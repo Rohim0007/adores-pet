@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="bn">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADORE'S PET — Admin</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="brand">🐰 ADORE'S PET — Admin</div><nav><a href="index.html">Website</a></nav></header>
+<main class="admin">
+<section id="loginBox" class="panel"><h2>Admin Login</h2><p>Supabase Auth দিয়ে লগইন করুন।</p>
+<form id="loginForm"><input id="email" type="email" placeholder="Admin email" required><input id="password" type="password" placeholder="Password" required><button class="btn">Login</button></form><p id="loginMsg"></p></section>
+<section id="dashboard" class="hidden">
+<div class="admin-top"><div><h1>Admin Panel</h1><p>পণ্য যোগ, ছবি আপলোড, Edit ও Delete করুন।</p></div><button id="logout" class="danger-outline">Logout</button></div>
+<section class="panel"><h2 id="formTitle">নতুন পণ্য</h2>
+<form id="productForm"><input type="hidden" id="id">
+<div class="form-grid">
+<label>Title<input id="title" required></label>
+<label>Category<select id="category"><option>Hamster</option><option>Rabbit</option><option>Hamster Food</option><option>Rabbit Food</option><option>Accessories</option></select></label>
+<label>Price (৳)<input id="price" type="number" min="0" required></label>
+<label>Stock<input id="stock" type="number" min="0" required></label>
+<label class="full">ছবি<input id="image" type="file" accept="image/*"></label>
+<label class="full">Description<textarea id="description" rows="4"></textarea></label>
+</div><img id="preview" class="preview hidden"><div class="actions"><button class="btn">Save Product</button><button type="button" id="cancel" class="secondary hidden">Cancel</button></div><p id="msg"></p>
+</form></section>
+<section class="panel"><div class="list-head"><h2>Product List</h2><input id="search" placeholder="Search"></div><div id="list"></div></section>
+</section>
+</main>
+<script src="config.js"></script><script type="module" src="admin.js"></script>
+</body></html>
