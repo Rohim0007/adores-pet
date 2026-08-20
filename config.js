@@ -1,3 +1,3 @@
-// Supabase Project Settings এখানে বসান।
-window.SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-window.SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+// Supabase Project Settings
+window.SUPABASE_URL = "https://dghpfkcnyvddkmimfcmb.supabase.co";
+window.SUPABASE_ANON_KEY = "sb_publishable_E_l44xOaicx1Ij02rturwQ_7I5Umq1Q";
