@@ -1,60 +1,25 @@
-<!doctype html>
-<html lang="bn">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<main>
 
-<title>ADORE'S PET — Pet Shop Bangladesh</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<!-- HEADER -->
-<header class="header">
-
-  <div class="brand">
-    🐰 <span>ADORE'S PET</span>
-  </div>
-
-  <nav>
-    <a href="#home">হোম</a>
-    <a href="#categories">ক্যাটাগরি</a>
-    <a href="#products">পণ্য</a>
-    <a href="admin.html">Admin</a>
-
-    <button class="cart-btn" onclick="openCart()">
-      🛒
-      <span>Cart</span>
-      <b id="cartCount">0</b>
-    </button>
-  </nav>
-
-</header>
-
-
-<!-- HERO -->
-<section id="home" class="hero">
+<section class="hero">
 
   <div class="hero-content">
 
-    <span class="hero-tag">
-      🐰 ADORE'S PET
-    </span>
+    <div class="hero-badge">
+      ADORE'S PET
+    </div>
 
     <h1>
-      আপনার প্রিয় পোষা প্রাণীর
-      <strong>সেরা ঠিকানা</strong>
+      আপনার পছন্দের<br>
+      পোষা প্রাণী
     </h1>
 
     <p>
-      Rabbit, Hamster, Pet Food এবং প্রয়োজনীয়
-      Accessories — সবকিছু এক জায়গায়।
+      সুস্থ ও সুন্দর পোষা প্রাণী এবং প্রয়োজনীয়
+      Pet Products এক জায়গায়।
     </p>
 
     <a href="#products" class="hero-btn">
-      🛍️ পণ্য দেখুন
+      🛍️ এখনই শপিং করুন
     </a>
 
   </div>
@@ -62,250 +27,146 @@
 </section>
 
 
-<!-- CATEGORIES -->
-<section id="categories" class="section">
+<section class="categories">
 
-  <div class="section-title">
-    <span>SHOP BY CATEGORY</span>
-    <h2>ক্যাটাগরি</h2>
+  <div class="section-label">
+    SHOP BY CATEGORY
   </div>
+
+  <h2 class="section-title">
+    ক্যাটাগরি
+  </h2>
 
   <div class="category-grid">
 
-    <button onclick="filterCategory('Rabbit')" class="category-card">
-      <div>🐰</div>
-      <h3>Rabbit</h3>
-      <p>সুন্দর ও স্বাস্থ্যকর খরগোশ</p>
-    </button>
+    <a href="#products" class="category">
+      <div class="category-icon">🐰</div>
+      <strong>Rabbit</strong>
+    </a>
 
-    <button onclick="filterCategory('Hamster')" class="category-card">
-      <div>🐹</div>
-      <h3>Hamster</h3>
-      <p>প্রিয় Hamster সংগ্রহ</p>
-    </button>
+    <a href="#products" class="category">
+      <div class="category-icon">🐹</div>
+      <strong>Hamster</strong>
+    </a>
 
-    <button onclick="filterCategory('Hamster Food')" class="category-card">
-      <div>🌾</div>
-      <h3>Pet Food</h3>
-      <p>মানসম্মত খাবার</p>
-    </button>
+    <a href="#products" class="category">
+      <div class="category-icon">🌾</div>
+      <strong>Pet Food</strong>
+    </a>
 
-    <button onclick="filterCategory('Accessories')" class="category-card">
-      <div>🛒</div>
-      <h3>Accessories</h3>
-      <p>প্রয়োজনীয় Accessories</p>
-    </button>
+    <a href="#products" class="category">
+      <div class="category-icon">🧺</div>
+      <strong>Accessories</strong>
+    </a>
 
   </div>
 
 </section>
 
 
-<!-- PRODUCTS -->
-<section id="products" class="section products-section">
+<section id="products" class="products-section">
 
   <div class="products-heading">
 
-    <div class="section-title">
-      <span>OUR COLLECTION</span>
-      <h2>আমাদের পণ্য</h2>
-    </div>
+    <div>
 
-    <button onclick="showAllProducts()" class="all-btn">
-      সব পণ্য
-    </button>
-
-  </div>
-
-  <div id="grid" class="product-grid">
-    <p class="loading">পণ্য লোড হচ্ছে...</p>
-  </div>
-
-</section>
-
-
-<!-- WHY US -->
-<section class="why-section">
-
-  <div class="section-title">
-    <span>WHY CHOOSE US</span>
-    <h2>কেন ADORE'S PET?</h2>
-  </div>
-
-  <div class="why-grid">
-
-    <div class="why-card">
-      <div>❤️</div>
-      <h3>Healthy Pets</h3>
-      <p>সুস্থ ও যত্নে রাখা পোষা প্রাণী।</p>
-    </div>
-
-    <div class="why-card">
-      <div>⭐</div>
-      <h3>Quality Products</h3>
-      <p>মানসম্মত খাবার ও Accessories।</p>
-    </div>
-
-    <div class="why-card">
-      <div>🚚</div>
-      <h3>Delivery</h3>
-      <p>বাংলাদেশের বিভিন্ন স্থানে Delivery।</p>
-    </div>
-
-    <div class="why-card">
-      <div>🤝</div>
-      <h3>Trusted Service</h3>
-      <p>বিশ্বাসের সাথে সেবা দেওয়ার চেষ্টা করি।</p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CONTACT -->
-<section class="contact-section">
-
-  <div>
-    <span>CONTACT US</span>
-    <h2>আপনার পছন্দের Pet খুঁজছেন?</h2>
-    <p>
-      অর্ডার অথবা যেকোনো তথ্যের জন্য আমাদের সাথে যোগাযোগ করুন।
-    </p>
-  </div>
-
-  <div class="contact-buttons">
-    <a href="tel:+8801681578599">📞 কল করুন</a>
-    <a href="https://wa.me/8801681578599" target="_blank">
-      💬 WhatsApp
-    </a>
-  </div>
-
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-
-  <div class="footer-brand">
-    🐰 ADORE'S PET
-  </div>
-
-  <p>
-    আপনার পোষা প্রাণীর যত্নে আমরা পাশে আছি। ❤️
-  </p>
-
-  <div class="footer-links">
-    <a href="#home">হোম</a>
-    <a href="#products">পণ্য</a>
-    <a href="admin.html">Admin</a>
-  </div>
-
-  <p class="copyright">
-    © <span id="year"></span> ADORE'S PET
-  </p>
-
-</footer>
-
-
-<!-- ================= CART ================= -->
-
-<div id="cartPanel" class="cart-panel">
-
-  <div class="cart-box">
-
-    <div class="cart-head">
-
-      <h2>🛒 আপনার Cart</h2>
-
-      <button onclick="closeCart()" class="close-cart">
-        ✕
-      </button>
-
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div id="cartSummary"></div>
-
-    <div class="checkout-form">
-
-      <h3>📦 অর্ডারের তথ্য</h3>
-
-      <label>আপনার নাম</label>
-      <input id="customerName" placeholder="আপনার নাম">
-
-      <label>মোবাইল নম্বর</label>
-      <input id="customerPhone" placeholder="01XXXXXXXXX">
-
-      <label>জেলা</label>
-
-      <select id="customerDistrict">
-
-        <option value="">জেলা নির্বাচন করুন</option>
-
-        <option>ঢাকা</option>
-        <option>চট্টগ্রাম</option>
-        <option>সিলেট</option>
-        <option>রাজশাহী</option>
-        <option>খুলনা</option>
-        <option>বরিশাল</option>
-        <option>রংপুর</option>
-        <option>ময়মনসিংহ</option>
-        <option>কুমিল্লা</option>
-        <option>নারায়ণগঞ্জ</option>
-        <option>গাজীপুর</option>
-        <option>নরসিংদী</option>
-        <option>টাঙ্গাইল</option>
-        <option>ফরিদপুর</option>
-        <option>যশোর</option>
-        <option>কুষ্টিয়া</option>
-        <option>বগুড়া</option>
-        <option>দিনাজপুর</option>
-
-      </select>
-
-      <label>সম্পূর্ণ ঠিকানা</label>
-
-      <textarea
-        id="customerAddress"
-        placeholder="বাড়ি / রোড / এলাকা / থানা..."
-      ></textarea>
-
-      <label>Delivery Charge</label>
-
-      <select id="deliveryCharge">
-
-        <option value="100">
-          ঢাকার ভিতরে — ৳100
-        </option>
-
-        <option value="150">
-          ঢাকার বাইরে — ৳150
-        </option>
-
-      </select>
-
-      <div id="checkoutTotal" class="checkout-total">
-        মোট: ৳0
+      <div class="section-label">
+        OUR COLLECTION
       </div>
 
-      <button onclick="placeOrder()" class="place-order">
-        ✅ অর্ডার করুন
-      </button>
+      <h2 class="section-title">
+        আমাদের পণ্য
+      </h2>
 
-      <div id="orderMsg"></div>
+    </div>
+
+    <a href="#products">
+      সব পণ্য
+    </a>
+
+  </div>
+
+
+  <div id="grid" class="grid">
+
+    <p>পণ্য লোড হচ্ছে...</p>
+
+  </div>
+
+</section>
+
+
+<section class="why">
+
+  <div class="why-inner">
+
+    <div class="section-label">
+      WHY CHOOSE US
+    </div>
+
+    <h2 class="section-title">
+      কেন ADORE'S PET?
+    </h2>
+
+    <div class="features">
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🐰
+        </div>
+
+        <h3>
+          সুস্থ পোষা প্রাণী
+        </h3>
+
+        <p>
+          যত্নসহকারে পালন করা স্বাস্থ্যকর
+          ও সুন্দর পোষা প্রাণী।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🚚
+        </div>
+
+        <h3>
+          Delivery সুবিধা
+        </h3>
+
+        <p>
+          দেশের বিভিন্ন জায়গায় সহজে
+          অর্ডার ও ডেলিভারি সুবিধা।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⭐
+        </div>
+
+        <h3>
+          বিশ্বস্ত সেবা
+        </h3>
+
+        <p>
+          গ্রাহকের সন্তুষ্টি ও ভালো সার্ভিসকে
+          আমরা সর্বোচ্চ গুরুত্ব দিই।
+        </p>
+
+      </div>
 
     </div>
 
   </div>
 
-</div>
+</section>
 
-
-<script src="config.js"></script>
-
-<script type="module" src="app.js"></script>
-
-</body>
-</html>
+</main>
