@@ -3,1329 +3,1080 @@
 
 <head>
 
-<meta charset="utf-8">
+  <meta charset="utf-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-<title>ADORE'S PET — Pet Shop</title>
+  <title>ADORE'S PET</title>
 
-<style>
 
-/* =====================================================
-   RESET
-===================================================== */
+  <style>
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    *{
+      box-sizing:border-box;
+    }
 
-html{
-  scroll-behavior:smooth;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-body{
-  font-family:
-    "Noto Sans Bengali",
-    "Hind Siliguri",
-    Arial,
-    sans-serif;
+    body{
+      margin:0;
+      font-family:
+        Arial,
+        "Noto Sans Bengali",
+        sans-serif;
+      background:#f5f8f6;
+      color:#17221d;
+    }
 
-  background:#f7faf8;
-  color:#17211c;
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-  line-height:1.6;
-}
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+    /* ================= HEADER ================= */
 
-button,
-input,
-select,
-textarea{
-  font-family:inherit;
-}
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
 
+      background:#fff;
 
-/* =====================================================
-   HEADER
-===================================================== */
+      min-height:82px;
 
-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
 
-  width:100%;
+      padding:14px 5%;
 
-  min-height:76px;
+      border-bottom:1px solid #e4e9e6;
 
-  background:#fff;
+      box-shadow:
+        0 3px 15px rgba(0,0,0,.04);
+    }
 
-  display:flex;
 
-  align-items:center;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
 
-  justify-content:space-between;
+      font-size:27px;
+      font-weight:800;
 
-  padding:0 5%;
+      color:#16221c;
+    }
 
-  border-bottom:1px solid #e5e9e6;
 
-  position:sticky;
+    nav{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
 
-  top:0;
 
-  z-index:1000;
-}
+    nav > a{
+      font-size:17px;
+      font-weight:700;
+    }
 
-.brand{
 
-  display:flex;
+    .cart-btn{
+      border:0;
 
-  align-items:center;
+      background:#176b3a;
+      color:#fff;
 
-  gap:9px;
+      padding:12px 18px;
 
-  font-size:26px;
+      border-radius:14px;
 
-  font-weight:900;
+      font-size:17px;
+      font-weight:800;
 
-  color:#16201b;
-}
+      cursor:pointer;
 
-nav{
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
 
-  display:flex;
 
-  align-items:center;
+    .cart-count{
+      background:#fff;
+      color:#176b3a;
 
-  gap:20px;
-}
+      min-width:30px;
+      height:30px;
 
-nav a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
 
-  font-size:16px;
+      border-radius:50%;
 
-  font-weight:800;
-}
+      font-weight:800;
+    }
 
-nav a:hover{
 
-  color:#176b3a;
-}
+    /* ================= HERO ================= */
 
+    .hero{
+      min-height:520px;
 
-/* =====================================================
-   CART BUTTON
-===================================================== */
+      display:flex;
+      align-items:center;
 
-.cart-btn{
+      padding:80px 7%;
 
-  border:0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(238,248,242,.98) 0%,
+          rgba(238,248,242,.88) 45%,
+          rgba(238,248,242,.45) 100%
+        ),
+        url("https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1600&q=85");
 
-  background:#176b3a;
+      background-size:cover;
+      background-position:center;
+    }
 
-  color:#fff;
 
-  padding:11px 16px;
+    .hero-content{
+      max-width:650px;
+    }
 
-  border-radius:12px;
 
-  font-size:16px;
+    .hero-badge{
+      display:inline-block;
 
-  font-weight:800;
+      color:#176b3a;
 
-  cursor:pointer;
+      font-size:15px;
+      font-weight:800;
 
-  transition:.2s;
-}
+      letter-spacing:4px;
 
-.cart-btn:hover{
+      margin-bottom:18px;
+    }
 
-  background:#0e542c;
 
-  transform:translateY(-1px);
-}
+    .hero h1{
+      margin:0 0 20px;
 
-.cart-count{
+      font-size:clamp(45px,7vw,78px);
 
-  display:inline-block;
+      line-height:1.08;
 
-  background:#fff;
+      letter-spacing:-2px;
+    }
 
-  color:#176b3a;
 
-  min-width:25px;
+    .hero p{
+      max-width:560px;
 
-  padding:2px 7px;
+      color:#66736c;
 
-  border-radius:20px;
+      font-size:20px;
+      line-height:1.7;
 
-  margin-left:4px;
+      margin:0 0 30px;
+    }
 
-  text-align:center;
-}
 
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
 
-/* =====================================================
-   HERO
-===================================================== */
+      background:#176b3a;
+      color:#fff;
 
-.hero{
+      padding:15px 25px;
 
-  min-height:520px;
+      border-radius:12px;
 
-  display:flex;
+      font-size:18px;
+      font-weight:800;
 
-  align-items:center;
+      box-shadow:
+        0 10px 25px rgba(23,107,58,.18);
+    }
 
-  padding:70px 7%;
 
-  background:
+    /* ================= COMMON ================= */
 
-    linear-gradient(
-      90deg,
-      rgba(244,250,246,.98) 0%,
-      rgba(244,250,246,.88) 45%,
-      rgba(244,250,246,.25) 100%
-    ),
+    .section-label{
+      color:#176b3a;
 
-    url("https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1600&q=85");
+      font-size:16px;
+      font-weight:800;
 
-  background-size:cover;
+      letter-spacing:4px;
 
-  background-position:center;
-}
+      margin-bottom:10px;
+    }
 
-.hero-content{
 
-  max-width:620px;
-}
+    .section-title{
+      margin:0;
 
-.hero-badge{
+      font-size:clamp(38px,5vw,55px);
 
-  color:#176b3a;
+      line-height:1.15;
 
-  font-size:14px;
+      letter-spacing:-1px;
+    }
 
-  font-weight:900;
 
-  letter-spacing:3px;
+    /* ================= CATEGORY ================= */
 
-  margin-bottom:15px;
-}
+    .categories{
+      padding:80px 4%;
+      max-width:1250px;
+      margin:auto;
+    }
 
-.hero h1{
 
-  font-size:clamp(42px,6vw,72px);
+    .category-grid{
+      display:grid;
 
-  line-height:1.08;
+      grid-template-columns:
+        repeat(2,minmax(0,1fr));
 
-  font-weight:900;
+      gap:22px;
 
-  letter-spacing:-2px;
+      margin-top:35px;
+    }
 
-  margin-bottom:20px;
-}
 
-.hero p{
+    .category{
+      background:#fff;
 
-  max-width:530px;
+      min-height:245px;
 
-  color:#59635d;
+      border-radius:28px;
 
-  font-size:19px;
+      border:1px solid #e1e8e4;
 
-  margin-bottom:28px;
-}
+      display:flex;
+      flex-direction:column;
 
-.hero-btn{
+      align-items:center;
+      justify-content:center;
 
-  display:inline-flex;
+      text-align:center;
 
-  align-items:center;
+      padding:25px;
 
-  justify-content:center;
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.035);
 
-  background:#176b3a;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
 
-  color:#fff;
 
-  padding:14px 24px;
+    .category:hover{
+      transform:translateY(-4px);
 
-  border-radius:11px;
+      box-shadow:
+        0 15px 35px rgba(0,0,0,.08);
+    }
 
-  font-weight:800;
 
-  font-size:16px;
+    .category-icon{
+      font-size:62px;
 
-  box-shadow:
-    0 8px 20px rgba(23,107,58,.18);
+      margin-bottom:20px;
+    }
 
-  transition:.2s;
-}
 
-.hero-btn:hover{
+    .category strong{
+      font-size:25px;
+    }
 
-  background:#0e542c;
 
-  transform:translateY(-2px);
-}
+    /* ================= PRODUCTS ================= */
 
+    .products-section{
+      max-width:1250px;
 
-/* =====================================================
-   COMMON
-===================================================== */
+      margin:auto;
 
-.section-label{
+      padding:80px 4%;
+    }
 
-  color:#176b3a;
 
-  font-size:14px;
+    .products-heading{
+      display:flex;
 
-  font-weight:900;
+      align-items:end;
 
-  letter-spacing:3px;
+      justify-content:space-between;
 
-  margin-bottom:8px;
-}
+      gap:20px;
 
-.section-title{
+      margin-bottom:30px;
+    }
 
-  font-size:clamp(34px,5vw,50px);
 
-  font-weight:900;
+    .all-products{
+      background:#176b3a;
+      color:#fff;
 
-  line-height:1.2;
+      padding:14px 25px;
 
-  letter-spacing:-1px;
-}
+      border-radius:12px;
 
+      font-size:17px;
+      font-weight:800;
+    }
 
-/* =====================================================
-   CATEGORY
-===================================================== */
 
-.categories{
+    .grid{
+      display:grid;
 
-  max-width:1250px;
+      grid-template-columns:
+        repeat(2,minmax(0,1fr));
 
-  margin:auto;
+      gap:25px;
+    }
 
-  padding:70px 5% 45px;
-}
 
-.category-grid{
+    .card{
+      background:#fff;
 
-  display:grid;
+      border-radius:25px;
 
-  grid-template-columns:
-    repeat(4,1fr);
+      overflow:hidden;
 
-  gap:18px;
+      border:1px solid #e1e8e4;
 
-  margin-top:28px;
-}
+      box-shadow:
+        0 8px 30px rgba(0,0,0,.045);
+    }
 
-.category{
 
-  background:#fff;
+    .card > img{
+      width:100%;
 
-  border:1px solid #e5ebe7;
+      height:300px;
 
-  border-radius:18px;
+      display:block;
 
-  padding:26px 12px;
+      object-fit:cover;
+    }
 
-  text-align:center;
 
-  box-shadow:
-    0 8px 25px rgba(0,0,0,.04);
+    .card .body{
+      padding:22px;
+    }
 
-  transition:.25s;
-}
 
-.category:hover{
+    .card small{
+      display:block;
 
-  transform:translateY(-5px);
+      color:#176b3a;
 
-  box-shadow:
-    0 15px 30px rgba(0,0,0,.08);
+      font-size:16px;
+      font-weight:800;
 
-  border-color:#b9d7c4;
-}
+      margin-bottom:12px;
+    }
 
-.category-icon{
 
-  font-size:43px;
+    .card h3{
+      margin:0 0 12px;
 
-  margin-bottom:8px;
-}
+      font-size:27px;
+    }
 
-.category strong{
 
-  font-size:18px;
-}
+    .card p{
+      min-height:48px;
 
+      color:#777;
 
-/* =====================================================
-   PRODUCTS
-===================================================== */
+      font-size:17px;
 
-.products-section{
+      line-height:1.6;
 
-  max-width:1250px;
+      margin:0 0 22px;
+    }
 
-  margin:auto;
 
-  padding:50px 5% 80px;
-}
+    .card b{
+      display:block;
 
-.products-heading{
+      font-size:28px;
 
-  display:flex;
+      margin-bottom:10px;
+    }
 
-  align-items:flex-end;
 
-  justify-content:space-between;
+    .in{
+      color:#176b3a;
 
-  gap:20px;
+      font-size:17px;
+      font-weight:800;
+    }
 
-  margin-bottom:28px;
-}
 
-.products-heading>a{
+    .out{
+      color:#c62828;
 
-  background:#176b3a;
+      font-size:17px;
+      font-weight:800;
+    }
 
-  color:#fff;
 
-  padding:12px 24px;
+    .product-actions{
+      margin-top:18px;
+    }
 
-  border-radius:11px;
 
-  font-weight:800;
+    .add-cart{
+      width:100%;
 
-  white-space:nowrap;
-}
+      border:0;
 
-.grid{
+      background:#176b3a;
+      color:#fff;
 
-  display:grid;
+      padding:14px;
 
-  grid-template-columns:
-    repeat(4,minmax(0,1fr));
+      border-radius:12px;
 
-  gap:20px;
-}
+      font-size:17px;
+      font-weight:800;
 
+      cursor:pointer;
+    }
 
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
 
-.card{
+    .add-cart:disabled{
+      background:#999;
+      cursor:not-allowed;
+    }
 
-  background:#fff;
 
-  border-radius:20px;
+    /* ================= WHY ================= */
 
-  overflow:hidden;
+    .why{
+      background:#eaf6ee;
 
-  border:1px solid #e5ebe7;
+      padding:90px 4%;
+    }
 
-  box-shadow:
-    0 8px 25px rgba(0,0,0,.05);
 
-  transition:.25s;
+    .why-inner{
+      max-width:1250px;
+      margin:auto;
+    }
 
-  min-width:0;
-}
 
-.card:hover{
+    .why-grid{
+      margin-top:35px;
+    }
 
-  transform:translateY(-5px);
 
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.09);
-}
+    .feature{
+      min-height:270px;
 
-.card>img{
+      align-items:flex-start;
 
-  width:100%;
+      justify-content:flex-start;
 
-  aspect-ratio:1/1;
+      text-align:left;
+    }
 
-  object-fit:cover;
 
-  display:block;
-}
+    .feature .category-icon{
+      margin-bottom:15px;
+    }
 
-.card .body{
 
-  padding:17px;
-}
+    .feature strong{
+      font-size:24px;
 
-.card small{
+      margin-bottom:12px;
+    }
 
-  display:block;
 
-  color:#176b3a;
+    .feature p{
+      margin:0;
 
-  font-size:14px;
+      color:#777;
 
-  font-weight:800;
+      font-size:17px;
 
-  margin-bottom:4px;
-}
+      line-height:1.7;
+    }
 
-.card h3{
 
-  font-size:21px;
+    /* ================= CART ================= */
 
-  line-height:1.25;
+    .cart-panel{
+      position:fixed;
 
-  margin-bottom:8px;
-}
+      inset:0;
 
-.card p{
+      background:rgba(0,0,0,.58);
 
-  color:#777;
+      display:none;
 
-  font-size:14px;
+      z-index:9999;
 
-  min-height:42px;
+      padding:15px;
 
-  margin-bottom:8px;
-}
+      overflow:auto;
+    }
 
-.card b{
 
-  display:block;
+    .cart-box{
+      width:100%;
+      max-width:700px;
 
-  font-size:24px;
+      margin:25px auto;
 
-  margin-top:10px;
+      background:#fff;
 
-  margin-bottom:4px;
-}
+      border-radius:22px;
 
-.in{
+      padding:25px;
 
-  color:#176b3a;
+      color:#222;
+    }
 
-  font-weight:800;
 
-  font-size:14px;
-}
+    .cart-head{
+      display:flex;
 
-.out{
+      align-items:center;
 
-  color:#c62828;
+      justify-content:space-between;
 
-  font-weight:800;
+      gap:15px;
 
-  font-size:14px;
-}
+      margin-bottom:15px;
+    }
 
-.product-actions{
 
-  margin-top:14px;
-}
+    .cart-head h2{
+      margin:0;
 
-.add-cart{
+      font-size:30px;
+    }
 
-  width:100%;
 
-  border:0;
+    .close-cart{
+      border:0;
 
-  background:#176b3a;
+      background:#eee;
 
-  color:#fff;
+      border-radius:10px;
 
-  padding:12px;
+      width:48px;
+      height:48px;
 
-  border-radius:10px;
+      font-size:24px;
 
-  font-size:15px;
+      cursor:pointer;
+    }
 
-  font-weight:800;
 
-  cursor:pointer;
+    .cart-item{
+      display:flex;
 
-  transition:.2s;
-}
+      align-items:center;
 
-.add-cart:hover{
+      gap:13px;
 
-  background:#0e542c;
-}
+      border-bottom:1px solid #ddd;
 
-.add-cart:disabled{
+      padding:15px 0;
+    }
 
-  background:#999;
 
-  cursor:not-allowed;
-}
+    .cart-item img{
+      width:75px;
+      height:75px;
 
+      object-fit:cover;
 
-/* =====================================================
-   WHY CHOOSE US
-===================================================== */
+      border-radius:12px;
+    }
 
-.why{
 
-  background:#eaf5ee;
+    .cart-info{
+      flex:1;
+      min-width:0;
+    }
 
-  padding:75px 5%;
-}
 
-.why-inner{
+    .cart-info h4{
+      margin:0 0 6px;
 
-  max-width:1250px;
+      font-size:18px;
+    }
 
-  margin:auto;
-}
 
-.features{
+    .cart-info > div{
+      font-size:16px;
+    }
 
-  display:grid;
 
-  grid-template-columns:
-    repeat(3,1fr);
+    .qty{
+      display:flex;
 
-  gap:20px;
+      align-items:center;
 
-  margin-top:30px;
-}
+      gap:9px;
 
-.feature{
+      margin-top:9px;
+    }
 
-  background:#fff;
 
-  border-radius:20px;
+    .qty button{
+      border:0;
 
-  padding:28px;
+      background:#176b3a;
+      color:#fff;
 
-  box-shadow:
-    0 7px 20px rgba(0,0,0,.03);
-}
+      width:34px;
+      height:34px;
 
-.feature-icon{
+      border-radius:7px;
 
-  font-size:40px;
+      font-size:21px;
 
-  margin-bottom:10px;
-}
+      cursor:pointer;
+    }
 
-.feature h3{
 
-  font-size:21px;
+    .qty strong{
+      min-width:22px;
 
-  margin-bottom:7px;
-}
+      text-align:center;
 
-.feature p{
+      font-size:18px;
+    }
 
-  color:#69736d;
 
-  font-size:15px;
-}
+    .remove-item{
+      border:0;
 
+      background:#c62828;
+      color:#fff;
 
-/* =====================================================
-   FOOTER
-===================================================== */
+      padding:9px 12px;
 
-footer{
+      border-radius:8px;
 
-  background:#14231b;
+      cursor:pointer;
 
-  color:#fff;
+      font-weight:700;
+    }
 
-  text-align:center;
 
-  padding:45px 20px 30px;
-}
+    .cart-total{
+      font-size:22px;
 
-.footer-brand{
+      font-weight:800;
 
-  font-size:25px;
+      margin:22px 0;
+    }
 
-  font-weight:900;
 
-  margin-bottom:8px;
-}
+    .empty-cart{
+      text-align:center;
 
-.footer-text{
+      padding:35px 10px;
 
-  color:#bdc8c1;
+      color:#777;
 
-  margin-bottom:20px;
-}
+      font-size:18px;
+    }
 
-.footer-links{
 
-  display:flex;
+    /* ================= CHECKOUT ================= */
 
-  justify-content:center;
+    .checkout-form{
+      border-top:1px solid #ddd;
 
-  flex-wrap:wrap;
+      margin-top:20px;
 
-  gap:20px;
+      padding-top:22px;
+    }
 
-  margin-bottom:25px;
-}
 
-.footer-links a{
+    .checkout-form h3{
+      font-size:24px;
 
-  color:#fff;
+      margin-top:0;
+    }
 
-  font-weight:700;
-}
 
-.footer-links a:hover{
+    .checkout-form label{
+      display:block;
 
-  color:#8bd4a7;
-}
+      margin:14px 0 6px;
 
-.copyright{
+      font-weight:800;
 
-  border-top:1px solid rgba(255,255,255,.12);
+      font-size:17px;
+    }
 
-  padding-top:18px;
 
-  color:#aeb9b2;
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea{
+      width:100%;
 
-  font-size:14px;
-}
+      padding:14px;
 
+      border:1px solid #ccc;
 
-/* =====================================================
-   CART PANEL
-===================================================== */
+      border-radius:10px;
 
-.cart-panel{
+      font-size:17px;
 
-  position:fixed;
+      background:#fff;
+    }
 
-  inset:0;
 
-  background:rgba(0,0,0,.60);
+    .checkout-form textarea{
+      min-height:100px;
 
-  display:none;
+      resize:vertical;
+    }
 
-  z-index:9999;
 
-  padding:15px;
+    .place-order{
+      width:100%;
 
-  overflow:auto;
-}
+      border:0;
 
-.cart-box{
+      background:#176b3a;
+      color:#fff;
 
-  max-width:650px;
+      padding:15px;
 
-  margin:25px auto;
+      border-radius:12px;
 
-  background:#fff;
+      font-size:19px;
+      font-weight:800;
 
-  border-radius:20px;
+      margin-top:15px;
 
-  padding:22px;
+      cursor:pointer;
+    }
 
-  color:#222;
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.25);
-}
+    .place-order:disabled{
+      opacity:.65;
 
-.cart-head{
+      cursor:not-allowed;
+    }
 
-  display:flex;
 
-  align-items:center;
+    .order-msg{
+      margin-top:18px;
 
-  justify-content:space-between;
+      font-weight:800;
 
-  gap:10px;
+      line-height:1.6;
+    }
 
-  margin-bottom:10px;
-}
 
-.cart-head h2{
+    /* ================= FOOTER ================= */
 
-  font-size:28px;
-}
+    footer{
+      background:#0d241a;
 
-.close-cart{
+      color:#fff;
 
-  border:0;
+      padding:65px 25px 35px;
 
-  background:#eee;
+      text-align:center;
+    }
 
-  border-radius:9px;
 
-  padding:8px 13px;
+    .footer-inner{
+      max-width:900px;
 
-  font-size:20px;
+      margin:auto;
+    }
 
-  cursor:pointer;
-}
 
+    .footer-brand{
+      font-size:34px;
 
-/* =====================================================
-   CART ITEM
-===================================================== */
+      font-weight:800;
 
-.cart-item{
+      margin-bottom:15px;
+    }
 
-  display:flex;
 
-  align-items:center;
+    .footer-tagline{
+      color:#b9c8c1;
 
-  gap:12px;
+      font-size:19px;
 
-  border-bottom:1px solid #ddd;
+      margin:0;
+    }
 
-  padding:14px 0;
-}
 
-.cart-item img{
+    .footer-line{
+      height:1px;
 
-  width:70px;
+      background:
+        rgba(255,255,255,.18);
 
-  height:70px;
+      margin:35px 0 25px;
+    }
 
-  object-fit:cover;
 
-  border-radius:10px;
+    .copyright{
+      color:#b9c8c1;
 
-  flex-shrink:0;
-}
+      font-size:16px;
 
-.cart-info{
+      margin:0;
+    }
 
-  flex:1;
 
-  min-width:0;
-}
+    /* ================= MOBILE ================= */
 
-.cart-info h4{
+    @media(max-width:700px){
 
-  margin:0 0 5px;
+      header{
+        min-height:72px;
 
-  font-size:17px;
-}
+        padding:11px 5%;
+      }
 
-.qty{
 
-  display:flex;
+      .brand{
+        font-size:23px;
+      }
 
-  align-items:center;
 
-  gap:8px;
+      nav > a{
+        display:none;
+      }
 
-  margin-top:7px;
-}
 
-.qty button{
+      .cart-btn{
+        padding:11px 14px;
 
-  border:0;
+        font-size:16px;
+      }
 
-  background:#176b3a;
 
-  color:#fff;
+      .hero{
+        min-height:500px;
 
-  width:32px;
+        padding:60px 7%;
 
-  height:32px;
+        background-position:
+          65% center;
+      }
 
-  border-radius:7px;
 
-  cursor:pointer;
+      .hero h1{
+        font-size:48px;
+      }
 
-  font-size:19px;
 
-  font-weight:800;
-}
+      .hero p{
+        font-size:18px;
+      }
 
-.qty button:hover{
 
-  background:#0e542c;
-}
+      .categories,
+      .products-section{
+        padding:65px 22px;
+      }
 
-.remove-item{
 
-  border:0;
+      .category-grid,
+      .grid{
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
 
-  background:#c62828;
+        gap:14px;
+      }
 
-  color:#fff;
 
-  padding:7px 10px;
+      .category{
+        min-height:210px;
 
-  border-radius:7px;
+        border-radius:25px;
 
-  cursor:pointer;
+        padding:18px;
+      }
 
-  font-weight:700;
 
-  flex-shrink:0;
-}
+      .category-icon{
+        font-size:48px;
+      }
 
 
-/* =====================================================
-   CART SUMMARY
-===================================================== */
+      .category strong{
+        font-size:20px;
+      }
 
-.cart-total{
 
-  font-size:21px;
+      .section-title{
+        font-size:43px;
+      }
 
-  font-weight:900;
 
-  margin:20px 0;
-}
+      .products-heading{
+        align-items:end;
+      }
 
-.empty-cart{
 
-  text-align:center;
+      .all-products{
+        padding:12px 17px;
 
-  padding:35px 10px;
+        font-size:15px;
 
-  color:#777;
+        white-space:nowrap;
+      }
 
-  font-size:16px;
-}
 
+      .card{
+        border-radius:20px;
+      }
 
-/* =====================================================
-   CHECKOUT
-===================================================== */
 
-.checkout-form{
+      .card > img{
+        height:190px;
+      }
 
-  border-top:1px solid #ddd;
 
-  margin-top:20px;
+      .card .body{
+        padding:16px;
+      }
 
-  padding-top:20px;
-}
 
-.checkout-form h3{
+      .card h3{
+        font-size:21px;
+      }
 
-  font-size:23px;
 
-  margin-bottom:15px;
-}
+      .card p{
+        font-size:14px;
 
-.checkout-form label{
+        min-height:45px;
+      }
 
-  display:block;
 
-  margin:12px 0 5px;
+      .card b{
+        font-size:22px;
+      }
 
-  font-weight:800;
-}
 
-.checkout-form input,
-.checkout-form select,
-.checkout-form textarea{
+      .in,
+      .out{
+        font-size:14px;
+      }
 
-  width:100%;
 
-  padding:12px;
+      .add-cart{
+        padding:11px 6px;
 
-  border:1px solid #ccc;
+        font-size:14px;
+      }
 
-  border-radius:9px;
 
-  font-size:16px;
+      .why{
+        padding:65px 22px;
+      }
 
-  background:#fff;
 
-  outline:none;
-}
+      .feature{
+        min-height:240px;
 
-.checkout-form input:focus,
-.checkout-form select:focus,
-.checkout-form textarea:focus{
+        padding:25px;
+      }
 
-  border-color:#176b3a;
 
-  box-shadow:
-    0 0 0 3px rgba(23,107,58,.08);
-}
+      .feature strong{
+        font-size:20px;
+      }
 
-.checkout-form textarea{
 
-  min-height:90px;
+      .feature p{
+        font-size:15px;
+      }
 
-  resize:vertical;
-}
 
-.place-order{
+      .cart-box{
+        margin:10px auto;
 
-  width:100%;
+        padding:18px;
 
-  border:0;
+        border-radius:20px;
+      }
 
-  background:#176b3a;
 
-  color:#fff;
+      .cart-head h2{
+        font-size:25px;
+      }
 
-  padding:14px;
 
-  border-radius:10px;
+      .cart-item{
+        align-items:flex-start;
+      }
 
-  font-size:18px;
 
-  font-weight:900;
+      .cart-item img{
+        width:62px;
+        height:62px;
+      }
 
-  margin-top:15px;
 
-  cursor:pointer;
-}
+      .remove-item{
+        padding:7px 9px;
 
-.place-order:hover{
+        font-size:13px;
+      }
 
-  background:#0e542c;
-}
 
-.order-msg{
+      footer{
+        padding:55px 20px 30px;
+      }
 
-  margin-top:15px;
 
-  font-weight:800;
+      .footer-brand{
+        font-size:28px;
+      }
 
-  line-height:1.6;
-}
 
+      .footer-tagline{
+        font-size:17px;
+      }
 
-/* =====================================================
-   RESPONSIVE TABLET
-===================================================== */
 
-@media(max-width:900px){
+      .copyright{
+        font-size:14px;
+      }
 
-  .grid{
+    }
 
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-  }
-
-  .category-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .features{
-
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-}
-
-
-/* =====================================================
-   RESPONSIVE MOBILE
-===================================================== */
-
-@media(max-width:600px){
-
-  header{
-
-    min-height:70px;
-
-    padding:0 14px;
-  }
-
-  .brand{
-
-    font-size:21px;
-  }
-
-  nav{
-
-    gap:7px;
-  }
-
-  nav a{
-
-    display:none;
-  }
-
-  .cart-btn{
-
-    padding:9px 12px;
-
-    font-size:14px;
-  }
-
-
-  /* HERO */
-
-  .hero{
-
-    min-height:460px;
-
-    padding:55px 22px;
-
-    background-position:
-      65% center;
-  }
-
-  .hero h1{
-
-    font-size:43px;
-
-    letter-spacing:-1px;
-  }
-
-  .hero p{
-
-    font-size:16px;
-  }
-
-  .hero-btn{
-
-    font-size:15px;
-
-    padding:13px 20px;
-  }
-
-
-  /* CATEGORY */
-
-  .categories{
-
-    padding:55px 16px 30px;
-  }
-
-  .category-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-    gap:12px;
-  }
-
-  .category{
-
-    padding:20px 8px;
-  }
-
-  .category-icon{
-
-    font-size:36px;
-  }
-
-
-  /* PRODUCTS */
-
-  .products-section{
-
-    padding:45px 12px 65px;
-  }
-
-  .products-heading{
-
-    align-items:flex-end;
-
-    margin-bottom:20px;
-  }
-
-  .products-heading>a{
-
-    padding:10px 14px;
-
-    font-size:14px;
-  }
-
-  .grid{
-
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-
-    gap:10px;
-  }
-
-  .card{
-
-    border-radius:15px;
-  }
-
-  .card .body{
-
-    padding:10px;
-  }
-
-  .card h3{
-
-    font-size:17px;
-  }
-
-  .card p{
-
-    font-size:12px;
-
-    min-height:34px;
-  }
-
-  .card b{
-
-    font-size:19px;
-  }
-
-  .card small,
-  .in,
-  .out{
-
-    font-size:12px;
-  }
-
-  .add-cart{
-
-    font-size:12px;
-
-    padding:9px 4px;
-  }
-
-
-  /* WHY */
-
-  .why{
-
-    padding:60px 16px;
-  }
-
-  .features{
-
-    grid-template-columns:1fr;
-  }
-
-  .feature{
-
-    padding:22px;
-  }
-
-
-  /* CART */
-
-  .cart-panel{
-
-    padding:8px;
-  }
-
-  .cart-box{
-
-    margin:8px auto;
-
-    padding:17px;
-
-    border-radius:18px;
-  }
-
-  .cart-head h2{
-
-    font-size:24px;
-  }
-
-  .cart-item{
-
-    gap:8px;
-  }
-
-  .cart-item img{
-
-    width:58px;
-
-    height:58px;
-  }
-
-  .cart-info h4{
-
-    font-size:15px;
-  }
-
-  .remove-item{
-
-    font-size:12px;
-
-    padding:6px 8px;
-  }
-
-  .qty button{
-
-    width:29px;
-
-    height:29px;
-
-    font-size:17px;
-  }
-
-  .cart-total{
-
-    font-size:19px;
-  }
-
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media(max-width:380px){
-
-  .brand{
-
-    font-size:19px;
-  }
-
-  .cart-btn{
-
-    padding:8px 9px;
-
-    font-size:13px;
-  }
-
-  .hero h1{
-
-    font-size:37px;
-  }
-
-  .grid{
-
-    gap:8px;
-  }
-
-  .card .body{
-
-    padding:8px;
-  }
-
-  .card h3{
-
-    font-size:15px;
-  }
-
-  .card b{
-
-    font-size:17px;
-  }
-
-}
-
-</style>
+  </style>
 
 </head>
 
@@ -1333,9 +1084,7 @@ footer{
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -1343,25 +1092,33 @@ footer{
     🐰 ADORE'S PET
   </div>
 
+
   <nav>
 
     <a href="#products">
       পণ্য
     </a>
 
+
     <a href="admin.html">
       Admin
     </a>
+
 
     <button
       class="cart-btn"
       onclick="openCart()"
     >
+
       🛒 Cart
+
       <span
         id="cartCount"
         class="cart-count"
-      >0</span>
+      >
+        0
+      </span>
+
     </button>
 
   </nav>
@@ -1369,301 +1126,347 @@ footer{
 </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+
+<!-- ================= MAIN ================= -->
 
 <main>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+  <!-- ================= HERO ================= -->
 
-<section class="hero">
+  <section class="hero">
 
-  <div class="hero-content">
+    <div class="hero-content">
 
-    <div class="hero-badge">
-      ADORE'S PET
-    </div>
-
-    <h1>
-      আপনার পছন্দের<br>
-      পোষা প্রাণী
-    </h1>
-
-    <p>
-      সুস্থ ও সুন্দর পোষা প্রাণী এবং প্রয়োজনীয়
-      Pet Products এক জায়গায়।
-    </p>
-
-    <a
-      href="#products"
-      class="hero-btn"
-    >
-      🛍️ এখনই শপিং করুন
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CATEGORY
-===================================================== -->
-
-<section class="categories">
-
-  <div class="section-label">
-    SHOP BY CATEGORY
-  </div>
-
-  <h2 class="section-title">
-    ক্যাটাগরি
-  </h2>
-
-  <div class="category-grid">
-
-    <a
-      href="#products"
-      class="category"
-    >
-
-      <div class="category-icon">
-        🐰
+      <div class="hero-badge">
+        ADORE'S PET
       </div>
 
-      <strong>
-        Rabbit
-      </strong>
 
-    </a>
-
-
-    <a
-      href="#products"
-      class="category"
-    >
-
-      <div class="category-icon">
-        🐹
-      </div>
-
-      <strong>
-        Hamster
-      </strong>
-
-    </a>
+      <h1>
+        আপনার পছন্দের<br>
+        পোষা প্রাণী
+      </h1>
 
 
-    <a
-      href="#products"
-      class="category"
-    >
-
-      <div class="category-icon">
-        🌾
-      </div>
-
-      <strong>
-        Pet Food
-      </strong>
-
-    </a>
+      <p>
+        সুস্থ ও সুন্দর পোষা প্রাণী এবং প্রয়োজনীয়
+        Pet Products এক জায়গায়।
+      </p>
 
 
-    <a
-      href="#products"
-      class="category"
-    >
-
-      <div class="category-icon">
-        🧺
-      </div>
-
-      <strong>
-        Accessories
-      </strong>
-
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     PRODUCTS
-===================================================== -->
-
-<section
-  id="products"
-  class="products-section"
->
-
-  <div class="products-heading">
-
-    <div>
-
-      <div class="section-label">
-        OUR COLLECTION
-      </div>
-
-      <h2 class="section-title">
-        আমাদের পণ্য
-      </h2>
+      <a
+        href="#products"
+        class="hero-btn"
+      >
+        🛍️ এখনই শপিং করুন
+      </a>
 
     </div>
 
-    <a href="#products">
-      সব পণ্য
-    </a>
-
-  </div>
+  </section>
 
 
-  <div
-    id="grid"
-    class="grid"
-  >
 
-    <p>
-      পণ্য লোড হচ্ছে...
-    </p>
+  <!-- ================= CATEGORY ================= -->
 
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     WHY CHOOSE US
-===================================================== -->
-
-<section class="why">
-
-  <div class="why-inner">
+  <section class="categories">
 
     <div class="section-label">
-      WHY CHOOSE US
+      SHOP BY CATEGORY
     </div>
 
+
     <h2 class="section-title">
-      কেন ADORE'S PET?
+      ক্যাটাগরি
     </h2>
 
 
-    <div class="features">
+    <div class="category-grid">
 
 
-      <div class="feature">
+      <a
+        href="#products"
+        class="category"
+      >
 
-        <div class="feature-icon">
+        <div class="category-icon">
           🐰
         </div>
 
-        <h3>
-          সুস্থ পোষা প্রাণী
-        </h3>
+        <strong>
+          Rabbit
+        </strong>
 
-        <p>
-          যত্নসহকারে পালন করা স্বাস্থ্যকর
-          ও সুন্দর পোষা প্রাণী।
-        </p>
-
-      </div>
+      </a>
 
 
-      <div class="feature">
+      <a
+        href="#products"
+        class="category"
+      >
 
-        <div class="feature-icon">
-          🚚
+        <div class="category-icon">
+          🐹
         </div>
 
-        <h3>
-          Delivery সুবিধা
-        </h3>
+        <strong>
+          Hamster
+        </strong>
 
-        <p>
-          দেশের বিভিন্ন জায়গায় সহজে
-          অর্ডার ও ডেলিভারি সুবিধা।
-        </p>
-
-      </div>
+      </a>
 
 
-      <div class="feature">
+      <a
+        href="#products"
+        class="category"
+      >
 
-        <div class="feature-icon">
-          ⭐
+        <div class="category-icon">
+          🌾
         </div>
 
-        <h3>
-          বিশ্বস্ত সেবা
-        </h3>
+        <strong>
+          Pet Food
+        </strong>
 
-        <p>
-          গ্রাহকের সন্তুষ্টি ও ভালো
-          সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।
-        </p>
+      </a>
 
-      </div>
+
+      <a
+        href="#products"
+        class="category"
+      >
+
+        <div class="category-icon">
+          🧺
+        </div>
+
+        <strong>
+          Accessories
+        </strong>
+
+      </a>
 
 
     </div>
 
-  </div>
+  </section>
 
-</section>
+
+
+  <!-- ================= PRODUCTS ================= -->
+
+  <section
+    id="products"
+    class="products-section"
+  >
+
+    <div class="products-heading">
+
+      <div>
+
+        <div class="section-label">
+          OUR COLLECTION
+        </div>
+
+
+        <h2 class="section-title">
+          আমাদের পণ্য
+        </h2>
+
+      </div>
+
+
+      <a
+        href="#products"
+        class="all-products"
+      >
+        সব পণ্য
+      </a>
+
+    </div>
+
+
+    <div
+      id="grid"
+      class="grid"
+    >
+
+      <p>
+        পণ্য লোড হচ্ছে...
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ================= WHY CHOOSE US ================= -->
+
+  <section class="why">
+
+    <div class="why-inner">
+
+
+      <div class="section-label">
+        WHY CHOOSE US
+      </div>
+
+
+      <h2 class="section-title">
+        কেন ADORE'S PET?
+      </h2>
+
+
+      <div class="category-grid why-grid">
+
+
+        <!-- BOX 1 -->
+
+        <div class="category feature">
+
+          <div class="category-icon">
+            🐰
+          </div>
+
+
+          <strong>
+            সুস্থ পোষা প্রাণী
+          </strong>
+
+
+          <p>
+            যত্নসহকারে পালন করা স্বাস্থ্যকর
+            ও সুন্দর পোষা প্রাণী।
+          </p>
+
+        </div>
+
+
+
+        <!-- BOX 2 -->
+
+        <div class="category feature">
+
+          <div class="category-icon">
+            🚚
+          </div>
+
+
+          <strong>
+            Delivery সুবিধা
+          </strong>
+
+
+          <p>
+            দেশের বিভিন্ন জায়গায় সহজ অর্ডার
+            ও ডেলিভারি সুবিধা।
+          </p>
+
+        </div>
+
+
+
+        <!-- BOX 3 -->
+
+        <div class="category feature">
+
+          <div class="category-icon">
+            ⭐
+          </div>
+
+
+          <strong>
+            বিশ্বস্ত সেবা
+          </strong>
+
+
+          <p>
+            গ্রাহকের সন্তুষ্টি ও ভালো
+            সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।
+          </p>
+
+        </div>
+
+
+
+        <!-- BOX 4 -->
+
+        <div class="category feature">
+
+          <div class="category-icon">
+            🛡️
+          </div>
+
+
+          <strong>
+            মানসম্মত পণ্য
+          </strong>
+
+
+          <p>
+            পোষা প্রাণীর জন্য প্রয়োজনীয়
+            ভালো মানের পণ্য।
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
 
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-  <div class="footer-brand">
-    🐰 ADORE'S PET
+  <div class="footer-inner">
+
+
+    <div class="footer-brand">
+      🐰 ADORE'S PET
+    </div>
+
+
+    <p class="footer-tagline">
+      আপনার বিশ্বস্ত Pet Shop
+    </p>
+
+
+    <div class="footer-line"></div>
+
+
+    <p class="copyright">
+
+      © <span id="year"></span>
+      ADORE'S PET —
+      All Rights Reserved
+
+    </p>
+
+
   </div>
-
-  <p class="footer-text">
-    আপনার বিশ্বস্ত Pet Shop
-  </p>
-
-  <div class="footer-links">
-
-    <a href="#products">
-      পণ্য
-    </a>
-
-    <a href="admin.html">
-      Admin
-    </a>
-
-  </div>
-
-  <p class="copyright">
-    © <span id="year"></span>
-    ADORE'S PET — All Rights Reserved
-  </p>
 
 </footer>
 
 
-<!-- =====================================================
-     CART
-===================================================== -->
+
+<!-- ================= CART ================= -->
 
 <div
   id="cartPanel"
   class="cart-panel"
 >
+
 
   <div class="cart-box">
 
@@ -1673,6 +1476,7 @@ footer{
       <h2>
         🛒 আপনার Cart
       </h2>
+
 
       <button
         class="close-cart"
@@ -1686,14 +1490,15 @@ footer{
 
     <div id="cartItems"></div>
 
+
     <div id="cartSummary"></div>
 
 
-    <!-- =================================================
-         CHECKOUT
-    ================================================= -->
+
+    <!-- ================= CHECKOUT ================= -->
 
     <div class="checkout-form">
+
 
       <h3>
         📦 অর্ডারের তথ্য
@@ -1704,6 +1509,7 @@ footer{
         আপনার নাম
       </label>
 
+
       <input
         id="customerName"
         type="text"
@@ -1711,9 +1517,11 @@ footer{
       >
 
 
+
       <label>
         মোবাইল নম্বর
       </label>
+
 
       <input
         id="customerPhone"
@@ -1722,9 +1530,11 @@ footer{
       >
 
 
+
       <label>
         জেলা
       </label>
+
 
       <select id="customerDistrict">
 
@@ -1755,9 +1565,11 @@ footer{
       </select>
 
 
+
       <label>
         সম্পূর্ণ ঠিকানা
       </label>
+
 
       <textarea
         id="customerAddress"
@@ -1765,9 +1577,11 @@ footer{
       ></textarea>
 
 
+
       <label>
         Delivery Charge
       </label>
+
 
       <select id="deliveryCharge">
 
@@ -1782,6 +1596,7 @@ footer{
       </select>
 
 
+
       <div
         id="checkoutTotal"
         class="cart-total"
@@ -1790,7 +1605,9 @@ footer{
       </div>
 
 
+
       <button
+        id="placeOrderBtn"
         class="place-order"
         onclick="placeOrder()"
       >
@@ -1803,6 +1620,7 @@ footer{
         class="order-msg"
       ></div>
 
+
     </div>
 
   </div>
@@ -1810,27 +1628,28 @@ footer{
 </div>
 
 
-<!-- =====================================================
-     CONFIG
-===================================================== -->
+
+<!-- ================= CONFIG ================= -->
 
 <script src="config.js"></script>
 
 
-<!-- =====================================================
-     SUPABASE + APP
-===================================================== -->
+
+<!-- ================= SUPABASE + CART ================= -->
 
 <script type="module">
 
+
 import {
   createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+}
+from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+
+/* ================= SUPABASE ================= */
+
 
 const ready =
   window.SUPABASE_URL &&
@@ -1839,7 +1658,8 @@ const ready =
   window.SUPABASE_ANON_KEY.length > 20;
 
 
-const db = ready
+const db =
+  ready
 
   ? createClient(
       window.SUPABASE_URL,
@@ -1849,9 +1669,9 @@ const db = ready
   : null;
 
 
-/* =====================================================
-   GLOBAL DATA
-===================================================== */
+
+/* ================= GLOBAL ================= */
+
 
 let products = [];
 
@@ -1864,18 +1684,22 @@ let cart =
   );
 
 
+
 const grid =
   document.getElementById("grid");
 
 
-document.getElementById("year")
-  .textContent =
+const year =
+  document.getElementById("year");
+
+
+year.textContent =
   new Date().getFullYear();
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+
+/* ================= ESCAPE HTML ================= */
+
 
 function escapeHtml(value){
 
@@ -1884,30 +1708,30 @@ function escapeHtml(value){
   ).replace(
     /[&<>"']/g,
 
-    m => ({
+    function(m){
 
-      "&":"&amp;",
+      return {
 
-      "<":"&lt;",
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-      ">":"&gt;",
+      }[m];
 
-      '"':"&quot;",
-
-      "'":"&#039;"
-
-    }[m])
-
+    }
   );
 
 }
 
 
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
+
+/* ================= PRODUCT CARD ================= */
+
 
 function productCard(p){
+
 
   const image =
     p.image_url ||
@@ -1925,6 +1749,7 @@ function productCard(p){
 
     <article class="card">
 
+
       <img
         src="${escapeHtml(image)}"
         alt="${escapeHtml(p.title)}"
@@ -1932,6 +1757,7 @@ function productCard(p){
 
 
       <div class="body">
+
 
         <small>
           ${escapeHtml(p.category)}
@@ -1957,16 +1783,18 @@ function productCard(p){
         </b>
 
 
-        <div
-          class="${stock > 0 ? "in" : "out"}"
-        >
+        <div class="${
+          stock > 0
+          ? "in"
+          : "out"
+        }">
 
           ${
             stock > 0
 
-              ? "স্টকে আছে: " + stock
+            ? "স্টকে আছে: " + stock
 
-              : "স্টক শেষ"
+            : "স্টক শেষ"
           }
 
         </div>
@@ -1974,33 +1802,37 @@ function productCard(p){
 
         <div class="product-actions">
 
-          <button
 
+          <button
             class="add-cart"
 
             ${
               stock <= 0
-                ? "disabled"
-                : ""
+              ? "disabled"
+              : ""
             }
 
-            onclick="addToCart('${p.id}')"
-
+            onclick="
+              addToCart('${p.id}')
+            "
           >
 
             ${
               stock > 0
 
-                ? "🛒 Cart-এ যোগ করুন"
+              ? "🛒 Cart-এ যোগ করুন"
 
-                : "স্টক শেষ"
+              : "স্টক শেষ"
             }
 
           </button>
 
+
         </div>
 
+
       </div>
+
 
     </article>
 
@@ -2009,11 +1841,12 @@ function productCard(p){
 }
 
 
-/* =====================================================
-   LOAD PRODUCTS
-===================================================== */
+
+/* ================= LOAD PRODUCTS ================= */
+
 
 async function loadProducts(){
+
 
   if(!db){
 
@@ -2028,7 +1861,6 @@ async function loadProducts(){
     data,
     error
   } =
-
     await db
 
       .from("products")
@@ -2062,48 +1894,22 @@ async function loadProducts(){
 
     products.length
 
-      ? products
-          .map(productCard)
-          .join("")
+    ? products
+        .map(productCard)
+        .join("")
 
-      : "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
-
-
-  /* Existing cart stock update */
-
-  cart = cart.filter(item => {
-
-    const p =
-      products.find(
-        x =>
-          String(x.id) ===
-          String(item.id)
-      );
-
-    if(!p) return false;
-
-    item.stock =
-      Number(p.stock || 0);
-
-    item.price =
-      Number(p.price || 0);
-
-    return item.stock > 0;
-
-  });
-
-
-  saveCart();
+    : "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
 
 }
+
 
 
 loadProducts();
 
 
-/* =====================================================
-   SAVE CART
-===================================================== */
+
+/* ================= SAVE CART ================= */
+
 
 function saveCart(){
 
@@ -2115,25 +1921,28 @@ function saveCart(){
 
   );
 
+
   updateCartCount();
 
 }
 
 
-/* =====================================================
-   CART COUNT
-===================================================== */
+
+/* ================= CART COUNT ================= */
+
 
 function updateCartCount(){
 
-  const count =
 
+  const count =
     cart.reduce(
 
-      (total,item) =>
+      function(total,item){
 
-        total +
-        Number(item.qty || 0),
+        return total +
+          Number(item.qty || 0);
+
+      },
 
       0
 
@@ -2147,20 +1956,23 @@ function updateCartCount(){
 }
 
 
-/* =====================================================
-   ADD TO CART
-===================================================== */
+
+/* ================= ADD TO CART ================= */
+
 
 window.addToCart =
 function(id){
 
-  const product =
 
+  const product =
     products.find(
 
-      p =>
-        String(p.id) ===
-        String(id)
+      function(p){
+
+        return String(p.id)
+          === String(id);
+
+      }
 
     );
 
@@ -2181,32 +1993,25 @@ function(id){
     );
 
 
-  if(stock <= 0){
-
-    alert(
-      "এই পণ্যটি স্টকে নেই।"
-    );
-
-    return;
-  }
-
-
   const existing =
-
     cart.find(
 
-      item =>
-        String(item.id) ===
-        String(id)
+      function(item){
+
+        return String(item.id)
+          === String(id);
+
+      }
 
     );
 
 
   if(existing){
 
+
     if(
-      Number(existing.qty) >=
-      stock
+      Number(existing.qty)
+      >= stock
     ){
 
       alert(
@@ -2217,11 +2022,12 @@ function(id){
     }
 
 
-    existing.qty++;
+    existing.qty =
+      Number(existing.qty) + 1;
 
-  }
 
-  else{
+  }else{
+
 
     cart.push({
 
@@ -2229,10 +2035,9 @@ function(id){
 
       title:product.title,
 
-      price:
-        Number(
-          product.price || 0
-        ),
+      price:Number(
+        product.price || 0
+      ),
 
       image_url:
         product.image_url || "",
@@ -2248,69 +2053,74 @@ function(id){
 
   saveCart();
 
-  renderCart();
 
   alert(
     "পণ্য Cart-এ যোগ হয়েছে।"
   );
 
+
+  renderCart();
+
 };
 
 
-/* =====================================================
-   REMOVE FROM CART
-   IMPORTANT:
-   window-এর সাথে দেওয়া হয়েছে,
-   তাই HTML onclick কাজ করবে।
-===================================================== */
+
+/* ================= DELETE ================= */
+
 
 window.removeFromCart =
 function(id){
 
-  cart =
 
+  cart =
     cart.filter(
 
-      item =>
-        String(item.id) !==
-        String(id)
+      function(item){
+
+        return String(item.id)
+          !== String(id);
+
+      }
 
     );
 
 
   saveCart();
 
+
   renderCart();
 
 };
 
 
-/* =====================================================
-   CHANGE QUANTITY
-   IMPORTANT:
-   window-এর সাথে দেওয়া হয়েছে,
-   তাই + / − কাজ করবে।
-===================================================== */
+
+/* ================= PLUS / MINUS ================= */
+
 
 window.changeQty =
 function(id,change){
 
-  const item =
 
+  const item =
     cart.find(
 
-      x =>
-        String(x.id) ===
-        String(id)
+      function(x){
+
+        return String(x.id)
+          === String(id);
+
+      }
 
     );
 
 
-  if(!item) return;
+  if(!item){
+
+    return;
+  }
 
 
   const newQty =
-
     Number(item.qty) +
     Number(change);
 
@@ -2342,171 +2152,31 @@ function(id,change){
 
   saveCart();
 
+
   renderCart();
 
 };
 
 
-/* =====================================================
-   RENDER CART
-===================================================== */
 
-function renderCart(){
+/* ================= SUBTOTAL ================= */
 
-  const container =
-    document.getElementById(
-      "cartItems"
-    );
-
-
-  const summary =
-    document.getElementById(
-      "cartSummary"
-    );
-
-
-  if(!cart.length){
-
-    container.innerHTML = `
-
-      <div class="empty-cart">
-
-        🛒 Cart এখন খালি।
-
-        <br><br>
-
-        পছন্দের পণ্য Cart-এ যোগ করুন।
-
-      </div>
-
-    `;
-
-
-    summary.innerHTML = "";
-
-    updateCheckoutTotal();
-
-    return;
-  }
-
-
-  container.innerHTML =
-
-    cart.map(item => `
-
-      <div class="cart-item">
-
-        <img
-
-          src="${escapeHtml(
-
-            item.image_url ||
-
-            "https://images.unsplash.com/photo-1583301286816-f4f05e1f8b2d?auto=format&fit=crop&w=300&q=80"
-
-          )}"
-
-          alt="${escapeHtml(
-            item.title
-          )}"
-
-        >
-
-
-        <div class="cart-info">
-
-          <h4>
-            ${escapeHtml(
-              item.title
-            )}
-          </h4>
-
-
-          <div>
-            ৳${Number(
-              item.price
-            ).toLocaleString("en-BD")}
-          </div>
-
-
-          <div class="qty">
-
-            <button
-              onclick="changeQty('${item.id}',-1)"
-            >
-              −
-            </button>
-
-
-            <strong>
-              ${item.qty}
-            </strong>
-
-
-            <button
-              onclick="changeQty('${item.id}',1)"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <button
-
-          class="remove-item"
-
-          onclick="removeFromCart('${item.id}')"
-
-        >
-          Delete
-        </button>
-
-      </div>
-
-    `).join("");
-
-
-  const subtotal =
-    getSubtotal();
-
-
-  summary.innerHTML = `
-
-    <div class="cart-total">
-
-      পণ্যের মূল্য:
-
-      ৳${subtotal.toLocaleString("en-BD")}
-
-    </div>
-
-  `;
-
-
-  updateCheckoutTotal();
-
-}
-
-
-/* =====================================================
-   SUBTOTAL
-===================================================== */
 
 function getSubtotal(){
 
+
   return cart.reduce(
 
-    (total,item) =>
+    function(total,item){
 
-      total +
+      return total +
 
-      (
-        Number(item.price) *
-        Number(item.qty)
-      ),
+        (
+          Number(item.price) *
+          Number(item.qty)
+        );
+
+    },
 
     0
 
@@ -2515,24 +2185,32 @@ function getSubtotal(){
 }
 
 
-/* =====================================================
-   DELIVERY
-===================================================== */
+
+/* ================= DELIVERY ================= */
+
 
 function getDeliveryCharge(){
 
-  return Number(
 
+  const select =
     document.getElementById(
       "deliveryCharge"
-    ).value || 0
+    );
 
+
+  return Number(
+    select.value || 0
   );
 
 }
 
 
+
+/* ================= CHECKOUT TOTAL ================= */
+
+
 function updateCheckoutTotal(){
+
 
   const subtotal =
     getSubtotal();
@@ -2551,9 +2229,13 @@ function updateCheckoutTotal(){
     "checkoutTotal"
   ).textContent =
 
-    `মোট: ৳${total.toLocaleString("en-BD")}`;
+    "মোট: ৳" +
+    total.toLocaleString(
+      "en-BD"
+    );
 
 }
+
 
 
 document.getElementById(
@@ -2564,12 +2246,179 @@ document.getElementById(
 );
 
 
-/* =====================================================
-   OPEN CART
-===================================================== */
+
+/* ================= RENDER CART ================= */
+
+
+function renderCart(){
+
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+
+  const summary =
+    document.getElementById(
+      "cartSummary"
+    );
+
+
+  if(!cart.length){
+
+
+    container.innerHTML = `
+
+      <div class="empty-cart">
+
+        🛒 Cart এখন খালি।
+
+        <br><br>
+
+        পছন্দের পণ্য Cart-এ যোগ করুন।
+
+      </div>
+
+    `;
+
+
+    summary.innerHTML = "";
+
+
+    updateCheckoutTotal();
+
+
+    return;
+
+  }
+
+
+
+  container.innerHTML =
+
+    cart.map(
+
+      function(item){
+
+        return `
+
+          <div class="cart-item">
+
+
+            <img
+              src="${escapeHtml(
+                item.image_url ||
+
+                "https://images.unsplash.com/photo-1583301286816-f4f05e1f8b2d?auto=format&fit=crop&w=300&q=80"
+              )}"
+              alt="${escapeHtml(
+                item.title
+              )}"
+            >
+
+
+            <div class="cart-info">
+
+
+              <h4>
+                ${escapeHtml(
+                  item.title
+                )}
+              </h4>
+
+
+              <div>
+                ৳${Number(
+                  item.price
+                ).toLocaleString(
+                  "en-BD"
+                )}
+              </div>
+
+
+              <div class="qty">
+
+
+                <button
+                  onclick="
+                    changeQty('${item.id}',-1)
+                  "
+                >
+                  −
+                </button>
+
+
+                <strong>
+                  ${item.qty}
+                </strong>
+
+
+                <button
+                  onclick="
+                    changeQty('${item.id}',1)
+                  "
+                >
+                  +
+                </button>
+
+
+              </div>
+
+
+            </div>
+
+
+            <button
+              class="remove-item"
+              onclick="
+                removeFromCart('${item.id}')
+              "
+            >
+              Delete
+            </button>
+
+
+          </div>
+
+        `;
+
+      }
+
+    ).join("");
+
+
+
+  const subtotal =
+    getSubtotal();
+
+
+  summary.innerHTML = `
+
+    <div class="cart-total">
+
+      পণ্যের মূল্য:
+      ৳${subtotal.toLocaleString(
+        "en-BD"
+      )}
+
+    </div>
+
+  `;
+
+
+  updateCheckoutTotal();
+
+}
+
+
+
+/* ================= OPEN CART ================= */
+
 
 window.openCart =
 function(){
+
 
   document.getElementById(
     "cartPanel"
@@ -2582,12 +2431,13 @@ function(){
 };
 
 
-/* =====================================================
-   CLOSE CART
-===================================================== */
+
+/* ================= CLOSE CART ================= */
+
 
 window.closeCart =
 function(){
+
 
   document.getElementById(
     "cartPanel"
@@ -2597,16 +2447,23 @@ function(){
 };
 
 
-/* =====================================================
-   PLACE ORDER
-===================================================== */
+
+/* ================= PLACE ORDER ================= */
+
 
 window.placeOrder =
 async function(){
 
+
   const msg =
     document.getElementById(
       "orderMsg"
+    );
+
+
+  const button =
+    document.getElementById(
+      "placeOrderBtn"
     );
 
 
@@ -2623,28 +2480,24 @@ async function(){
 
 
   const name =
-
     document.getElementById(
       "customerName"
     ).value.trim();
 
 
   const phone =
-
     document.getElementById(
       "customerPhone"
     ).value.trim();
 
 
   const district =
-
     document.getElementById(
       "customerDistrict"
     ).value;
 
 
   const address =
-
     document.getElementById(
       "customerAddress"
     ).value.trim();
@@ -2654,7 +2507,6 @@ async function(){
     getDeliveryCharge();
 
 
-  /* ================= VALIDATION ================= */
 
   if(!name){
 
@@ -2674,10 +2526,14 @@ async function(){
   }
 
 
-  if(!/^01[3-9]\d{8}$/.test(phone)){
+  if(
+    !/^01[3-9]\d{8}$/.test(
+      phone
+    )
+  ){
 
     msg.textContent =
-      "❌ সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।";
+      "❌ সঠিক বাংলাদেশি মোবাইল নম্বর দিন।";
 
     return;
   }
@@ -2710,7 +2566,6 @@ async function(){
   }
 
 
-  /* ================= TOTAL ================= */
 
   const subtotal =
     getSubtotal();
@@ -2721,158 +2576,205 @@ async function(){
     delivery;
 
 
-  /* ================= ORDER ITEMS ================= */
 
   const orderItems =
+    cart.map(
 
-    cart.map(item => ({
+      function(item){
 
-      product_id:
-        item.id,
+        return {
 
-      title:
-        item.title,
+          product_id:
+            item.id,
 
-      price:
-        Number(item.price),
+          title:
+            item.title,
 
-      quantity:
-        Number(item.qty)
+          price:
+            Number(item.price),
 
-    }));
+          quantity:
+            Number(item.qty)
+
+        };
+
+      }
+
+    );
 
 
-  msg.textContent =
+
+  msg.innerHTML =
     "⏳ অর্ডার পাঠানো হচ্ছে...";
 
 
-  /* ================= SAVE ORDER ================= */
-
-  const {
-    data,
-    error
-  } =
-
-    await db
-
-      .from("orders")
-
-      .insert({
-
-        customer_name:
-          name,
-
-        phone:
-          phone,
-
-        district:
-          district,
-
-        address:
-          address,
-
-        delivery_charge:
-          delivery,
-
-        subtotal:
-          subtotal,
-
-        total_amount:
-          total,
-
-        items:
-          orderItems,
-
-        status:
-          "pending"
-
-      })
-
-      .select()
-
-      .single();
+  button.disabled =
+    true;
 
 
-  if(error){
 
-    console.error(error);
+  try{
 
-    msg.textContent =
 
-      "❌ অর্ডার করা যায়নি: " +
-      error.message;
+    const {
+      data,
+      error
+    } =
 
-    return;
+      await db
+
+        .from("orders")
+
+        .insert({
+
+          customer_name:
+            name,
+
+          phone:
+            phone,
+
+          district:
+            district,
+
+          address:
+            address,
+
+          delivery_charge:
+            delivery,
+
+          subtotal:
+            subtotal,
+
+          total_amount:
+            total,
+
+          items:
+            orderItems,
+
+          status:
+            "pending"
+
+        })
+
+        .select()
+
+        .single();
+
+
+
+    if(error){
+
+      throw error;
+
+    }
+
+
+
+    msg.innerHTML = `
+
+      <span style="
+        color:#176b3a;
+        font-size:18px;
+      ">
+
+        ✅ অর্ডার সফল হয়েছে!
+
+        <br><br>
+
+        Order ID:
+
+        ${escapeHtml(
+          data.id
+        )}
+
+      </span>
+
+    `;
+
+
+
+    cart = [];
+
+
+    saveCart();
+
+
+    renderCart();
+
+
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerDistrict"
+    ).value = "";
+
+
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
+
+
+    alert(
+      "আপনার অর্ডার সফলভাবে নেওয়া হয়েছে।"
+    );
+
+
+
+  }catch(error){
+
+
+    console.error(
+      "ORDER ERROR:",
+      error
+    );
+
+
+    msg.innerHTML = `
+
+      <span style="color:#c62828">
+
+        ❌ অর্ডার করা যায়নি।
+
+        <br>
+
+        ${escapeHtml(
+          error.message
+        )}
+
+      </span>
+
+    `;
+
+
+  }finally{
+
+
+    button.disabled =
+      false;
+
   }
-
-
-  /* ================= SUCCESS ================= */
-
-  msg.innerHTML = `
-
-    <span style="color:#176b3a">
-
-      ✅ অর্ডার সফল হয়েছে!
-
-      <br><br>
-
-      আপনার Order ID:
-
-      <br>
-
-      <strong>
-        ${escapeHtml(data.id)}
-      </strong>
-
-    </span>
-
-  `;
-
-
-  /* Clear cart */
-
-  cart = [];
-
-  saveCart();
-
-
-  /* Clear form */
-
-  document.getElementById(
-    "customerName"
-  ).value = "";
-
-
-  document.getElementById(
-    "customerPhone"
-  ).value = "";
-
-
-  document.getElementById(
-    "customerDistrict"
-  ).value = "";
-
-
-  document.getElementById(
-    "customerAddress"
-  ).value = "";
-
-
-  renderCart();
-
-
-  alert(
-    "আপনার অর্ডার সফলভাবে নেওয়া হয়েছে।"
-  );
 
 };
 
 
-/* =====================================================
-   INITIAL CART COUNT
-===================================================== */
+
+/* ================= INITIAL ================= */
+
 
 updateCartCount();
+
+
+updateCheckoutTotal();
+
 
 </script>
 
