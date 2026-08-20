@@ -1,28 +1,662 @@
 <!doctype html>
 <html lang="bn">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ADORE'S PET — Admin</title><link rel="stylesheet" href="style.css">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <title>ADORE'S PET — Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <style>
+
+    .hidden{
+      display:none !important;
+    }
+
+    .admin{
+      max-width:1100px;
+      margin:auto;
+      padding:25px 15px;
+    }
+
+    .panel{
+      background:#fff;
+      border-radius:18px;
+      padding:25px;
+      margin-bottom:25px;
+      box-shadow:0 5px 25px rgba(0,0,0,.06);
+    }
+
+    .admin-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .form-grid label{
+      font-weight:700;
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-grid textarea{
+      display:block;
+      width:100%;
+      box-sizing:border-box;
+      margin-top:7px;
+      padding:12px;
+      border:1px solid #ccc;
+      border-radius:9px;
+      font-size:16px;
+    }
+
+    .full{
+      grid-column:1 / -1;
+    }
+
+    .btn{
+      border:0;
+      background:#176b3a;
+      color:#fff;
+      padding:12px 20px;
+      border-radius:9px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .secondary{
+      border:0;
+      background:#777;
+      color:#fff;
+      padding:12px 20px;
+      border-radius:9px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .danger-outline{
+      border:0;
+      background:#c62828;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:9px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .preview{
+      width:180px;
+      height:180px;
+      object-fit:cover;
+      border-radius:12px;
+      margin-top:15px;
+    }
+
+    .list-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .list-head input{
+      width:250px;
+      padding:12px;
+      border:1px solid #ccc;
+      border-radius:9px;
+      font-size:16px;
+    }
+
+    .admin-item{
+      display:flex;
+      gap:15px;
+      align-items:center;
+      border-bottom:1px solid #ddd;
+      padding:15px 0;
+    }
+
+    .admin-item img{
+      width:90px;
+      height:90px;
+      object-fit:cover;
+      border-radius:10px;
+    }
+
+    .admin-item-info{
+      flex:1;
+    }
+
+    .admin-item-info h3{
+      margin:0 0 5px;
+    }
+
+    .edit{
+      border:0;
+      background:#eee;
+      padding:9px 13px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .delete{
+      border:0;
+      background:#c62828;
+      color:#fff;
+      padding:9px 13px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .order-card{
+      border:1px solid #ddd;
+      border-radius:14px;
+      padding:18px;
+      margin-bottom:15px;
+      background:#fff;
+    }
+
+    .order-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .order-id{
+      font-size:12px;
+      color:#777;
+      word-break:break-all;
+    }
+
+    .status{
+      padding:6px 10px;
+      border-radius:20px;
+      font-weight:700;
+      font-size:13px;
+      background:#fff3cd;
+      color:#856404;
+    }
+
+    .status.completed{
+      background:#d4edda;
+      color:#155724;
+    }
+
+    .status.cancelled{
+      background:#f8d7da;
+      color:#721c24;
+    }
+
+    .order-info{
+      margin-top:15px;
+      line-height:1.8;
+    }
+
+    .order-items{
+      background:#f7f7f7;
+      border-radius:10px;
+      padding:12px;
+      margin-top:12px;
+    }
+
+    .order-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:15px;
+    }
+
+    .complete-btn{
+      border:0;
+      background:#176b3a;
+      color:#fff;
+      padding:9px 13px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .cancel-btn{
+      border:0;
+      background:#f39c12;
+      color:#fff;
+      padding:9px 13px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .delete-order{
+      border:0;
+      background:#c62828;
+      color:#fff;
+      padding:9px 13px;
+      border-radius:7px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .refresh-btn{
+      border:0;
+      background:#176b3a;
+      color:#fff;
+      padding:10px 15px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    @media(max-width:700px){
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .full{
+        grid-column:auto;
+      }
+
+      .admin-top{
+        align-items:flex-start;
+      }
+
+      .list-head{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .list-head input{
+        width:100%;
+        box-sizing:border-box;
+      }
+
+      .admin-item{
+        align-items:flex-start;
+      }
+
+      .admin-item img{
+        width:70px;
+        height:70px;
+      }
+
+      .order-top{
+        flex-direction:column;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 <body>
-<header><div class="brand">🐰 ADORE'S PET — Admin</div><nav><a href="index.html">Website</a></nav></header>
+
+
+<header>
+
+  <div class="brand">
+    🐰 ADORE'S PET — Admin
+  </div>
+
+  <nav>
+
+    <a href="index.html">
+      Website
+    </a>
+
+  </nav>
+
+</header>
+
+
+
 <main class="admin">
-<section id="loginBox" class="panel"><h2>Admin Login</h2><p>Supabase Auth দিয়ে লগইন করুন।</p>
-<form id="loginForm"><input id="email" type="email" placeholder="Admin email" required><input id="password" type="password" placeholder="Password" required><button class="btn">Login</button></form><p id="loginMsg"></p></section>
-<section id="dashboard" class="hidden">
-<div class="admin-top"><div><h1>Admin Panel</h1><p>পণ্য যোগ, ছবি আপলোড, Edit ও Delete করুন।</p></div><button id="logout" class="danger-outline">Logout</button></div>
-<section class="panel"><h2 id="formTitle">নতুন পণ্য</h2>
-<form id="productForm"><input type="hidden" id="id">
-<div class="form-grid">
-<label>Title<input id="title" required></label>
-<label>Category<select id="category"><option>Hamster</option><option>Rabbit</option><option>Hamster Food</option><option>Rabbit Food</option><option>Accessories</option></select></label>
-<label>Price (৳)<input id="price" type="number" min="0" required></label>
-<label>Stock<input id="stock" type="number" min="0" required></label>
-<label class="full">ছবি<input id="image" type="file" accept="image/*"></label>
-<label class="full">Description<textarea id="description" rows="4"></textarea></label>
-</div><img id="preview" class="preview hidden"><div class="actions"><button class="btn">Save Product</button><button type="button" id="cancel" class="secondary hidden">Cancel</button></div><p id="msg"></p>
-</form></section>
-<section class="panel"><div class="list-head"><h2>Product List</h2><input id="search" placeholder="Search"></div><div id="list"></div></section>
-</section>
+
+
+  <!-- ================= LOGIN ================= -->
+
+  <section
+    id="loginBox"
+    class="panel"
+  >
+
+    <h2>
+      Admin Login
+    </h2>
+
+    <p>
+      Supabase Auth দিয়ে লগইন করুন।
+    </p>
+
+
+    <form id="loginForm">
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Admin email"
+        required
+      >
+
+      <br><br>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+      >
+
+      <br><br>
+
+      <button
+        class="btn"
+        type="submit"
+      >
+        Login
+      </button>
+
+    </form>
+
+
+    <p id="loginMsg"></p>
+
+  </section>
+
+
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <section
+    id="dashboard"
+    class="hidden"
+  >
+
+
+    <div class="admin-top">
+
+      <div>
+
+        <h1>
+          Admin Panel
+        </h1>
+
+        <p>
+          পণ্য ও অর্ডার পরিচালনা করুন।
+        </p>
+
+      </div>
+
+
+      <button
+        id="logout"
+        class="danger-outline"
+        type="button"
+      >
+        Logout
+      </button>
+
+    </div>
+
+
+
+    <!-- ================= PRODUCT FORM ================= -->
+
+    <section class="panel">
+
+      <h2 id="formTitle">
+        নতুন পণ্য
+      </h2>
+
+
+      <form id="productForm">
+
+        <input
+          type="hidden"
+          id="id"
+        >
+
+
+        <div class="form-grid">
+
+
+          <label>
+
+            Title
+
+            <input
+              id="title"
+              required
+            >
+
+          </label>
+
+
+
+          <label>
+
+            Category
+
+            <select id="category">
+
+              <option>
+                Hamster
+              </option>
+
+              <option>
+                Rabbit
+              </option>
+
+              <option>
+                Hamster Food
+              </option>
+
+              <option>
+                Rabbit Food
+              </option>
+
+              <option>
+                Accessories
+              </option>
+
+            </select>
+
+          </label>
+
+
+
+          <label>
+
+            Price (৳)
+
+            <input
+              id="price"
+              type="number"
+              min="0"
+              required
+            >
+
+          </label>
+
+
+
+          <label>
+
+            Stock
+
+            <input
+              id="stock"
+              type="number"
+              min="0"
+              required
+            >
+
+          </label>
+
+
+
+          <label class="full">
+
+            ছবি
+
+            <input
+              id="image"
+              type="file"
+              accept="image/*"
+            >
+
+          </label>
+
+
+
+          <label class="full">
+
+            Description
+
+            <textarea
+              id="description"
+              rows="4"
+            ></textarea>
+
+          </label>
+
+
+        </div>
+
+
+        <img
+          id="preview"
+          class="preview hidden"
+        >
+
+
+        <div class="actions">
+
+          <button
+            class="btn"
+            type="submit"
+          >
+            Save Product
+          </button>
+
+
+          <button
+            type="button"
+            id="cancel"
+            class="secondary hidden"
+          >
+            Cancel
+          </button>
+
+        </div>
+
+
+        <p id="msg"></p>
+
+      </form>
+
+    </section>
+
+
+
+    <!-- ================= PRODUCT LIST ================= -->
+
+    <section class="panel">
+
+      <div class="list-head">
+
+        <h2>
+          Product List
+        </h2>
+
+        <input
+          id="search"
+          placeholder="Search"
+        >
+
+      </div>
+
+
+      <div id="list">
+        পণ্য লোড হচ্ছে...
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= ORDERS ================= -->
+
+    <section class="panel">
+
+      <div class="list-head">
+
+        <h2>
+          📦 Orders
+        </h2>
+
+        <button
+          id="refreshOrders"
+          class="refresh-btn"
+          type="button"
+        >
+          🔄 Refresh
+        </button>
+
+      </div>
+
+
+      <div id="ordersList">
+        অর্ডার লোড হচ্ছে...
+      </div>
+
+    </section>
+
+
+  </section>
+
+
 </main>
-<script src="config.js"></script><script type="module" src="admin.js"></script>
-</body></html>
+
+
+
+<script src="config.js"></script>
+
+<script
+  type="module"
+  src="admin.js"
+></script>
+
+
+</body>
+
+</html>
