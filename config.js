@@ -1,5 +1,5 @@
-window.SUPABASE_URL =
-"https://YOUR-PROJECT.supabase.co";
+const SUPABASE_URL =
+  "https://dghpfkcnyvddkmimfcmb.supabase.co";
 
-window.SUPABASE_ANON_KEY =
-"YOUR-SUPABASE-ANON-KEY";
+const SUPABASE_ANON_KEY =
+  "তোমার sb_publishable_... key";
