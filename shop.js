@@ -23,6 +23,7 @@ ready
 
 let products = [];
 
+
 let cart =
 JSON.parse(
   localStorage.getItem("adore_pet_cart") || "[]"
@@ -151,16 +152,16 @@ async function loadProducts(){
   }
 
 
+  /*
+    এখানে created_at দিয়ে order করা হয়নি।
+    তাই products table-এ created_at না থাকলেও
+    product load করতে সমস্যা হবে না।
+  */
+
   const result =
   await db
   .from("products")
-  .select("*")
-  .order(
-    "created_at",
-    {
-      ascending:false
-    }
-  );
+  .select("*");
 
 
   if(result.error){
@@ -220,7 +221,7 @@ async function loadProducts(){
       .map(productCard)
       .join("")
 
-    : "<p>এই ক্যাটাগরিতে এখন কোনো পণ্য নেই।</p>";
+    : "<p>এই ক্যাটাগরিতে এখন কোনো পণ্য নেই।";
 
   }
 
@@ -236,10 +237,13 @@ function saveCart(){
     JSON.stringify(cart)
   );
 
+
   updateCartCount();
 
 }
 
+
+/* ================= CART COUNT ================= */
 
 function updateCartCount(){
 
@@ -519,8 +523,10 @@ function renderCart(){
 
     `;
 
+
     if(summary)
     summary.innerHTML = "";
+
 
     updateCheckoutTotal();
 
@@ -549,6 +555,7 @@ function renderCart(){
           ${escapeHtml(item.title)}
         </h4>
 
+
         <div>
           ৳${Number(item.price).toLocaleString("en-BD")}
         </div>
@@ -562,9 +569,11 @@ function renderCart(){
             −
           </button>
 
+
           <strong>
             ${item.qty}
           </strong>
+
 
           <button
             onclick="changeQty('${item.id}',1)"
@@ -611,7 +620,7 @@ function renderCart(){
 }
 
 
-/* ================= OPEN / CLOSE ================= */
+/* ================= OPEN CART ================= */
 
 window.openCart =
 function(){
@@ -633,6 +642,8 @@ function(){
 
 };
 
+
+/* ================= CLOSE CART ================= */
 
 window.closeCart =
 function(){
@@ -848,13 +859,16 @@ async function(){
     "customerName"
   ).value = "";
 
+
   document.getElementById(
     "customerPhone"
   ).value = "";
 
+
   document.getElementById(
     "customerDistrict"
   ).value = "";
+
 
   document.getElementById(
     "customerAddress"
