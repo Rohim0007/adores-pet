@@ -1,1138 +1,324 @@
-import {
-  createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+<!doctype html>
+<html lang="bn">
 
+<head>
 
-/* =========================================
-   SUPABASE
-========================================= */
+<meta charset="utf-8">
 
-const db = createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
 
+<title>ADORE'S PET</title>
 
-/* =========================================
-   HELPERS
-========================================= */
+<link rel="stylesheet" href="style.css">
 
-const $ = id =>
-  document.getElementById(id);
+</head>
 
+<body>
 
-let editing = null;
+<!-- ================= HEADER ================= -->
 
-let oldImage = null;
+<header class="header">
 
+  <a href="index.html" class="logo">
+    🐰 <span>ADORE'S PET</span>
+  </a>
 
+  <button
+    class="cart-btn"
+    onclick="openCart()"
+  >
+    🛒 Cart
+    <span id="cartCount">0</span>
+  </button>
 
-/* =========================================
-   INIT
-========================================= */
+</header>
 
-async function init(){
 
-  const {
-    data:{
-      session
-    }
-  } =
-    await db.auth.getSession();
+<!-- ================= CATEGORY ================= -->
 
+<main>
 
-  show(session);
+<section class="category-page">
 
-}
+  <a
+    href="index.html"
+    class="back-btn"
+  >
+    ← হোমে ফিরে যান
+  </a>
 
 
+  <div
+    id="categoryTitle"
+    class="category-title"
+  >
+    🐰 Rabbit
+  </div>
 
-/* =========================================
-   SHOW LOGIN / DASHBOARD
-========================================= */
 
-function show(session){
+  <div
+    id="grid"
+    class="grid"
+  >
 
-  $("loginBox")
-    .classList
-    .toggle(
-      "hidden",
-      !!session
-    );
+    <p>পণ্য লোড হচ্ছে...</p>
 
+  </div>
 
-  $("dashboard")
-    .classList
-    .toggle(
-      "hidden",
-      !session
-    );
+</section>
 
+</main>
 
-  if(session){
 
-    load();
+<!-- ================= FOOTER ================= -->
 
-    loadOrders();
+<footer class="footer">
 
-  }
+  <div class="footer-logo">
+    🐰 ADORE'S PET
+  </div>
 
-}
+  <p>
+    আপনার বিশ্বস্ত Pet Shop
+  </p>
 
+  <div class="footer-line"></div>
 
+  <small>
+    © <span id="year"></span>
+    ADORE'S PET — All Rights Reserved
+  </small>
 
-/* =========================================
-   LOGIN
-========================================= */
+</footer>
 
-$("loginForm").onsubmit =
-async function(e){
 
-  e.preventDefault();
+<!-- ================= CART ================= -->
 
+<div
+  id="cartPanel"
+  class="cart-panel"
+>
 
-  $("loginMsg").textContent =
-    "Login হচ্ছে...";
+  <div class="cart-box">
 
+    <div class="cart-head">
 
-  const {
-    error
-  } =
-    await db.auth.signInWithPassword({
+      <h2>
+        🛒 আপনার Cart
+      </h2>
 
-      email:
-        $("email").value.trim(),
+      <button onclick="closeCart()">
+        ✕
+      </button>
 
-      password:
-        $("password").value
+    </div>
 
-    });
 
+    <div id="cartItems"></div>
 
-  if(error){
+    <div id="cartSummary"></div>
 
-    $("loginMsg").textContent =
-      "❌ " + error.message;
 
-    return;
-  }
+    <div class="checkout-form">
 
+      <h3>
+        📦 অর্ডারের তথ্য
+      </h3>
 
-  $("loginMsg").textContent = "";
 
-  init();
+      <label>
+        আপনার নাম
+      </label>
 
-};
-
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-$("logout").onclick =
-async function(){
-
-  await db.auth.signOut();
-
-  init();
-
-};
-
-
-
-/* =========================================
-   IMAGE PREVIEW
-========================================= */
-
-$("image").onchange =
-function(){
-
-  const file =
-    $("image").files[0];
-
-
-  if(!file){
-
-    return;
-  }
-
-
-  $("preview").src =
-    URL.createObjectURL(file);
-
-
-  $("preview")
-    .classList
-    .remove("hidden");
-
-};
-
-
-
-/* =========================================
-   CANCEL EDIT
-========================================= */
-
-$("cancel").onclick =
-reset;
-
-
-
-/* =========================================
-   SEARCH
-========================================= */
-
-$("search").oninput =
-load;
-
-
-
-/* =========================================
-   SAVE PRODUCT
-========================================= */
-
-$("productForm").onsubmit =
-async function(e){
-
-  e.preventDefault();
-
-
-  $("msg").textContent =
-    "Saving...";
-
-
-  let image_url =
-    oldImage;
-
-
-  const file =
-    $("image").files[0];
-
-
-  /* ===============================
-     IMAGE UPLOAD
-  =============================== */
-
-  if(file){
-
-    const ext =
-      file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const path =
-      `${crypto.randomUUID()}.${ext}`;
-
-
-    const upload =
-      await db
-        .storage
-        .from("product-images")
-        .upload(
-          path,
-          file,
-          {
-            upsert:false
-          }
-        );
-
-
-    if(upload.error){
-
-      $("msg").textContent =
-        "❌ " +
-        upload.error.message;
-
-      return;
-    }
-
-
-    image_url =
-      db
-        .storage
-        .from("product-images")
-        .getPublicUrl(path)
-        .data
-        .publicUrl;
-
-  }
-
-
-
-  /* ===============================
-     PRODUCT DATA
-  =============================== */
-
-  const row = {
-
-    title:
-      $("title")
-        .value
-        .trim(),
-
-    category:
-      $("category").value,
-
-    price:
-      Number(
-        $("price").value
-      ),
-
-    stock:
-      Number(
-        $("stock").value
-      ),
-
-    description:
-      $("description")
-        .value
-        .trim(),
-
-    image_url:
-      image_url
-
-  };
-
-
-
-  let result;
-
-
-  /* ===============================
-     UPDATE
-  =============================== */
-
-  if(editing){
-
-    result =
-      await db
-        .from("products")
-        .update(row)
-        .eq(
-          "id",
-          editing
-        );
-
-  }
-
-
-  /* ===============================
-     INSERT
-  =============================== */
-
-  else{
-
-    result =
-      await db
-        .from("products")
-        .insert(row);
-
-  }
-
-
-
-  if(result.error){
-
-    $("msg").textContent =
-      "❌ " +
-      result.error.message;
-
-    return;
-  }
-
-
-
-  $("msg").textContent =
-    "✅ Saved";
-
-
-  reset();
-
-  await load();
-
-};
-
-
-
-/* =========================================
-   LOAD PRODUCTS
-========================================= */
-
-async function load(){
-
-  const query =
-    $("search")
-      .value
-      .toLowerCase();
-
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("products")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    $("list").textContent =
-      error.message;
-
-    return;
-  }
-
-
-  const filtered =
-    (data || []).filter(
-      function(p){
-
-        return (
-          String(p.title || "") +
-          " " +
-          String(p.category || "")
-        )
-        .toLowerCase()
-        .includes(query);
-
-      }
-    );
-
-
-
-  $("list").innerHTML =
-    filtered.length
-
-      ? filtered
-          .map(productHTML)
-          .join("")
-
-      : "<p>কোনো পণ্য নেই।</p>";
-
-}
-
-
-
-/* =========================================
-   PRODUCT HTML
-========================================= */
-
-function productHTML(p){
-
-  const image =
-    p.image_url || "";
-
-
-  return `
-
-    <div class="admin-item">
-
-      <img
-        src="${esc(image)}"
-        alt=""
+      <input
+        id="customerName"
+        placeholder="আপনার নাম"
       >
 
 
-      <div class="admin-item-info">
+      <label>
+        মোবাইল নম্বর
+      </label>
 
-        <h3>
-          ${esc(p.title)}
-        </h3>
-
-        <small>
-
-          ${esc(p.category)}
-
-          • ৳${Number(p.price || 0)
-            .toLocaleString("en-BD")}
-
-          • Stock:
-          ${Number(p.stock || 0)}
-
-        </small>
+      <input
+        id="customerPhone"
+        type="tel"
+        placeholder="01XXXXXXXXX"
+      >
 
 
-        <p>
-          ${esc(p.description || "")}
-        </p>
+      <label>
+        জেলা
+      </label>
 
+      <select id="customerDistrict">
+
+        <option value="">
+          জেলা নির্বাচন করুন
+        </option>
+
+        <option>ঢাকা</option>
+        <option>চট্টগ্রাম</option>
+        <option>সিলেট</option>
+        <option>রাজশাহী</option>
+        <option>খুলনা</option>
+        <option>বরিশাল</option>
+        <option>রংপুর</option>
+        <option>ময়মনসিংহ</option>
+
+        <option>কুমিল্লা</option>
+        <option>ফেনী</option>
+        <option>ব্রাহ্মণবাড়িয়া</option>
+        <option>চাঁদপুর</option>
+        <option>লক্ষ্মীপুর</option>
+        <option>নোয়াখালী</option>
+
+        <option>নারায়ণগঞ্জ</option>
+        <option>গাজীপুর</option>
+        <option>নরসিংদী</option>
+        <option>টাঙ্গাইল</option>
+        <option>কিশোরগঞ্জ</option>
+        <option>মানিকগঞ্জ</option>
+        <option>মুন্সিগঞ্জ</option>
+        <option>ফরিদপুর</option>
+
+        <option>যশোর</option>
+        <option>ঝিনাইদহ</option>
+        <option>মাগুরা</option>
+        <option>নড়াইল</option>
+        <option>কুষ্টিয়া</option>
+        <option>চুয়াডাঙ্গা</option>
+        <option>মেহেরপুর</option>
+        <option>সাতক্ষীরা</option>
+        <option>বাগেরহাট</option>
+
+        <option>বগুড়া</option>
+        <option>জয়পুরহাট</option>
+        <option>নওগাঁ</option>
+        <option>নাটোর</option>
+        <option>চাঁপাইনবাবগঞ্জ</option>
+        <option>পাবনা</option>
+        <option>সিরাজগঞ্জ</option>
+
+        <option>দিনাজপুর</option>
+        <option>ঠাকুরগাঁও</option>
+        <option>পঞ্চগড়</option>
+        <option>নীলফামারী</option>
+        <option>লালমনিরহাট</option>
+        <option>কুড়িগ্রাম</option>
+        <option>গাইবান্ধা</option>
+
+        <option>সুনামগঞ্জ</option>
+        <option>মৌলভীবাজার</option>
+        <option>হবিগঞ্জ</option>
+
+        <option>ঝালকাঠি</option>
+        <option>পটুয়াখালী</option>
+        <option>পিরোজপুর</option>
+        <option>ভোলা</option>
+        <option>বরগুনা</option>
+
+      </select>
+
+
+      <label>
+        সম্পূর্ণ ঠিকানা
+      </label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="বাড়ি / রোড / এলাকা / থানা..."
+      ></textarea>
+
+
+      <label>
+        Delivery Charge
+      </label>
+
+      <select id="deliveryCharge">
+
+        <option value="100">
+          ঢাকার ভিতরে — ৳100
+        </option>
+
+        <option value="150">
+          ঢাকার বাইরে — ৳150
+        </option>
+
+      </select>
+
+
+      <div
+        id="checkoutTotal"
+        class="checkout-total"
+      >
+        মোট: ৳0
       </div>
 
 
-      <div>
-
-        <button
-          class="edit"
-          type="button"
-          onclick="editProduct('${esc(p.id)}')"
-        >
-          Edit
-        </button>
+      <button
+        class="place-order"
+        onclick="placeOrder()"
+      >
+        ✅ অর্ডার করুন
+      </button>
 
 
-        <button
-          class="delete"
-          type="button"
-          onclick="deleteProduct('${esc(p.id)}')"
-        >
-          Delete
-        </button>
-
-      </div>
+      <div id="orderMsg"></div>
 
     </div>
 
-  `;
+  </div>
 
-}
-
-
-
-/* =========================================
-   EDIT PRODUCT
-========================================= */
-
-window.editProduct =
-async function(id){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("products")
-      .select("*")
-      .eq("id",id)
-      .single();
+</div>
 
 
-  if(error){
+<!-- ================= SCRIPT ================= -->
 
-    alert(error.message);
+<script src="config.js"></script>
 
-    return;
-  }
-
-
-  editing =
-    data.id;
+<script
+  type="module"
+  src="shop.js"
+></script>
 
 
-  oldImage =
-    data.image_url || null;
+<script>
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
 
 
-  $("id").value =
-    data.id;
+const params =
+  new URLSearchParams(location.search);
 
 
-  $("title").value =
-    data.title || "";
+const cat =
+  params.get("cat") || "Rabbit";
 
 
-  $("category").value =
-    data.category || "Hamster";
+const titles = {
 
+  "Rabbit": "🐰 Rabbit",
 
-  $("price").value =
-    data.price || 0;
+  "Hamster": "🐹 Hamster",
 
+  "Pet Food": "🌾 Pet Food",
 
-  $("stock").value =
-    data.stock || 0;
-
-
-  $("description").value =
-    data.description || "";
-
-
-  $("formTitle").textContent =
-    "পণ্য Edit";
-
-
-  $("cancel")
-    .classList
-    .remove("hidden");
-
-
-  if(oldImage){
-
-    $("preview").src =
-      oldImage;
-
-    $("preview")
-      .classList
-      .remove("hidden");
-
-  }
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+  "Accessories": "🧺 Accessories"
 
 };
 
 
-
-/* =========================================
-   DELETE PRODUCT
-========================================= */
-
-window.deleteProduct =
-async function(id){
-
-  if(
-    !confirm(
-      "এই পণ্যটি Delete করবেন?"
-    )
-  ){
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db
-      .from("products")
-      .delete()
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(
-      "❌ Delete করা যায়নি: " +
-      error.message
-    );
-
-    return;
-  }
-
-
-  alert(
-    "✅ পণ্য Delete হয়েছে।"
-  );
-
-
-  load();
-
-};
-
-
-
-/* =========================================
-   RESET PRODUCT FORM
-========================================= */
-
-function reset(){
-
-  editing = null;
-
-  oldImage = null;
-
-
-  $("productForm").reset();
-
-
-  $("preview")
-    .classList
-    .add("hidden");
-
-
-  $("cancel")
-    .classList
-    .add("hidden");
-
-
-  $("formTitle").textContent =
-    "নতুন পণ্য";
-
-}
-
-
-
-/* =========================================
-   LOAD ORDERS
-========================================= */
-
-async function loadOrders(){
-
-  $("ordersList").innerHTML =
-    "⏳ অর্ডার লোড হচ্ছে...";
-
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("orders")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    $("ordersList").innerHTML =
-      `
-        <p style="color:#c62828">
-          ❌ অর্ডার লোড করা যায়নি:
-          ${esc(error.message)}
-        </p>
-      `;
-
-    return;
-  }
-
-
-  if(!data || !data.length){
-
-    $("ordersList").innerHTML =
-      "<p>📦 এখনো কোনো অর্ডার নেই।</p>";
-
-    return;
-  }
-
-
-  $("ordersList").innerHTML =
-    data
-      .map(orderHTML)
-      .join("");
-
-}
-
-
-
-/* =========================================
-   ORDER HTML
-========================================= */
-
-function orderHTML(order){
-
-  let items = [];
-
-
-  try{
-
-    if(
-      Array.isArray(order.items)
-    ){
-
-      items =
-        order.items;
-
-    }
-
-    else if(
-      typeof order.items === "string"
-    ){
-
-      items =
-        JSON.parse(order.items);
-
-    }
-
-  }
-
-  catch(e){
-
-    items = [];
-
-  }
-
-
-
-  const status =
-    String(
-      order.status || "pending"
-    )
-    .toLowerCase();
-
-
-  let statusClass = "";
-
-
-  if(status === "completed"){
-
-    statusClass =
-      "completed";
-
-  }
-
-  else if(status === "cancelled"){
-
-    statusClass =
-      "cancelled";
-
-  }
-
-
-
-  const itemsHTML =
-    items.length
-
-      ? items.map(
-          function(item){
-
-            return `
-
-              <div>
-
-                🐰
-                ${esc(item.title || "Product")}
-
-                ×
-                ${Number(item.quantity || 0)}
-
-                =
-                ৳${(
-                  Number(item.price || 0) *
-                  Number(item.quantity || 0)
-                ).toLocaleString("en-BD")}
-
-              </div>
-
-            `;
-
-          }
-        ).join("")
-
-      : "পণ্যের তথ্য নেই";
-
-
-
-  const created =
-    order.created_at
-      ? new Date(
-          order.created_at
-        ).toLocaleString(
-          "bn-BD"
-        )
-      : "";
-
-
-
-  return `
-
-    <div class="order-card">
-
-
-      <div class="order-top">
-
-        <div>
-
-          <h3>
-            📦 Order
-          </h3>
-
-          <div class="order-id">
-
-            ID:
-            ${esc(order.id)}
-
-          </div>
-
-          <small>
-            ${esc(created)}
-          </small>
-
-        </div>
-
-
-        <span
-          class="status ${statusClass}"
-        >
-
-          ${
-            status === "completed"
-              ? "Completed"
-              : status === "cancelled"
-                ? "Cancelled"
-                : "Pending"
-          }
-
-        </span>
-
-      </div>
-
-
-
-      <div class="order-info">
-
-        <strong>
-          👤 ${esc(order.customer_name || "")}
-        </strong>
-
-        <br>
-
-        📞 ${esc(order.phone || "")}
-
-        <br>
-
-        📍 ${esc(order.district || "")}
-
-        <br>
-
-        🏠 ${esc(order.address || "")}
-
-      </div>
-
-
-
-      <div class="order-items">
-
-        <strong>
-          🛒 পণ্য:
-        </strong>
-
-        <br><br>
-
-        ${itemsHTML}
-
-      </div>
-
-
-
-      <div class="order-info">
-
-        পণ্যের মূল্য:
-        <strong>
-          ৳${Number(order.subtotal || 0)
-            .toLocaleString("en-BD")}
-        </strong>
-
-        <br>
-
-        Delivery:
-        <strong>
-          ৳${Number(order.delivery_charge || 0)
-            .toLocaleString("en-BD")}
-        </strong>
-
-        <br>
-
-        <strong
-          style="font-size:20px"
-        >
-          মোট:
-          ৳${Number(
-            order.total_amount || 0
-          ).toLocaleString("en-BD")}
-        </strong>
-
-      </div>
-
-
-
-      <div class="order-actions">
-
-
-        ${
-          status !== "completed"
-            ? `
-              <button
-                class="complete-btn"
-                type="button"
-                onclick="updateOrderStatus('${esc(order.id)}','completed')"
-              >
-                ✅ Completed
-              </button>
-            `
-            : ""
-        }
-
-
-
-        ${
-          status !== "cancelled"
-            ? `
-              <button
-                class="cancel-btn"
-                type="button"
-                onclick="updateOrderStatus('${esc(order.id)}','cancelled')"
-              >
-                ❌ Cancel
-              </button>
-            `
-            : ""
-        }
-
-
-
-        <button
-          class="delete-order"
-          type="button"
-          onclick="deleteOrder('${esc(order.id)}')"
-        >
-          🗑 Delete Order
-        </button>
-
-
-      </div>
-
-
-    </div>
-
-  `;
-
-}
-
-
-
-/* =========================================
-   UPDATE ORDER STATUS
-========================================= */
-
-window.updateOrderStatus =
-async function(id,status){
-
-  const {
-    error
-  } =
-    await db
-      .from("orders")
-      .update({
-        status:status
-      })
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(
-      "❌ Status পরিবর্তন করা যায়নি: " +
-      error.message
-    );
-
-    return;
-  }
-
-
-  loadOrders();
-
-};
-
-
-
-/* =========================================
-   DELETE ORDER
-========================================= */
-
-window.deleteOrder =
-async function(id){
-
-  if(
-    !confirm(
-      "এই Order Delete করবেন?"
-    )
-  ){
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db
-      .from("orders")
-      .delete()
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(
-      "❌ Order Delete করা যায়নি: " +
-      error.message
-    );
-
-    return;
-  }
-
-
-  alert(
-    "✅ Order Delete হয়েছে।"
-  );
-
-
-  loadOrders();
-
-};
-
-
-
-/* =========================================
-   REFRESH ORDERS
-========================================= */
-
-$("refreshOrders").onclick =
-function(){
-
-  loadOrders();
-
-};
-
-
-
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function esc(value){
-
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>"']/g,
-
-    function(m){
-
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[m];
-
-    }
-  );
-
-}
-
-
-
-/* =========================================
-   START
-========================================= */
-
-init();
+document.getElementById(
+  "categoryTitle"
+).textContent =
+  titles[cat] || cat;
+
+</script>
+
+</body>
+</html>
