@@ -959,3 +959,17 @@ body{
   }
 
 }
+
+
+
+/* CATEGORY → WHY CHOOSE US GAP */
+
+.categories {
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+.why {
+    padding-top: 20px !important;
+    margin-top: 0 !important;
+}
