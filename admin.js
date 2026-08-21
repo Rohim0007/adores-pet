@@ -1,324 +1,1093 @@
-<!doctype html>
-<html lang="bn">
+// =====================================================
+// ADORE'S PET — ADMIN.JS
+// Supabase Login + Product Upload + Image Upload
+// =====================================================
 
-<head>
+import { createClient } from
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-<meta charset="utf-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1"
->
+// ================= SUPABASE =================
 
-<title>ADORE'S PET</title>
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
-<link rel="stylesheet" href="style.css">
 
-</head>
+// ================= ELEMENTS =================
 
-<body>
+const loginBox = document.getElementById("loginBox");
+const dashboard = document.getElementById("dashboard");
 
-<!-- ================= HEADER ================= -->
+const loginForm = document.getElementById("loginForm");
+const loginMsg = document.getElementById("loginMsg");
 
-<header class="header">
+const logoutBtn = document.getElementById("logout");
 
-  <a href="index.html" class="logo">
-    🐰 <span>ADORE'S PET</span>
-  </a>
+const productForm = document.getElementById("productForm");
 
-  <button
-    class="cart-btn"
-    onclick="openCart()"
-  >
-    🛒 Cart
-    <span id="cartCount">0</span>
-  </button>
+const idInput = document.getElementById("id");
+const titleInput = document.getElementById("title");
+const categoryInput = document.getElementById("category");
+const priceInput = document.getElementById("price");
+const stockInput = document.getElementById("stock");
+const imageInput = document.getElementById("image");
+const descriptionInput = document.getElementById("description");
 
-</header>
+const preview = document.getElementById("preview");
 
+const formTitle = document.getElementById("formTitle");
+const msg = document.getElementById("msg");
 
-<!-- ================= CATEGORY ================= -->
+const cancelBtn = document.getElementById("cancel");
 
-<main>
+const list = document.getElementById("list");
+const searchInput = document.getElementById("search");
 
-<section class="category-page">
+const ordersList = document.getElementById("ordersList");
+const refreshOrders =
+  document.getElementById("refreshOrders");
 
-  <a
-    href="index.html"
-    class="back-btn"
-  >
-    ← হোমে ফিরে যান
-  </a>
 
+// ================= VARIABLES =================
 
-  <div
-    id="categoryTitle"
-    class="category-title"
-  >
-    🐰 Rabbit
-  </div>
+let products = [];
 
+let editingId = null;
 
-  <div
-    id="grid"
-    class="grid"
-  >
+let selectedImageFile = null;
 
-    <p>পণ্য লোড হচ্ছে...</p>
 
-  </div>
+// =====================================================
+// LOGIN
+// =====================================================
 
-</section>
+loginForm.addEventListener("submit", async (e) => {
 
-</main>
+  e.preventDefault();
 
+  loginMsg.textContent = "⏳ Login হচ্ছে...";
 
-<!-- ================= FOOTER ================= -->
+  const email =
+    document.getElementById("email").value.trim();
 
-<footer class="footer">
+  const password =
+    document.getElementById("password").value;
 
-  <div class="footer-logo">
-    🐰 ADORE'S PET
-  </div>
 
-  <p>
-    আপনার বিশ্বস্ত Pet Shop
-  </p>
+  const { data, error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
 
-  <div class="footer-line"></div>
 
-  <small>
-    © <span id="year"></span>
-    ADORE'S PET — All Rights Reserved
-  </small>
+  if (error) {
 
-</footer>
+    loginMsg.textContent =
+      "❌ " + error.message;
 
+    return;
+  }
 
-<!-- ================= CART ================= -->
 
-<div
-  id="cartPanel"
-  class="cart-panel"
->
+  if (!data.user) {
 
-  <div class="cart-box">
+    loginMsg.textContent =
+      "❌ Login করা যায়নি।";
 
-    <div class="cart-head">
+    return;
+  }
 
-      <h2>
-        🛒 আপনার Cart
-      </h2>
-
-      <button onclick="closeCart()">
-        ✕
-      </button>
-
-    </div>
-
-
-    <div id="cartItems"></div>
-
-    <div id="cartSummary"></div>
-
-
-    <div class="checkout-form">
-
-      <h3>
-        📦 অর্ডারের তথ্য
-      </h3>
-
 
-      <label>
-        আপনার নাম
-      </label>
-
-      <input
-        id="customerName"
-        placeholder="আপনার নাম"
-      >
+  loginMsg.textContent =
+    "✅ Login সফল হয়েছে।";
 
+  showDashboard();
 
-      <label>
-        মোবাইল নম্বর
-      </label>
+});
 
-      <input
-        id="customerPhone"
-        type="tel"
-        placeholder="01XXXXXXXXX"
-      >
 
+// =====================================================
+// CHECK LOGIN
+// =====================================================
 
-      <label>
-        জেলা
-      </label>
+async function checkLogin() {
 
-      <select id="customerDistrict">
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
 
-        <option value="">
-          জেলা নির্বাচন করুন
-        </option>
 
-        <option>ঢাকা</option>
-        <option>চট্টগ্রাম</option>
-        <option>সিলেট</option>
-        <option>রাজশাহী</option>
-        <option>খুলনা</option>
-        <option>বরিশাল</option>
-        <option>রংপুর</option>
-        <option>ময়মনসিংহ</option>
+  if (session) {
 
-        <option>কুমিল্লা</option>
-        <option>ফেনী</option>
-        <option>ব্রাহ্মণবাড়িয়া</option>
-        <option>চাঁদপুর</option>
-        <option>লক্ষ্মীপুর</option>
-        <option>নোয়াখালী</option>
+    showDashboard();
 
-        <option>নারায়ণগঞ্জ</option>
-        <option>গাজীপুর</option>
-        <option>নরসিংদী</option>
-        <option>টাঙ্গাইল</option>
-        <option>কিশোরগঞ্জ</option>
-        <option>মানিকগঞ্জ</option>
-        <option>মুন্সিগঞ্জ</option>
-        <option>ফরিদপুর</option>
+  } else {
 
-        <option>যশোর</option>
-        <option>ঝিনাইদহ</option>
-        <option>মাগুরা</option>
-        <option>নড়াইল</option>
-        <option>কুষ্টিয়া</option>
-        <option>চুয়াডাঙ্গা</option>
-        <option>মেহেরপুর</option>
-        <option>সাতক্ষীরা</option>
-        <option>বাগেরহাট</option>
+    showLogin();
 
-        <option>বগুড়া</option>
-        <option>জয়পুরহাট</option>
-        <option>নওগাঁ</option>
-        <option>নাটোর</option>
-        <option>চাঁপাইনবাবগঞ্জ</option>
-        <option>পাবনা</option>
-        <option>সিরাজগঞ্জ</option>
+  }
 
-        <option>দিনাজপুর</option>
-        <option>ঠাকুরগাঁও</option>
-        <option>পঞ্চগড়</option>
-        <option>নীলফামারী</option>
-        <option>লালমনিরহাট</option>
-        <option>কুড়িগ্রাম</option>
-        <option>গাইবান্ধা</option>
+}
 
-        <option>সুনামগঞ্জ</option>
-        <option>মৌলভীবাজার</option>
-        <option>হবিগঞ্জ</option>
 
-        <option>ঝালকাঠি</option>
-        <option>পটুয়াখালী</option>
-        <option>পিরোজপুর</option>
-        <option>ভোলা</option>
-        <option>বরগুনা</option>
+function showLogin() {
 
-      </select>
+  loginBox.classList.remove("hidden");
 
+  dashboard.classList.add("hidden");
 
-      <label>
-        সম্পূর্ণ ঠিকানা
-      </label>
+}
 
-      <textarea
-        id="customerAddress"
-        placeholder="বাড়ি / রোড / এলাকা / থানা..."
-      ></textarea>
 
+function showDashboard() {
 
-      <label>
-        Delivery Charge
-      </label>
+  loginBox.classList.add("hidden");
 
-      <select id="deliveryCharge">
+  dashboard.classList.remove("hidden");
 
-        <option value="100">
-          ঢাকার ভিতরে — ৳100
-        </option>
+  loadProducts();
 
-        <option value="150">
-          ঢাকার বাইরে — ৳150
-        </option>
+  loadOrders();
 
-      </select>
+}
 
 
-      <div
-        id="checkoutTotal"
-        class="checkout-total"
-      >
-        মোট: ৳0
+// =====================================================
+// LOGOUT
+// =====================================================
+
+logoutBtn.addEventListener("click", async () => {
+
+  await supabase.auth.signOut();
+
+  showLogin();
+
+});
+
+
+// =====================================================
+// IMAGE SELECT
+// =====================================================
+
+imageInput.addEventListener("change", () => {
+
+  selectedImageFile =
+    imageInput.files[0] || null;
+
+
+  if (!selectedImageFile) {
+
+    preview.classList.add("hidden");
+
+    return;
+
+  }
+
+
+  const imageURL =
+    URL.createObjectURL(selectedImageFile);
+
+  preview.src = imageURL;
+
+  preview.classList.remove("hidden");
+
+});
+
+
+// =====================================================
+// IMAGE UPLOAD
+// =====================================================
+
+async function uploadImage(file) {
+
+  if (!file) {
+    return null;
+  }
+
+
+  const extension =
+    file.name.split(".").pop().toLowerCase();
+
+
+  const fileName =
+    "product-" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2) +
+    "." +
+    extension;
+
+
+  const filePath =
+    fileName;
+
+
+  const { error } =
+    await supabase.storage
+      .from("product-images")
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+  if (error) {
+
+    throw error;
+
+  }
+
+
+  const { data } =
+    supabase.storage
+      .from("product-images")
+      .getPublicUrl(filePath);
+
+
+  return data.publicUrl;
+
+}
+
+
+// =====================================================
+// SAVE PRODUCT
+// =====================================================
+
+productForm.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+
+  msg.textContent =
+    "⏳ Product save হচ্ছে...";
+
+
+  try {
+
+    let imageURL = null;
+
+
+    // নতুন ছবি থাকলে Upload
+    if (selectedImageFile) {
+
+      imageURL =
+        await uploadImage(selectedImageFile);
+
+    }
+
+
+    const productData = {
+
+      title:
+        titleInput.value.trim(),
+
+      category:
+        categoryInput.value,
+
+      price:
+        Number(priceInput.value),
+
+      stock:
+        Number(stockInput.value),
+
+      description:
+        descriptionInput.value.trim()
+
+    };
+
+
+    // ছবি থাকলে image field
+    if (imageURL) {
+
+      productData.image =
+        imageURL;
+
+    }
+
+
+    // ================= EDIT =================
+
+    if (editingId) {
+
+      const { error } =
+        await supabase
+          .from("products")
+          .update(productData)
+          .eq("id", editingId);
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      msg.textContent =
+        "✅ Product আপডেট হয়েছে.";
+
+    }
+
+
+    // ================= NEW =================
+
+    else {
+
+      const { error } =
+        await supabase
+          .from("products")
+          .insert([productData]);
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      msg.textContent =
+        "✅ Product সফলভাবে যোগ হয়েছে.";
+
+    }
+
+
+    resetForm();
+
+    loadProducts();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    msg.textContent =
+      "❌ Error: " +
+      error.message;
+
+  }
+
+});
+
+
+// =====================================================
+// LOAD PRODUCTS
+// =====================================================
+
+async function loadProducts() {
+
+  list.innerHTML =
+    "⏳ পণ্য লোড হচ্ছে...";
+
+
+  const { data, error } =
+    await supabase
+      .from("products")
+      .select("*")
+      .order("id", {
+        ascending: false
+      });
+
+
+  if (error) {
+
+    list.innerHTML =
+      "❌ Product load error: " +
+      error.message;
+
+    return;
+
+  }
+
+
+  products = data || [];
+
+  renderProducts(products);
+
+}
+
+
+// =====================================================
+// SHOW PRODUCTS
+// =====================================================
+
+function renderProducts(items) {
+
+  if (!items.length) {
+
+    list.innerHTML =
+      "<p>কোনো Product পাওয়া যায়নি।</p>";
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  items.forEach(product => {
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "admin-item";
+
+
+    item.innerHTML = `
+
+      ${
+        product.image
+          ? `
+            <img
+              src="${product.image}"
+              alt="${escapeHTML(product.title || "")}"
+            >
+          `
+          : `
+            <div
+              style="
+                width:90px;
+                height:90px;
+                background:#eee;
+                border-radius:10px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:30px;
+              "
+            >
+              🐰
+            </div>
+          `
+      }
+
+
+      <div class="admin-item-info">
+
+        <h3>
+          ${escapeHTML(product.title || "")}
+        </h3>
+
+        <div>
+          Category:
+          <b>
+            ${escapeHTML(product.category || "")}
+          </b>
+        </div>
+
+        <div>
+          Price:
+          <b>৳${Number(product.price || 0)}</b>
+        </div>
+
+        <div>
+          Stock:
+          <b>${Number(product.stock || 0)}</b>
+        </div>
+
       </div>
 
 
       <button
-        class="place-order"
-        onclick="placeOrder()"
+        class="edit"
+        data-id="${product.id}"
       >
-        ✅ অর্ডার করুন
+        ✏️ Edit
       </button>
 
 
-      <div id="orderMsg"></div>
+      <button
+        class="delete"
+        data-id="${product.id}"
+      >
+        🗑️ Delete
+      </button>
 
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= SCRIPT ================= -->
-
-<script src="config.js"></script>
-
-<script
-  type="module"
-  src="shop.js"
-></script>
+    `;
 
 
-<script>
+    list.appendChild(item);
 
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-const params =
-  new URLSearchParams(location.search);
+  });
 
 
-const cat =
-  params.get("cat") || "Rabbit";
+  // Edit buttons
+
+  list
+    .querySelectorAll(".edit")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            button.dataset.id;
+
+          editProduct(id);
+
+        }
+      );
+
+    });
 
 
-const titles = {
+  // Delete buttons
 
-  "Rabbit": "🐰 Rabbit",
+  list
+    .querySelectorAll(".delete")
+    .forEach(button => {
 
-  "Hamster": "🐹 Hamster",
+      button.addEventListener(
+        "click",
+        () => {
 
-  "Pet Food": "🌾 Pet Food",
+          const id =
+            button.dataset.id;
 
-  "Accessories": "🧺 Accessories"
+          deleteProduct(id);
 
-};
+        }
+      );
+
+    });
+
+}
 
 
-document.getElementById(
-  "categoryTitle"
-).textContent =
-  titles[cat] || cat;
+// =====================================================
+// SEARCH
+// =====================================================
 
-</script>
+searchInput.addEventListener("input", () => {
 
-</body>
-</html>
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+
+  if (!search) {
+
+    renderProducts(products);
+
+    return;
+
+  }
+
+
+  const filtered =
+    products.filter(product => {
+
+      return (
+
+        String(product.title || "")
+          .toLowerCase()
+          .includes(search)
+
+        ||
+
+        String(product.category || "")
+          .toLowerCase()
+          .includes(search)
+
+      );
+
+    });
+
+
+  renderProducts(filtered);
+
+});
+
+
+// =====================================================
+// EDIT PRODUCT
+// =====================================================
+
+function editProduct(id) {
+
+  const product =
+    products.find(
+      item =>
+        String(item.id) === String(id)
+    );
+
+
+  if (!product) {
+
+    return;
+
+  }
+
+
+  editingId =
+    product.id;
+
+
+  idInput.value =
+    product.id;
+
+
+  titleInput.value =
+    product.title || "";
+
+
+  categoryInput.value =
+    product.category || "Rabbit";
+
+
+  priceInput.value =
+    product.price || 0;
+
+
+  stockInput.value =
+    product.stock || 0;
+
+
+  descriptionInput.value =
+    product.description || "";
+
+
+  if (product.image) {
+
+    preview.src =
+      product.image;
+
+    preview.classList.remove(
+      "hidden"
+    );
+
+  } else {
+
+    preview.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  selectedImageFile = null;
+
+  imageInput.value = "";
+
+
+  formTitle.textContent =
+    "পণ্য Edit করুন";
+
+
+  cancelBtn.classList.remove(
+    "hidden"
+  );
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+// =====================================================
+// DELETE PRODUCT
+// =====================================================
+
+async function deleteProduct(id) {
+
+  const ok =
+    confirm(
+      "আপনি কি সত্যিই এই Product Delete করতে চান?"
+    );
+
+
+  if (!ok) {
+
+    return;
+
+  }
+
+
+  const { error } =
+    await supabase
+      .from("products")
+      .delete()
+      .eq("id", id);
+
+
+  if (error) {
+
+    alert(
+      "❌ Delete Error: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    "✅ Product Delete হয়েছে।"
+  );
+
+
+  loadProducts();
+
+}
+
+
+// =====================================================
+// CANCEL EDIT
+// =====================================================
+
+cancelBtn.addEventListener(
+  "click",
+  resetForm
+);
+
+
+function resetForm() {
+
+  productForm.reset();
+
+
+  idInput.value = "";
+
+  editingId = null;
+
+  selectedImageFile = null;
+
+
+  preview.src = "";
+
+  preview.classList.add(
+    "hidden"
+  );
+
+
+  formTitle.textContent =
+    "নতুন পণ্য";
+
+
+  cancelBtn.classList.add(
+    "hidden"
+  );
+
+
+  msg.textContent = "";
+
+}
+
+
+// =====================================================
+// ORDERS
+// =====================================================
+
+async function loadOrders() {
+
+  ordersList.innerHTML =
+    "⏳ অর্ডার লোড হচ্ছে...";
+
+
+  const { data, error } =
+    await supabase
+      .from("orders")
+      .select("*")
+      .order("created_at", {
+        ascending: false
+      });
+
+
+  if (error) {
+
+    ordersList.innerHTML =
+      "❌ Orders load error: " +
+      error.message;
+
+    return;
+
+  }
+
+
+  if (!data || !data.length) {
+
+    ordersList.innerHTML =
+      "<p>এখনো কোনো Order নেই।</p>";
+
+    return;
+
+  }
+
+
+  ordersList.innerHTML = "";
+
+
+  data.forEach(order => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "order-card";
+
+
+    card.innerHTML = `
+
+      <div class="order-top">
+
+        <div>
+
+          <strong>
+            📦 Order
+          </strong>
+
+          <div class="order-id">
+            ${escapeHTML(String(order.id || ""))}
+          </div>
+
+        </div>
+
+        <span class="status">
+          ${escapeHTML(order.status || "pending")}
+        </span>
+
+      </div>
+
+
+      <div class="order-info">
+
+        <b>নাম:</b>
+        ${escapeHTML(order.customer_name || "")}
+
+        <br>
+
+        <b>মোবাইল:</b>
+        ${escapeHTML(order.customer_phone || "")}
+
+        <br>
+
+        <b>জেলা:</b>
+        ${escapeHTML(order.district || "")}
+
+        <br>
+
+        <b>ঠিকানা:</b>
+        ${escapeHTML(order.address || "")}
+
+        <br>
+
+        <b>Total:</b>
+        ৳${Number(order.total || 0)}
+
+      </div>
+
+
+      <div class="order-actions">
+
+        <button
+          class="complete-btn"
+          data-order-id="${order.id}"
+        >
+          ✅ Complete
+        </button>
+
+        <button
+          class="cancel-btn"
+          data-order-id="${order.id}"
+        >
+          ❌ Cancel
+        </button>
+
+        <button
+          class="delete-order"
+          data-order-id="${order.id}"
+        >
+          🗑️ Delete
+        </button>
+
+      </div>
+
+    `;
+
+
+    ordersList.appendChild(card);
+
+  });
+
+
+  // Complete
+
+  ordersList
+    .querySelectorAll(".complete-btn")
+    .forEach(button => {
+
+      button.onclick = () => {
+
+        updateOrderStatus(
+          button.dataset.orderId,
+          "completed"
+        );
+
+      };
+
+    });
+
+
+  // Cancel
+
+  ordersList
+    .querySelectorAll(".cancel-btn")
+    .forEach(button => {
+
+      button.onclick = () => {
+
+        updateOrderStatus(
+          button.dataset.orderId,
+          "cancelled"
+        );
+
+      };
+
+    });
+
+
+  // Delete
+
+  ordersList
+    .querySelectorAll(".delete-order")
+    .forEach(button => {
+
+      button.onclick = () => {
+
+        deleteOrder(
+          button.dataset.orderId
+        );
+
+      };
+
+    });
+
+}
+
+
+// =====================================================
+// UPDATE ORDER STATUS
+// =====================================================
+
+async function updateOrderStatus(
+  id,
+  status
+) {
+
+  const { error } =
+    await supabase
+      .from("orders")
+      .update({
+        status: status
+      })
+      .eq("id", id);
+
+
+  if (error) {
+
+    alert(
+      "❌ " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  loadOrders();
+
+}
+
+
+// =====================================================
+// DELETE ORDER
+// =====================================================
+
+async function deleteOrder(id) {
+
+  const ok =
+    confirm(
+      "এই Order Delete করবেন?"
+    );
+
+
+  if (!ok) {
+
+    return;
+
+  }
+
+
+  const { error } =
+    await supabase
+      .from("orders")
+      .delete()
+      .eq("id", id);
+
+
+  if (error) {
+
+    alert(
+      "❌ " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  loadOrders();
+
+}
+
+
+// =====================================================
+// REFRESH ORDERS
+// =====================================================
+
+refreshOrders.addEventListener(
+  "click",
+  loadOrders
+);
+
+
+// =====================================================
+// HTML SECURITY
+// =====================================================
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+// =====================================================
+// START
+// =====================================================
+
+checkLogin();
