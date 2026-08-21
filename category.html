@@ -2,12 +2,11 @@
 <html lang="bn">
 
 <head>
-
 <meta charset="utf-8">
 
 <meta
-name="viewport"
-content="width=device-width,initial-scale=1"
+  name="viewport"
+  content="width=device-width,initial-scale=1"
 >
 
 <title>ADORE'S PET</title>
@@ -16,9 +15,9 @@ content="width=device-width,initial-scale=1"
 
 </head>
 
-
 <body>
 
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
@@ -26,19 +25,26 @@ content="width=device-width,initial-scale=1"
     🐰 <span>ADORE'S PET</span>
   </a>
 
-  <button class="cart-btn" onclick="openCart()">
+  <button
+    class="cart-btn"
+    onclick="openCart()"
+  >
     🛒 Cart <span id="cartCount">0</span>
   </button>
 
 </header>
 
 
-<main>
+<!-- ================= CATEGORY PAGE ================= -->
 
+<main>
 
 <section class="category-page">
 
-  <a href="index.html" class="back-btn">
+  <a
+    href="index.html"
+    class="back-btn"
+  >
     ← হোমে ফিরে যান
   </a>
 
@@ -58,100 +64,16 @@ content="width=device-width,initial-scale=1"
   </p>
 
 
-  <div id="grid" class="grid">
+  <!-- শুধু নির্বাচিত Category-এর Product এখানে আসবে -->
 
-    <p>পণ্য লোড হচ্ছে...</p>
+  <div
+    id="grid"
+    class="grid"
+  >
 
-  </div>
-
-</section>
-
-
-<!-- ================= WHY ================= -->
-
-<section class="why category-why">
-
-  <div class="section-label">
-    WHY CHOOSE US
-  </div>
-
-  <h2>
-    কেন ADORE'S PET?
-  </h2>
-
-
-  <div class="features">
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🐰
-      </div>
-
-      <h3>
-        সুস্থ পোষা প্রাণী
-      </h3>
-
-      <p>
-        যত্নসহকারে পালন করা স্বাস্থ্যকর
-        ও সুন্দর পোষা প্রাণী।
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🚚
-      </div>
-
-      <h3>
-        Delivery সুবিধা
-      </h3>
-
-      <p>
-        দেশের বিভিন্ন জায়গায় সহজে
-        অর্ডার ও ডেলিভারি সুবিধা।
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        ⭐
-      </div>
-
-      <h3>
-        বিশ্বস্ত সেবা
-      </h3>
-
-      <p>
-        গ্রাহকের সন্তুষ্টি ও ভালো
-        সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🛡️
-      </div>
-
-      <h3>
-        মানসম্মত পণ্য
-      </h3>
-
-      <p>
-        পোষা প্রাণীর জন্য প্রয়োজনীয়
-        ভালো মানের পণ্য।
-      </p>
-
-    </div>
+    <p>
+      পণ্য লোড হচ্ছে...
+    </p>
 
   </div>
 
@@ -159,6 +81,8 @@ content="width=device-width,initial-scale=1"
 
 </main>
 
+
+<!-- ================= FOOTER ================= -->
 
 <footer class="footer">
 
@@ -182,7 +106,10 @@ content="width=device-width,initial-scale=1"
 
 <!-- ================= CART ================= -->
 
-<div id="cartPanel" class="cart-panel">
+<div
+  id="cartPanel"
+  class="cart-panel"
+>
 
   <div class="cart-box">
 
@@ -358,36 +285,39 @@ content="width=device-width,initial-scale=1"
 </div>
 
 
+<!-- ================= JAVASCRIPT ================= -->
+
 <script src="config.js"></script>
 
 <script
-type="module"
-src="shop.js"
+  type="module"
+  src="shop.js"
 ></script>
 
 
 <script>
 
 document.getElementById("year").textContent =
-new Date().getFullYear();
+  new Date().getFullYear();
 
 
 const params =
-new URLSearchParams(location.search);
+  new URLSearchParams(location.search);
+
 
 const cat =
-params.get("cat") || "Rabbit";
+  params.get("cat") || "Rabbit";
 
 
 const titles = {
 
-  "Rabbit":"🐰 Rabbit",
+  "Rabbit": "🐰 Rabbit",
 
-  "Hamster":"🐹 Hamster",
+  "Hamster": "🐹 Hamster",
 
-  "Pet Food":"🌾 Pet Food",
+  "Pet Food": "🌾 Pet Food",
 
-  "Accessories":"🧺 Accessories"
+  "Accessories": "🧺 Accessories"
 
 };
 
@@ -395,16 +325,16 @@ const titles = {
 const descriptions = {
 
   "Rabbit":
-  "আমাদের কাছে থাকা Rabbit-এর সকল পণ্য দেখুন।",
+    "আমাদের কাছে থাকা Rabbit-এর সকল পণ্য দেখুন।",
 
   "Hamster":
-  "আমাদের কাছে থাকা Hamster-এর সকল পণ্য দেখুন।",
+    "আমাদের কাছে থাকা Hamster-এর সকল পণ্য দেখুন।",
 
   "Pet Food":
-  "পোষা প্রাণীর জন্য প্রয়োজনীয় সকল Food দেখুন।",
+    "পোষা প্রাণীর জন্য প্রয়োজনীয় সকল Food দেখুন।",
 
   "Accessories":
-  "পোষা প্রাণীর প্রয়োজনীয় Accessories দেখুন।"
+    "পোষা প্রাণীর প্রয়োজনীয় Accessories দেখুন।"
 
 };
 
@@ -412,17 +342,16 @@ const descriptions = {
 document.getElementById(
   "categoryTitle"
 ).textContent =
-titles[cat] || cat;
+  titles[cat] || cat;
 
 
 document.getElementById(
   "categoryDescription"
 ).textContent =
-descriptions[cat] ||
-"আপনার পছন্দের পণ্য দেখুন।";
+  descriptions[cat] ||
+  "আপনার পছন্দের পণ্য দেখুন।";
 
 </script>
-
 
 </body>
 </html>
