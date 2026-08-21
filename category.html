@@ -2,11 +2,12 @@
 <html lang="bn">
 
 <head>
+
 <meta charset="utf-8">
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1"
+  content="width=device-width, initial-scale=1"
 >
 
 <title>ADORE'S PET</title>
@@ -29,13 +30,14 @@
     class="cart-btn"
     onclick="openCart()"
   >
-    🛒 Cart <span id="cartCount">0</span>
+    🛒 Cart
+    <span id="cartCount">0</span>
   </button>
 
 </header>
 
 
-<!-- ================= CATEGORY PAGE ================= -->
+<!-- ================= CATEGORY ================= -->
 
 <main>
 
@@ -49,31 +51,20 @@
   </a>
 
 
-  <div class="section-label">
-    ADORE'S PET
+  <div
+    id="categoryTitle"
+    class="category-title"
+  >
+    🐰 Rabbit
   </div>
 
-
-  <h1 id="categoryTitle">
-    পণ্য
-  </h1>
-
-
-  <p id="categoryDescription">
-    আপনার পছন্দের পণ্য দেখুন।
-  </p>
-
-
-  <!-- শুধু নির্বাচিত Category-এর Product এখানে আসবে -->
 
   <div
     id="grid"
     class="grid"
   >
 
-    <p>
-      পণ্য লোড হচ্ছে...
-    </p>
+    <p>পণ্য লোড হচ্ছে...</p>
 
   </div>
 
@@ -285,7 +276,7 @@
 </div>
 
 
-<!-- ================= JAVASCRIPT ================= -->
+<!-- ================= SCRIPT ================= -->
 
 <script src="config.js"></script>
 
@@ -322,34 +313,10 @@ const titles = {
 };
 
 
-const descriptions = {
-
-  "Rabbit":
-    "আমাদের কাছে থাকা Rabbit-এর সকল পণ্য দেখুন।",
-
-  "Hamster":
-    "আমাদের কাছে থাকা Hamster-এর সকল পণ্য দেখুন।",
-
-  "Pet Food":
-    "পোষা প্রাণীর জন্য প্রয়োজনীয় সকল Food দেখুন।",
-
-  "Accessories":
-    "পোষা প্রাণীর প্রয়োজনীয় Accessories দেখুন।"
-
-};
-
-
 document.getElementById(
   "categoryTitle"
 ).textContent =
   titles[cat] || cat;
-
-
-document.getElementById(
-  "categoryDescription"
-).textContent =
-  descriptions[cat] ||
-  "আপনার পছন্দের পণ্য দেখুন।";
 
 </script>
 
