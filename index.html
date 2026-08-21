@@ -3,1079 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ADORE'S PET</title>
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,"Noto Sans Bengali","Noto Sans",sans-serif;background:#f6f9f7;color:#10251d;line-height:1.5}
+a{text-decoration:none;color:inherit}
+.site-header{width:100%;background:#fff;border-bottom:1px solid #dfe8e3;position:sticky;top:0;z-index:1000}
+.header-inner{max-width:1200px;min-height:105px;margin:auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand-logo{display:flex;align-items:center;height:78px}
+.brand-logo img{display:block;height:72px;width:auto;max-width:280px;object-fit:contain}
+.cart-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#19733f;color:#fff;border-radius:24px;min-width:190px;padding:12px 16px;font-size:20px;font-weight:700}
+.cart-count{width:52px;height:52px;border-radius:50%;background:#fff;color:#19733f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.section{padding:72px 24px}
+.section-inner{max-width:1200px;margin:auto}
+.section-label{text-align:center;color:#19733f;font-size:18px;font-weight:800;letter-spacing:6px;margin-bottom:36px;text-transform:uppercase}
+.category-grid,.why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:850px;margin:0 auto}
+.category-card{width:100%;aspect-ratio:1/1;background:#fff;border:1px solid #d9e3de;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;box-shadow:0 5px 18px rgba(16,37,29,.04);transition:.2s}
+.category-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(16,37,29,.10)}
+.category-icon{width:115px;height:115px;object-fit:contain;margin-bottom:24px}
+.category-name{font-size:27px;font-weight:800;text-align:center}
+.why-section{background:#eaf6ef}
+.why-card{width:100%;aspect-ratio:1/1;background:#fff;border:1px solid #d9e3de;border-radius:30px;padding:30px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;box-shadow:0 5px 18px rgba(16,37,29,.04)}
+.why-icon{width:92px;height:92px;object-fit:contain;margin:0 auto 20px}
+.why-title{font-size:25px;font-weight:800;margin-bottom:12px}
+.why-text{color:#7a827f;font-size:17px;line-height:1.75}
+footer{background:#06251a;color:#fff;padding:55px 24px 28px;text-align:center}
+.footer-brand{font-size:30px;font-weight:800;margin-bottom:10px}
+.footer-tagline{color:#b8c8c1;font-size:17px;margin-bottom:32px}
+.footer-line{height:1px;background:rgba(255,255,255,.18);max-width:900px;margin:0 auto 22px}
+.copyright{color:#9eafa8;font-size:14px}
+@media(max-width:700px){
+.header-inner{min-height:88px;padding:10px 16px}.brand-logo{height:62px}.brand-logo img{height:58px;max-width:210px}
+.cart-btn{min-width:135px;border-radius:20px;padding:8px 10px;font-size:17px}.cart-count{width:44px;height:44px;font-size:19px}
+.section{padding:52px 18px}.section-label{font-size:14px;letter-spacing:4px;margin-bottom:28px}
+.category-grid,.why-grid{gap:16px}.category-card,.why-card{border-radius:24px;padding:18px}
+.category-icon{width:76px;height:76px;margin-bottom:16px}.category-name{font-size:20px}
+.why-icon{width:68px;height:68px;margin-bottom:14px}.why-title{font-size:20px;margin-bottom:8px}.why-text{font-size:14px;line-height:1.55}
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family:
-    Arial,
-    "Noto Sans Bengali",
-    "Noto Sans",
-    sans-serif;
-
-  background: #f6f9f7;
-  color: #10251d;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.site-header {
-
-  width: 100%;
-  height: 105px;
-
-  background: #ffffff;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 12px 38px;
-
-  border-bottom: 1px solid #e3e8e5;
-
-  position: sticky;
-  top: 0;
-
-  z-index: 9999;
-}
-
-
-/* LOGO */
-
-.brand-logo {
-
-  display: flex;
-  align-items: center;
-
-  height: 80px;
-  max-width: 280px;
-
-  text-decoration: none;
-}
-
-.brand-logo img {
-
-  display: block;
-
-  height: 78px;
-  width: auto;
-
-  max-width: 280px;
-
-  object-fit: contain;
-}
-
-
-/* CART */
-
-.cart-btn {
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-
-  background: #187542;
-
-  color: #ffffff;
-
-  text-decoration: none;
-
-  min-width: 145px;
-  height: 58px;
-
-  padding: 8px 14px;
-
-  border-radius: 22px;
-
-  font-size: 20px;
-  font-weight: 700;
-
-  box-shadow: 0 8px 20px rgba(24,117,66,0.15);
-}
-
-.cart-btn strong {
-
-  width: 38px;
-  height: 38px;
-
-  background: #ffffff;
-
-  color: #187542;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-main {
-  width: 100%;
-}
-
-
-/* =====================================================
-   CATEGORY SECTION
-===================================================== */
-
-.categories-section {
-
-  width: 100%;
-
-  padding: 75px 30px 80px;
-
-  background: #f7faf8;
-}
-
-.section-container {
-
-  width: 100%;
-  max-width: 1100px;
-
-  margin: 0 auto;
-}
-
-
-/* SMALL TITLE */
-
-.section-label {
-
-  color: #187542;
-
-  font-size: 18px;
-
-  font-weight: 800;
-
-  letter-spacing: 5px;
-
-  margin-bottom: 18px;
-
-  text-transform: uppercase;
-}
-
-
-/* MAIN TITLE */
-
-.section-title {
-
-  font-size: 48px;
-
-  line-height: 1.1;
-
-  font-weight: 900;
-
-  margin-bottom: 45px;
-
-  color: #10251d;
-}
-
-
-/* =====================================================
-   CATEGORY GRID
-===================================================== */
-
-.category-grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 28px;
-
-  width: 100%;
-}
-
-
-/* SQUARE CATEGORY */
-
-.category-card {
-
-  width: 100%;
-
-  aspect-ratio: 1 / 1;
-
-  min-width: 0;
-
-  background: #ffffff;
-
-  border: 1px solid #dce5e0;
-
-  border-radius: 28px;
-
-  text-decoration: none;
-
-  color: #10251d;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 25px;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-
-  box-shadow: 0 8px 25px rgba(16,37,29,0.04);
-}
-
-.category-card:hover {
-
-  transform: translateY(-5px);
-
-  border-color: #187542;
-
-  box-shadow: 0 15px 35px rgba(16,37,29,0.10);
-}
-
-
-/* ICON */
-
-.category-icon {
-
-  font-size: 75px;
-
-  line-height: 1;
-
-  margin-bottom: 30px;
-}
-
-
-/* CATEGORY NAME */
-
-.category-name {
-
-  font-size: 27px;
-
-  font-weight: 800;
-
-  line-height: 1.2;
-}
-
-
-/* =====================================================
-   WHY CHOOSE US
-===================================================== */
-
-.why-section {
-
-  width: 100%;
-
-  background: #eaf5ee;
-
-  padding: 75px 30px 85px;
-}
-
-
-/* WHY GRID */
-
-.features-grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 28px;
-
-  width: 100%;
-}
-
-
-/* SQUARE FEATURE */
-
-.feature-card {
-
-  width: 100%;
-
-  aspect-ratio: 1 / 1;
-
-  min-width: 0;
-
-  background: #ffffff;
-
-  border: 1px solid #dce5e0;
-
-  border-radius: 28px;
-
-  padding: 30px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  align-items: flex-start;
-
-  box-shadow: 0 8px 25px rgba(16,37,29,0.04);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.feature-card:hover {
-
-  transform: translateY(-5px);
-
-  box-shadow: 0 15px 35px rgba(16,37,29,0.10);
-}
-
-
-/* FEATURE ICON */
-
-.feature-icon {
-
-  font-size: 68px;
-
-  line-height: 1;
-
-  margin-bottom: 25px;
-}
-
-
-/* FEATURE TITLE */
-
-.feature-title {
-
-  font-size: 27px;
-
-  font-weight: 800;
-
-  line-height: 1.25;
-
-  margin-bottom: 18px;
-}
-
-
-/* FEATURE TEXT */
-
-.feature-text {
-
-  font-size: 17px;
-
-  line-height: 1.7;
-
-  color: #78827d;
-
-  font-weight: 500;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.site-footer {
-
-  width: 100%;
-
-  background: #09261b;
-
-  color: #ffffff;
-
-  padding: 65px 25px 30px;
-
-  text-align: center;
-}
-
-
-.footer-logo {
-
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  text-decoration: none;
-
-  margin-bottom: 18px;
-}
-
-.footer-logo img {
-
-  width: auto;
-
-  height: 70px;
-
-  max-width: 250px;
-
-  object-fit: contain;
-}
-
-
-.footer-description {
-
-  color: #b9c9c2;
-
-  font-size: 17px;
-
-  margin-bottom: 35px;
-}
-
-
-.footer-line {
-
-  width: 100%;
-
-  max-width: 850px;
-
-  height: 1px;
-
-  background: rgba(255,255,255,0.15);
-
-  margin: 0 auto 25px;
-}
-
-
-.footer-copy {
-
-  color: #aebdb7;
-
-  font-size: 15px;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-
-  /* HEADER */
-
-  .site-header {
-
-    height: 92px;
-
-    padding: 8px 18px;
-  }
-
-
-  .brand-logo {
-
-    height: 65px;
-
-    max-width: 185px;
-  }
-
-
-  .brand-logo img {
-
-    height: 65px;
-
-    max-width: 185px;
-  }
-
-
-  .cart-btn {
-
-    min-width: 120px;
-
-    height: 54px;
-
-    padding: 7px 10px;
-
-    border-radius: 18px;
-
-    font-size: 17px;
-  }
-
-
-  .cart-btn strong {
-
-    width: 34px;
-    height: 34px;
-
-    font-size: 16px;
-  }
-
-
-  /* CATEGORY */
-
-  .categories-section {
-
-    padding: 55px 20px 65px;
-  }
-
-
-  .section-label {
-
-    font-size: 14px;
-
-    letter-spacing: 4px;
-
-    margin-bottom: 14px;
-  }
-
-
-  .section-title {
-
-    font-size: 36px;
-
-    margin-bottom: 32px;
-  }
-
-
-  .category-grid {
-
-    gap: 18px;
-  }
-
-
-  .category-card {
-
-    border-radius: 22px;
-
-    padding: 15px;
-  }
-
-
-  .category-icon {
-
-    font-size: 55px;
-
-    margin-bottom: 22px;
-  }
-
-
-  .category-name {
-
-    font-size: 21px;
-  }
-
-
-  /* WHY */
-
-  .why-section {
-
-    padding: 55px 20px 65px;
-  }
-
-
-  .features-grid {
-
-    gap: 18px;
-  }
-
-
-  .feature-card {
-
-    border-radius: 22px;
-
-    padding: 20px;
-  }
-
-
-  .feature-icon {
-
-    font-size: 50px;
-
-    margin-bottom: 18px;
-  }
-
-
-  .feature-title {
-
-    font-size: 20px;
-
-    margin-bottom: 12px;
-  }
-
-
-  .feature-text {
-
-    font-size: 14px;
-
-    line-height: 1.55;
-  }
-
-
-  /* FOOTER */
-
-  .site-footer {
-
-    padding: 50px 20px 25px;
-  }
-
-
-  .footer-logo img {
-
-    height: 60px;
-
-    max-width: 220px;
-  }
-
-
-  .footer-description {
-
-    font-size: 15px;
-  }
-
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media (max-width: 380px) {
-
-  .site-header {
-
-    padding: 8px 12px;
-  }
-
-
-  .brand-logo {
-
-    max-width: 160px;
-  }
-
-
-  .brand-logo img {
-
-    max-width: 160px;
-
-    height: 58px;
-  }
-
-
-  .cart-btn {
-
-    min-width: 105px;
-
-    font-size: 15px;
-  }
-
-
-  .category-icon {
-
-    font-size: 48px;
-  }
-
-
-  .category-name {
-
-    font-size: 18px;
-  }
-
-
-  .feature-title {
-
-    font-size: 18px;
-  }
-
-
-  .feature-text {
-
-    font-size: 13px;
-  }
-
-}
-
+@media(max-width:380px){.brand-logo img{max-width:175px}.cart-btn{min-width:118px;font-size:15px}.cart-count{width:38px;height:38px}.category-name{font-size:17px}.why-title{font-size:17px}.why-text{font-size:12px}}
 </style>
 </head>
-
-
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="site-header">
-
-
-  <!-- LOGO -->
-  <!-- logo.png অবশ্যই index.html-এর একই folder-এ রাখবে -->
-
-  <a
-    href="index.html"
-    class="brand-logo"
-    aria-label="ADORE'S PET Home"
-  >
-
-    <img
-      src="logo.png"
-      alt="ADORE'S PET"
-    >
-
-  </a>
-
-
-  <!-- CART -->
-
-  <a
-    href="cart.html"
-    class="cart-btn"
-  >
-
-    🛒
-
-    <span>
-      Cart
-    </span>
-
-    <strong id="cartCount">
-      0
-    </strong>
-
-  </a>
-
-
+  <div class="header-inner">
+    <a href="index.html" class="brand-logo" aria-label="ADORE'S PET Home">
+      <img src="logo.png.png" alt="ADORE'S PET">
+    </a>
+    <a href="cart.html" class="cart-btn">
+      <span>🛒</span><span>Cart</span><span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
 </header>
 
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <main>
-
-
-  <!-- ===================================================
-       CATEGORY
-  ==================================================== -->
-
-  <section class="categories-section">
-
-    <div class="section-container">
-
-
-      <div class="section-label">
-        SHOP BY CATEGORY
-      </div>
-
-
-      <div class="category-grid">
-
-
-        <!-- RABBIT -->
-
-        <a
-          href="category.html?category=rabbit"
-          class="category-card"
-        >
-
-          <div class="category-icon">
-            🐰
-          </div>
-
-          <div class="category-name">
-            Rabbit
-          </div>
-
-        </a>
-
-
-        <!-- HAMSTER -->
-
-        <a
-          href="category.html?category=hamster"
-          class="category-card"
-        >
-
-          <div class="category-icon">
-            🐹
-          </div>
-
-          <div class="category-name">
-            Hamster
-          </div>
-
-        </a>
-
-
-        <!-- PET FOOD -->
-
-        <a
-          href="category.html?category=pet-food"
-          class="category-card"
-        >
-
-          <div class="category-icon">
-            🌾
-          </div>
-
-          <div class="category-name">
-            Pet Food
-          </div>
-
-        </a>
-
-
-        <!-- ACCESSORIES -->
-
-        <a
-          href="category.html?category=accessories"
-          class="category-card"
-        >
-
-          <div class="category-icon">
-            🧺
-          </div>
-
-          <div class="category-name">
-            Accessories
-          </div>
-
-        </a>
-
-
-      </div>
-
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">SHOP BY CATEGORY</div>
+    <div class="category-grid">
+      <a class="category-card" href="category.html?category=Rabbit">
+        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg" alt="Rabbit">
+        <div class="category-name">Rabbit</div>
+      </a>
+      <a class="category-card" href="category.html?category=Hamster">
+        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f439.svg" alt="Hamster">
+        <div class="category-name">Hamster</div>
+      </a>
+      <a class="category-card" href="category.html?category=Pet%20Food">
+        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f33e.svg" alt="Pet Food">
+        <div class="category-name">Pet Food</div>
+      </a>
+      <a class="category-card" href="category.html?category=Accessories">
+        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f9fa.svg" alt="Accessories">
+        <div class="category-name">Accessories</div>
+      </a>
     </div>
+  </div>
+</section>
 
-  </section>
-
-
-
-  <!-- ===================================================
-       WHY CHOOSE US
-  ==================================================== -->
-
-  <section class="why-section">
-
-    <div class="section-container">
-
-
-      <div class="section-label">
-        WHY CHOOSE US
+<section class="section why-section">
+  <div class="section-inner">
+    <div class="section-label">WHY CHOOSE US</div>
+    <div class="why-grid">
+      <div class="why-card">
+        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg" alt="Healthy Pet">
+        <h2 class="why-title">সুস্থ পোষা প্রাণী</h2>
+        <p class="why-text">যত্নসহকারে পালন করা স্বাস্থ্যকর ও সুন্দর পোষা প্রাণী।</p>
       </div>
-
-
-      <div class="features-grid">
-
-
-        <!-- HEALTHY PET -->
-
-        <div class="feature-card">
-
-          <div class="feature-icon">
-            🐰
-          </div>
-
-          <h3 class="feature-title">
-            সুস্থ পোষা প্রাণী
-          </h3>
-
-          <p class="feature-text">
-            যত্নসহকারে পালন করা স্বাস্থ্যকর
-            ও সুন্দর পোষা প্রাণী।
-          </p>
-
-        </div>
-
-
-        <!-- DELIVERY -->
-
-        <div class="feature-card">
-
-          <div class="feature-icon">
-            🚚
-          </div>
-
-          <h3 class="feature-title">
-            Delivery সুবিধা
-          </h3>
-
-          <p class="feature-text">
-            দেশের বিভিন্ন জায়গায় সহজে
-            অর্ডার ও ডেলিভারি সুবিধা।
-          </p>
-
-        </div>
-
-
-        <!-- TRUST -->
-
-        <div class="feature-card">
-
-          <div class="feature-icon">
-            ⭐
-          </div>
-
-          <h3 class="feature-title">
-            বিশ্বস্ত সেবা
-          </h3>
-
-          <p class="feature-text">
-            গ্রাহকের সন্তুষ্টি ও ভালো
-            সার্ভিসকে আমরা সর্বোচ্চ
-            গুরুত্ব দিই।
-          </p>
-
-        </div>
-
-
-        <!-- QUALITY -->
-
-        <div class="feature-card">
-
-          <div class="feature-icon">
-            🛡️
-          </div>
-
-          <h3 class="feature-title">
-            মানসম্মত পণ্য
-          </h3>
-
-          <p class="feature-text">
-            পোষা প্রাণীর জন্য প্রয়োজনীয়
-            ভালো মানের পণ্য।
-          </p>
-
-        </div>
-
-
+      <div class="why-card">
+        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f69a.svg" alt="Delivery">
+        <h2 class="why-title">Delivery সুবিধা</h2>
+        <p class="why-text">দেশের বিভিন্ন জায়গায় সহজে অর্ডার ও ডেলিভারি সুবিধা।</p>
       </div>
-
+      <div class="why-card">
+        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2b50.svg" alt="Trusted Service">
+        <h2 class="why-title">বিশ্বস্ত সেবা</h2>
+        <p class="why-text">গ্রাহকের সন্তুষ্টি ও ভালো সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f6e1.svg" alt="Quality Product">
+        <h2 class="why-title">মানসম্মত পণ্য</h2>
+        <p class="why-text">পোষা প্রাণীর জন্য প্রয়োজনীয় ভালো মানের পণ্য।</p>
+      </div>
     </div>
-
-  </section>
-
-
+  </div>
+</section>
 </main>
 
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="site-footer">
-
-
-  <a
-    href="index.html"
-    class="footer-logo"
-  >
-
-    <img
-      src="logo.png"
-      alt="ADORE'S PET"
-    >
-
-  </a>
-
-
-  <p class="footer-description">
-    আপনার বিশ্বস্ত Pet Shop
-  </p>
-
-
+<footer>
+  <div class="footer-brand">🐰 ADORE'S PET</div>
+  <div class="footer-tagline">আপনার বিশ্বস্ত Pet Shop</div>
   <div class="footer-line"></div>
-
-
-  <p class="footer-copy">
-    © 2026 ADORE'S PET — All Rights Reserved
-  </p>
-
-
+  <div class="copyright">© 2026 ADORE'S PET — All Rights Reserved</div>
 </footer>
 
-
-
-<!-- =====================================================
-     CART COUNT
-===================================================== -->
-
 <script>
-
-function updateCartCount() {
-
-  try {
-
-    const cart =
-      JSON.parse(
-        localStorage.getItem("cart") || "[]"
-      );
-
-    let count = 0;
-
-    if (Array.isArray(cart)) {
-
-      cart.forEach(item => {
-
-        count +=
-          Number(item.quantity || 1);
-
-      });
-
-    }
-
-    const cartCount =
-      document.getElementById("cartCount");
-
-    if (cartCount) {
-
-      cartCount.textContent = count;
-
-    }
-
-  } catch (error) {
-
-    console.log("Cart error:", error);
-
-  }
-
-}
-
-
-/* PAGE LOAD */
-
-updateCartCount();
-
-
-/* BACK/FORWARD এলে আবার count update */
-
-window.addEventListener(
-  "pageshow",
-  updateCartCount
-);
-
+try{
+  const cart=JSON.parse(localStorage.getItem("cart")||"[]");
+  const count=Array.isArray(cart)?cart.reduce((s,i)=>s+(Number(i.quantity)||1),0):0;
+  document.getElementById("cartCount").textContent=count;
+}catch(e){document.getElementById("cartCount").textContent="0";}
 </script>
-
-
 </body>
 </html>
