@@ -1,13 +1,15 @@
 // =====================================================
 // ADORE'S PET — ADMIN.JS
-// Supabase Login + Product Upload + Image Upload
+// Login + Product Upload + Image Upload + Edit + Delete
 // =====================================================
 
 import { createClient } from
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
-// ================= SUPABASE =================
+// =====================================================
+// SUPABASE
+// =====================================================
 
 const supabase = createClient(
   SUPABASE_URL,
@@ -15,42 +17,77 @@ const supabase = createClient(
 );
 
 
-// ================= ELEMENTS =================
+// =====================================================
+// ELEMENTS
+// =====================================================
 
-const loginBox = document.getElementById("loginBox");
-const dashboard = document.getElementById("dashboard");
+const loginBox =
+  document.getElementById("loginBox");
 
-const loginForm = document.getElementById("loginForm");
-const loginMsg = document.getElementById("loginMsg");
+const dashboard =
+  document.getElementById("dashboard");
 
-const logoutBtn = document.getElementById("logout");
+const loginForm =
+  document.getElementById("loginForm");
 
-const productForm = document.getElementById("productForm");
+const loginMsg =
+  document.getElementById("loginMsg");
 
-const idInput = document.getElementById("id");
-const titleInput = document.getElementById("title");
-const categoryInput = document.getElementById("category");
-const priceInput = document.getElementById("price");
-const stockInput = document.getElementById("stock");
-const imageInput = document.getElementById("image");
-const descriptionInput = document.getElementById("description");
+const logoutBtn =
+  document.getElementById("logout");
 
-const preview = document.getElementById("preview");
+const productForm =
+  document.getElementById("productForm");
 
-const formTitle = document.getElementById("formTitle");
-const msg = document.getElementById("msg");
+const idInput =
+  document.getElementById("id");
 
-const cancelBtn = document.getElementById("cancel");
+const titleInput =
+  document.getElementById("title");
 
-const list = document.getElementById("list");
-const searchInput = document.getElementById("search");
+const categoryInput =
+  document.getElementById("category");
 
-const ordersList = document.getElementById("ordersList");
+const priceInput =
+  document.getElementById("price");
+
+const stockInput =
+  document.getElementById("stock");
+
+const imageInput =
+  document.getElementById("image");
+
+const descriptionInput =
+  document.getElementById("description");
+
+const preview =
+  document.getElementById("preview");
+
+const formTitle =
+  document.getElementById("formTitle");
+
+const msg =
+  document.getElementById("msg");
+
+const cancelBtn =
+  document.getElementById("cancel");
+
+const list =
+  document.getElementById("list");
+
+const searchInput =
+  document.getElementById("search");
+
+const ordersList =
+  document.getElementById("ordersList");
+
 const refreshOrders =
   document.getElementById("refreshOrders");
 
 
-// ================= VARIABLES =================
+// =====================================================
+// VARIABLES
+// =====================================================
 
 let products = [];
 
@@ -63,50 +100,63 @@ let selectedImageFile = null;
 // LOGIN
 // =====================================================
 
-loginForm.addEventListener("submit", async (e) => {
+loginForm.addEventListener(
+  "submit",
+  async function (e) {
 
-  e.preventDefault();
-
-  loginMsg.textContent = "⏳ Login হচ্ছে...";
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-
-  const { data, error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-
-  if (error) {
+    e.preventDefault();
 
     loginMsg.textContent =
-      "❌ " + error.message;
-
-    return;
-  }
+      "⏳ Login হচ্ছে...";
 
 
-  if (!data.user) {
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+
+    const {
+      data,
+      error
+    } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+    if (error) {
+
+      loginMsg.textContent =
+        "❌ " + error.message;
+
+      return;
+    }
+
+
+    if (!data.user) {
+
+      loginMsg.textContent =
+        "❌ Login করা যায়নি।";
+
+      return;
+    }
+
 
     loginMsg.textContent =
-      "❌ Login করা যায়নি।";
+      "✅ Login সফল হয়েছে।";
 
-    return;
+    showDashboard();
+
   }
-
-
-  loginMsg.textContent =
-    "✅ Login সফল হয়েছে।";
-
-  showDashboard();
-
-});
+);
 
 
 // =====================================================
@@ -116,8 +166,11 @@ loginForm.addEventListener("submit", async (e) => {
 async function checkLogin() {
 
   const {
-    data: { session }
-  } = await supabase.auth.getSession();
+    data: {
+      session
+    }
+  } =
+    await supabase.auth.getSession();
 
 
   if (session) {
@@ -133,20 +186,37 @@ async function checkLogin() {
 }
 
 
+// =====================================================
+// SHOW LOGIN
+// =====================================================
+
 function showLogin() {
 
-  loginBox.classList.remove("hidden");
+  loginBox.classList.remove(
+    "hidden"
+  );
 
-  dashboard.classList.add("hidden");
+  dashboard.classList.add(
+    "hidden"
+  );
 
 }
 
 
+// =====================================================
+// SHOW DASHBOARD
+// =====================================================
+
 function showDashboard() {
 
-  loginBox.classList.add("hidden");
+  loginBox.classList.add(
+    "hidden"
+  );
 
-  dashboard.classList.remove("hidden");
+  dashboard.classList.remove(
+    "hidden"
+  );
+
 
   loadProducts();
 
@@ -159,42 +229,52 @@ function showDashboard() {
 // LOGOUT
 // =====================================================
 
-logoutBtn.addEventListener("click", async () => {
+logoutBtn.addEventListener(
+  "click",
+  async function () {
 
-  await supabase.auth.signOut();
+    await supabase.auth.signOut();
 
-  showLogin();
+    showLogin();
 
-});
+  }
+);
 
 
 // =====================================================
 // IMAGE SELECT
 // =====================================================
 
-imageInput.addEventListener("change", () => {
+imageInput.addEventListener(
+  "change",
+  function () {
 
-  selectedImageFile =
-    imageInput.files[0] || null;
+    selectedImageFile =
+      imageInput.files[0] || null;
 
 
-  if (!selectedImageFile) {
+    if (!selectedImageFile) {
 
-    preview.classList.add("hidden");
+      return;
 
-    return;
+    }
+
+
+    const imageURL =
+      URL.createObjectURL(
+        selectedImageFile
+      );
+
+
+    preview.src =
+      imageURL;
+
+    preview.classList.remove(
+      "hidden"
+    );
 
   }
-
-
-  const imageURL =
-    URL.createObjectURL(selectedImageFile);
-
-  preview.src = imageURL;
-
-  preview.classList.remove("hidden");
-
-});
+);
 
 
 // =====================================================
@@ -204,12 +284,17 @@ imageInput.addEventListener("change", () => {
 async function uploadImage(file) {
 
   if (!file) {
+
     return null;
+
   }
 
 
   const extension =
-    file.name.split(".").pop().toLowerCase();
+    file.name
+      .split(".")
+      .pop()
+      .toLowerCase();
 
 
   const fileName =
@@ -223,15 +308,13 @@ async function uploadImage(file) {
     extension;
 
 
-  const filePath =
-    fileName;
-
-
-  const { error } =
+  const {
+    error
+  } =
     await supabase.storage
       .from("product-images")
       .upload(
-        filePath,
+        fileName,
         file,
         {
           cacheControl: "3600",
@@ -247,10 +330,14 @@ async function uploadImage(file) {
   }
 
 
-  const { data } =
+  const {
+    data
+  } =
     supabase.storage
       .from("product-images")
-      .getPublicUrl(filePath);
+      .getPublicUrl(
+        fileName
+      );
 
 
   return data.publicUrl;
@@ -262,121 +349,145 @@ async function uploadImage(file) {
 // SAVE PRODUCT
 // =====================================================
 
-productForm.addEventListener("submit", async (e) => {
+productForm.addEventListener(
+  "submit",
+  async function (e) {
 
-  e.preventDefault();
+    e.preventDefault();
 
-
-  msg.textContent =
-    "⏳ Product save হচ্ছে...";
-
-
-  try {
-
-    let imageURL = null;
-
-
-    // নতুন ছবি থাকলে Upload
-    if (selectedImageFile) {
-
-      imageURL =
-        await uploadImage(selectedImageFile);
-
-    }
-
-
-    const productData = {
-
-      title:
-        titleInput.value.trim(),
-
-      category:
-        categoryInput.value,
-
-      price:
-        Number(priceInput.value),
-
-      stock:
-        Number(stockInput.value),
-
-      description:
-        descriptionInput.value.trim()
-
-    };
-
-
-    // ছবি থাকলে image field
-    if (imageURL) {
-
-      productData.image =
-        imageURL;
-
-    }
-
-
-    // ================= EDIT =================
-
-    if (editingId) {
-
-      const { error } =
-        await supabase
-          .from("products")
-          .update(productData)
-          .eq("id", editingId);
-
-
-      if (error) {
-
-        throw error;
-
-      }
-
-
-      msg.textContent =
-        "✅ Product আপডেট হয়েছে.";
-
-    }
-
-
-    // ================= NEW =================
-
-    else {
-
-      const { error } =
-        await supabase
-          .from("products")
-          .insert([productData]);
-
-
-      if (error) {
-
-        throw error;
-
-      }
-
-
-      msg.textContent =
-        "✅ Product সফলভাবে যোগ হয়েছে.";
-
-    }
-
-
-    resetForm();
-
-    loadProducts();
-
-
-  } catch (error) {
-
-    console.error(error);
 
     msg.textContent =
-      "❌ Error: " +
-      error.message;
+      "⏳ Product save হচ্ছে...";
+
+
+    try {
+
+      let imageURL = null;
+
+
+      // নতুন ছবি থাকলে Upload
+      if (selectedImageFile) {
+
+        imageURL =
+          await uploadImage(
+            selectedImageFile
+          );
+
+      }
+
+
+      const productData = {
+
+        title:
+          titleInput.value.trim(),
+
+        category:
+          categoryInput.value,
+
+        price:
+          Number(
+            priceInput.value
+          ),
+
+        stock:
+          Number(
+            stockInput.value
+          ),
+
+        description:
+          descriptionInput.value.trim()
+
+      };
+
+
+      // নতুন ছবি থাকলে
+      // image_url column-এ save হবে
+      if (imageURL) {
+
+        productData.image_url =
+          imageURL;
+
+      }
+
+
+      // =================================================
+      // EDIT PRODUCT
+      // =================================================
+
+      if (editingId) {
+
+        const {
+          error
+        } =
+          await supabase
+            .from("products")
+            .update(productData)
+            .eq(
+              "id",
+              editingId
+            );
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        msg.textContent =
+          "✅ Product সফলভাবে আপডেট হয়েছে.";
+
+      }
+
+
+      // =================================================
+      // NEW PRODUCT
+      // =================================================
+
+      else {
+
+        const {
+          error
+        } =
+          await supabase
+            .from("products")
+            .insert([
+              productData
+            ]);
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        msg.textContent =
+          "✅ Product সফলভাবে যোগ হয়েছে.";
+
+      }
+
+
+      resetForm();
+
+      await loadProducts();
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      msg.textContent =
+        "❌ Error: " +
+        error.message;
+
+    }
 
   }
-
-});
+);
 
 
 // =====================================================
@@ -389,13 +500,19 @@ async function loadProducts() {
     "⏳ পণ্য লোড হচ্ছে...";
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabase
       .from("products")
       .select("*")
-      .order("id", {
-        ascending: false
-      });
+      .order(
+        "id",
+        {
+          ascending: false
+        }
+      );
 
 
   if (error) {
@@ -409,15 +526,19 @@ async function loadProducts() {
   }
 
 
-  products = data || [];
+  products =
+    data || [];
 
-  renderProducts(products);
+
+  renderProducts(
+    products
+  );
 
 }
 
 
 // =====================================================
-// SHOW PRODUCTS
+// RENDER PRODUCTS
 // =====================================================
 
 function renderProducts(items) {
@@ -425,7 +546,7 @@ function renderProducts(items) {
   if (!items.length) {
 
     list.innerHTML =
-      "<p>কোনো Product পাওয়া যায়নি।</p>";
+      "<p>এখনো কোনো Product নেই।</p>";
 
     return;
 
@@ -435,133 +556,170 @@ function renderProducts(items) {
   list.innerHTML = "";
 
 
-  items.forEach(product => {
+  items.forEach(
+    function (product) {
 
-    const item =
-      document.createElement("div");
+      const item =
+        document.createElement(
+          "div"
+        );
 
-    item.className =
-      "admin-item";
+
+      item.className =
+        "admin-item";
 
 
-    item.innerHTML = `
+      item.innerHTML = `
 
-      ${
-        product.image
-          ? `
-            <img
-              src="${product.image}"
-              alt="${escapeHTML(product.title || "")}"
-            >
-          `
-          : `
-            <div
-              style="
-                width:90px;
-                height:90px;
-                background:#eee;
-                border-radius:10px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:30px;
-              "
-            >
-              🐰
-            </div>
-          `
+        ${
+          product.image_url
+
+            ? `
+
+              <img
+                src="${product.image_url}"
+                alt="${escapeHTML(
+                  product.title || ""
+                )}"
+              >
+
+            `
+
+            : `
+
+              <div
+                style="
+                  width:90px;
+                  height:90px;
+                  background:#eee;
+                  border-radius:10px;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:30px;
+                "
+              >
+                🐰
+              </div>
+
+            `
+        }
+
+
+        <div class="admin-item-info">
+
+          <h3>
+            ${escapeHTML(
+              product.title || ""
+            )}
+          </h3>
+
+          <div>
+            Category:
+            <b>
+              ${escapeHTML(
+                product.category || ""
+              )}
+            </b>
+          </div>
+
+          <div>
+            Price:
+            <b>
+              ৳${Number(
+                product.price || 0
+              )}
+            </b>
+          </div>
+
+          <div>
+            Stock:
+            <b>
+              ${Number(
+                product.stock || 0
+              )}
+            </b>
+          </div>
+
+        </div>
+
+
+        <button
+          class="edit"
+          data-id="${product.id}"
+        >
+          ✏️ Edit
+        </button>
+
+
+        <button
+          class="delete"
+          data-id="${product.id}"
+        >
+          🗑️ Delete
+        </button>
+
+      `;
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+
+  // ===================================================
+  // EDIT BUTTON
+  // ===================================================
+
+  list
+    .querySelectorAll(
+      ".edit"
+    )
+    .forEach(
+      function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            editProduct(
+              button.dataset.id
+            );
+
+          }
+        );
+
       }
+    );
 
 
-      <div class="admin-item-info">
-
-        <h3>
-          ${escapeHTML(product.title || "")}
-        </h3>
-
-        <div>
-          Category:
-          <b>
-            ${escapeHTML(product.category || "")}
-          </b>
-        </div>
-
-        <div>
-          Price:
-          <b>৳${Number(product.price || 0)}</b>
-        </div>
-
-        <div>
-          Stock:
-          <b>${Number(product.stock || 0)}</b>
-        </div>
-
-      </div>
-
-
-      <button
-        class="edit"
-        data-id="${product.id}"
-      >
-        ✏️ Edit
-      </button>
-
-
-      <button
-        class="delete"
-        data-id="${product.id}"
-      >
-        🗑️ Delete
-      </button>
-
-    `;
-
-
-    list.appendChild(item);
-
-  });
-
-
-  // Edit buttons
+  // ===================================================
+  // DELETE BUTTON
+  // ===================================================
 
   list
-    .querySelectorAll(".edit")
-    .forEach(button => {
+    .querySelectorAll(
+      ".delete"
+    )
+    .forEach(
+      function (button) {
 
-      button.addEventListener(
-        "click",
-        () => {
+        button.addEventListener(
+          "click",
+          function () {
 
-          const id =
-            button.dataset.id;
+            deleteProduct(
+              button.dataset.id
+            );
 
-          editProduct(id);
+          }
+        );
 
-        }
-      );
-
-    });
-
-
-  // Delete buttons
-
-  list
-    .querySelectorAll(".delete")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const id =
-            button.dataset.id;
-
-          deleteProduct(id);
-
-        }
-      );
-
-    });
+      }
+    );
 
 }
 
@@ -570,46 +728,59 @@ function renderProducts(items) {
 // SEARCH
 // =====================================================
 
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener(
+  "input",
+  function () {
 
-  const search =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-
-  if (!search) {
-
-    renderProducts(products);
-
-    return;
-
-  }
+    const search =
+      searchInput.value
+        .trim()
+        .toLowerCase();
 
 
-  const filtered =
-    products.filter(product => {
+    if (!search) {
 
-      return (
-
-        String(product.title || "")
-          .toLowerCase()
-          .includes(search)
-
-        ||
-
-        String(product.category || "")
-          .toLowerCase()
-          .includes(search)
-
+      renderProducts(
+        products
       );
 
-    });
+      return;
+
+    }
 
 
-  renderProducts(filtered);
+    const filtered =
+      products.filter(
+        function (product) {
 
-});
+          return (
+
+            String(
+              product.title || ""
+            )
+              .toLowerCase()
+              .includes(search)
+
+            ||
+
+            String(
+              product.category || ""
+            )
+              .toLowerCase()
+              .includes(search)
+
+          );
+
+        }
+      );
+
+
+    renderProducts(
+      filtered
+    );
+
+  }
+);
 
 
 // =====================================================
@@ -620,8 +791,13 @@ function editProduct(id) {
 
   const product =
     products.find(
-      item =>
-        String(item.id) === String(id)
+      function (item) {
+
+        return String(
+          item.id
+        ) === String(id);
+
+      }
     );
 
 
@@ -660,10 +836,18 @@ function editProduct(id) {
     product.description || "";
 
 
-  if (product.image) {
+  selectedImageFile =
+    null;
+
+
+  imageInput.value =
+    "";
+
+
+  if (product.image_url) {
 
     preview.src =
-      product.image;
+      product.image_url;
 
     preview.classList.remove(
       "hidden"
@@ -678,13 +862,8 @@ function editProduct(id) {
   }
 
 
-  selectedImageFile = null;
-
-  imageInput.value = "";
-
-
   formTitle.textContent =
-    "পণ্য Edit করুন";
+    "✏️ Product Edit করুন";
 
 
   cancelBtn.classList.remove(
@@ -706,24 +885,29 @@ function editProduct(id) {
 
 async function deleteProduct(id) {
 
-  const ok =
+  const confirmDelete =
     confirm(
       "আপনি কি সত্যিই এই Product Delete করতে চান?"
     );
 
 
-  if (!ok) {
+  if (!confirmDelete) {
 
     return;
 
   }
 
 
-  const { error } =
+  const {
+    error
+  } =
     await supabase
       .from("products")
       .delete()
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if (error) {
@@ -754,23 +938,38 @@ async function deleteProduct(id) {
 
 cancelBtn.addEventListener(
   "click",
-  resetForm
+  function () {
+
+    resetForm();
+
+  }
 );
 
+
+// =====================================================
+// RESET FORM
+// =====================================================
 
 function resetForm() {
 
   productForm.reset();
 
 
-  idInput.value = "";
-
-  editingId = null;
-
-  selectedImageFile = null;
+  idInput.value =
+    "";
 
 
-  preview.src = "";
+  editingId =
+    null;
+
+
+  selectedImageFile =
+    null;
+
+
+  preview.src =
+    "";
+
 
   preview.classList.add(
     "hidden"
@@ -786,13 +985,14 @@ function resetForm() {
   );
 
 
-  msg.textContent = "";
+  msg.textContent =
+    "";
 
 }
 
 
 // =====================================================
-// ORDERS
+// LOAD ORDERS
 // =====================================================
 
 async function loadOrders() {
@@ -801,13 +1001,19 @@ async function loadOrders() {
     "⏳ অর্ডার লোড হচ্ছে...";
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabase
       .from("orders")
       .select("*")
-      .order("created_at", {
-        ascending: false
-      });
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
 
 
   if (error) {
@@ -831,153 +1037,197 @@ async function loadOrders() {
   }
 
 
-  ordersList.innerHTML = "";
+  ordersList.innerHTML =
+    "";
 
 
-  data.forEach(order => {
+  data.forEach(
+    function (order) {
 
-    const card =
-      document.createElement("div");
+      const card =
+        document.createElement(
+          "div"
+        );
 
-    card.className =
-      "order-card";
+
+      card.className =
+        "order-card";
 
 
-    card.innerHTML = `
+      card.innerHTML = `
 
-      <div class="order-top">
+        <div class="order-top">
 
-        <div>
+          <div>
 
-          <strong>
-            📦 Order
-          </strong>
+            <strong>
+              📦 Order
+            </strong>
 
-          <div class="order-id">
-            ${escapeHTML(String(order.id || ""))}
+            <div class="order-id">
+              ${escapeHTML(
+                String(
+                  order.id || ""
+                )
+              )}
+            </div>
+
           </div>
+
+          <span class="status">
+            ${escapeHTML(
+              order.status ||
+              "pending"
+            )}
+          </span>
 
         </div>
 
-        <span class="status">
-          ${escapeHTML(order.status || "pending")}
-        </span>
 
-      </div>
+        <div class="order-info">
 
+          <b>নাম:</b>
+          ${escapeHTML(
+            order.customer_name ||
+            ""
+          )}
 
-      <div class="order-info">
+          <br>
 
-        <b>নাম:</b>
-        ${escapeHTML(order.customer_name || "")}
+          <b>মোবাইল:</b>
+          ${escapeHTML(
+            order.customer_phone ||
+            ""
+          )}
 
-        <br>
+          <br>
 
-        <b>মোবাইল:</b>
-        ${escapeHTML(order.customer_phone || "")}
+          <b>জেলা:</b>
+          ${escapeHTML(
+            order.district ||
+            ""
+          )}
 
-        <br>
+          <br>
 
-        <b>জেলা:</b>
-        ${escapeHTML(order.district || "")}
+          <b>ঠিকানা:</b>
+          ${escapeHTML(
+            order.address ||
+            ""
+          )}
 
-        <br>
+          <br>
 
-        <b>ঠিকানা:</b>
-        ${escapeHTML(order.address || "")}
+          <b>Total:</b>
+          ৳${Number(
+            order.total || 0
+          )}
 
-        <br>
-
-        <b>Total:</b>
-        ৳${Number(order.total || 0)}
-
-      </div>
-
-
-      <div class="order-actions">
-
-        <button
-          class="complete-btn"
-          data-order-id="${order.id}"
-        >
-          ✅ Complete
-        </button>
-
-        <button
-          class="cancel-btn"
-          data-order-id="${order.id}"
-        >
-          ❌ Cancel
-        </button>
-
-        <button
-          class="delete-order"
-          data-order-id="${order.id}"
-        >
-          🗑️ Delete
-        </button>
-
-      </div>
-
-    `;
+        </div>
 
 
-    ordersList.appendChild(card);
+        <div class="order-actions">
 
-  });
+          <button
+            class="complete-btn"
+            data-order-id="${order.id}"
+          >
+            ✅ Complete
+          </button>
+
+          <button
+            class="cancel-btn"
+            data-order-id="${order.id}"
+          >
+            ❌ Cancel
+          </button>
+
+          <button
+            class="delete-order"
+            data-order-id="${order.id}"
+          >
+            🗑️ Delete
+          </button>
+
+        </div>
+
+      `;
+
+
+      ordersList.appendChild(
+        card
+      );
+
+    }
+  );
 
 
   // Complete
 
   ordersList
-    .querySelectorAll(".complete-btn")
-    .forEach(button => {
+    .querySelectorAll(
+      ".complete-btn"
+    )
+    .forEach(
+      function (button) {
 
-      button.onclick = () => {
+        button.onclick =
+          function () {
 
-        updateOrderStatus(
-          button.dataset.orderId,
-          "completed"
-        );
+            updateOrderStatus(
+              button.dataset.orderId,
+              "completed"
+            );
 
-      };
+          };
 
-    });
+      }
+    );
 
 
   // Cancel
 
   ordersList
-    .querySelectorAll(".cancel-btn")
-    .forEach(button => {
+    .querySelectorAll(
+      ".cancel-btn"
+    )
+    .forEach(
+      function (button) {
 
-      button.onclick = () => {
+        button.onclick =
+          function () {
 
-        updateOrderStatus(
-          button.dataset.orderId,
-          "cancelled"
-        );
+            updateOrderStatus(
+              button.dataset.orderId,
+              "cancelled"
+            );
 
-      };
+          };
 
-    });
+      }
+    );
 
 
   // Delete
 
   ordersList
-    .querySelectorAll(".delete-order")
-    .forEach(button => {
+    .querySelectorAll(
+      ".delete-order"
+    )
+    .forEach(
+      function (button) {
 
-      button.onclick = () => {
+        button.onclick =
+          function () {
 
-        deleteOrder(
-          button.dataset.orderId
-        );
+            deleteOrder(
+              button.dataset.orderId
+            );
 
-      };
+          };
 
-    });
+      }
+    );
 
 }
 
@@ -991,13 +1241,18 @@ async function updateOrderStatus(
   status
 ) {
 
-  const { error } =
+  const {
+    error
+  } =
     await supabase
       .from("orders")
       .update({
         status: status
       })
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if (error) {
@@ -1023,24 +1278,29 @@ async function updateOrderStatus(
 
 async function deleteOrder(id) {
 
-  const ok =
+  const confirmDelete =
     confirm(
       "এই Order Delete করবেন?"
     );
 
 
-  if (!ok) {
+  if (!confirmDelete) {
 
     return;
 
   }
 
 
-  const { error } =
+  const {
+    error
+  } =
     await supabase
       .from("orders")
       .delete()
-      .eq("id", id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if (error) {
@@ -1066,28 +1326,47 @@ async function deleteOrder(id) {
 
 refreshOrders.addEventListener(
   "click",
-  loadOrders
+  function () {
+
+    loadOrders();
+
+  }
 );
 
 
 // =====================================================
-// HTML SECURITY
+// ESCAPE HTML
 // =====================================================
 
 function escapeHTML(value) {
 
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
 // =====================================================
-// START
+// START ADMIN
 // =====================================================
 
 checkLogin();
