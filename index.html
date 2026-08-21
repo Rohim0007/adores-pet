@@ -1,291 +1,1081 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ADORE'S PET</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    Arial,
+    "Noto Sans Bengali",
+    "Noto Sans",
+    sans-serif;
+
+  background: #f6f9f7;
+  color: #10251d;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header {
+
+  width: 100%;
+  height: 105px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 38px;
+
+  border-bottom: 1px solid #e3e8e5;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 9999;
+}
+
+
+/* LOGO */
+
+.brand-logo {
+
+  display: flex;
+  align-items: center;
+
+  height: 80px;
+  max-width: 280px;
+
+  text-decoration: none;
+}
+
+.brand-logo img {
+
+  display: block;
+
+  height: 78px;
+  width: auto;
+
+  max-width: 280px;
+
+  object-fit: contain;
+}
+
+
+/* CART */
+
+.cart-btn {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  background: #187542;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  min-width: 145px;
+  height: 58px;
+
+  padding: 8px 14px;
+
+  border-radius: 22px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(24,117,66,0.15);
+}
+
+.cart-btn strong {
+
+  width: 38px;
+  height: 38px;
+
+  background: #ffffff;
+
+  color: #187542;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main {
+  width: 100%;
+}
+
+
+/* =====================================================
+   CATEGORY SECTION
+===================================================== */
+
+.categories-section {
+
+  width: 100%;
+
+  padding: 75px 30px 80px;
+
+  background: #f7faf8;
+}
+
+.section-container {
+
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* SMALL TITLE */
+
+.section-label {
+
+  color: #187542;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 18px;
+
+  text-transform: uppercase;
+}
+
+
+/* MAIN TITLE */
+
+.section-title {
+
+  font-size: 48px;
+
+  line-height: 1.1;
+
+  font-weight: 900;
+
+  margin-bottom: 45px;
+
+  color: #10251d;
+}
+
+
+/* =====================================================
+   CATEGORY GRID
+===================================================== */
+
+.category-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 28px;
+
+  width: 100%;
+}
+
+
+/* SQUARE CATEGORY */
+
+.category-card {
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dce5e0;
+
+  border-radius: 28px;
+
+  text-decoration: none;
+
+  color: #10251d;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 25px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  box-shadow: 0 8px 25px rgba(16,37,29,0.04);
+}
+
+.category-card:hover {
+
+  transform: translateY(-5px);
+
+  border-color: #187542;
+
+  box-shadow: 0 15px 35px rgba(16,37,29,0.10);
+}
+
+
+/* ICON */
+
+.category-icon {
+
+  font-size: 75px;
+
+  line-height: 1;
+
+  margin-bottom: 30px;
+}
+
+
+/* CATEGORY NAME */
+
+.category-name {
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+
+/* =====================================================
+   WHY CHOOSE US
+===================================================== */
+
+.why-section {
+
+  width: 100%;
+
+  background: #eaf5ee;
+
+  padding: 75px 30px 85px;
+}
+
+
+/* WHY GRID */
+
+.features-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 28px;
+
+  width: 100%;
+}
+
+
+/* SQUARE FEATURE */
+
+.feature-card {
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dce5e0;
+
+  border-radius: 28px;
+
+  padding: 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  box-shadow: 0 8px 25px rgba(16,37,29,0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 35px rgba(16,37,29,0.10);
+}
+
+
+/* FEATURE ICON */
+
+.feature-icon {
+
+  font-size: 68px;
+
+  line-height: 1;
+
+  margin-bottom: 25px;
+}
+
+
+/* FEATURE TITLE */
+
+.feature-title {
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  line-height: 1.25;
+
+  margin-bottom: 18px;
+}
+
+
+/* FEATURE TEXT */
+
+.feature-text {
+
+  font-size: 17px;
+
+  line-height: 1.7;
+
+  color: #78827d;
+
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.site-footer {
+
+  width: 100%;
+
+  background: #09261b;
+
+  color: #ffffff;
+
+  padding: 65px 25px 30px;
+
+  text-align: center;
+}
+
+
+.footer-logo {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  margin-bottom: 18px;
+}
+
+.footer-logo img {
+
+  width: auto;
+
+  height: 70px;
+
+  max-width: 250px;
+
+  object-fit: contain;
+}
+
+
+.footer-description {
+
+  color: #b9c9c2;
+
+  font-size: 17px;
+
+  margin-bottom: 35px;
+}
+
+
+.footer-line {
+
+  width: 100%;
+
+  max-width: 850px;
+
+  height: 1px;
+
+  background: rgba(255,255,255,0.15);
+
+  margin: 0 auto 25px;
+}
+
+
+.footer-copy {
+
+  color: #aebdb7;
+
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+
+  /* HEADER */
+
+  .site-header {
+
+    height: 92px;
+
+    padding: 8px 18px;
+  }
+
+
+  .brand-logo {
+
+    height: 65px;
+
+    max-width: 185px;
+  }
+
+
+  .brand-logo img {
+
+    height: 65px;
+
+    max-width: 185px;
+  }
+
+
+  .cart-btn {
+
+    min-width: 120px;
+
+    height: 54px;
+
+    padding: 7px 10px;
+
+    border-radius: 18px;
+
+    font-size: 17px;
+  }
+
+
+  .cart-btn strong {
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 16px;
+  }
+
+
+  /* CATEGORY */
+
+  .categories-section {
+
+    padding: 55px 20px 65px;
+  }
+
+
+  .section-label {
+
+    font-size: 14px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 14px;
+  }
+
+
+  .section-title {
+
+    font-size: 36px;
+
+    margin-bottom: 32px;
+  }
+
+
+  .category-grid {
+
+    gap: 18px;
+  }
+
+
+  .category-card {
+
+    border-radius: 22px;
+
+    padding: 15px;
+  }
+
+
+  .category-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 22px;
+  }
+
+
+  .category-name {
+
+    font-size: 21px;
+  }
+
+
+  /* WHY */
+
+  .why-section {
+
+    padding: 55px 20px 65px;
+  }
+
+
+  .features-grid {
+
+    gap: 18px;
+  }
+
+
+  .feature-card {
+
+    border-radius: 22px;
+
+    padding: 20px;
+  }
+
+
+  .feature-icon {
+
+    font-size: 50px;
+
+    margin-bottom: 18px;
+  }
+
+
+  .feature-title {
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+  }
+
+
+  .feature-text {
+
+    font-size: 14px;
+
+    line-height: 1.55;
+  }
+
+
+  /* FOOTER */
+
+  .site-footer {
+
+    padding: 50px 20px 25px;
+  }
+
+
+  .footer-logo img {
+
+    height: 60px;
+
+    max-width: 220px;
+  }
+
+
+  .footer-description {
+
+    font-size: 15px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .site-header {
+
+    padding: 8px 12px;
+  }
+
+
+  .brand-logo {
+
+    max-width: 160px;
+  }
+
+
+  .brand-logo img {
+
+    max-width: 160px;
+
+    height: 58px;
+  }
+
+
+  .cart-btn {
+
+    min-width: 105px;
+
+    font-size: 15px;
+  }
+
+
+  .category-icon {
+
+    font-size: 48px;
+  }
+
+
+  .category-name {
+
+    font-size: 18px;
+  }
+
+
+  .feature-title {
+
+    font-size: 18px;
+  }
+
+
+  .feature-text {
+
+    font-size: 13px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<header class="header">
-  <div class="logo">
-    🐰 <span>ADORE'S PET</span>
-  </div>
 
-  <button class="cart-btn" onclick="openCart()">
-    🛒 Cart <span id="cartCount">0</span>
-  </button>
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+
+  <!-- LOGO -->
+  <!-- logo.png অবশ্যই index.html-এর একই folder-এ রাখবে -->
+
+  <a
+    href="index.html"
+    class="brand-logo"
+    aria-label="ADORE'S PET Home"
+  >
+
+    <img
+      src="logo.png"
+      alt="ADORE'S PET"
+    >
+
+  </a>
+
+
+  <!-- CART -->
+
+  <a
+    href="cart.html"
+    class="cart-btn"
+  >
+
+    🛒
+
+    <span>
+      Cart
+    </span>
+
+    <strong id="cartCount">
+      0
+    </strong>
+
+  </a>
+
+
 </header>
 
 
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main>
 
-<section class="home-space"></section>
+
+  <!-- ===================================================
+       CATEGORY
+  ==================================================== -->
+
+  <section class="categories-section">
+
+    <div class="section-container">
 
 
-<!-- ================= CATEGORY ================= -->
-
-<section class="categories">
-
-  <div class="section-label">SHOP BY CATEGORY</div>
-
-  <h1>ক্যাটাগরি</h1>
-
-  <div class="category-grid">
-
-    <a class="category-card" href="category.html?cat=Rabbit">
-      <div class="category-icon">🐰</div>
-      <strong>Rabbit</strong>
-    </a>
-
-    <a class="category-card" href="category.html?cat=Hamster">
-      <div class="category-icon">🐹</div>
-      <strong>Hamster</strong>
-    </a>
-
-    <a class="category-card" href="category.html?cat=Pet%20Food">
-      <div class="category-icon">🌾</div>
-      <strong>Pet Food</strong>
-    </a>
-
-    <a class="category-card" href="category.html?cat=Accessories">
-      <div class="category-icon">🧺</div>
-      <strong>Accessories</strong>
-    </a>
-
-  </div>
-
-</section>
+      <div class="section-label">
+        SHOP BY CATEGORY
+      </div>
 
 
-<!-- ================= WHY CHOOSE US ================= -->
+      <div class="category-grid">
 
-<section class="why">
 
-  <div class="section-label">WHY CHOOSE US</div>
+        <!-- RABBIT -->
 
-  <h2>কেন ADORE'S PET?</h2>
+        <a
+          href="category.html?category=rabbit"
+          class="category-card"
+        >
 
-  <div class="features">
+          <div class="category-icon">
+            🐰
+          </div>
 
-    <div class="feature">
-      <div class="feature-icon">🐰</div>
-      <h3>সুস্থ পোষা প্রাণী</h3>
-      <p>
-        যত্নসহকারে পালন করা স্বাস্থ্যকর
-        ও সুন্দর পোষা প্রাণী।
-      </p>
+          <div class="category-name">
+            Rabbit
+          </div>
+
+        </a>
+
+
+        <!-- HAMSTER -->
+
+        <a
+          href="category.html?category=hamster"
+          class="category-card"
+        >
+
+          <div class="category-icon">
+            🐹
+          </div>
+
+          <div class="category-name">
+            Hamster
+          </div>
+
+        </a>
+
+
+        <!-- PET FOOD -->
+
+        <a
+          href="category.html?category=pet-food"
+          class="category-card"
+        >
+
+          <div class="category-icon">
+            🌾
+          </div>
+
+          <div class="category-name">
+            Pet Food
+          </div>
+
+        </a>
+
+
+        <!-- ACCESSORIES -->
+
+        <a
+          href="category.html?category=accessories"
+          class="category-card"
+        >
+
+          <div class="category-icon">
+            🧺
+          </div>
+
+          <div class="category-name">
+            Accessories
+          </div>
+
+        </a>
+
+
+      </div>
+
     </div>
 
+  </section>
 
-    <div class="feature">
-      <div class="feature-icon">🚚</div>
-      <h3>Delivery সুবিধা</h3>
-      <p>
-        দেশের বিভিন্ন জায়গায় সহজে
-        অর্ডার ও ডেলিভারি সুবিধা।
-      </p>
+
+
+  <!-- ===================================================
+       WHY CHOOSE US
+  ==================================================== -->
+
+  <section class="why-section">
+
+    <div class="section-container">
+
+
+      <div class="section-label">
+        WHY CHOOSE US
+      </div>
+
+
+      <div class="features-grid">
+
+
+        <!-- HEALTHY PET -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🐰
+          </div>
+
+          <h3 class="feature-title">
+            সুস্থ পোষা প্রাণী
+          </h3>
+
+          <p class="feature-text">
+            যত্নসহকারে পালন করা স্বাস্থ্যকর
+            ও সুন্দর পোষা প্রাণী।
+          </p>
+
+        </div>
+
+
+        <!-- DELIVERY -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🚚
+          </div>
+
+          <h3 class="feature-title">
+            Delivery সুবিধা
+          </h3>
+
+          <p class="feature-text">
+            দেশের বিভিন্ন জায়গায় সহজে
+            অর্ডার ও ডেলিভারি সুবিধা।
+          </p>
+
+        </div>
+
+
+        <!-- TRUST -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            ⭐
+          </div>
+
+          <h3 class="feature-title">
+            বিশ্বস্ত সেবা
+          </h3>
+
+          <p class="feature-text">
+            গ্রাহকের সন্তুষ্টি ও ভালো
+            সার্ভিসকে আমরা সর্বোচ্চ
+            গুরুত্ব দিই।
+          </p>
+
+        </div>
+
+
+        <!-- QUALITY -->
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            🛡️
+          </div>
+
+          <h3 class="feature-title">
+            মানসম্মত পণ্য
+          </h3>
+
+          <p class="feature-text">
+            পোষা প্রাণীর জন্য প্রয়োজনীয়
+            ভালো মানের পণ্য।
+          </p>
+
+        </div>
+
+
+      </div>
+
     </div>
 
+  </section>
 
-    <div class="feature">
-      <div class="feature-icon">⭐</div>
-      <h3>বিশ্বস্ত সেবা</h3>
-      <p>
-        গ্রাহকের সন্তুষ্টি ও ভালো
-        সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।
-      </p>
-    </div>
-
-
-    <div class="feature">
-      <div class="feature-icon">🛡️</div>
-      <h3>মানসম্মত পণ্য</h3>
-      <p>
-        পোষা প্রাণীর জন্য প্রয়োজনীয়
-        ভালো মানের পণ্য।
-      </p>
-    </div>
-
-  </div>
-
-</section>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
 
-<footer class="footer">
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-  <div class="footer-logo">
-    🐰 ADORE'S PET
-  </div>
+<footer class="site-footer">
 
-  <p>আপনার বিশ্বস্ত Pet Shop</p>
+
+  <a
+    href="index.html"
+    class="footer-logo"
+  >
+
+    <img
+      src="logo.png"
+      alt="ADORE'S PET"
+    >
+
+  </a>
+
+
+  <p class="footer-description">
+    আপনার বিশ্বস্ত Pet Shop
+  </p>
+
 
   <div class="footer-line"></div>
 
-  <small>
-    © <span id="year"></span> ADORE'S PET — All Rights Reserved
-  </small>
+
+  <p class="footer-copy">
+    © 2026 ADORE'S PET — All Rights Reserved
+  </p>
+
 
 </footer>
 
 
-<!-- ================= CART ================= -->
 
-<div id="cartPanel" class="cart-panel">
-
-  <div class="cart-box">
-
-    <div class="cart-head">
-      <h2>🛒 আপনার Cart</h2>
-      <button onclick="closeCart()">✕</button>
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div id="cartSummary"></div>
-
-    <div class="checkout-form">
-
-      <h3>📦 অর্ডারের তথ্য</h3>
-
-      <label>আপনার নাম</label>
-      <input id="customerName" placeholder="আপনার নাম">
-
-      <label>মোবাইল নম্বর</label>
-      <input id="customerPhone" type="tel" placeholder="01XXXXXXXXX">
-
-      <label>জেলা</label>
-
-      <select id="customerDistrict">
-
-        <option value="">জেলা নির্বাচন করুন</option>
-
-        <option>ঢাকা</option>
-        <option>চট্টগ্রাম</option>
-        <option>সিলেট</option>
-        <option>রাজশাহী</option>
-        <option>খুলনা</option>
-        <option>বরিশাল</option>
-        <option>রংপুর</option>
-        <option>ময়মনসিংহ</option>
-
-        <option>কুমিল্লা</option>
-        <option>ফেনী</option>
-        <option>ব্রাহ্মণবাড়িয়া</option>
-        <option>চাঁদপুর</option>
-        <option>লক্ষ্মীপুর</option>
-        <option>নোয়াখালী</option>
-
-        <option>নারায়ণগঞ্জ</option>
-        <option>গাজীপুর</option>
-        <option>নরসিংদী</option>
-        <option>টাঙ্গাইল</option>
-        <option>কিশোরগঞ্জ</option>
-        <option>মানিকগঞ্জ</option>
-        <option>মুন্সিগঞ্জ</option>
-        <option>মাদারীপুর</option>
-        <option>গোপালগঞ্জ</option>
-        <option>শরীয়তপুর</option>
-        <option>রাজবাড়ী</option>
-        <option>ফরিদপুর</option>
-
-        <option>যশোর</option>
-        <option>ঝিনাইদহ</option>
-        <option>মাগুরা</option>
-        <option>নড়াইল</option>
-        <option>কুষ্টিয়া</option>
-        <option>চুয়াডাঙ্গা</option>
-        <option>মেহেরপুর</option>
-        <option>সাতক্ষীরা</option>
-        <option>খুলনা</option>
-        <option>বাগেরহাট</option>
-
-        <option>বগুড়া</option>
-        <option>জয়পুরহাট</option>
-        <option>নওগাঁ</option>
-        <option>নাটোর</option>
-        <option>চাঁপাইনবাবগঞ্জ</option>
-        <option>পাবনা</option>
-        <option>সিরাজগঞ্জ</option>
-
-        <option>দিনাজপুর</option>
-        <option>ঠাকুরগাঁও</option>
-        <option>পঞ্চগড়</option>
-        <option>নীলফামারী</option>
-        <option>লালমনিরহাট</option>
-        <option>কুড়িগ্রাম</option>
-        <option>রংপুর</option>
-        <option>গাইবান্ধা</option>
-
-        <option>সুনামগঞ্জ</option>
-        <option>মৌলভীবাজার</option>
-        <option>হবিগঞ্জ</option>
-
-        <option>ঝালকাঠি</option>
-        <option>পটুয়াখালী</option>
-        <option>পিরোজপুর</option>
-        <option>ভোলা</option>
-        <option>বরগুনা</option>
-
-      </select>
-
-      <label>সম্পূর্ণ ঠিকানা</label>
-
-      <textarea
-        id="customerAddress"
-        placeholder="বাড়ি / রোড / এলাকা / থানা..."
-      ></textarea>
-
-
-      <label>Delivery Charge</label>
-
-      <select id="deliveryCharge">
-
-        <option value="100">
-          ঢাকার ভিতরে — ৳100
-        </option>
-
-        <option value="150">
-          ঢাকার বাইরে — ৳150
-        </option>
-
-      </select>
-
-
-      <div id="checkoutTotal" class="checkout-total">
-        মোট: ৳0
-      </div>
-
-
-      <button
-        class="place-order"
-        onclick="placeOrder()"
-      >
-        ✅ অর্ডার করুন
-      </button>
-
-      <div id="orderMsg"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<script src="config.js"></script>
-<script type="module" src="shop.js"></script>
+<!-- =====================================================
+     CART COUNT
+===================================================== -->
 
 <script>
-document.getElementById("year").textContent =
-new Date().getFullYear();
+
+function updateCartCount() {
+
+  try {
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+
+    let count = 0;
+
+    if (Array.isArray(cart)) {
+
+      cart.forEach(item => {
+
+        count +=
+          Number(item.quantity || 1);
+
+      });
+
+    }
+
+    const cartCount =
+      document.getElementById("cartCount");
+
+    if (cartCount) {
+
+      cartCount.textContent = count;
+
+    }
+
+  } catch (error) {
+
+    console.log("Cart error:", error);
+
+  }
+
+}
+
+
+/* PAGE LOAD */
+
+updateCartCount();
+
+
+/* BACK/FORWARD এলে আবার count update */
+
+window.addEventListener(
+  "pageshow",
+  updateCartCount
+);
+
 </script>
+
 
 </body>
 </html>
