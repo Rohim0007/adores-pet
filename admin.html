@@ -16,6 +16,10 @@
 
 <style>
 
+/* =====================================================
+   BASIC
+===================================================== */
+
 *{
   box-sizing:border-box;
 }
@@ -23,13 +27,13 @@
 body{
   margin:0;
   background:#f5f8f6;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
   color:#10251d;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
 }
 
 header{
   background:#176b3a;
-  color:white;
+  color:#fff;
   padding:18px 20px;
   display:flex;
   justify-content:space-between;
@@ -42,7 +46,7 @@ header{
 }
 
 header a{
-  color:white;
+  color:#fff;
   text-decoration:none;
   font-weight:700;
 }
@@ -54,7 +58,7 @@ header a{
 }
 
 .panel{
-  background:white;
+  background:#fff;
   border-radius:18px;
   padding:25px;
   margin-bottom:25px;
@@ -65,7 +69,10 @@ header a{
   display:none !important;
 }
 
-/* LOGIN */
+
+/* =====================================================
+   LOGIN
+===================================================== */
 
 .login-box{
   max-width:500px;
@@ -87,9 +94,7 @@ header a{
   margin-bottom:7px;
 }
 
-.input-group input,
-.input-group select,
-.input-group textarea{
+.input-group input{
   width:100%;
   padding:13px;
   border:1px solid #ccc;
@@ -100,7 +105,7 @@ header a{
 .btn{
   border:0;
   background:#176b3a;
-  color:white;
+  color:#fff;
   padding:13px 20px;
   border-radius:10px;
   font-size:16px;
@@ -120,7 +125,10 @@ header a{
   background:#777;
 }
 
-/* DASHBOARD */
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
 
 .admin-top{
   display:flex;
@@ -134,7 +142,10 @@ header a{
   margin:0 0 5px;
 }
 
-/* FORM */
+
+/* =====================================================
+   PRODUCT FORM
+===================================================== */
 
 .form-grid{
   display:grid;
@@ -166,6 +177,10 @@ header a{
   font-size:16px;
 }
 
+.form-group textarea{
+  resize:vertical;
+}
+
 .preview{
   width:180px;
   height:180px;
@@ -173,6 +188,7 @@ header a{
   border-radius:12px;
   margin-top:15px;
   border:1px solid #ddd;
+  display:block;
 }
 
 .actions{
@@ -182,7 +198,10 @@ header a{
   flex-wrap:wrap;
 }
 
-/* PRODUCTS */
+
+/* =====================================================
+   PRODUCT LIST
+===================================================== */
 
 .list-head{
   display:flex;
@@ -200,38 +219,69 @@ header a{
   font-size:16px;
 }
 
+
+/* PRODUCT ITEM */
+
 .product-item{
   display:flex;
   align-items:center;
   gap:15px;
+  width:100%;
+  max-width:100%;
   padding:15px 0;
   border-bottom:1px solid #ddd;
+  overflow:hidden;
 }
 
+
+/* IMPORTANT IMAGE FIX */
+
+.product-item img,
 .product-image{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:10px;
+  width:90px !important;
+  height:90px !important;
+
+  min-width:90px !important;
+  max-width:90px !important;
+
+  min-height:90px !important;
+  max-height:90px !important;
+
+  object-fit:cover !important;
+  border-radius:10px !important;
+
   background:#eee;
+  display:block !important;
+
+  flex-shrink:0 !important;
 }
+
+
+/* PRODUCT INFO */
 
 .product-info{
   flex:1;
+  min-width:0;
 }
 
 .product-info h3{
   margin:0 0 7px;
+  word-break:break-word;
 }
 
 .product-info p{
   margin:4px 0;
   color:#666;
+  word-break:break-word;
 }
+
+
+/* ACTIONS */
 
 .product-actions{
   display:flex;
   gap:8px;
+  flex-shrink:0;
 }
 
 .edit-btn{
@@ -246,20 +296,23 @@ header a{
 .delete-btn{
   border:0;
   background:#c62828;
-  color:white;
+  color:#fff;
   padding:9px 13px;
   border-radius:8px;
   cursor:pointer;
-  font-weight:700;
 }
 
-/* ORDERS */
+
+/* =====================================================
+   ORDERS
+===================================================== */
 
 .order-card{
   border:1px solid #ddd;
   border-radius:14px;
   padding:18px;
   margin-bottom:15px;
+  background:#fff;
 }
 
 .order-card h3{
@@ -279,16 +332,36 @@ header a{
 .refresh{
   border:0;
   background:#176b3a;
-  color:white;
+  color:#fff;
   padding:10px 15px;
   border-radius:8px;
   cursor:pointer;
   font-weight:700;
 }
 
-/* MOBILE */
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px){
+
+  header{
+    padding:16px 14px;
+  }
+
+  .brand{
+    font-size:18px;
+  }
+
+  .admin{
+    padding:15px 10px;
+  }
+
+  .panel{
+    padding:18px;
+    border-radius:15px;
+  }
 
   .form-grid{
     grid-template-columns:1fr;
@@ -312,19 +385,104 @@ header a{
     width:100%;
   }
 
+
+  /* MOBILE PRODUCT IMAGE */
+
   .product-item{
     align-items:flex-start;
+    gap:10px;
   }
 
+  .product-item img,
   .product-image{
-    width:70px;
-    height:70px;
+    width:70px !important;
+    height:70px !important;
+
+    min-width:70px !important;
+    max-width:70px !important;
+
+    min-height:70px !important;
+    max-height:70px !important;
+  }
+
+
+  .product-info{
+    min-width:0;
+  }
+
+  .product-info h3{
+    font-size:17px;
+  }
+
+  .product-info p{
+    font-size:14px;
   }
 
   .product-actions{
     flex-direction:column;
   }
 
+  .edit-btn,
+  .delete-btn{
+    padding:7px 10px;
+    font-size:13px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media(max-width:420px){
+
+  .product-item{
+    gap:8px;
+  }
+
+  .product-item img,
+  .product-image{
+    width:60px !important;
+    height:60px !important;
+
+    min-width:60px !important;
+    max-width:60px !important;
+
+    min-height:60px !important;
+    max-height:60px !important;
+  }
+
+  .product-info h3{
+    font-size:15px;
+  }
+
+  .product-info p{
+    font-size:13px;
+  }
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+#msg,
+#loginMsg{
+  margin-top:15px;
+  font-weight:700;
+}
+
+
+/* =====================================================
+   EMPTY PRODUCT / ORDER
+===================================================== */
+
+.empty{
+  text-align:center;
+  padding:30px 10px;
+  color:#777;
 }
 
 </style>
@@ -335,7 +493,9 @@ header a{
 <body>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
@@ -354,9 +514,9 @@ header a{
 <main class="admin">
 
 
-<!-- ==================================================
+<!-- =====================================================
      LOGIN
-================================================== -->
+===================================================== -->
 
 <section
   id="loginBox"
@@ -385,6 +545,7 @@ header a{
         id="email"
         type="email"
         placeholder="admin@gmail.com"
+        autocomplete="username"
         required
       >
 
@@ -401,6 +562,7 @@ header a{
         id="password"
         type="password"
         placeholder="Password"
+        autocomplete="current-password"
         required
       >
 
@@ -425,9 +587,9 @@ header a{
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      DASHBOARD
-================================================== -->
+===================================================== -->
 
 <section
   id="dashboard"
@@ -464,9 +626,9 @@ header a{
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      PRODUCT UPLOAD
-================================================== -->
+===================================================== -->
 
 <section class="panel">
 
@@ -487,7 +649,7 @@ header a{
     <div class="form-grid">
 
 
-      <!-- TITLE -->
+      <!-- PRODUCT NAME -->
 
       <div class="form-group">
 
@@ -596,7 +758,7 @@ header a{
         <input
           id="image"
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
         >
 
         <small>
@@ -632,7 +794,7 @@ header a{
     <img
       id="preview"
       class="preview hidden"
-      alt="Preview"
+      alt="Product Preview"
     >
 
 
@@ -669,9 +831,9 @@ header a{
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      PRODUCT LIST
-================================================== -->
+===================================================== -->
 
 <section class="panel">
 
@@ -704,9 +866,9 @@ header a{
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      ORDERS
-================================================== -->
+===================================================== -->
 
 <section class="panel">
 
@@ -746,9 +908,9 @@ header a{
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      SCRIPTS
-================================================== -->
+===================================================== -->
 
 <script src="config.js"></script>
 
