@@ -5,18 +5,11 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ADORE'S PET — Category</title>
+<title>ADORE'S PET</title>
 
 <style>
-
-/* =====================================================
-   BASIC
-===================================================== */
 
 *{
   box-sizing:border-box;
@@ -24,20 +17,10 @@
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  font-family:
-    Arial,
-    "Noto Sans Bengali",
-    "Noto Sans",
-    sans-serif;
-
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
   background:#f6f9f7;
   color:#10251d;
-  line-height:1.5;
 }
 
 a{
@@ -45,257 +28,132 @@ a{
   color:inherit;
 }
 
-button{
-  font-family:inherit;
-}
 
-
-/* =====================================================
-   HEADER
-===================================================== */
+/* ================= HEADER ================= */
 
 .site-header{
-
-  width:100%;
-
   background:#fff;
-
-  border-bottom:
-    1px solid #dfe8e3;
-
+  border-bottom:1px solid #dfe8e3;
   position:sticky;
-
   top:0;
-
   z-index:1000;
-
 }
-
 
 .header-inner{
-
   max-width:1200px;
-
-  min-height:105px;
-
+  min-height:90px;
   margin:auto;
-
-  padding:14px 24px;
+  padding:10px 18px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
-  gap:20px;
-
+  gap:15px;
 }
 
-
-.brand-logo{
-
-  display:flex;
-
-  align-items:center;
-
-  height:78px;
-
-}
-
-
-.brand-logo img{
-
-  display:block;
-
-  height:72px;
-
+.logo img{
+  height:65px;
   width:auto;
-
-  max-width:280px;
-
+  max-width:230px;
   object-fit:contain;
-
+  display:block;
 }
-
 
 .cart-btn{
-
   display:flex;
-
   align-items:center;
-
-  justify-content:center;
-
-  gap:10px;
+  gap:8px;
 
   background:#19733f;
-
   color:#fff;
 
-  border-radius:24px;
+  padding:8px 12px;
+  border-radius:22px;
 
-  min-width:190px;
-
-  padding:12px 16px;
-
-  font-size:20px;
-
+  font-size:18px;
   font-weight:700;
-
 }
 
-
 .cart-count{
+  width:44px;
+  height:44px;
 
-  width:52px;
-
-  height:52px;
+  background:#fff;
+  color:#19733f;
 
   border-radius:50%;
 
-  background:#fff;
-
-  color:#19733f;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:22px;
 
   font-weight:800;
-
 }
 
 
-/* =====================================================
-   MAIN
-===================================================== */
+/* ================= MAIN ================= */
 
 main{
-
-  min-height:calc(100vh - 300px);
-
-}
-
-
-.category-section{
-
   max-width:1200px;
-
   margin:auto;
-
-  padding:55px 24px 80px;
-
+  padding:35px 18px 70px;
 }
-
-
-/* =====================================================
-   TOP
-===================================================== */
 
 .back-btn{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
+  display:inline-block;
 
   background:#19733f;
-
   color:#fff;
 
-  border-radius:12px;
-
-  padding:13px 25px;
-
-  font-size:18px;
+  padding:11px 20px;
+  border-radius:10px;
 
   font-weight:700;
 
-  margin-bottom:35px;
-
+  margin-bottom:30px;
 }
 
-
-.back-btn:hover{
-
-  opacity:.9;
-
-}
-
-
-.category-title{
-
+.page-title{
   text-align:center;
 
   color:#19733f;
 
-  font-size:46px;
+  font-size:38px;
 
   font-weight:800;
 
-  margin-bottom:55px;
-
+  margin-bottom:40px;
 }
 
 
-/* =====================================================
-   PRODUCT GRID
-===================================================== */
+/* ================= PRODUCT GRID ================= */
 
 .product-grid{
 
   display:grid;
 
   grid-template-columns:
-    repeat(
-      2,
-      minmax(0,1fr)
-    );
+    repeat(2,minmax(0,1fr));
 
-  gap:28px;
+  gap:25px;
 
 }
 
 
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
+/* ================= PRODUCT CARD ================= */
 
 .product-card{
 
   background:#fff;
 
-  border:
-    1px solid #d9e3de;
+  border:1px solid #d9e3de;
 
-  border-radius:25px;
+  border-radius:22px;
 
   overflow:hidden;
 
   box-shadow:
-    0 5px 18px
-    rgba(16,37,29,.06);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
-
-}
-
-
-.product-card:hover{
-
-  transform:translateY(-4px);
-
-  box-shadow:
-    0 12px 30px
-    rgba(16,37,29,.12);
+    0 5px 18px rgba(16,37,29,.06);
 
 }
 
@@ -310,25 +168,25 @@ main{
 
   display:block;
 
-  background:#eef3f0;
+  background:#eee;
 
 }
 
 
 .product-body{
 
-  padding:20px;
+  padding:18px;
 
 }
 
 
 .product-title{
 
-  font-size:26px;
+  font-size:24px;
 
   font-weight:800;
 
-  margin-bottom:8px;
+  margin-bottom:7px;
 
   word-break:break-word;
 
@@ -339,9 +197,9 @@ main{
 
   color:#777;
 
-  font-size:17px;
+  font-size:14px;
 
-  margin-bottom:12px;
+  margin-bottom:8px;
 
 }
 
@@ -350,11 +208,11 @@ main{
 
   color:#19733f;
 
-  font-size:28px;
+  font-size:25px;
 
   font-weight:800;
 
-  margin-bottom:7px;
+  margin-bottom:6px;
 
 }
 
@@ -363,14 +221,16 @@ main{
 
   color:#666;
 
-  font-size:16px;
+  font-size:14px;
 
-  margin-bottom:18px;
+  margin-bottom:16px;
 
 }
 
 
-.add-cart{
+/* ================= ADD TO CART ================= */
+
+.add-cart-btn{
 
   width:100%;
 
@@ -380,11 +240,11 @@ main{
 
   color:#fff;
 
-  padding:14px;
+  padding:13px;
 
-  border-radius:12px;
+  border-radius:10px;
 
-  font-size:18px;
+  font-size:17px;
 
   font-weight:800;
 
@@ -393,14 +253,14 @@ main{
 }
 
 
-.add-cart:hover{
+.add-cart-btn:hover{
 
   background:#145d34;
 
 }
 
 
-.add-cart:disabled{
+.add-cart-btn:disabled{
 
   background:#999;
 
@@ -409,9 +269,7 @@ main{
 }
 
 
-/* =====================================================
-   LOADING / EMPTY / ERROR
-===================================================== */
+/* ================= MESSAGE ================= */
 
 .message{
 
@@ -419,11 +277,11 @@ main{
 
   text-align:center;
 
-  padding:70px 20px;
+  padding:60px 15px;
 
   color:#777;
 
-  font-size:24px;
+  font-size:19px;
 
 }
 
@@ -435,18 +293,9 @@ main{
 }
 
 
-.loading{
+/* ================= TOAST ================= */
 
-  color:#19733f;
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-#toast{
+.toast{
 
   position:fixed;
 
@@ -454,24 +303,17 @@ main{
 
   bottom:25px;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   background:#19733f;
 
   color:#fff;
 
-  padding:14px 22px;
+  padding:13px 20px;
 
-  border-radius:12px;
-
-  font-size:16px;
+  border-radius:10px;
 
   font-weight:700;
-
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.2);
 
   display:none;
 
@@ -480,9 +322,7 @@ main{
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* ================= FOOTER ================= */
 
 footer{
 
@@ -490,51 +330,41 @@ footer{
 
   color:#fff;
 
-  padding:
-    55px 24px
-    28px;
-
   text-align:center;
 
-}
+  padding:45px 20px 25px;
 
+}
 
 .footer-brand{
 
-  font-size:30px;
+  font-size:28px;
 
   font-weight:800;
 
-  margin-bottom:10px;
+  margin-bottom:8px;
 
 }
 
-
-.footer-tagline{
+.footer-text{
 
   color:#b8c8c1;
 
-  font-size:17px;
-
-  margin-bottom:32px;
+  margin-bottom:25px;
 
 }
-
 
 .footer-line{
 
   height:1px;
 
-  background:
-    rgba(255,255,255,.18);
+  background:rgba(255,255,255,.18);
 
   max-width:900px;
 
-  margin:
-    0 auto 22px;
+  margin:0 auto 20px;
 
 }
-
 
 .copyright{
 
@@ -545,229 +375,71 @@ footer{
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
   .header-inner{
 
-    min-height:88px;
+    min-height:82px;
 
-    padding:
-      10px 16px;
-
-  }
-
-
-  .brand-logo{
-
-    height:62px;
+    padding:8px 12px;
 
   }
 
+  .logo img{
 
-  .brand-logo img{
+    height:55px;
 
-    height:58px;
-
-    max-width:175px;
+    max-width:170px;
 
   }
-
 
   .cart-btn{
 
-    min-width:135px;
+    font-size:15px;
 
-    border-radius:20px;
-
-    padding:8px 10px;
-
-    font-size:17px;
+    padding:6px 8px;
 
   }
-
 
   .cart-count{
 
-    width:44px;
+    width:40px;
 
-    height:44px;
-
-    font-size:19px;
-
-  }
-
-
-  .category-section{
-
-    padding:
-      35px 18px
-      55px;
-
-  }
-
-
-  .back-btn{
+    height:40px;
 
     font-size:17px;
 
-    padding:
-      12px 22px;
+  }
+
+  main{
+
+    padding:25px 12px 50px;
+
+  }
+
+  .page-title{
+
+    font-size:30px;
 
     margin-bottom:30px;
 
   }
 
-
-  .category-title{
-
-    font-size:36px;
-
-    margin-bottom:40px;
-
-  }
-
-
   .product-grid{
 
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0,1fr)
-      );
+    grid-template-columns:1fr 1fr;
 
-    gap:16px;
+    gap:12px;
 
   }
-
 
   .product-card{
 
-    border-radius:20px;
+    border-radius:17px;
 
   }
-
-
-  .product-body{
-
-    padding:14px;
-
-  }
-
-
-  .product-title{
-
-    font-size:20px;
-
-  }
-
-
-  .product-category{
-
-    font-size:14px;
-
-  }
-
-
-  .product-price{
-
-    font-size:21px;
-
-  }
-
-
-  .product-stock{
-
-    font-size:14px;
-
-  }
-
-
-  .add-cart{
-
-    font-size:14px;
-
-    padding:12px 8px;
-
-  }
-
-
-  .message{
-
-    font-size:18px;
-
-    padding:60px 15px;
-
-  }
-
-
-  footer{
-
-    padding:
-      45px 18px
-      25px;
-
-  }
-
-
-  .footer-brand{
-
-    font-size:25px;
-
-  }
-
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media(max-width:380px){
-
-  .brand-logo img{
-
-    max-width:145px;
-
-  }
-
-
-  .cart-btn{
-
-    min-width:115px;
-
-    font-size:15px;
-
-  }
-
-
-  .cart-count{
-
-    width:38px;
-
-    height:38px;
-
-    font-size:17px;
-
-  }
-
-
-  .category-title{
-
-    font-size:32px;
-
-  }
-
-
-  .product-grid{
-
-    gap:10px;
-
-  }
-
 
   .product-body{
 
@@ -775,13 +447,11 @@ footer{
 
   }
 
-
   .product-title{
 
     font-size:17px;
 
   }
-
 
   .product-category{
 
@@ -789,22 +459,68 @@ footer{
 
   }
 
-
   .product-price{
 
-    font-size:18px;
+    font-size:19px;
 
   }
-
 
   .product-stock{
 
     font-size:12px;
 
+    margin-bottom:11px;
+
   }
 
+  .add-cart-btn{
 
-  .add-cart{
+    font-size:13px;
+
+    padding:10px 5px;
+
+  }
+
+}
+
+
+/* ================= VERY SMALL ================= */
+
+@media(max-width:380px){
+
+  .logo img{
+
+    max-width:145px;
+
+  }
+
+  .cart-btn{
+
+    font-size:13px;
+
+  }
+
+  .cart-count{
+
+    width:36px;
+
+    height:36px;
+
+  }
+
+  .product-title{
+
+    font-size:15px;
+
+  }
+
+  .product-price{
+
+    font-size:17px;
+
+  }
+
+  .add-cart-btn{
 
     font-size:12px;
 
@@ -831,7 +547,7 @@ footer{
 
     <a
       href="index.html"
-      class="brand-logo"
+      class="logo"
     >
 
       <img
@@ -847,13 +563,11 @@ footer{
       class="cart-btn"
     >
 
-      <span>🛒</span>
-
-      <span>Cart</span>
+      🛒 Cart
 
       <span
-        class="cart-count"
         id="cartCount"
+        class="cart-count"
       >
         0
       </span>
@@ -874,41 +588,28 @@ footer{
 <main>
 
 
-<section class="category-section">
-
-
-  <!-- BACK -->
-
   <a
     href="index.html"
     class="back-btn"
   >
-
     ← Home
-
   </a>
 
 
-
-  <!-- CATEGORY TITLE -->
-
   <h1
     id="pageTitle"
-    class="category-title"
+    class="page-title"
   >
-    Product
+    Products
   </h1>
 
-
-
-  <!-- PRODUCT GRID -->
 
   <div
     id="productGrid"
     class="product-grid"
   >
 
-    <div class="message loading">
+    <div class="message">
 
       ⏳ Product লোড হচ্ছে...
 
@@ -916,8 +617,6 @@ footer{
 
   </div>
 
-
-</section>
 
 </main>
 
@@ -927,7 +626,10 @@ footer{
      TOAST
 ===================================================== -->
 
-<div id="toast"></div>
+<div
+  id="toast"
+  class="toast"
+></div>
 
 
 
@@ -938,26 +640,17 @@ footer{
 <footer>
 
   <div class="footer-brand">
-
     🐰 ADORE'S PET
-
   </div>
 
-
-  <div class="footer-tagline">
-
+  <div class="footer-text">
     আপনার বিশ্বস্ত Pet Shop
-
   </div>
-
 
   <div class="footer-line"></div>
 
-
   <div class="copyright">
-
     © 2026 ADORE'S PET — All Rights Reserved
-
   </div>
 
 </footer>
@@ -973,7 +666,7 @@ footer{
 
 
 <!-- =====================================================
-     SUPABASE + CATEGORY SCRIPT
+     CATEGORY + CART
 ===================================================== -->
 
 <script type="module">
@@ -1005,18 +698,15 @@ const productGrid =
     "productGrid"
   );
 
-
 const pageTitle =
   document.getElementById(
     "pageTitle"
   );
 
-
 const cartCount =
   document.getElementById(
     "cartCount"
   );
-
 
 const toast =
   document.getElementById(
@@ -1025,14 +715,13 @@ const toast =
 
 
 /* =====================================================
-   GET CATEGORY FROM URL
+   CATEGORY
 ===================================================== */
 
 const params =
   new URLSearchParams(
     window.location.search
   );
-
 
 const selectedCategory =
   (
@@ -1042,17 +731,209 @@ const selectedCategory =
   .trim();
 
 
-/* =====================================================
-   PAGE TITLE
-===================================================== */
-
 pageTitle.textContent =
   selectedCategory
   || "All Products";
 
 
 /* =====================================================
-   ESCAPE HTML
+   CART
+===================================================== */
+
+function getCart(){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(
+          "cart"
+        ) || "[]"
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(cart){
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+}
+
+
+function updateCartCount(){
+
+  const cart =
+    getCart();
+
+
+  const count =
+    cart.reduce(
+      (
+        total,
+        item
+      ) => {
+
+        return total +
+          (
+            Number(
+              item.quantity
+            ) || 1
+          );
+
+      },
+      0
+    );
+
+
+  cartCount.textContent =
+    count;
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(text){
+
+  toast.textContent =
+    text;
+
+  toast.style.display =
+    "block";
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(
+      function(){
+
+        toast.style.display =
+          "none";
+
+      },
+      1800
+    );
+
+}
+
+
+/* =====================================================
+   ADD TO CART
+===================================================== */
+
+function addToCart(product){
+
+  try{
+
+    const cart =
+      getCart();
+
+
+    const productId =
+      String(
+        product.id
+      );
+
+
+    const existing =
+      cart.find(
+        function(item){
+
+          return String(
+            item.id
+          ) === productId;
+
+        }
+      );
+
+
+    if(existing){
+
+      existing.quantity =
+        (
+          Number(
+            existing.quantity
+          ) || 1
+        ) + 1;
+
+    }else{
+
+      cart.push({
+
+        id:
+          product.id,
+
+        title:
+          product.title || "Product",
+
+        price:
+          Number(
+            product.price
+          ) || 0,
+
+        image:
+          product.image_url || "",
+
+        quantity:
+          1
+
+      });
+
+    }
+
+
+    saveCart(
+      cart
+    );
+
+
+    updateCartCount();
+
+
+    showToast(
+      "✅ Cart-এ Product যোগ হয়েছে"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "CART ERROR:",
+      error
+    );
+
+
+    showToast(
+      "❌ Cart-এ যোগ করা যায়নি"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCAPE
 ===================================================== */
 
 function escapeHTML(value){
@@ -1090,190 +971,6 @@ function escapeHTML(value){
 
 
 /* =====================================================
-   CART COUNT
-===================================================== */
-
-function updateCartCount(){
-
-  try{
-
-    const cart =
-      JSON.parse(
-        localStorage.getItem(
-          "cart"
-        ) || "[]"
-      );
-
-
-    if(
-      !Array.isArray(cart)
-    ){
-
-      cartCount.textContent =
-        "0";
-
-      return;
-
-    }
-
-
-    const count =
-      cart.reduce(
-        (
-          total,
-          item
-        ) => {
-
-          return (
-            total +
-            (
-              Number(
-                item.quantity
-              ) || 1
-            )
-          );
-
-        },
-        0
-      );
-
-
-    cartCount.textContent =
-      count;
-
-
-  }catch(error){
-
-    cartCount.textContent =
-      "0";
-
-  }
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(message){
-
-  toast.textContent =
-    message;
-
-  toast.style.display =
-    "block";
-
-
-  setTimeout(
-    () => {
-
-      toast.style.display =
-        "none";
-
-    },
-    1800
-  );
-
-}
-
-
-/* =====================================================
-   ADD TO CART
-===================================================== */
-
-function addToCart(product){
-
-  let cart = [];
-
-
-  try{
-
-    cart =
-      JSON.parse(
-        localStorage.getItem(
-          "cart"
-        ) || "[]"
-      );
-
-
-    if(
-      !Array.isArray(cart)
-    ){
-
-      cart = [];
-
-    }
-
-  }catch(error){
-
-    cart = [];
-
-  }
-
-
-  const existing =
-    cart.find(
-      item =>
-        String(item.id)
-        ===
-        String(product.id)
-    );
-
-
-  if(existing){
-
-    existing.quantity =
-      (
-        Number(
-          existing.quantity
-        ) || 1
-      ) + 1;
-
-  }else{
-
-    cart.push({
-
-      id:
-        product.id,
-
-      title:
-        product.title,
-
-      price:
-        Number(
-          product.price
-        ) || 0,
-
-      image:
-        product.image_url
-        || "",
-
-      quantity:
-        1
-
-    });
-
-  }
-
-
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
-
-
-  updateCartCount();
-
-
-  showToast(
-    "✅ Product Cart-এ যোগ হয়েছে"
-  );
-
-}
-
-
-/* =====================================================
    RENDER PRODUCTS
 ===================================================== */
 
@@ -1291,7 +988,8 @@ function renderProducts(
         class="message"
       >
 
-        📦 এই Category-তে কোনো Product নেই।
+        📦 এই Category-তে
+        কোনো Product নেই।
 
       </div>
 
@@ -1307,8 +1005,7 @@ function renderProducts(
 
 
   products.forEach(
-    product => {
-
+    function(product){
 
       const card =
         document.createElement(
@@ -1365,13 +1062,10 @@ function renderProducts(
           class="product-body"
         >
 
-
           <div
             class="product-title"
           >
-
             ${escapeHTML(title)}
-
           </div>
 
 
@@ -1380,9 +1074,7 @@ function renderProducts(
           >
 
             Category:
-            <b>
-              ${escapeHTML(category)}
-            </b>
+            ${escapeHTML(category)}
 
           </div>
 
@@ -1407,38 +1099,41 @@ function renderProducts(
 
 
           <button
-            class="add-cart"
             type="button"
-            ${stock <= 0 ? "disabled" : ""}
+            class="add-cart-btn"
           >
 
             ${
-              stock <= 0
-              ? "Out of Stock"
-              : "🛒 Add to Cart"
+              stock > 0
+              ? "🛒 Add to Cart"
+              : "Out of Stock"
             }
 
           </button>
-
 
         </div>
 
       `;
 
 
-      const addButton =
+      const button =
         card.querySelector(
-          ".add-cart"
+          ".add-cart-btn"
         );
 
 
       if(
-        stock > 0
+        stock <= 0
       ){
 
-        addButton.addEventListener(
+        button.disabled =
+          true;
+
+      }else{
+
+        button.addEventListener(
           "click",
-          () => {
+          function(){
 
             addToCart(
               product
@@ -1453,7 +1148,6 @@ function renderProducts(
       productGrid.appendChild(
         card
       );
-
 
     }
   );
@@ -1470,7 +1164,7 @@ async function loadProducts(){
   productGrid.innerHTML = `
 
     <div
-      class="message loading"
+      class="message"
     >
 
       ⏳ Product লোড হচ্ছে...
@@ -1483,32 +1177,24 @@ async function loadProducts(){
   try{
 
 
-    /* ---------------------------------------------
-       IMPORTANT:
-
-       Database থেকে আগে সব Product নেওয়া হচ্ছে।
-       তারপর JavaScript দিয়ে Category filter করা হচ্ছে।
-
-       এতে URL category এবং Database category
-       mismatch হওয়ার সমস্যা অনেকটাই কমে যাবে।
-    --------------------------------------------- */
-
-
-    const {
-      data,
-      error
-    } =
+    const result =
       await supabase
         .from("products")
-        .select(
-          "*"
-        )
+        .select("*")
         .order(
           "id",
           {
             ascending:false
           }
         );
+
+
+    const data =
+      result.data;
+
+
+    const error =
+      result.error;
 
 
     if(error){
@@ -1522,9 +1208,7 @@ async function loadProducts(){
       data || [];
 
 
-    /* ---------------------------------------------
-       CATEGORY FILTER
-    --------------------------------------------- */
+    /* CATEGORY FILTER */
 
     if(
       selectedCategory
@@ -1538,8 +1222,7 @@ async function loadProducts(){
 
       products =
         products.filter(
-          product => {
-
+          function(product){
 
             const category =
               String(
@@ -1548,12 +1231,6 @@ async function loadProducts(){
               )
               .toLowerCase()
               .trim();
-
-
-            /*
-              Exact match অথবা
-              category-এর মধ্যে wanted থাকলে match।
-            */
 
 
             return (
@@ -1578,6 +1255,7 @@ async function loadProducts(){
   }catch(error){
 
     console.error(
+      "PRODUCT LOAD ERROR:",
       error
     );
 
@@ -1588,7 +1266,7 @@ async function loadProducts(){
         class="message error"
       >
 
-        ❌ Product লোড করতে সমস্যা হয়েছে।
+        ❌ Product লোড করা যায়নি।
 
         <br><br>
 
