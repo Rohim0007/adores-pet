@@ -1,19 +1,763 @@
-<select id="category">
+<!doctype html>
+<html lang="bn">
 
-  <option value="Rabbit">
-    Rabbit
-  </option>
+<head>
 
-  <option value="Hamster">
-    Hamster
-  </option>
+<meta charset="utf-8">
 
-  <option value="Pet Food">
-    Pet Food
-  </option>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
 
-  <option value="Accessories">
-    Accessories
-  </option>
+<title>ADORE'S PET — Admin Panel</title>
 
-</select>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f5f8f6;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  color:#10251d;
+}
+
+header{
+  background:#176b3a;
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  font-size:22px;
+  font-weight:800;
+}
+
+header a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.admin{
+  max-width:1100px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+.panel{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  margin-bottom:25px;
+  box-shadow:0 5px 25px rgba(0,0,0,.07);
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* LOGIN */
+
+.login-box{
+  max-width:500px;
+  margin:60px auto;
+}
+
+.login-box h1{
+  text-align:center;
+  color:#176b3a;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+.input-group label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.btn{
+  border:0;
+  background:#176b3a;
+  color:white;
+  padding:13px 20px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.logout{
+  background:#c62828;
+}
+
+.cancel{
+  background:#777;
+}
+
+/* DASHBOARD */
+
+.admin-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.admin-top h1{
+  margin:0 0 5px;
+}
+
+/* FORM */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+.form-group label{
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
+}
+
+.preview{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-top:15px;
+  border:1px solid #ddd;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+/* PRODUCTS */
+
+.list-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.search{
+  width:260px;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:16px;
+}
+
+.product-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.product-image{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#eee;
+}
+
+.product-info{
+  flex:1;
+}
+
+.product-info h3{
+  margin:0 0 7px;
+}
+
+.product-info p{
+  margin:4px 0;
+  color:#666;
+}
+
+.product-actions{
+  display:flex;
+  gap:8px;
+}
+
+.edit-btn{
+  border:0;
+  background:#eee;
+  padding:9px 13px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.delete-btn{
+  border:0;
+  background:#c62828;
+  color:white;
+  padding:9px 13px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* ORDERS */
+
+.order-card{
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.order-card h3{
+  margin-top:0;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#fff3cd;
+  color:#856404;
+  font-weight:700;
+  font-size:13px;
+}
+
+.refresh{
+  border:0;
+  background:#176b3a;
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .admin-top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .list-head{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .search{
+    width:100%;
+  }
+
+  .product-item{
+    align-items:flex-start;
+  }
+
+  .product-image{
+    width:70px;
+    height:70px;
+  }
+
+  .product-actions{
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+  <div class="brand">
+    🐰 ADORE'S PET — Admin
+  </div>
+
+  <a href="index.html">
+    🌐 Website
+  </a>
+
+</header>
+
+
+
+<main class="admin">
+
+
+<!-- ==================================================
+     LOGIN
+================================================== -->
+
+<section
+  id="loginBox"
+  class="panel login-box"
+>
+
+  <h1>
+    🔐 Admin Login
+  </h1>
+
+  <p style="text-align:center;">
+    শুধু Admin Email ও Password দিয়ে প্রবেশ করুন।
+  </p>
+
+
+  <form id="loginForm">
+
+
+    <div class="input-group">
+
+      <label>
+        Admin Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="admin@gmail.com"
+        required
+      >
+
+    </div>
+
+
+    <div class="input-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        required
+      >
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="btn"
+      style="width:100%;"
+    >
+      🔐 Login
+    </button>
+
+
+  </form>
+
+
+  <p id="loginMsg"></p>
+
+</section>
+
+
+
+<!-- ==================================================
+     DASHBOARD
+================================================== -->
+
+<section
+  id="dashboard"
+  class="hidden"
+>
+
+
+<!-- TOP -->
+
+<div class="admin-top">
+
+  <div>
+
+    <h1>
+      🛒 Admin Dashboard
+    </h1>
+
+    <p>
+      Product এবং Order পরিচালনা করুন।
+    </p>
+
+  </div>
+
+
+  <button
+    id="logout"
+    class="btn logout"
+    type="button"
+  >
+    Logout
+  </button>
+
+</div>
+
+
+
+<!-- ==================================================
+     PRODUCT UPLOAD
+================================================== -->
+
+<section class="panel">
+
+  <h2 id="formTitle">
+    ➕ নতুন Product Upload
+  </h2>
+
+
+  <form id="productForm">
+
+
+    <input
+      type="hidden"
+      id="id"
+    >
+
+
+    <div class="form-grid">
+
+
+      <!-- TITLE -->
+
+      <div class="form-group">
+
+        <label>
+          Product Name
+        </label>
+
+        <input
+          id="title"
+          type="text"
+          placeholder="যেমন: Flemish Giant Rabbit"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- CATEGORY -->
+
+      <div class="form-group">
+
+        <label>
+          Category
+        </label>
+
+        <select
+          id="category"
+          required
+        >
+
+          <option value="">
+            Category নির্বাচন করুন
+          </option>
+
+          <option value="Rabbit">
+            🐰 Rabbit
+          </option>
+
+          <option value="Hamster">
+            🐹 Hamster
+          </option>
+
+          <option value="Pet Food">
+            🌾 Pet Food
+          </option>
+
+          <option value="Accessories">
+            🧺 Accessories
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- PRICE -->
+
+      <div class="form-group">
+
+        <label>
+          Price (৳)
+        </label>
+
+        <input
+          id="price"
+          type="number"
+          min="0"
+          placeholder="1000"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- STOCK -->
+
+      <div class="form-group">
+
+        <label>
+          Stock
+        </label>
+
+        <input
+          id="stock"
+          type="number"
+          min="0"
+          placeholder="10"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- IMAGE -->
+
+      <div class="form-group full">
+
+        <label>
+          🖼️ Product Image
+        </label>
+
+        <input
+          id="image"
+          type="file"
+          accept="image/*"
+        >
+
+        <small>
+          JPG / PNG / WEBP ছবি নির্বাচন করুন
+        </small>
+
+      </div>
+
+
+
+      <!-- DESCRIPTION -->
+
+      <div class="form-group full">
+
+        <label>
+          Product Description
+        </label>
+
+        <textarea
+          id="description"
+          rows="5"
+          placeholder="Product সম্পর্কে বিস্তারিত লিখুন..."
+        ></textarea>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- IMAGE PREVIEW -->
+
+    <img
+      id="preview"
+      class="preview hidden"
+      alt="Preview"
+    >
+
+
+    <!-- BUTTONS -->
+
+    <div class="actions">
+
+      <button
+        id="saveProduct"
+        class="btn"
+        type="submit"
+      >
+        ✅ Save Product
+      </button>
+
+
+      <button
+        id="cancel"
+        class="btn cancel hidden"
+        type="button"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+
+    <p id="msg"></p>
+
+
+  </form>
+
+</section>
+
+
+
+<!-- ==================================================
+     PRODUCT LIST
+================================================== -->
+
+<section class="panel">
+
+
+  <div class="list-head">
+
+    <h2>
+      📦 Product List
+    </h2>
+
+
+    <input
+      id="search"
+      class="search"
+      type="search"
+      placeholder="🔍 Product Search"
+    >
+
+  </div>
+
+
+  <div id="list">
+
+    পণ্য লোড হচ্ছে...
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     ORDERS
+================================================== -->
+
+<section class="panel">
+
+
+  <div class="list-head">
+
+    <h2>
+      📋 Customer Orders
+    </h2>
+
+
+    <button
+      id="refreshOrders"
+      class="refresh"
+      type="button"
+    >
+      🔄 Refresh
+    </button>
+
+  </div>
+
+
+  <div id="ordersList">
+
+    অর্ডার লোড হচ্ছে...
+
+  </div>
+
+
+</section>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     SCRIPTS
+================================================== -->
+
+<script src="config.js"></script>
+
+<script
+  type="module"
+  src="admin.js"
+></script>
+
+
+</body>
+
+</html>
