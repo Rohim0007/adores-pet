@@ -1,129 +1,1266 @@
+
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>ADORE'S PET</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,"Noto Sans Bengali","Noto Sans",sans-serif;background:#f6f9f7;color:#10251d;line-height:1.5}
-a{text-decoration:none;color:inherit}
-.site-header{width:100%;background:#fff;border-bottom:1px solid #dfe8e3;position:sticky;top:0;z-index:1000}
-.header-inner{max-width:1200px;min-height:105px;margin:auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand-logo{display:flex;align-items:center;height:78px}
-.brand-logo img{display:block;height:72px;width:auto;max-width:280px;object-fit:contain}
-.cart-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#19733f;color:#fff;border-radius:24px;min-width:190px;padding:12px 16px;font-size:20px;font-weight:700}
-.cart-count{width:52px;height:52px;border-radius:50%;background:#fff;color:#19733f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
-.section{padding:72px 24px}
-.section-inner{max-width:1200px;margin:auto}
-.section-label{text-align:center;color:#19733f;font-size:18px;font-weight:800;letter-spacing:6px;margin-bottom:36px;text-transform:uppercase}
-.category-grid,.why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;max-width:850px;margin:0 auto}
-.category-card{width:100%;aspect-ratio:1/1;background:#fff;border:1px solid #d9e3de;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;box-shadow:0 5px 18px rgba(16,37,29,.04);transition:.2s}
-.category-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(16,37,29,.10)}
-.category-icon{width:115px;height:115px;object-fit:contain;margin-bottom:24px}
-.category-name{font-size:27px;font-weight:800;text-align:center}
-.why-section{background:#eaf6ef}
-.why-card{width:100%;aspect-ratio:1/1;background:#fff;border:1px solid #d9e3de;border-radius:30px;padding:30px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;box-shadow:0 5px 18px rgba(16,37,29,.04)}
-.why-icon{width:92px;height:92px;object-fit:contain;margin:0 auto 20px}
-.why-title{font-size:25px;font-weight:800;margin-bottom:12px}
-.why-text{color:#7a827f;font-size:17px;line-height:1.75}
-footer{background:#06251a;color:#fff;padding:55px 24px 28px;text-align:center}
-.footer-brand{font-size:30px;font-weight:800;margin-bottom:10px}
-.footer-tagline{color:#b8c8c1;font-size:17px;margin-bottom:32px}
-.footer-line{height:1px;background:rgba(255,255,255,.18);max-width:900px;margin:0 auto 22px}
-.copyright{color:#9eafa8;font-size:14px}
-@media(max-width:700px){
-.header-inner{min-height:88px;padding:10px 16px}.brand-logo{height:62px}.brand-logo img{height:58px;max-width:210px}
-.cart-btn{min-width:135px;border-radius:20px;padding:8px 10px;font-size:17px}.cart-count{width:44px;height:44px;font-size:19px}
-.section{padding:52px 18px}.section-label{font-size:14px;letter-spacing:4px;margin-bottom:28px}
-.category-grid,.why-grid{gap:16px}.category-card,.why-card{border-radius:24px;padding:18px}
-.category-icon{width:76px;height:76px;margin-bottom:16px}.category-name{font-size:20px}
-.why-icon{width:68px;height:68px;margin-bottom:14px}.why-title{font-size:20px;margin-bottom:8px}.why-text{font-size:14px;line-height:1.55}
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
-@media(max-width:380px){.brand-logo img{max-width:175px}.cart-btn{min-width:118px;font-size:15px}.cart-count{width:38px;height:38px}.category-name{font-size:17px}.why-title{font-size:17px}.why-text{font-size:12px}}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali","Noto Sans",sans-serif;
+  background:#f6f9f7;
+  color:#10251d;
+  line-height:1.5;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header{
+  width:100%;
+  background:#fff;
+  border-bottom:1px solid #dfe8e3;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.header-inner{
+  max-width:1200px;
+  min-height:105px;
+  margin:auto;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand-logo{
+  display:flex;
+  align-items:center;
+  height:78px;
+}
+
+.brand-logo img{
+  display:block;
+  height:72px;
+  width:auto;
+  max-width:280px;
+  object-fit:contain;
+}
+
+.cart-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:#19733f;
+  color:#fff;
+  border-radius:24px;
+  min-width:190px;
+  padding:12px 16px;
+  font-size:20px;
+  font-weight:700;
+}
+
+.cart-count{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#fff;
+  color:#19733f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:800;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+  padding:72px 24px;
+}
+
+.section-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-label{
+  text-align:center;
+  color:#19733f;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:6px;
+  margin-bottom:36px;
+  text-transform:uppercase;
+}
+
+
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:28px;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.category-card{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#fff;
+  border:1px solid #d9e3de;
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  box-shadow:0 5px 18px rgba(16,37,29,.04);
+  transition:.2s;
+}
+
+.category-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(16,37,29,.10);
+}
+
+.category-icon{
+  width:115px;
+  height:115px;
+  object-fit:contain;
+  margin-bottom:24px;
+}
+
+.category-name{
+  font-size:27px;
+  font-weight:800;
+  text-align:center;
+}
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+.products-section{
+  background:#fff;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:22px;
+}
+
+.product-card{
+  background:#fff;
+  border:1px solid #d9e3de;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(16,37,29,.06);
+  transition:.2s;
+}
+
+.product-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(16,37,29,.12);
+}
+
+.product-image{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+  display:block;
+  background:#eee;
+}
+
+.product-content{
+  padding:17px;
+}
+
+.product-title{
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.product-category{
+  color:#777;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.product-price{
+  color:#19733f;
+  font-size:21px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.product-stock{
+  color:#666;
+  font-size:14px;
+  margin-bottom:14px;
+}
+
+.product-btn{
+  display:block;
+  width:100%;
+  text-align:center;
+  background:#19733f;
+  color:#fff;
+  padding:11px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.product-empty,
+.product-loading,
+.product-error{
+  text-align:center;
+  padding:35px 15px;
+  color:#777;
+  grid-column:1/-1;
+  font-size:17px;
+}
+
+
+/* =====================================================
+   WHY
+===================================================== */
+
+.why-section{
+  background:#eaf6ef;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:28px;
+  max-width:850px;
+  margin:0 auto;
+}
+
+.why-card{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#fff;
+  border:1px solid #d9e3de;
+  border-radius:30px;
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  box-shadow:0 5px 18px rgba(16,37,29,.04);
+}
+
+.why-icon{
+  width:92px;
+  height:92px;
+  object-fit:contain;
+  margin:0 auto 20px;
+}
+
+.why-title{
+  font-size:25px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.why-text{
+  color:#7a827f;
+  font-size:17px;
+  line-height:1.75;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+  background:#06251a;
+  color:#fff;
+  padding:55px 24px 28px;
+  text-align:center;
+}
+
+.footer-brand{
+  font-size:30px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.footer-tagline{
+  color:#b8c8c1;
+  font-size:17px;
+  margin-bottom:32px;
+}
+
+.footer-line{
+  height:1px;
+  background:rgba(255,255,255,.18);
+  max-width:900px;
+  margin:0 auto 22px;
+}
+
+.copyright{
+  color:#9eafa8;
+  font-size:14px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:700px){
+
+  .header-inner{
+    min-height:88px;
+    padding:10px 16px;
+  }
+
+  .brand-logo{
+    height:62px;
+  }
+
+  .brand-logo img{
+    height:58px;
+    max-width:210px;
+  }
+
+  .cart-btn{
+    min-width:135px;
+    border-radius:20px;
+    padding:8px 10px;
+    font-size:17px;
+  }
+
+  .cart-count{
+    width:44px;
+    height:44px;
+    font-size:19px;
+  }
+
+  .section{
+    padding:52px 18px;
+  }
+
+  .section-label{
+    font-size:14px;
+    letter-spacing:4px;
+    margin-bottom:28px;
+  }
+
+  .category-grid,
+  .why-grid{
+    gap:16px;
+  }
+
+  .category-card,
+  .why-card{
+    border-radius:24px;
+    padding:18px;
+  }
+
+  .category-icon{
+    width:76px;
+    height:76px;
+    margin-bottom:16px;
+  }
+
+  .category-name{
+    font-size:20px;
+  }
+
+  .why-icon{
+    width:68px;
+    height:68px;
+    margin-bottom:14px;
+  }
+
+  .why-title{
+    font-size:20px;
+    margin-bottom:8px;
+  }
+
+  .why-text{
+    font-size:14px;
+    line-height:1.55;
+  }
+
+  .product-grid{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .product-image{
+    height:170px;
+  }
+
+  .product-content{
+    padding:12px;
+  }
+
+  .product-title{
+    font-size:17px;
+  }
+
+  .product-price{
+    font-size:18px;
+  }
+
+  .product-stock{
+    font-size:13px;
+  }
+
+}
+
+@media(max-width:380px){
+
+  .brand-logo img{
+    max-width:175px;
+  }
+
+  .cart-btn{
+    min-width:118px;
+    font-size:15px;
+  }
+
+  .cart-count{
+    width:38px;
+    height:38px;
+  }
+
+  .category-name{
+    font-size:17px;
+  }
+
+  .why-title{
+    font-size:17px;
+  }
+
+  .why-text{
+    font-size:12px;
+  }
+
+  .product-image{
+    height:145px;
+  }
+
+}
+
+
+/* =====================================================
+   ADD TO CART MESSAGE
+===================================================== */
+
+.cart-message{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  background:#19733f;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:700;
+  z-index:9999;
+  display:none;
+}
+
 </style>
+
 </head>
+
+
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="site-header">
+
   <div class="header-inner">
-    <a href="index.html" class="brand-logo" aria-label="ADORE'S PET Home">
-      <img src="logo.png.png" alt="ADORE'S PET">
+
+    <a
+      href="index.html"
+      class="brand-logo"
+      aria-label="ADORE'S PET Home"
+    >
+
+      <img
+        src="logo.png.png"
+        alt="ADORE'S PET"
+      >
+
     </a>
-    <a href="cart.html" class="cart-btn">
-      <span>🛒</span><span>Cart</span><span class="cart-count" id="cartCount">0</span>
+
+
+    <a
+      href="cart.html"
+      class="cart-btn"
+    >
+
+      <span>🛒</span>
+
+      <span>Cart</span>
+
+      <span
+        class="cart-count"
+        id="cartCount"
+      >
+        0
+      </span>
+
     </a>
+
   </div>
+
 </header>
 
+
+
 <main>
+
+
+<!-- =====================================================
+     CATEGORY
+===================================================== -->
+
 <section class="section">
+
   <div class="section-inner">
-    <div class="section-label">SHOP BY CATEGORY</div>
-    <div class="category-grid">
-      <a class="category-card" href="category.html?category=Rabbit">
-        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg" alt="Rabbit">
-        <div class="category-name">Rabbit</div>
-      </a>
-      <a class="category-card" href="category.html?category=Hamster">
-        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f439.svg" alt="Hamster">
-        <div class="category-name">Hamster</div>
-      </a>
-      <a class="category-card" href="category.html?category=Pet%20Food">
-        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f33e.svg" alt="Pet Food">
-        <div class="category-name">Pet Food</div>
-      </a>
-      <a class="category-card" href="category.html?category=Accessories">
-        <img class="category-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f9fa.svg" alt="Accessories">
-        <div class="category-name">Accessories</div>
-      </a>
+
+    <div class="section-label">
+      SHOP BY CATEGORY
     </div>
+
+
+    <div class="category-grid">
+
+
+      <a
+        class="category-card"
+        href="category.html?category=Rabbit"
+      >
+
+        <img
+          class="category-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg"
+          alt="Rabbit"
+        >
+
+        <div class="category-name">
+          Rabbit
+        </div>
+
+      </a>
+
+
+
+      <a
+        class="category-card"
+        href="category.html?category=Hamster"
+      >
+
+        <img
+          class="category-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f439.svg"
+          alt="Hamster"
+        >
+
+        <div class="category-name">
+          Hamster
+        </div>
+
+      </a>
+
+
+
+      <a
+        class="category-card"
+        href="category.html?category=Pet%20Food"
+      >
+
+        <img
+          class="category-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f33e.svg"
+          alt="Pet Food"
+        >
+
+        <div class="category-name">
+          Pet Food
+        </div>
+
+      </a>
+
+
+
+      <a
+        class="category-card"
+        href="category.html?category=Accessories"
+      >
+
+        <img
+          class="category-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f9fa.svg"
+          alt="Accessories"
+        >
+
+        <div class="category-name">
+          Accessories
+        </div>
+
+      </a>
+
+    </div>
+
   </div>
+
 </section>
+
+
+
+<!-- =====================================================
+     PRODUCTS FROM SUPABASE
+===================================================== -->
+
+<section class="section products-section">
+
+  <div class="section-inner">
+
+    <div class="section-label">
+      OUR PRODUCTS
+    </div>
+
+
+    <div
+      id="productGrid"
+      class="product-grid"
+    >
+
+      <div class="product-loading">
+        ⏳ Product লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WHY CHOOSE US
+===================================================== -->
 
 <section class="section why-section">
+
   <div class="section-inner">
-    <div class="section-label">WHY CHOOSE US</div>
-    <div class="why-grid">
-      <div class="why-card">
-        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg" alt="Healthy Pet">
-        <h2 class="why-title">সুস্থ পোষা প্রাণী</h2>
-        <p class="why-text">যত্নসহকারে পালন করা স্বাস্থ্যকর ও সুন্দর পোষা প্রাণী।</p>
-      </div>
-      <div class="why-card">
-        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f69a.svg" alt="Delivery">
-        <h2 class="why-title">Delivery সুবিধা</h2>
-        <p class="why-text">দেশের বিভিন্ন জায়গায় সহজে অর্ডার ও ডেলিভারি সুবিধা।</p>
-      </div>
-      <div class="why-card">
-        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2b50.svg" alt="Trusted Service">
-        <h2 class="why-title">বিশ্বস্ত সেবা</h2>
-        <p class="why-text">গ্রাহকের সন্তুষ্টি ও ভালো সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।</p>
-      </div>
-      <div class="why-card">
-        <img class="why-icon" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f6e1.svg" alt="Quality Product">
-        <h2 class="why-title">মানসম্মত পণ্য</h2>
-        <p class="why-text">পোষা প্রাণীর জন্য প্রয়োজনীয় ভালো মানের পণ্য।</p>
-      </div>
+
+    <div class="section-label">
+      WHY CHOOSE US
     </div>
+
+
+    <div class="why-grid">
+
+
+      <div class="why-card">
+
+        <img
+          class="why-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg"
+          alt="Healthy Pet"
+        >
+
+        <h2 class="why-title">
+          সুস্থ পোষা প্রাণী
+        </h2>
+
+        <p class="why-text">
+          যত্নসহকারে পালন করা স্বাস্থ্যকর ও সুন্দর পোষা প্রাণী।
+        </p>
+
+      </div>
+
+
+
+      <div class="why-card">
+
+        <img
+          class="why-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f69a.svg"
+          alt="Delivery"
+        >
+
+        <h2 class="why-title">
+          Delivery সুবিধা
+        </h2>
+
+        <p class="why-text">
+          দেশের বিভিন্ন জায়গায় সহজে অর্ডার ও ডেলিভারি সুবিধা।
+        </p>
+
+      </div>
+
+
+
+      <div class="why-card">
+
+        <img
+          class="why-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2b50.svg"
+          alt="Trusted Service"
+        >
+
+        <h2 class="why-title">
+          বিশ্বস্ত সেবা
+        </h2>
+
+        <p class="why-text">
+          গ্রাহকের সন্তুষ্টি ও ভালো সার্ভিসকে আমরা সর্বোচ্চ গুরুত্ব দিই।
+        </p>
+
+      </div>
+
+
+
+      <div class="why-card">
+
+        <img
+          class="why-icon"
+          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f6e1.svg"
+          alt="Quality Product"
+        >
+
+        <h2 class="why-title">
+          মানসম্মত পণ্য
+        </h2>
+
+        <p class="why-text">
+          পোষা প্রাণীর জন্য প্রয়োজনীয় ভালো মানের পণ্য।
+        </p>
+
+      </div>
+
+
+    </div>
+
   </div>
+
 </section>
+
+
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
-  <div class="footer-brand">🐰 ADORE'S PET</div>
-  <div class="footer-tagline">আপনার বিশ্বস্ত Pet Shop</div>
+
+  <div class="footer-brand">
+    🐰 ADORE'S PET
+  </div>
+
+  <div class="footer-tagline">
+    আপনার বিশ্বস্ত Pet Shop
+  </div>
+
   <div class="footer-line"></div>
-  <div class="copyright">© 2026 ADORE'S PET — All Rights Reserved</div>
+
+  <div class="copyright">
+    © 2026 ADORE'S PET — All Rights Reserved
+  </div>
+
 </footer>
 
-<script>
-try{
-  const cart=JSON.parse(localStorage.getItem("cart")||"[]");
-  const count=Array.isArray(cart)?cart.reduce((s,i)=>s+(Number(i.quantity)||1),0):0;
-  document.getElementById("cartCount").textContent=count;
-}catch(e){document.getElementById("cartCount").textContent="0";}
+
+
+<div
+  id="cartMessage"
+  class="cart-message"
+></div>
+
+
+
+<!-- =====================================================
+     CONFIG
+===================================================== -->
+
+<script src="config.js"></script>
+
+
+
+<!-- =====================================================
+     SUPABASE + PRODUCT LOADER
+===================================================== -->
+
+<script type="module">
+
+import {
+  createClient
+} from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const productGrid =
+  document.getElementById("productGrid");
+
+const cartCount =
+  document.getElementById("cartCount");
+
+const cartMessage =
+  document.getElementById("cartMessage");
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   CART COUNT
+===================================================== */
+
+function updateCartCount(){
+
+  try{
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+
+    const count =
+      Array.isArray(cart)
+        ? cart.reduce(
+            (total,item)=>
+              total +
+              (Number(item.quantity) || 1),
+            0
+          )
+        : 0;
+
+    cartCount.textContent =
+      count;
+
+  }catch(error){
+
+    cartCount.textContent =
+      "0";
+
+  }
+
+}
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(text){
+
+  cartMessage.textContent =
+    text;
+
+  cartMessage.style.display =
+    "block";
+
+  setTimeout(
+    function(){
+
+      cartMessage.style.display =
+        "none";
+
+    },
+    1800
+  );
+
+}
+
+
+/* =====================================================
+   ADD TO CART
+===================================================== */
+
+function addToCart(product){
+
+  try{
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+
+    if(!Array.isArray(cart)){
+      cart=[];
+    }
+
+
+    const existing =
+      cart.find(
+        item =>
+          String(item.id) ===
+          String(product.id)
+      );
+
+
+    if(existing){
+
+      existing.quantity =
+        (Number(existing.quantity) || 1) + 1;
+
+    }else{
+
+      cart.push({
+
+        id:product.id,
+
+        title:product.title,
+
+        price:Number(product.price) || 0,
+
+        image:product.image_url || "",
+
+        quantity:1
+
+      });
+
+    }
+
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+
+    updateCartCount();
+
+    showMessage(
+      "✅ Product Cart-এ যোগ হয়েছে"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "❌ Cart-এ যোগ করা যায়নি"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   RENDER PRODUCTS
+===================================================== */
+
+function renderProducts(products){
+
+  if(!products || !products.length){
+
+    productGrid.innerHTML = `
+
+      <div class="product-empty">
+
+        📦 এখনো কোনো Product নেই।
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  productGrid.innerHTML = "";
+
+
+  products.forEach(
+    function(product){
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "product-card";
+
+
+      const image =
+        product.image_url
+          ? product.image_url
+          : "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg";
+
+
+      const stock =
+        Number(product.stock) || 0;
+
+
+      const price =
+        Number(product.price) || 0;
+
+
+      card.innerHTML = `
+
+        <img
+          class="product-image"
+          src="${escapeHTML(image)}"
+          alt="${escapeHTML(product.title)}"
+          loading="lazy"
+        >
+
+
+        <div class="product-content">
+
+          <div class="product-title">
+
+            ${escapeHTML(product.title)}
+
+          </div>
+
+
+          <div class="product-category">
+
+            Category:
+            ${escapeHTML(product.category)}
+
+          </div>
+
+
+          <div class="product-price">
+
+            ৳${price.toLocaleString("en-BD")}
+
+          </div>
+
+
+          <div class="product-stock">
+
+            Stock:
+            ${stock}
+
+          </div>
+
+
+          <button
+            class="product-btn"
+            type="button"
+          >
+            🛒 Add to Cart
+          </button>
+
+        </div>
+
+      `;
+
+
+      const button =
+        card.querySelector(
+          ".product-btn"
+        );
+
+
+      if(stock <= 0){
+
+        button.textContent =
+          "Out of Stock";
+
+        button.style.background =
+          "#999";
+
+        button.disabled =
+          true;
+
+      }else{
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            addToCart(product);
+
+          }
+        );
+
+      }
+
+
+      productGrid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOAD PRODUCTS
+===================================================== */
+
+async function loadProducts(){
+
+  productGrid.innerHTML = `
+
+    <div class="product-loading">
+
+      ⏳ Product লোড হচ্ছে...
+
+    </div>
+
+  `;
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("products")
+      .select(
+        "id,title,category,price,stock,image_url,description"
+      )
+      .order(
+        "id",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    console.error(
+      "Supabase Product Error:",
+      error
+    );
+
+
+    productGrid.innerHTML = `
+
+      <div class="product-error">
+
+        ❌ Product লোড করা যায়নি।<br><br>
+
+        ${escapeHTML(error.message)}
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  renderProducts(
+    data || []
+  );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+updateCartCount();
+
+loadProducts();
+
 </script>
+
+
 </body>
+
 </html>
