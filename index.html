@@ -1,1237 +1,1111 @@
 <!doctype html>
 <html lang="bn">
-
 <head>
 
-  <meta charset="utf-8">
+<meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
-  >
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
 
-  <title>ADORE'S PET</title>
+<title>ADORE'S PET</title>
 
-  <style>
+<link rel="stylesheet" href="style.css">
 
-    /* =====================================================
-       RESET
-    ===================================================== */
+<style>
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-    html{
-      scroll-behavior:smooth;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    body{
-      font-family:
-        "Noto Sans Bengali",
-        "Nirmala UI",
-        Arial,
-        sans-serif;
+html{
+  scroll-behavior:smooth;
+}
 
-      background:#f6f9f7;
-      color:#15201b;
-      overflow-x:hidden;
-    }
+body{
+  margin:0;
+  font-family:
+    Arial,
+    "Noto Sans Bengali",
+    "Noto Sans",
+    sans-serif;
 
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
+  background:#f7faf8;
+  color:#102019;
+}
 
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+button{
+  font-family:inherit;
+}
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:5000;
 
-      height:86px;
+/* =====================================================
+   HEADER
+===================================================== */
 
-      background:#ffffff;
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
 
-      border-bottom:1px solid #e4e9e6;
+  height:78px;
 
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-      padding:0 32px;
-    }
+  padding:0 28px;
 
+  background:#fff;
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+  border-bottom:1px solid #e5e9e7;
 
-      font-size:30px;
-      font-weight:900;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,.05);
+}
 
-      color:#17211d;
-      white-space:nowrap;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 
+  font-size:28px;
+  font-weight:800;
 
-    .brand-logo{
-      font-size:34px;
-    }
+  color:#101a16;
+}
 
+.brand span{
+  font-size:34px;
+}
 
-    .header-right{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+nav{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
 
+nav a{
+  font-weight:700;
+}
 
-    .cart-btn{
-      border:0;
+.cart-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
 
-      background:#176b3a;
-      color:#fff;
+  min-width:150px;
 
-      padding:13px 22px;
+  background:#176b3a;
+  color:#fff;
 
-      border-radius:16px;
+  border:0;
 
-      font-size:18px;
-      font-weight:800;
+  padding:12px 18px;
 
-      cursor:pointer;
+  border-radius:14px;
 
-      display:flex;
-      align-items:center;
-      gap:8px;
+  font-size:18px;
+  font-weight:800;
 
-      box-shadow:
-        0 8px 20px rgba(23,107,58,.18);
-    }
+  cursor:pointer;
 
+  box-shadow:
+    0 8px 18px rgba(23,107,58,.18);
+}
 
-    .cart-count{
-      min-width:38px;
-      height:38px;
+.cart-count{
+  display:inline-flex;
 
-      background:#fff;
-      color:#176b3a;
+  align-items:center;
+  justify-content:center;
 
-      border-radius:50%;
+  min-width:34px;
+  height:34px;
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
+  background:#fff;
+  color:#176b3a;
 
-      font-size:17px;
-      font-weight:900;
-    }
+  border-radius:50%;
 
+  font-weight:900;
+}
 
-    /* =====================================================
-       HERO
-    ===================================================== */
 
-    .hero{
-      min-height:500px;
+/* =====================================================
+   HERO
+===================================================== */
 
-      display:flex;
-      align-items:center;
+.hero{
+  min-height:470px;
 
-      padding:70px 7%;
+  display:flex;
+  align-items:center;
 
-      background:
-        linear-gradient(
-          110deg,
-          #eef8f2 0%,
-          #f7faf8 55%,
-          #e5f2ea 100%
-        );
+  padding:70px 7%;
 
-      position:relative;
-      overflow:hidden;
-    }
+  background:
+    linear-gradient(
+      110deg,
+      #eaf6ef 0%,
+      #f8fbf9 55%,
+      #e2f1e8 100%
+    );
 
+  position:relative;
+  overflow:hidden;
+}
 
-    .hero::after{
-      content:"🐰";
+.hero:after{
+  content:"🐰";
 
-      position:absolute;
+  position:absolute;
 
-      right:5%;
-      bottom:-55px;
+  right:7%;
+  bottom:-45px;
 
-      font-size:260px;
+  font-size:210px;
 
-      opacity:.08;
+  opacity:.08;
+}
 
-      pointer-events:none;
-    }
+.hero-content{
+  max-width:650px;
 
+  position:relative;
+  z-index:2;
+}
 
-    .hero-content{
-      max-width:700px;
-      position:relative;
-      z-index:2;
-    }
+.hero-badge{
+  display:inline-block;
 
+  padding:8px 15px;
 
-    .hero-badge{
-      display:inline-block;
+  border-radius:30px;
 
-      color:#176b3a;
+  background:#176b3a;
+  color:#fff;
 
-      font-size:15px;
-      font-weight:900;
+  font-size:14px;
+  font-weight:800;
 
-      letter-spacing:4px;
+  letter-spacing:2px;
+}
 
-      margin-bottom:18px;
-    }
+.hero h1{
+  margin:20px 0 15px;
 
+  font-size:clamp(42px,7vw,72px);
 
-    .hero h1{
-      font-size:clamp(42px,7vw,78px);
+  line-height:1.08;
 
-      line-height:1.12;
+  font-weight:900;
 
-      font-weight:900;
+  color:#0d1914;
+}
 
-      margin-bottom:22px;
+.hero p{
+  max-width:570px;
 
-      color:#111914;
-    }
+  margin:0 0 28px;
 
+  color:#66716c;
 
-    .hero p{
-      max-width:650px;
+  font-size:20px;
 
-      color:#66736d;
+  line-height:1.7;
+}
 
-      font-size:20px;
+.hero-btn{
+  display:inline-flex;
 
-      line-height:1.8;
+  align-items:center;
+  justify-content:center;
 
-      margin-bottom:30px;
-    }
+  background:#176b3a;
+  color:#fff;
 
+  padding:15px 25px;
 
-    .hero-btn{
-      display:inline-flex;
+  border-radius:12px;
 
-      align-items:center;
-      justify-content:center;
+  font-size:18px;
+  font-weight:800;
 
-      background:#176b3a;
-      color:white;
+  box-shadow:
+    0 10px 25px rgba(23,107,58,.20);
+}
 
-      padding:15px 25px;
 
-      border-radius:13px;
+/* =====================================================
+   COMMON SECTION
+===================================================== */
 
-      font-size:18px;
-      font-weight:800;
+.categories,
+.products-section{
+  padding:70px 4%;
+}
 
-      box-shadow:
-        0 10px 25px rgba(23,107,58,.18);
-    }
+.section-label{
+  color:#176b3a;
 
+  font-size:17px;
 
-    /* =====================================================
-       COMMON SECTION
-    ===================================================== */
+  font-weight:900;
 
-    .section-label{
-      color:#176b3a;
+  letter-spacing:4px;
 
-      font-size:15px;
+  margin-bottom:10px;
+}
 
-      font-weight:900;
+.section-title{
+  margin:0;
 
-      letter-spacing:4px;
+  font-size:clamp(38px,6vw,55px);
 
-      margin-bottom:10px;
-    }
+  line-height:1.15;
 
+  font-weight:900;
+}
 
-    .section-title{
-      font-size:clamp(38px,6vw,60px);
 
-      line-height:1.15;
+/* =====================================================
+   CATEGORY
+===================================================== */
 
-      font-weight:900;
+.categories{
+  background:#f7faf8;
+}
 
-      color:#101713;
-    }
+.category-grid{
+  margin-top:35px;
 
+  display:grid;
 
-    /* =====================================================
-       CATEGORY
-    ===================================================== */
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-    .categories{
-      padding:80px 4.5% 70px;
+  gap:22px;
+}
 
-      background:#f7faf8;
-    }
+.category{
+  min-height:190px;
 
+  aspect-ratio:1 / 1;
 
-    .category-grid{
-      display:grid;
+  background:#fff;
 
-      grid-template-columns:
-        repeat(4,minmax(0,1fr));
+  border:1px solid #e0e8e3;
 
-      gap:20px;
+  border-radius:28px;
 
-      margin-top:38px;
-    }
+  display:flex;
 
+  flex-direction:column;
 
-    .category{
-      min-height:220px;
+  align-items:center;
 
-      background:#fff;
+  justify-content:center;
 
-      border:1px solid #dfe8e2;
+  text-align:center;
 
-      border-radius:28px;
+  transition:.25s;
 
-      display:flex;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.04);
+}
 
-      flex-direction:column;
+.category:hover{
+  transform:translateY(-5px);
 
-      align-items:center;
+  border-color:#176b3a;
 
-      justify-content:center;
+  box-shadow:
+    0 15px 35px rgba(23,107,58,.12);
+}
 
-      gap:22px;
+.category-icon{
+  font-size:65px;
 
-      transition:.25s;
+  margin-bottom:20px;
+}
 
-      box-shadow:
-        0 8px 25px rgba(0,0,0,.035);
-    }
+.category strong{
+  font-size:22px;
 
+  font-weight:800;
+}
 
-    .category:hover{
-      transform:translateY(-5px);
 
-      border-color:#b9d8c5;
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
-      box-shadow:
-        0 15px 35px rgba(23,107,58,.10);
-    }
+.products-section{
+  background:#fff;
+}
 
+.products-heading{
+  display:flex;
 
-    .category-icon{
-      font-size:58px;
+  align-items:flex-end;
 
-      line-height:1;
-    }
+  justify-content:space-between;
 
+  gap:20px;
 
-    .category strong{
-      font-size:23px;
+  margin-bottom:30px;
+}
 
-      font-weight:900;
-    }
+.products-heading > a{
+  background:#176b3a;
 
+  color:#fff;
 
-    /* =====================================================
-       PRODUCTS
-    ===================================================== */
+  padding:14px 25px;
 
-    .products-section{
-      padding:75px 4.5% 90px;
+  border-radius:12px;
 
-      background:#f7faf8;
-    }
+  font-weight:800;
 
+  white-space:nowrap;
+}
 
-    .products-heading{
-      display:flex;
+.grid{
+  display:grid;
 
-      align-items:end;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-      justify-content:space-between;
+  gap:22px;
+}
 
-      gap:20px;
+.card{
+  background:#fff;
 
-      margin-bottom:38px;
-    }
+  border:1px solid #e1e7e4;
 
+  border-radius:25px;
 
-    .all-products{
-      background:#176b3a;
-      color:#fff;
+  overflow:hidden;
 
-      padding:14px 25px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.06);
 
-      border-radius:14px;
+  display:flex;
 
-      font-size:18px;
-      font-weight:800;
+  flex-direction:column;
+}
 
-      white-space:nowrap;
-    }
+.card img{
+  width:100%;
 
+  aspect-ratio:1 / .9;
 
-    .grid{
-      display:grid;
+  object-fit:cover;
 
-      grid-template-columns:
-        repeat(4,minmax(0,1fr));
+  display:block;
+}
 
-      gap:22px;
-    }
+.card .body{
+  padding:20px;
 
+  display:flex;
 
-    .card{
-      background:#fff;
+  flex-direction:column;
 
-      border-radius:28px;
+  flex:1;
+}
 
-      overflow:hidden;
+.card small{
+  color:#176b3a;
 
-      border:1px solid #e2e8e4;
+  font-weight:800;
 
-      box-shadow:
-        0 8px 25px rgba(0,0,0,.045);
-    }
+  font-size:15px;
+}
 
+.card h3{
+  margin:8px 0;
 
-    .card > img{
-      width:100%;
+  font-size:23px;
 
-      height:260px;
+  line-height:1.3;
+}
 
-      object-fit:cover;
+.card p{
+  color:#8a938f;
 
-      display:block;
-    }
+  line-height:1.6;
 
+  margin:5px 0 20px;
 
-    .card .body{
-      padding:22px;
-    }
+  min-height:45px;
+}
 
+.card b{
+  font-size:27px;
 
-    .card small{
-      display:block;
+  margin-top:auto;
+}
 
-      color:#176b3a;
+.in{
+  color:#176b3a;
 
-      font-size:15px;
+  font-weight:800;
 
-      font-weight:800;
+  margin:12px 0;
+}
 
-      margin-bottom:8px;
-    }
+.out{
+  color:#c62828;
 
+  font-weight:800;
 
-    .card h3{
-      font-size:25px;
+  margin:12px 0;
+}
 
-      line-height:1.3;
+.product-actions{
+  margin-top:8px;
+}
 
-      margin-bottom:12px;
-    }
+.add-cart{
+  width:100%;
 
+  border:0;
 
-    .card p{
-      color:#7b8580;
+  background:#176b3a;
 
-      font-size:16px;
+  color:#fff;
 
-      line-height:1.6;
+  padding:13px;
 
-      min-height:50px;
+  border-radius:11px;
 
-      margin-bottom:20px;
-    }
+  font-size:17px;
 
+  font-weight:800;
 
-    .card b{
-      display:block;
+  cursor:pointer;
+}
 
-      font-size:27px;
+.add-cart:disabled{
+  background:#999;
 
-      margin-bottom:8px;
-    }
+  cursor:not-allowed;
+}
 
 
-    .in{
-      color:#176b3a;
+/* =====================================================
+   WHY CHOOSE US
+===================================================== */
 
-      font-size:16px;
+.why{
+  padding:75px 4%;
 
-      font-weight:800;
-    }
+  background:#eaf6ef;
+}
 
+.why-inner{
+  max-width:1100px;
 
-    .out{
-      color:#c62828;
+  margin:auto;
+}
 
-      font-size:16px;
+.features{
+  margin-top:35px;
 
-      font-weight:800;
-    }
+  display:grid;
 
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-    .product-actions{
-      margin-top:18px;
-    }
+  gap:22px;
+}
 
+.feature{
+  aspect-ratio:1 / 1;
 
-    .add-cart{
-      width:100%;
+  background:#fff;
 
-      border:0;
+  border:1px solid #dce7e0;
 
-      background:#176b3a;
+  border-radius:28px;
 
-      color:#fff;
+  padding:32px;
 
-      padding:14px;
+  display:flex;
 
-      border-radius:12px;
+  flex-direction:column;
 
-      font-size:17px;
+  justify-content:center;
 
-      font-weight:800;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.04);
+}
 
-      cursor:pointer;
-    }
+.feature-icon{
+  font-size:62px;
 
+  margin-bottom:22px;
+}
 
-    .add-cart:disabled{
-      background:#999;
+.feature h3{
+  margin:0 0 12px;
 
-      cursor:not-allowed;
-    }
+  font-size:24px;
 
+  line-height:1.35;
+}
 
-    /* =====================================================
-       WHY CHOOSE US
-    ===================================================== */
+.feature p{
+  margin:0;
 
-    .why{
-      background:#eaf6ef;
+  color:#858e89;
 
-      padding:85px 4.5% 90px;
+  font-size:17px;
 
-      overflow:hidden;
-    }
+  line-height:1.7;
+}
 
 
-    .why-inner{
-      max-width:1200px;
+/* =====================================================
+   FOOTER
+===================================================== */
 
-      margin:auto;
-    }
+footer{
+  background:#0c2118;
 
+  color:#fff;
 
-    .why .section-title{
-      margin-bottom:38px;
-    }
+  text-align:center;
 
+  padding:55px 20px 30px;
+}
 
-    .features{
-      display:grid;
+.footer-brand{
+  font-size:30px;
 
-      grid-template-columns:
-        repeat(4,minmax(0,1fr));
+  font-weight:900;
 
-      gap:20px;
-    }
+  margin-bottom:12px;
+}
 
+.footer-text{
+  color:#aebbb4;
 
-    .feature{
-      background:#fff;
+  font-size:17px;
 
-      border:1px solid #e1e8e4;
+  margin-bottom:30px;
+}
 
-      border-radius:28px;
+.footer-line{
+  height:1px;
 
-      padding:30px 25px;
+  background:rgba(255,255,255,.15);
 
-      min-height:260px;
+  margin:0 auto 25px;
 
-      box-shadow:
-        0 8px 25px rgba(0,0,0,.035);
-    }
+  max-width:700px;
+}
 
+.copyright{
+  color:#9eaaa4;
 
-    .feature-icon{
-      font-size:48px;
+  font-size:15px;
+}
 
-      margin-bottom:25px;
-    }
 
+/* =====================================================
+   CART PANEL
+===================================================== */
 
-    .feature h3{
-      font-size:23px;
+.cart-panel{
+  position:fixed;
 
-      line-height:1.35;
+  inset:0;
 
-      margin-bottom:13px;
-    }
+  background:rgba(0,0,0,.60);
 
+  display:none;
 
-    .feature p{
-      color:#7b8580;
+  z-index:9999;
 
-      font-size:16px;
+  padding:15px;
 
-      line-height:1.7;
-    }
+  overflow:auto;
+}
 
+.cart-box{
+  max-width:650px;
 
-    /* =====================================================
-       FOOTER
-    ===================================================== */
+  margin:30px auto;
 
-    footer{
-      background:#0e2118;
+  background:#fff;
 
-      color:#fff;
+  border-radius:20px;
 
-      padding:65px 25px 35px;
+  padding:22px;
 
-      text-align:center;
-    }
+  color:#222;
+}
 
+.cart-head{
+  display:flex;
 
-    .footer-brand{
-      font-size:32px;
+  align-items:center;
 
-      font-weight:900;
+  justify-content:space-between;
 
-      margin-bottom:12px;
-    }
+  gap:10px;
+}
 
+.cart-head h2{
+  margin:0;
 
-    .footer-tagline{
-      color:#b9c7c0;
+  font-size:28px;
+}
 
-      font-size:17px;
+.close-cart{
+  border:0;
 
-      margin-bottom:30px;
-    }
+  background:#eee;
 
+  border-radius:10px;
 
-    .footer-line{
-      height:1px;
+  padding:9px 14px;
 
-      background:rgba(255,255,255,.15);
+  font-size:22px;
 
-      max-width:1100px;
+  cursor:pointer;
+}
 
-      margin:0 auto 25px;
-    }
+.cart-item{
+  display:flex;
 
+  gap:12px;
 
-    .copyright{
-      color:#aebbb5;
+  align-items:center;
 
-      font-size:15px;
-    }
+  border-bottom:1px solid #ddd;
 
+  padding:15px 0;
+}
 
-    /* =====================================================
-       CART MODAL
-    ===================================================== */
+.cart-item img{
+  width:75px;
 
-    .cart-panel{
-      position:fixed;
+  height:75px;
 
-      inset:0;
+  object-fit:cover;
 
-      background:rgba(0,0,0,.58);
+  border-radius:10px;
+}
 
-      display:none;
+.cart-info{
+  flex:1;
+}
 
-      z-index:9999;
+.cart-info h4{
+  margin:0 0 5px;
 
-      padding:15px;
+  font-size:18px;
+}
 
-      overflow:auto;
-    }
+.qty{
+  display:flex;
 
+  align-items:center;
 
-    .cart-box{
-      max-width:680px;
+  gap:8px;
 
-      margin:30px auto;
+  margin-top:8px;
+}
 
-      background:#fff;
+.qty button{
+  border:0;
 
-      border-radius:22px;
+  background:#176b3a;
 
-      padding:24px;
+  color:#fff;
 
-      color:#222;
-    }
+  width:32px;
 
+  height:32px;
 
-    .cart-head{
-      display:flex;
+  border-radius:7px;
 
-      align-items:center;
+  cursor:pointer;
 
-      justify-content:space-between;
+  font-size:20px;
 
-      gap:10px;
+  font-weight:700;
+}
 
-      margin-bottom:10px;
-    }
+.remove-item{
+  border:0;
 
+  background:#c62828;
 
-    .cart-head h2{
-      font-size:30px;
-    }
+  color:#fff;
 
+  padding:8px 11px;
 
-    .close-cart{
-      border:0;
+  border-radius:7px;
 
-      background:#eee;
+  cursor:pointer;
 
-      width:48px;
-      height:48px;
+  font-weight:700;
+}
 
-      border-radius:12px;
+.cart-total{
+  font-size:21px;
 
-      font-size:25px;
+  font-weight:800;
 
-      cursor:pointer;
-    }
+  margin:20px 0;
+}
 
+.empty-cart{
+  text-align:center;
 
-    .cart-item{
-      display:flex;
+  padding:35px 10px;
 
-      gap:12px;
+  color:#777;
+}
 
-      align-items:center;
 
-      border-bottom:1px solid #ddd;
+/* =====================================================
+   CHECKOUT
+===================================================== */
 
-      padding:16px 0;
-    }
+.checkout-form{
+  border-top:1px solid #ddd;
 
+  margin-top:20px;
 
-    .cart-item img{
-      width:75px;
-      height:75px;
+  padding-top:20px;
+}
 
-      object-fit:cover;
+.checkout-form h3{
+  font-size:25px;
+}
 
-      border-radius:12px;
+.checkout-form label{
+  display:block;
 
-      flex-shrink:0;
-    }
+  margin:13px 0 6px;
 
+  font-weight:800;
+}
 
-    .cart-info{
-      flex:1;
-    }
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea{
+  width:100%;
 
+  box-sizing:border-box;
 
-    .cart-info h4{
-      margin:0 0 5px;
+  padding:13px;
 
-      font-size:18px;
-    }
+  border:1px solid #ccc;
 
+  border-radius:10px;
 
-    .qty{
-      display:flex;
+  font-size:16px;
+}
 
-      align-items:center;
+.checkout-form textarea{
+  min-height:95px;
+}
 
-      gap:9px;
+.place-order{
+  width:100%;
 
-      margin-top:8px;
-    }
+  border:0;
 
+  background:#176b3a;
 
-    .qty button{
-      border:0;
+  color:#fff;
 
-      background:#176b3a;
+  padding:15px;
 
-      color:#fff;
+  border-radius:11px;
 
-      width:34px;
-      height:34px;
+  font-size:18px;
 
-      border-radius:7px;
+  font-weight:800;
 
-      cursor:pointer;
+  margin-top:15px;
 
-      font-size:21px;
+  cursor:pointer;
+}
 
-      font-weight:800;
-    }
+.order-msg{
+  margin-top:15px;
 
+  font-weight:800;
 
-    .qty strong{
-      min-width:25px;
+  line-height:1.6;
+}
 
-      text-align:center;
 
-      font-size:18px;
-    }
+/* =====================================================
+   MOBILE
+===================================================== */
 
+@media(max-width:600px){
 
-    .remove-item{
-      border:0;
+  header{
+    height:82px;
 
-      background:#c62828;
+    padding:0 15px;
+  }
 
-      color:#fff;
+  .brand{
+    font-size:25px;
+  }
 
-      padding:9px 12px;
+  .brand span{
+    font-size:30px;
+  }
 
-      border-radius:8px;
+  nav a{
+    display:none;
+  }
 
-      cursor:pointer;
+  .cart-btn{
+    min-width:125px;
 
-      font-weight:700;
-    }
+    padding:11px 13px;
 
+    font-size:17px;
+  }
 
-    .cart-total{
-      font-size:22px;
+  .hero{
+    min-height:420px;
 
-      font-weight:900;
+    padding:55px 28px;
+  }
 
-      margin:20px 0;
-    }
+  .hero h1{
+    font-size:48px;
+  }
 
+  .hero p{
+    font-size:17px;
+  }
 
-    .checkout-form{
-      border-top:1px solid #ddd;
+  .categories,
+  .products-section{
+    padding:60px 28px;
+  }
 
-      margin-top:20px;
+  .why{
+    padding:65px 28px;
+  }
 
-      padding-top:20px;
-    }
+  .section-label{
+    font-size:14px;
 
+    letter-spacing:3px;
+  }
 
-    .checkout-form h3{
-      font-size:25px;
+  .section-title{
+    font-size:43px;
+  }
 
-      margin-bottom:15px;
-    }
+  /* CATEGORY = 2 x 2 */
+  .category-grid{
+    grid-template-columns:repeat(2,1fr);
 
+    gap:16px;
+  }
 
-    .checkout-form label{
-      display:block;
+  .category{
+    aspect-ratio:1 / 1;
 
-      margin:13px 0 6px;
+    min-height:0;
 
-      font-weight:800;
-    }
+    border-radius:25px;
+  }
 
+  .category-icon{
+    font-size:55px;
 
-    .checkout-form input,
-    .checkout-form select,
-    .checkout-form textarea{
-      width:100%;
+    margin-bottom:15px;
+  }
 
-      padding:13px;
+  .category strong{
+    font-size:19px;
+  }
 
-      border:1px solid #ccc;
+  /* PRODUCTS = 2 পাশাপাশি */
+  .grid{
+    grid-template-columns:repeat(2,1fr);
 
-      border-radius:10px;
+    gap:15px;
+  }
 
-      font-size:16px;
+  .products-heading{
+    align-items:flex-end;
+  }
 
-      font-family:inherit;
+  .products-heading > a{
+    padding:12px 16px;
 
-      background:#fff;
-    }
+    font-size:15px;
+  }
 
+  .card{
+    border-radius:22px;
+  }
 
-    .checkout-form textarea{
-      min-height:95px;
+  .card .body{
+    padding:15px;
+  }
 
-      resize:vertical;
-    }
+  .card h3{
+    font-size:20px;
+  }
 
+  .card p{
+    font-size:14px;
 
-    .place-order{
-      width:100%;
+    min-height:40px;
+  }
 
-      border:0;
+  .card b{
+    font-size:23px;
+  }
 
-      background:#176b3a;
+  .add-cart{
+    font-size:15px;
 
-      color:#fff;
+    padding:12px 6px;
+  }
 
-      padding:15px;
+  /* WHY = 2 x 2 */
+  .features{
+    grid-template-columns:repeat(2,1fr);
 
-      border-radius:12px;
+    gap:16px;
+  }
 
-      font-size:19px;
+  .feature{
+    aspect-ratio:1 / 1;
 
-      font-weight:900;
+    padding:20px;
 
-      margin-top:15px;
+    border-radius:25px;
+  }
 
-      cursor:pointer;
-    }
+  .feature-icon{
+    font-size:48px;
 
+    margin-bottom:15px;
+  }
 
-    .empty-cart{
-      text-align:center;
+  .feature h3{
+    font-size:19px;
+  }
 
-      padding:35px 10px;
+  .feature p{
+    font-size:13px;
 
-      color:#777;
+    line-height:1.55;
+  }
 
-      font-size:17px;
-    }
+  footer{
+    padding:45px 20px 25px;
+  }
 
+  .footer-brand{
+    font-size:25px;
+  }
 
-    .order-msg{
-      margin-top:15px;
+}
 
-      font-weight:800;
 
-      line-height:1.6;
-    }
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
+@media(max-width:380px){
 
-    /* =====================================================
-       TABLET
-    ===================================================== */
+  .brand{
+    font-size:21px;
+  }
 
-    @media(max-width:900px){
+  .cart-btn{
+    min-width:110px;
 
-      .category-grid,
-      .features{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-      }
+    font-size:15px;
+  }
 
+  .categories,
+  .products-section,
+  .why{
+    padding-left:18px;
+    padding-right:18px;
+  }
 
-      .grid{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-      }
+  .section-title{
+    font-size:37px;
+  }
 
-    }
+  .category strong{
+    font-size:17px;
+  }
 
+  .feature{
+    padding:15px;
+  }
 
-    /* =====================================================
-       MOBILE
-    ===================================================== */
+  .feature h3{
+    font-size:17px;
+  }
 
-    @media(max-width:600px){
+  .feature p{
+    font-size:12px;
+  }
 
-      header{
-        height:78px;
+}
 
-        padding:0 15px;
-      }
 
+/* =====================================================
+   ORDER FORM DISTRICT
+===================================================== */
 
-      .brand{
-        font-size:23px;
-      }
+#customerDistrict{
+  background:#fff;
+}
 
 
-      .brand-logo{
-        font-size:28px;
-      }
+/* =====================================================
+   LOADING
+===================================================== */
 
+.loading{
+  text-align:center;
 
-      .cart-btn{
-        padding:10px 13px;
+  padding:30px;
 
-        border-radius:13px;
+  color:#777;
 
-        font-size:16px;
-      }
+  font-size:18px;
+}
 
-
-      .cart-count{
-        min-width:32px;
-        height:32px;
-
-        font-size:15px;
-      }
-
-
-      .hero{
-        min-height:430px;
-
-        padding:55px 22px;
-      }
-
-
-      .hero h1{
-        font-size:43px;
-      }
-
-
-      .hero p{
-        font-size:17px;
-
-        line-height:1.7;
-      }
-
-
-      .hero::after{
-        font-size:180px;
-
-        right:-25px;
-      }
-
-
-      .categories{
-        padding:65px 22px;
-      }
-
-
-      .section-label{
-        font-size:13px;
-
-        letter-spacing:3px;
-      }
-
-
-      .section-title{
-        font-size:42px;
-      }
-
-
-      .category-grid{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap:14px;
-
-        margin-top:28px;
-      }
-
-
-      .category{
-        min-height:205px;
-
-        border-radius:25px;
-
-        gap:20px;
-      }
-
-
-      .category-icon{
-        font-size:50px;
-      }
-
-
-      .category strong{
-        font-size:19px;
-      }
-
-
-      .products-section{
-        padding:65px 15px 75px;
-      }
-
-
-      .products-heading{
-        align-items:end;
-
-        margin-bottom:25px;
-      }
-
-
-      .products-heading .section-title{
-        font-size:38px;
-      }
-
-
-      .all-products{
-        padding:12px 16px;
-
-        font-size:15px;
-      }
-
-
-      .grid{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap:12px;
-      }
-
-
-      .card{
-        border-radius:20px;
-      }
-
-
-      .card > img{
-        height:170px;
-      }
-
-
-      .card .body{
-        padding:14px;
-      }
-
-
-      .card small{
-        font-size:12px;
-      }
-
-
-      .card h3{
-        font-size:18px;
-      }
-
-
-      .card p{
-        font-size:13px;
-
-        line-height:1.5;
-
-        min-height:42px;
-      }
-
-
-      .card b{
-        font-size:20px;
-      }
-
-
-      .in,
-      .out{
-        font-size:13px;
-      }
-
-
-      .add-cart{
-        padding:11px 7px;
-
-        font-size:13px;
-
-        border-radius:9px;
-      }
-
-
-      .why{
-        padding:70px 22px 70px;
-      }
-
-
-      .why .section-title{
-        font-size:38px;
-
-        margin-bottom:28px;
-      }
-
-
-      .features{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap:14px;
-      }
-
-
-      .feature{
-        min-height:245px;
-
-        padding:25px 18px;
-
-        border-radius:24px;
-      }
-
-
-      .feature-icon{
-        font-size:40px;
-
-        margin-bottom:20px;
-      }
-
-
-      .feature h3{
-        font-size:19px;
-
-        line-height:1.35;
-      }
-
-
-      .feature p{
-        font-size:13px;
-
-        line-height:1.6;
-      }
-
-
-      footer{
-        padding:55px 20px 30px;
-      }
-
-
-      .footer-brand{
-        font-size:27px;
-      }
-
-
-      .footer-tagline{
-        font-size:15px;
-      }
-
-
-      .cart-box{
-        margin:15px auto;
-
-        padding:18px;
-
-        border-radius:20px;
-      }
-
-
-      .cart-head h2{
-        font-size:24px;
-      }
-
-
-      .cart-item img{
-        width:62px;
-        height:62px;
-      }
-
-
-      .cart-info h4{
-        font-size:16px;
-      }
-
-
-      .remove-item{
-        padding:7px 8px;
-
-        font-size:12px;
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -1245,22 +1119,17 @@
 
 <header>
 
-  <a href="#" class="brand">
+  <div class="brand">
+    <span>🐰</span>
+    ADORE'S PET
+  </div>
 
-    <span class="brand-logo">🐰</span>
-
-    <span>ADORE'S PET</span>
-
-  </a>
-
-
-  <div class="header-right">
+  <nav>
 
     <button
       class="cart-btn"
       onclick="openCart()"
     >
-
       🛒 Cart
 
       <span
@@ -1272,7 +1141,7 @@
 
     </button>
 
-  </div>
+  </nav>
 
 </header>
 
@@ -1285,268 +1154,287 @@
 <main>
 
 
-  <!-- ===================================================
-       HERO
-  ==================================================== -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="hero-content">
+  <div class="hero-content">
 
-      <div class="hero-badge">
-        ADORE'S PET
+    <div class="hero-badge">
+      ADORE'S PET
+    </div>
+
+    <h1>
+      আপনার পছন্দের<br>
+      পোষা প্রাণী
+    </h1>
+
+    <p>
+      সুস্থ ও সুন্দর পোষা প্রাণী এবং প্রয়োজনীয়
+      Pet Products এক জায়গায়।
+    </p>
+
+    <a
+      href="#categories"
+      class="hero-btn"
+    >
+      🛍️ এখনই শপিং করুন
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section
+  id="categories"
+  class="categories"
+>
+
+  <div class="section-label">
+    SHOP BY CATEGORY
+  </div>
+
+  <h2 class="section-title">
+    ক্যাটাগরি
+  </h2>
+
+
+  <div class="category-grid">
+
+
+    <a
+      href="#products"
+      class="category"
+    >
+
+      <div class="category-icon">
+        🐰
       </div>
 
-      
-      <p>
-        সুস্থ ও সুন্দর পোষা প্রাণী এবং
-        প্রয়োজনীয় Pet Products এক জায়গায়।
-      </p>
+      <strong>
+        Rabbit
+      </strong>
+
+    </a>
 
 
-      <a
-        href="#products"
-        class="hero-btn"
-      >
-        🛍️ এখনই শপিং করুন
-      </a>
+    <a
+      href="#products"
+      class="category"
+    >
+
+      <div class="category-icon">
+        🐹
+      </div>
+
+      <strong>
+        Hamster
+      </strong>
+
+    </a>
+
+
+    <a
+      href="#products"
+      class="category"
+    >
+
+      <div class="category-icon">
+        🌾
+      </div>
+
+      <strong>
+        Pet Food
+      </strong>
+
+    </a>
+
+
+    <a
+      href="#products"
+      class="category"
+    >
+
+      <div class="category-icon">
+        🧺
+      </div>
+
+      <strong>
+        Accessories
+      </strong>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section
+  id="products"
+  class="products-section"
+>
+
+  <div class="products-heading">
+
+    <div>
+
+      <div class="section-label">
+        OUR COLLECTION
+      </div>
+
+      <h2 class="section-title">
+        আমাদের পণ্য
+      </h2>
 
     </div>
 
-  </section>
+    <a href="#products">
+      সব পণ্য
+    </a>
+
+  </div>
+
+
+  <div
+    id="grid"
+    class="grid"
+  >
+
+    <div class="loading">
+      পণ্য লোড হচ্ছে...
+    </div>
+
+  </div>
+
+</section>
 
 
 
-  <!-- ===================================================
-       CATEGORY
-  ==================================================== -->
+<!-- =====================================================
+     WHY CHOOSE US
+===================================================== -->
 
-  <section class="categories">
+<section class="why">
+
+  <div class="why-inner">
 
     <div class="section-label">
-      SHOP BY CATEGORY
+      WHY CHOOSE US
     </div>
 
-
     <h2 class="section-title">
-      
+      কেন ADORE'S PET?
     </h2>
 
 
-    <div class="category-grid">
+    <div class="features">
 
 
-      <a
-        href="#products"
-        class="category"
-      >
+      <!-- 1 -->
 
-        <div class="category-icon">
+      <div class="feature">
+
+        <div class="feature-icon">
           🐰
         </div>
 
-        <strong>
-          Rabbit
-        </strong>
+        <h3>
+          সুস্থ পোষা প্রাণী
+        </h3>
 
-      </a>
+        <p>
+          যত্নসহকারে পালন করা স্বাস্থ্যকর
+          ও সুন্দর পোষা প্রাণী।
+        </p>
 
-
-      <a
-        href="#products"
-        class="category"
-      >
-
-        <div class="category-icon">
-          🐹
-        </div>
-
-        <strong>
-          Hamster
-        </strong>
-
-      </a>
-
-
-      <a
-        href="#products"
-        class="category"
-      >
-
-        <div class="category-icon">
-          🌾
-        </div>
-
-        <strong>
-          Pet Food
-        </strong>
-
-      </a>
-
-
-      <a
-        href="#products"
-        class="category"
-      >
-
-        <div class="category-icon">
-          🧺
-        </div>
-
-        <strong>
-          Accessories
-        </strong>
-
-      </a>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       PRODUCTS
-  ==================================================== -->
-
-  <section
-    id="products"
-    class="products-section"
-  >
-
-    <div class="products-heading">
-
-      <div>
-
-        <div class="section-label">
-          OUR COLLECTION
-        </div>
-
-
-      <a
-        href="#products"
-        class="all-products"
-      >
-        সব পণ্য
-      </a>
-
-    </div>
-
-
-    <div
-      id="grid"
-      class="grid"
-    >
-
-      <p>
-        পণ্য লোড হচ্ছে...
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- ===================================================
-       WHY CHOOSE US
-  ==================================================== -->
-
-  <section class="why">
-
-    <div class="why-inner">
-
-
-      <div class="section-label">
-        WHY CHOOSE US
       </div>
 
 
 
-      <div class="features">
+      <!-- 2 -->
 
+      <div class="feature">
 
-        <div class="feature">
-
-          <div class="feature-icon">
-            🐰
-          </div>
-
-          <h3>
-            সুস্থ পোষা প্রাণী
-          </h3>
-
-          <p>
-            যত্নসহকারে পালন করা
-            স্বাস্থ্যকর ও সুন্দর পোষা প্রাণী।
-          </p>
-
+        <div class="feature-icon">
+          🚚
         </div>
 
+        <h3>
+          Delivery সুবিধা
+        </h3>
 
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            🚚
-          </div>
-
-          <h3>
-            Delivery সুবিধা
-          </h3>
-
-          <p>
-            দেশের বিভিন্ন জায়গায় সহজে
-            অর্ডার ও ডেলিভারি সুবিধা।
-          </p>
-
-        </div>
-
-
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            ⭐
-          </div>
-
-          <h3>
-            বিশ্বস্ত সেবা
-          </h3>
-
-          <p>
-            গ্রাহকের সন্তুষ্টি ও ভালো
-            সার্ভিসকে আমরা গুরুত্ব দিই।
-          </p>
-
-        </div>
-
-
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            🛡️
-          </div>
-
-          <h3>
-            মানসম্মত পণ্য
-          </h3>
-
-          <p>
-            পোষা প্রাণীর জন্য প্রয়োজনীয়
-            ভালো মানের পণ্য।
-          </p>
-
-        </div>
-
+        <p>
+          দেশের বিভিন্ন জায়গায় সহজে
+          অর্ডার ও ডেলিভারি সুবিধা।
+        </p>
 
       </div>
 
+
+
+      <!-- 3 -->
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⭐
+        </div>
+
+        <h3>
+          বিশ্বস্ত সেবা
+        </h3>
+
+        <p>
+          গ্রাহকের সন্তুষ্টি ও ভালো
+          সার্ভিসকে আমরা সর্বোচ্চ
+          গুরুত্ব দিই।
+        </p>
+
+      </div>
+
+
+
+      <!-- 4 -->
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🛡️
+        </div>
+
+        <h3>
+          মানসম্মত পণ্য
+        </h3>
+
+        <p>
+          পোষা প্রাণীর জন্য প্রয়োজনীয়
+          ভালো মানের পণ্য।
+        </p>
+
+      </div>
+
+
     </div>
 
-  </section>
+  </div>
+
+</section>
+
 
 
 </main>
@@ -1563,20 +1451,15 @@
     🐰 ADORE'S PET
   </div>
 
-
-  <div class="footer-tagline">
+  <div class="footer-text">
     আপনার বিশ্বস্ত Pet Shop
   </div>
 
-
   <div class="footer-line"></div>
 
-
   <div class="copyright">
-
     © <span id="year"></span>
     ADORE'S PET — All Rights Reserved
-
   </div>
 
 </footer>
@@ -1584,14 +1467,13 @@
 
 
 <!-- =====================================================
-     CART
+     CART PANEL
 ===================================================== -->
 
 <div
   id="cartPanel"
   class="cart-panel"
 >
-
 
   <div class="cart-box">
 
@@ -1601,7 +1483,6 @@
       <h2>
         🛒 আপনার Cart
       </h2>
-
 
       <button
         class="close-cart"
@@ -1615,17 +1496,15 @@
 
     <div id="cartItems"></div>
 
-
     <div id="cartSummary"></div>
 
 
 
-    <!-- ================================================
-         CHECKOUT
+    <!-- =================================================
+         CHECKOUT FORM
     ================================================= -->
 
     <div class="checkout-form">
-
 
       <h3>
         📦 অর্ডারের তথ্য
@@ -1658,92 +1537,110 @@
         জেলা
       </label>
 
+
       <select id="customerDistrict">
-<select id="customerDistrict">
 
-  <option value="">জেলা নির্বাচন করুন</option>
+        <option value="">
+          জেলা নির্বাচন করুন
+        </option>
 
-  <!-- ঢাকা বিভাগ -->
-  <option>ঢাকা</option>
-  <option>ফরিদপুর</option>
-  <option>গাজীপুর</option>
-  <option>গোপালগঞ্জ</option>
-  <option>কিশোরগঞ্জ</option>
-  <option>মাদারীপুর</option>
-  <option>মানিকগঞ্জ</option>
-  <option>মুন্সিগঞ্জ</option>
-  <option>নারায়ণগঞ্জ</option>
-  <option>নরসিংদী</option>
-  <option>রাজবাড়ী</option>
-  <option>শরীয়তপুর</option>
-  <option>টাঙ্গাইল</option>
 
-  <!-- চট্টগ্রাম বিভাগ -->
-  <option>চট্টগ্রাম</option>
-  <option>কক্সবাজার</option>
-  <option>কুমিল্লা</option>
-  <option>ব্রাহ্মণবাড়িয়া</option>
-  <option>চাঁদপুর</option>
-  <option>ফেনী</option>
-  <option>খাগড়াছড়ি</option>
-  <option>লক্ষ্মীপুর</option>
-  <option>নোয়াখালী</option>
-  <option>রাঙ্গামাটি</option>
-  <option>বান্দরবান</option>
+        <!-- ঢাকা বিভাগ -->
 
-  <!-- রাজশাহী বিভাগ -->
-  <option>রাজশাহী</option>
-  <option>বগুড়া</option>
-  <option>জয়পুরহাট</option>
-  <option>নওগাঁ</option>
-  <option>নাটোর</option>
-  <option>চাঁপাইনবাবগঞ্জ</option>
-  <option>পাবনা</option>
-  <option>সিরাজগঞ্জ</option>
+        <option>ঢাকা</option>
+        <option>ফরিদপুর</option>
+        <option>গাজীপুর</option>
+        <option>গোপালগঞ্জ</option>
+        <option>কিশোরগঞ্জ</option>
+        <option>মাদারীপুর</option>
+        <option>মানিকগঞ্জ</option>
+        <option>মুন্সিগঞ্জ</option>
+        <option>নারায়ণগঞ্জ</option>
+        <option>নরসিংদী</option>
+        <option>রাজবাড়ী</option>
+        <option>শরীয়তপুর</option>
+        <option>টাঙ্গাইল</option>
 
-  <!-- খুলনা বিভাগ -->
-  <option>খুলনা</option>
-  <option>বাগেরহাট</option>
-  <option>চুয়াডাঙ্গা</option>
-  <option>যশোর</option>
-  <option>ঝিনাইদহ</option>
-  <option>কুষ্টিয়া</option>
-  <option>মাগুরা</option>
-  <option>মেহেরপুর</option>
-  <option>নড়াইল</option>
-  <option>সাতক্ষীরা</option>
 
-  <!-- বরিশাল বিভাগ -->
-  <option>বরিশাল</option>
-  <option>ভোলা</option>
-  <option>ঝালকাঠি</option>
-  <option>পটুয়াখালী</option>
-  <option>পিরোজপুর</option>
-  <option>বরগুনা</option>
+        <!-- চট্টগ্রাম বিভাগ -->
 
-  <!-- সিলেট বিভাগ -->
-  <option>সিলেট</option>
-  <option>হবিগঞ্জ</option>
-  <option>মৌলভীবাজার</option>
-  <option>সুনামগঞ্জ</option>
+        <option>চট্টগ্রাম</option>
+        <option>কক্সবাজার</option>
+        <option>কুমিল্লা</option>
+        <option>ব্রাহ্মণবাড়িয়া</option>
+        <option>চাঁদপুর</option>
+        <option>ফেনী</option>
+        <option>খাগড়াছড়ি</option>
+        <option>লক্ষ্মীপুর</option>
+        <option>নোয়াখালী</option>
+        <option>রাঙ্গামাটি</option>
+        <option>বান্দরবান</option>
 
-  <!-- রংপুর বিভাগ -->
-  <option>রংপুর</option>
-  <option>দিনাজপুর</option>
-  <option>গাইবান্ধা</option>
-  <option>কুড়িগ্রাম</option>
-  <option>লালমনিরহাট</option>
-  <option>নীলফামারী</option>
-  <option>পঞ্চগড়</option>
-  <option>ঠাকুরগাঁও</option>
 
-  <!-- ময়মনসিংহ বিভাগ -->
-  <option>ময়মনসিংহ</option>
-  <option>জামালপুর</option>
-  <option>নেত্রকোণা</option>
-  <option>শেরপুর</option>
+        <!-- রাজশাহী বিভাগ -->
 
-</select>
+        <option>রাজশাহী</option>
+        <option>বগুড়া</option>
+        <option>জয়পুরহাট</option>
+        <option>নওগাঁ</option>
+        <option>নাটোর</option>
+        <option>চাঁপাইনবাবগঞ্জ</option>
+        <option>পাবনা</option>
+        <option>সিরাজগঞ্জ</option>
+
+
+        <!-- খুলনা বিভাগ -->
+
+        <option>খুলনা</option>
+        <option>বাগেরহাট</option>
+        <option>চুয়াডাঙ্গা</option>
+        <option>যশোর</option>
+        <option>ঝিনাইদহ</option>
+        <option>কুষ্টিয়া</option>
+        <option>মাগুরা</option>
+        <option>মেহেরপুর</option>
+        <option>নড়াইল</option>
+        <option>সাতক্ষীরা</option>
+
+
+        <!-- বরিশাল বিভাগ -->
+
+        <option>বরিশাল</option>
+        <option>ভোলা</option>
+        <option>ঝালকাঠি</option>
+        <option>পটুয়াখালী</option>
+        <option>পিরোজপুর</option>
+        <option>বরগুনা</option>
+
+
+        <!-- সিলেট বিভাগ -->
+
+        <option>সিলেট</option>
+        <option>হবিগঞ্জ</option>
+        <option>মৌলভীবাজার</option>
+        <option>সুনামগঞ্জ</option>
+
+
+        <!-- রংপুর বিভাগ -->
+
+        <option>রংপুর</option>
+        <option>দিনাজপুর</option>
+        <option>গাইবান্ধা</option>
+        <option>কুড়িগ্রাম</option>
+        <option>লালমনিরহাট</option>
+        <option>নীলফামারী</option>
+        <option>পঞ্চগড়</option>
+        <option>ঠাকুরগাঁও</option>
+
+
+        <!-- ময়মনসিংহ বিভাগ -->
+
+        <option>ময়মনসিংহ</option>
+        <option>জামালপুর</option>
+        <option>নেত্রকোণা</option>
+        <option>শেরপুর</option>
+
+      </select>
 
 
       <label>
@@ -1752,9 +1649,8 @@
 
       <textarea
         id="customerAddress"
-        placeholder="বাড়ি / রোড / এলাকা / থানা..."
+        placeholder="বাড়ি/রোড/এলাকা/থানা..."
       ></textarea>
-
 
 
       <label>
@@ -1774,14 +1670,12 @@
       </select>
 
 
-
       <div
         id="checkoutTotal"
         class="cart-total"
       >
         মোট: ৳0
       </div>
-
 
 
       <button
@@ -1792,7 +1686,6 @@
       </button>
 
 
-
       <div
         id="orderMsg"
         class="order-msg"
@@ -1800,7 +1693,6 @@
 
 
     </div>
-
 
   </div>
 
@@ -1815,20 +1707,11 @@
 <script src="config.js"></script>
 
 
-
-<!-- =====================================================
-     SUPABASE + JAVASCRIPT
-===================================================== -->
-
 <script type="module">
-
 
 import {
   createClient
-}
-from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
+} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
 /* =====================================================
@@ -1842,13 +1725,12 @@ const ready =
   window.SUPABASE_ANON_KEY.length > 20;
 
 
-const db =
-  ready
-    ? createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_ANON_KEY
-      )
-    : null;
+const db = ready
+  ? createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    )
+  : null;
 
 
 
@@ -1925,7 +1807,6 @@ function productCard(p){
 
     <article class="card">
 
-
       <img
         src="${escapeHtml(image)}"
         alt="${escapeHtml(p.title)}"
@@ -1934,10 +1815,9 @@ function productCard(p){
 
       <div class="body">
 
-
         <small>
           ${escapeHtml(
-            p.category
+            p.category || "Pet"
           )}
         </small>
 
@@ -1966,15 +1846,15 @@ function productCard(p){
         <div
           class="${
             stock > 0
-              ? "in"
-              : "out"
+            ? "in"
+            : "out"
           }"
         >
 
           ${
             stock > 0
-              ? "স্টকে আছে: " + stock
-              : "স্টক শেষ"
+            ? "স্টকে আছে: " + stock
+            : "স্টক শেষ"
           }
 
         </div>
@@ -1982,32 +1862,27 @@ function productCard(p){
 
         <div class="product-actions">
 
-
           <button
             class="add-cart"
 
             ${
               stock <= 0
-                ? "disabled"
-                : ""
+              ? "disabled"
+              : ""
             }
 
-            onclick="
-              addToCart('${p.id}')
-            "
+            onclick="addToCart('${p.id}')"
           >
 
             ${
               stock > 0
-                ? "🛒 Cart-এ যোগ করুন"
-                : "স্টক শেষ"
+              ? "🛒 Cart-এ যোগ করুন"
+              : "স্টক শেষ"
             }
 
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -2027,8 +1902,11 @@ async function loadProducts(){
 
   if(!db){
 
-    grid.innerHTML =
-      "<p>Supabase config.js সেটআপ করা হয়নি।</p>";
+    grid.innerHTML = `
+      <p>
+        Supabase config.js সেটআপ করা হয়নি।
+      </p>
+    `;
 
     return;
   }
@@ -2053,8 +1931,11 @@ async function loadProducts(){
 
     console.error(error);
 
-    grid.innerHTML =
-      "<p>পণ্য লোড করা যায়নি।</p>";
+    grid.innerHTML = `
+      <p>
+        পণ্য লোড করা যায়নি।
+      </p>
+    `;
 
     return;
   }
@@ -2067,11 +1948,15 @@ async function loadProducts(){
   grid.innerHTML =
     products.length
 
-      ? products
-          .map(productCard)
-          .join("")
+    ? products
+        .map(productCard)
+        .join("")
 
-      : "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
+    : `
+      <p>
+        এখনো কোনো পণ্য যোগ করা হয়নি।
+      </p>
+    `;
 
 }
 
@@ -2106,14 +1991,10 @@ function updateCartCount(){
 
   const count =
     cart.reduce(
-      (
-        total,
-        item
-      ) =>
+      (total,item) =>
         total +
-        Number(
-          item.qty || 0
-        ),
+        Number(item.qty || 0),
+
       0
     );
 
@@ -2161,7 +2042,7 @@ function(id){
   if(stock <= 0){
 
     alert(
-      "এই পণ্যটি স্টকে নেই।"
+      "এই পণ্যটি বর্তমানে স্টকে নেই।"
     );
 
     return;
@@ -2191,35 +2072,28 @@ function(id){
     }
 
 
-    existing.qty =
-      Number(existing.qty) + 1;
+    existing.qty++;
 
   }
-
 
   else{
 
     cart.push({
 
-      id:
-        product.id,
+      id:product.id,
 
-      title:
-        product.title,
+      title:product.title,
 
-      price:
-        Number(
-          product.price || 0
-        ),
+      price:Number(
+        product.price || 0
+      ),
 
       image_url:
         product.image_url || "",
 
-      stock:
-        stock,
+      stock:stock,
 
-      qty:
-        1
+      qty:1
 
     });
 
@@ -2228,9 +2102,7 @@ function(id){
 
   saveCart();
 
-
   renderCart();
-
 
   alert(
     "পণ্য Cart-এ যোগ হয়েছে।"
@@ -2241,7 +2113,7 @@ function(id){
 
 
 /* =====================================================
-   DELETE
+   REMOVE
 ===================================================== */
 
 window.removeFromCart =
@@ -2264,14 +2136,11 @@ function(id){
 
 
 /* =====================================================
-   PLUS / MINUS
+   CHANGE QUANTITY
 ===================================================== */
 
 window.changeQty =
-function(
-  id,
-  change
-){
+function(id,change){
 
   const item =
     cart.find(
@@ -2281,10 +2150,8 @@ function(
     );
 
 
-  if(!item){
-
+  if(!item)
     return;
-  }
 
 
   const newQty =
@@ -2332,10 +2199,8 @@ function(
 function getSubtotal(){
 
   return cart.reduce(
-    (
-      total,
-      item
-    ) =>
+    (total,item) =>
+
       total +
       (
         Number(item.price) *
@@ -2365,10 +2230,6 @@ function getDeliveryCharge(){
 
 
 
-/* =====================================================
-   UPDATE TOTAL
-===================================================== */
-
 function updateCheckoutTotal(){
 
   const subtotal =
@@ -2390,6 +2251,15 @@ function updateCheckoutTotal(){
     `মোট: ৳${total.toLocaleString("en-BD")}`;
 
 }
+
+
+
+document.getElementById(
+  "deliveryCharge"
+).addEventListener(
+  "change",
+  updateCheckoutTotal
+);
 
 
 
@@ -2419,7 +2289,7 @@ function renderCart(){
 
         🛒 Cart এখন খালি।
 
-        <br>
+        <br><br>
 
         পছন্দের পণ্য Cart-এ যোগ করুন।
 
@@ -2433,32 +2303,26 @@ function renderCart(){
     updateCheckoutTotal();
 
     return;
-
   }
 
 
 
   container.innerHTML =
-    cart
-      .map(
-        item => `
+
+    cart.map(
+      item => `
 
         <div class="cart-item">
-
 
           <img
             src="${escapeHtml(
               item.image_url ||
               "https://images.unsplash.com/photo-1583301286816-f4f05e1f8b2d?auto=format&fit=crop&w=300&q=80"
             )}"
-            alt="${escapeHtml(
-              item.title
-            )}"
           >
 
 
           <div class="cart-info">
-
 
             <h4>
               ${escapeHtml(
@@ -2476,9 +2340,7 @@ function renderCart(){
 
             <div class="qty">
 
-
               <button
-                type="button"
                 onclick="
                   changeQty(
                     '${item.id}',
@@ -2496,7 +2358,6 @@ function renderCart(){
 
 
               <button
-                type="button"
                 onclick="
                   changeQty(
                     '${item.id}',
@@ -2507,15 +2368,12 @@ function renderCart(){
                 +
               </button>
 
-
             </div>
-
 
           </div>
 
 
           <button
-            type="button"
             class="remove-item"
 
             onclick="
@@ -2524,18 +2382,13 @@ function renderCart(){
               )
             "
           >
-
             Delete
-
           </button>
-
 
         </div>
 
       `
-      )
-      .join("");
-
+    ).join("");
 
 
   const subtotal =
@@ -2596,19 +2449,6 @@ function(){
 
 
 /* =====================================================
-   DELIVERY CHANGE
-===================================================== */
-
-document.getElementById(
-  "deliveryCharge"
-).addEventListener(
-  "change",
-  updateCheckoutTotal
-);
-
-
-
-/* =====================================================
    PLACE ORDER
 ===================================================== */
 
@@ -2624,7 +2464,6 @@ async function(){
   msg.textContent = "";
 
 
-
   if(!cart.length){
 
     msg.textContent =
@@ -2632,7 +2471,6 @@ async function(){
 
     return;
   }
-
 
 
   const name =
@@ -2673,7 +2511,6 @@ async function(){
   }
 
 
-
   if(!phone){
 
     msg.textContent =
@@ -2681,7 +2518,6 @@ async function(){
 
     return;
   }
-
 
 
   if(!district){
@@ -2693,7 +2529,6 @@ async function(){
   }
 
 
-
   if(!address){
 
     msg.textContent =
@@ -2701,7 +2536,6 @@ async function(){
 
     return;
   }
-
 
 
   if(!db){
@@ -2713,7 +2547,6 @@ async function(){
   }
 
 
-
   const subtotal =
     getSubtotal();
 
@@ -2721,7 +2554,6 @@ async function(){
   const total =
     subtotal +
     delivery;
-
 
 
   const orderItems =
@@ -2735,146 +2567,127 @@ async function(){
           item.title,
 
         price:
-          Number(item.price),
+          item.price,
 
         quantity:
-          Number(item.qty)
+          item.qty
 
       })
     );
-
 
 
   msg.textContent =
     "⏳ অর্ডার পাঠানো হচ্ছে...";
 
 
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("orders")
+      .insert({
 
-  try{
+        customer_name:
+          name,
 
+        phone:
+          phone,
 
-    const {
-      data,
-      error
-    } =
-      await db
-        .from("orders")
-        .insert({
+        district:
+          district,
 
-          customer_name:
-            name,
+        address:
+          address,
 
-          phone:
-            phone,
+        delivery_charge:
+          delivery,
 
-          district:
-            district,
+        subtotal:
+          subtotal,
 
-          address:
-            address,
+        total_amount:
+          total,
 
-          delivery_charge:
-            delivery,
+        items:
+          orderItems,
 
-          subtotal:
-            subtotal,
+        status:
+          "pending"
 
-          total_amount:
-            total,
-
-          items:
-            orderItems,
-
-          status:
-            "pending"
-
-        })
-        .select()
-        .single();
+      })
+      .select()
+      .single();
 
 
 
-    if(error){
+  if(error){
 
-      console.error(error);
-
-      msg.textContent =
-        "❌ অর্ডার করা যায়নি: " +
-        error.message;
-
-      return;
-    }
-
-
-
-    msg.innerHTML = `
-
-      <span
-        style="
-          color:#176b3a;
-          font-size:18px;
-        "
-      >
-
-        ✅ অর্ডার সফল হয়েছে!
-
-        <br>
-
-        Order ID:
-        ${escapeHtml(
-          data.id
-        )}
-
-      </span>
-
-    `;
-
-
-
-    cart = [];
-
-    saveCart();
-
-    renderCart();
-
-
-
-    document.getElementById(
-      "customerName"
-    ).value = "";
-
-
-    document.getElementById(
-      "customerPhone"
-    ).value = "";
-
-
-    document.getElementById(
-      "customerDistrict"
-    ).value = "";
-
-
-    document.getElementById(
-      "customerAddress"
-    ).value = "";
-
-
-
-    alert(
-      "আপনার অর্ডার সফলভাবে নেওয়া হয়েছে।"
-    );
-
-
-  }
-
-  catch(err){
-
-    console.error(err);
+    console.error(error);
 
     msg.textContent =
-      "❌ একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।";
+      "❌ অর্ডার করা যায়নি: " +
+      error.message;
 
+    return;
   }
+
+
+
+  msg.innerHTML = `
+
+    <span
+      style="
+        color:#176b3a;
+        font-size:18px;
+      "
+    >
+
+      ✅ অর্ডার সফল হয়েছে!
+
+      <br><br>
+
+      Order ID:
+
+      ${escapeHtml(
+        data.id
+      )}
+
+    </span>
+
+  `;
+
+
+  cart = [];
+
+  saveCart();
+
+  renderCart();
+
+
+  document.getElementById(
+    "customerName"
+  ).value = "";
+
+
+  document.getElementById(
+    "customerPhone"
+  ).value = "";
+
+
+  document.getElementById(
+    "customerDistrict"
+  ).value = "";
+
+
+  document.getElementById(
+    "customerAddress"
+  ).value = "";
+
+
+  alert(
+    "আপনার অর্ডার সফলভাবে নেওয়া হয়েছে।"
+  );
 
 };
 
@@ -2886,12 +2699,8 @@ async function(){
 
 updateCartCount();
 
-updateCheckoutTotal();
-
-
 </script>
 
 
 </body>
-
 </html>
