@@ -1,269 +1,269 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ADORE'S PET</title>
+<title>Adore's PET</title>
 
 <style>
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
-    margin:0;
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background:#f4f9f6;
-    color:#092d22;
+    color:#063c2c;
 }
 
-/* HEADER */
-.header{
-    height:105px;
+/* ================= HEADER ================= */
+
+header{
+    height:180px;
     background:#fff;
+    border-bottom:1px solid #ddd;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 6%;
-    border-bottom:1px solid #e5e5e5;
+    padding:25px 7%;
 }
 
 .logo{
-    width:75px;
     cursor:pointer;
+    font-size:30px;
+    font-weight:800;
+    line-height:1.15;
+    color:#063c2c;
 }
 
 .cart-btn{
-    background:#177b45;
-    color:#fff;
-    border:0;
-    border-radius:35px;
-    height:64px;
-    min-width:235px;
-    padding:0 15px;
-    font-size:22px;
-    font-weight:bold;
+    background:#16834d;
+    color:white;
+    border:none;
+    border-radius:60px;
+    min-width:360px;
+    height:90px;
+    padding:0 20px 0 35px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    font-size:32px;
+    font-weight:700;
     cursor:pointer;
 }
 
+.cart-icon{
+    font-size:42px;
+}
+
 .cart-count{
-    background:#fff;
-    color:#177b45;
-    width:48px;
-    height:48px;
+    background:white;
+    color:#16834d;
+    width:72px;
+    height:72px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:30px;
 }
 
-/* CATEGORY */
-.category-section{
-    padding:90px 5%;
+/* ================= MAIN ================= */
+
+main{
+    max-width:1100px;
+    margin:auto;
+    padding:90px 35px;
 }
 
 .section-title{
     text-align:center;
-    font-size:27px;
+    font-size:42px;
     letter-spacing:7px;
-    margin:0 0 55px;
-    color:#197647;
-}
-
-.categories{
-    max-width:650px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-}
-
-.category-card{
-    height:300px;
-    background:#fff;
-    border:2px solid #dce4e0;
-    border-radius:40px;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-    transition:.25s;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.04);
-}
-
-.category-card:hover{
-    transform:translateY(-5px);
-    border-color:#177b45;
-}
-
-.category-icon{
-    font-size:105px;
-    margin-bottom:20px;
-}
-
-.category-name{
-    font-size:28px;
+    color:#167b4b;
+    margin-bottom:65px;
     font-weight:800;
 }
 
-/* WHY */
-.why-section{
-    background:#eaf7f0;
-    padding:90px 5%;
-}
+/* ================= CATEGORY ================= */
 
-.why-grid{
-    max-width:650px;
-    margin:auto;
+.category-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+    grid-template-columns:repeat(2,1fr);
+    gap:35px;
+    margin-bottom:120px;
 }
 
-.why-card{
-    background:#fff;
-    border:2px solid #d8e2de;
-    border-radius:38px;
-    min-height:300px;
-    padding:25px 18px;
-
-    text-align:center;
-
+.category-card{
+    background:white;
+    min-height:400px;
+    border:4px solid #dfe7e3;
+    border-radius:55px;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 8px 25px rgba(0,0,0,.04);
+}
+
+.category-card:hover{
+    border-color:#16834d;
+    transform:translateY(-5px);
+}
+
+.category-icon{
+    font-size:115px;
+    margin-bottom:35px;
+}
+
+.category-name{
+    font-size:34px;
+    font-weight:800;
+    color:#063c2c;
+}
+
+/* ================= WHY CHOOSE US ================= */
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:35px;
+}
+
+.why-card{
+    background:white;
+    min-height:300px;
+    border:4px solid #dfe7e3;
+    border-radius:50px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.04);
 }
 
 .why-icon{
-    font-size:75px;
+    font-size:85px;
+    margin-bottom:25px;
 }
 
-.why-card h3{
-    font-size:23px;
-    margin:12px 0;
+.why-title{
+    font-size:30px;
+    font-weight:800;
+    color:#063c2c;
+    margin-bottom:12px;
 }
 
-.why-card p{
-    color:#858c88;
-    font-size:16px;
-    line-height:1.6;
-}
-
-/* FOOTER */
-.footer{
-    background:#002c20;
-    color:#fff;
-    text-align:center;
-    padding:65px 20px 30px;
-}
-
-.footer-logo{
-    font-size:38px;
-    font-weight:bold;
-}
-
-.footer-tagline{
-    color:#b7c9c3;
-    margin-top:18px;
+.why-text{
     font-size:18px;
+    color:#60736b;
+    line-height:1.5;
 }
 
-.footer-line{
-    max-width:600px;
-    height:1px;
-    background:#31554c;
-    margin:30px auto 20px;
+/* ================= FOOTER ================= */
+
+footer{
+    background:#073d2d;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+    margin-top:50px;
 }
 
-.copyright{
-    color:#aebdb8;
+footer h2{
+    font-size:28px;
+    margin-bottom:10px;
 }
 
-/* MOBILE */
+footer p{
+    font-size:16px;
+    opacity:.85;
+}
+
+/* ================= MOBILE ================= */
+
 @media(max-width:600px){
 
-    .header{
-        height:95px;
-        padding:0 25px;
+    header{
+        height:180px;
+        padding:20px 30px;
     }
 
     .logo{
-        width:65px;
+        font-size:29px;
+        max-width:130px;
     }
 
     .cart-btn{
-        min-width:190px;
-        height:56px;
-        font-size:18px;
+        min-width:210px;
+        height:72px;
+        padding:0 12px 0 20px;
+        font-size:25px;
+    }
+
+    .cart-icon{
+        font-size:30px;
     }
 
     .cart-count{
-        width:42px;
-        height:42px;
+        width:55px;
+        height:55px;
+        font-size:23px;
     }
 
-    .category-section{
-        padding:75px 20px;
+    main{
+        padding:95px 38px;
     }
 
     .section-title{
-        font-size:22px;
-        letter-spacing:4px;
+        font-size:25px;
+        letter-spacing:5px;
+        margin-bottom:55px;
     }
 
-    .categories{
-        gap:18px;
+    .category-grid,
+    .why-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:30px;
     }
 
     .category-card{
-        height:220px;
-        border-radius:28px;
+        min-height:380px;
+        border-radius:42px;
     }
 
     .category-icon{
-        font-size:70px;
+        font-size:75px;
+        margin-bottom:30px;
     }
 
     .category-name{
-        font-size:20px;
-    }
-
-    .why-section{
-        padding:75px 20px;
-    }
-
-    .why-grid{
-        gap:18px;
+        font-size:27px;
     }
 
     .why-card{
-        min-height:260px;
-        border-radius:28px;
+        min-height:290px;
+        border-radius:40px;
+        padding:20px 12px;
     }
 
     .why-icon{
-        font-size:55px;
+        font-size:65px;
     }
 
-    .why-card h3{
-        font-size:18px;
+    .why-title{
+        font-size:23px;
     }
 
-    .why-card p{
-        font-size:14px;
+    .why-text{
+        font-size:15px;
     }
 }
 </style>
@@ -271,181 +271,240 @@ body{
 
 <body>
 
-<header class="header">
+<!-- ================= HEADER ================= -->
 
-<img
-    src="logo.png"
-    class="logo"
-    onclick="location.href='index.html'"
-    alt="ADORE'S PET"
->
+<header>
 
-<button
-    class="cart-btn"
-    onclick="location.href='category.html?cart=1'"
->
-    <span>🛒 Cart</span>
+    <div class="logo" onclick="goHome()">
+        ADORE'S<br>PET
+    </div>
 
-    <span
-        class="cart-count"
-        id="cartCount"
-    >0</span>
-</button>
+    <button class="cart-btn" onclick="openCart()">
+        <span>
+            <span class="cart-icon">🛒</span>
+            Cart
+        </span>
+
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
 
 </header>
 
 
-<!-- HOME-এ কোনো PRODUCT নেই -->
+<!-- ================= MAIN ================= -->
 
-<section class="category-section">
+<main>
 
-<h2 class="section-title">
-SHOP BY CATEGORY
-</h2>
+    <!-- SHOP BY CATEGORY -->
 
-<div class="categories">
+    <section>
 
-<div
-    class="category-card"
-    onclick="openCategory('Rabbit')"
->
-    <div class="category-icon">🐰</div>
-    <div class="category-name">Rabbit</div>
-</div>
+        <h1 class="section-title">
+            SHOP BY CATEGORY
+        </h1>
 
+        <div class="category-grid">
 
-<div
-    class="category-card"
-    onclick="openCategory('Hamster')"
->
-    <div class="category-icon">🐹</div>
-    <div class="category-name">Hamster</div>
-</div>
+            <div class="category-card"
+                 onclick="openCategory('Rabbit')">
+
+                <div class="category-icon">🐰</div>
+
+                <div class="category-name">
+                    Rabbit
+                </div>
+
+            </div>
 
 
-<div
-    class="category-card"
-    onclick="openCategory('Pet Food')"
->
-    <div class="category-icon">🌿</div>
-    <div class="category-name">Pet Food</div>
-</div>
+            <div class="category-card"
+                 onclick="openCategory('Hamster')">
+
+                <div class="category-icon">🐹</div>
+
+                <div class="category-name">
+                    Hamster
+                </div>
+
+            </div>
 
 
-<div
-    class="category-card"
-    onclick="openCategory('Accessories')"
->
-    <div class="category-icon">🧺</div>
-    <div class="category-name">Accessories</div>
-</div>
+            <div class="category-card"
+                 onclick="openCategory('Pet Food')">
 
-</div>
+                <div class="category-icon">🌿</div>
 
-</section>
+                <div class="category-name">
+                    Pet Food
+                </div>
 
-
-<!-- WHY CHOOSE US -->
-
-<section class="why-section">
-
-<h2 class="section-title">
-WHY CHOOSE US
-</h2>
-
-<div class="why-grid">
-
-<div class="why-card">
-<div class="why-icon">🐰</div>
-<h3>সুস্থ পোষা প্রাণী</h3>
-<p>
-যত্নসহকারে পালন করা স্বাস্থ্যকর
-ও সুন্দর পোষা প্রাণী।
-</p>
-</div>
+            </div>
 
 
-<div class="why-card">
-<div class="why-icon">🚚</div>
-<h3>Delivery সুবিধা</h3>
-<p>
-দেশের বিভিন্ন জায়গায় সহজে
-অর্ডার ও ডেলিভারি সুবিধা।
-</p>
-</div>
+            <div class="category-card"
+                 onclick="openCategory('Accessories')">
+
+                <div class="category-icon">🧺</div>
+
+                <div class="category-name">
+                    Accessories
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-<div class="why-card">
-<div class="why-icon">🤝</div>
-<h3>বিশ্বস্ত সেবা</h3>
-<p>
-গ্রাহকের সন্তুষ্টি ও ভালো
-সার্ভিসকে গুরুত্ব দেওয়া হয়।
-</p>
-</div>
+    <!-- WHY CHOOSE US -->
+
+    <section>
+
+        <h1 class="section-title">
+            WHY CHOOSE US
+        </h1>
+
+        <div class="why-grid">
+
+            <div class="why-card">
+
+                <div class="why-icon">⭐</div>
+
+                <div class="why-title">
+                    Quality Products
+                </div>
+
+                <div class="why-text">
+                    We provide quality pets and products.
+                </div>
+
+            </div>
 
 
-<div class="why-card">
-<div class="why-icon">⭐</div>
-<h3>মানসম্মত পণ্য</h3>
-<p>
-পোষা প্রাণীর জন্য প্রয়োজনীয়
-ভালো মানের পণ্য।
-</p>
-</div>
+            <div class="why-card">
 
-</div>
+                <div class="why-icon">🤝</div>
 
-</section>
+                <div class="why-title">
+                    Trusted Service
+                </div>
+
+                <div class="why-text">
+                    Reliable service for every customer.
+                </div>
+
+            </div>
 
 
-<footer class="footer">
+            <div class="why-card">
 
-<div class="footer-logo">
-🐰 ADORE'S PET
-</div>
+                <div class="why-icon">🚚</div>
 
-<div class="footer-tagline">
-আপনার বিশ্বস্ত Pet Shop
-</div>
+                <div class="why-title">
+                    Fast Delivery
+                </div>
 
-<div class="footer-line"></div>
+                <div class="why-text">
+                    Delivery service available across Bangladesh.
+                </div>
 
-<div class="copyright">
-© 2026 ADORE'S PET — All Rights Reserved
-</div>
+            </div>
+
+
+            <div class="why-card">
+
+                <div class="why-icon">💬</div>
+
+                <div class="why-title">
+                    Customer Support
+                </div>
+
+                <div class="why-text">
+                    We are always ready to help our customers.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>ADORE'S PET</h2>
+
+    <p>
+        Quality Pets • Food • Accessories
+    </p>
+
+    <p style="margin-top:15px;">
+        © 2026 Adore's PET. All Rights Reserved.
+    </p>
 
 </footer>
 
 
 <script>
 
-const CART_KEY="adores_pet_cart_v5";
+/* ================= CATEGORY ================= */
 
 function openCategory(category){
 
-    location.href=
-    "category.html?category="+
-    encodeURIComponent(category);
+    window.location.href =
+        "category.html?category=" +
+        encodeURIComponent(category);
 
 }
 
-function updateCart(){
 
-    const cart=
-    JSON.parse(
-        localStorage.getItem(CART_KEY)||"[]"
-    );
+/* ================= HOME ================= */
 
-    document.getElementById("cartCount")
-    .textContent=
-    cart.reduce(
-        (total,item)=>total+item.qty,
-        0
-    );
+function goHome(){
+
+    window.location.href = "index.html";
+
 }
 
-updateCart();
+
+/* ================= CART ================= */
+
+function openCart(){
+
+    // Category page-এ নিয়ে যাবে
+    window.location.href = "category.html";
+
+}
+
+
+/* ================= CART COUNT ================= */
+
+function updateCartCount(){
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("adores_pet_cart_v5")
+        ) || [];
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += Number(item.qty || 1);
+
+    });
+
+    document.getElementById("cartCount").innerText =
+        total;
+
+}
+
+updateCartCount();
 
 </script>
 
