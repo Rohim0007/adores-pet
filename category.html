@@ -4,527 +4,383 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADORE'S PET - Products</title>
 
-<title>ADORE'S PET</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
 }
 
 body{
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#f6f9f7;
-  color:#10251d;
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f9f6;
+    color:#092d22;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+/* HEADER */
+
+.header{
+    height:105px;
+    background:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    border-bottom:1px solid #ddd;
+
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-
-/* ================= HEADER ================= */
-
-.site-header{
-  background:#fff;
-  border-bottom:1px solid #dfe8e3;
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
-.header-inner{
-  max-width:1200px;
-  min-height:90px;
-  margin:auto;
-  padding:10px 18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.logo img{
-  height:65px;
-  width:auto;
-  max-width:230px;
-  object-fit:contain;
-  display:block;
+.logo{
+    width:75px;
+    cursor:pointer;
 }
 
 .cart-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
+    background:#177b45;
+    color:#fff;
+    border:0;
+    border-radius:35px;
 
-  background:#19733f;
-  color:#fff;
+    height:64px;
+    min-width:235px;
 
-  padding:8px 12px;
-  border-radius:22px;
+    padding:0 15px;
 
-  font-size:18px;
-  font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    font-size:22px;
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
 .cart-count{
-  width:44px;
-  height:44px;
+    background:#fff;
+    color:#177b45;
 
-  background:#fff;
-  color:#19733f;
+    width:48px;
+    height:48px;
 
-  border-radius:50%;
+    border-radius:50%;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
+/* MAIN */
 
-/* ================= MAIN ================= */
-
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:35px 18px 70px;
+.main{
+    padding:45px 5% 110px;
 }
 
-.back-btn{
-  display:inline-block;
-
-  background:#19733f;
-  color:#fff;
-
-  padding:11px 20px;
-  border-radius:10px;
-
-  font-weight:700;
-
-  margin-bottom:30px;
+.back{
+    color:#177b45;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:17px;
 }
 
-.page-title{
-  text-align:center;
-
-  color:#19733f;
-
-  font-size:38px;
-
-  font-weight:800;
-
-  margin-bottom:40px;
+.title{
+    text-align:center;
+    color:#197647;
+    font-size:32px;
+    margin:30px 0 40px;
 }
 
+/* PRODUCTS */
 
-/* ================= PRODUCT GRID ================= */
+.products{
+    max-width:900px;
+    margin:auto;
 
-.product-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
 
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:25px;
-
+    gap:25px;
 }
 
+.product{
+    background:#fff;
 
-/* ================= PRODUCT CARD ================= */
+    border:2px solid #dce4e0;
 
-.product-card{
+    border-radius:25px;
 
-  background:#fff;
+    padding:15px;
 
-  border:1px solid #d9e3de;
-
-  border-radius:22px;
-
-  overflow:hidden;
-
-  box-shadow:
-    0 5px 18px rgba(16,37,29,.06);
-
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.05);
 }
 
+.product img{
+    width:100%;
+    height:260px;
 
-.product-image{
+    object-fit:contain;
 
-  width:100%;
+    background:#f7f7f7;
 
-  aspect-ratio:1/1;
-
-  object-fit:cover;
-
-  display:block;
-
-  background:#eee;
-
+    border-radius:18px;
 }
 
-
-.product-body{
-
-  padding:18px;
-
+.product h3{
+    font-size:22px;
+    margin:15px 5px 5px;
 }
 
-
-.product-title{
-
-  font-size:24px;
-
-  font-weight:800;
-
-  margin-bottom:7px;
-
-  word-break:break-word;
-
+.category{
+    font-size:13px;
+    color:#777;
 }
 
-
-.product-category{
-
-  color:#777;
-
-  font-size:14px;
-
-  margin-bottom:8px;
-
+.price{
+    font-size:24px;
+    font-weight:bold;
+    color:#177b45;
+    margin:10px 5px;
 }
 
-
-.product-price{
-
-  color:#19733f;
-
-  font-size:25px;
-
-  font-weight:800;
-
-  margin-bottom:6px;
-
+.stock{
+    font-size:14px;
+    font-weight:bold;
+    margin:5px;
 }
 
-
-.product-stock{
-
-  color:#666;
-
-  font-size:14px;
-
-  margin-bottom:16px;
-
+.available{
+    color:#177b45;
 }
 
-
-/* ================= ADD TO CART ================= */
-
-.add-cart-btn{
-
-  width:100%;
-
-  border:0;
-
-  background:#19733f;
-
-  color:#fff;
-
-  padding:13px;
-
-  border-radius:10px;
-
-  font-size:17px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
+.out{
+    color:#e53935;
 }
 
+.buy{
+    width:100%;
 
-.add-cart-btn:hover{
+    border:0;
 
-  background:#145d34;
+    background:#177b45;
+    color:#fff;
 
-}
+    padding:13px;
 
-
-.add-cart-btn:disabled{
-
-  background:#999;
-
-  cursor:not-allowed;
-
-}
-
-
-/* ================= MESSAGE ================= */
-
-.message{
-
-  grid-column:1 / -1;
-
-  text-align:center;
-
-  padding:60px 15px;
-
-  color:#777;
-
-  font-size:19px;
-
-}
-
-
-.error{
-
-  color:#c62828;
-
-}
-
-
-/* ================= TOAST ================= */
-
-.toast{
-
-  position:fixed;
-
-  left:50%;
-
-  bottom:25px;
-
-  transform:translateX(-50%);
-
-  background:#19733f;
-
-  color:#fff;
-
-  padding:13px 20px;
-
-  border-radius:10px;
-
-  font-weight:700;
-
-  display:none;
-
-  z-index:9999;
-
-}
-
-
-/* ================= FOOTER ================= */
-
-footer{
-
-  background:#06251a;
-
-  color:#fff;
-
-  text-align:center;
-
-  padding:45px 20px 25px;
-
-}
-
-.footer-brand{
-
-  font-size:28px;
-
-  font-weight:800;
-
-  margin-bottom:8px;
-
-}
-
-.footer-text{
-
-  color:#b8c8c1;
-
-  margin-bottom:25px;
-
-}
-
-.footer-line{
-
-  height:1px;
-
-  background:rgba(255,255,255,.18);
-
-  max-width:900px;
-
-  margin:0 auto 20px;
-
-}
-
-.copyright{
-
-  color:#9eafa8;
-
-  font-size:14px;
-
-}
-
-
-/* ================= MOBILE ================= */
-
-@media(max-width:700px){
-
-  .header-inner{
-
-    min-height:82px;
-
-    padding:8px 12px;
-
-  }
-
-  .logo img{
-
-    height:55px;
-
-    max-width:170px;
-
-  }
-
-  .cart-btn{
-
-    font-size:15px;
-
-    padding:6px 8px;
-
-  }
-
-  .cart-count{
-
-    width:40px;
-
-    height:40px;
+    border-radius:10px;
 
     font-size:17px;
+    font-weight:bold;
 
-  }
+    cursor:pointer;
+}
 
-  main{
+.buy:disabled{
+    background:#aaa;
+}
 
-    padding:25px 12px 50px;
+/* EMPTY */
 
-  }
+.empty{
+    grid-column:1/-1;
 
-  .page-title{
+    background:#fff;
 
-    font-size:30px;
+    border-radius:20px;
 
-    margin-bottom:30px;
+    padding:60px 20px;
 
-  }
+    text-align:center;
 
-  .product-grid{
+    color:#777;
+}
 
-    grid-template-columns:1fr 1fr;
+/* CART */
+
+.cart{
+    display:none;
+
+    max-width:700px;
+
+    margin:40px auto 0;
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
 
     gap:12px;
 
-  }
+    background:#f4f7f5;
 
-  .product-card{
+    padding:10px;
 
-    border-radius:17px;
+    border-radius:12px;
 
-  }
-
-  .product-body{
-
-    padding:11px;
-
-  }
-
-  .product-title{
-
-    font-size:17px;
-
-  }
-
-  .product-category{
-
-    font-size:12px;
-
-  }
-
-  .product-price{
-
-    font-size:19px;
-
-  }
-
-  .product-stock{
-
-    font-size:12px;
-
-    margin-bottom:11px;
-
-  }
-
-  .add-cart-btn{
-
-    font-size:13px;
-
-    padding:10px 5px;
-
-  }
-
+    margin-bottom:10px;
 }
 
+.cart-item img{
+    width:65px;
+    height:65px;
 
-/* ================= VERY SMALL ================= */
+    object-fit:contain;
 
-@media(max-width:380px){
+    background:#fff;
 
-  .logo img{
+    border-radius:10px;
+}
 
-    max-width:145px;
+.cart-info{
+    flex:1;
+}
 
-  }
+.qty{
+    display:flex;
+    align-items:center;
+    gap:6px;
 
-  .cart-btn{
+    margin-top:7px;
+}
 
-    font-size:13px;
+.qty button{
+    border:0;
 
-  }
+    width:30px;
+    height:30px;
 
-  .cart-count{
+    background:#177b45;
+    color:#fff;
 
-    width:36px;
+    border-radius:6px;
 
-    height:36px;
+    cursor:pointer;
+}
 
-  }
+.qty .remove{
+    background:#e53935;
+}
 
-  .product-title{
+.input{
+    width:100%;
 
-    font-size:15px;
+    padding:12px;
 
-  }
+    margin-top:8px;
 
-  .product-price{
+    border:1px solid #ccc;
+
+    border-radius:9px;
+}
+
+.delivery{
+    margin-top:12px;
+
+    padding:12px;
+
+    background:#fff4cf;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+.total{
+    font-size:24px;
+
+    color:#177b45;
+
+    font-weight:bold;
+
+    margin:12px 0;
+}
+
+.order{
+    width:100%;
+
+    padding:14px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#177b45;
+
+    color:#fff;
 
     font-size:17px;
 
-  }
+    font-weight:bold;
 
-  .add-cart-btn{
+    cursor:pointer;
+}
 
-    font-size:12px;
+/* FOOTER */
 
-  }
+.footer{
+    background:#002c20;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:60px 20px 30px;
+}
+
+.footer-logo{
+    font-size:38px;
+    font-weight:bold;
+}
+
+.footer-tagline{
+    color:#b7c9c3;
+    margin-top:15px;
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 25px;
+    }
+
+    .cart-btn{
+        min-width:190px;
+        font-size:18px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .main{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .product img{
+        height:240px;
+    }
 
 }
 
@@ -536,764 +392,951 @@ footer{
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<header class="header">
 
-<header class="site-header">
-
-  <div class="header-inner">
-
-
-    <a
-      href="index.html"
-      class="logo"
-    >
-
-      <img
-        src="logo.png.png"
-        alt="ADORE'S PET"
-      >
-
-    </a>
+<img
+src="logo.png"
+class="logo"
+onclick="location.href='index.html'"
+alt="ADORE'S PET"
+>
 
 
-    <a
-      href="cart.html"
-      class="cart-btn"
-    >
+<button
+class="cart-btn"
+onclick="toggleCart()"
+>
 
-      🛒 Cart
+<span>🛒 Cart</span>
 
-      <span
-        id="cartCount"
-        class="cart-count"
-      >
-        0
-      </span>
+<span
+class="cart-count"
+id="cartCount"
+>
+0
+</span>
 
-    </a>
-
-
-  </div>
+</button>
 
 </header>
 
 
+<main class="main">
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main>
-
-
-  <a
-    href="index.html"
-    class="back-btn"
-  >
-    ← Home
-  </a>
+<div
+class="back"
+onclick="location.href='index.html'"
+>
+← Home
+</div>
 
 
-  <h1
-    id="pageTitle"
-    class="page-title"
-  >
-    Products
-  </h1>
+<h1
+class="title"
+id="categoryTitle"
+>
+Products
+</h1>
 
 
-  <div
-    id="productGrid"
-    class="product-grid"
-  >
+<div
+class="products"
+id="products"
+>
+</div>
 
-    <div class="message">
 
-      ⏳ Product লোড হচ্ছে...
+<!-- CART -->
 
-    </div>
+<div
+class="cart"
+id="cart"
+>
 
-  </div>
+<h2>
+🛒 Your Cart
+</h2>
 
+<div id="cartItems"></div>
+
+
+<select
+class="input"
+id="area"
+onchange="calculateTotal()"
+>
+
+<option value="">
+Delivery Area নির্বাচন করুন
+</option>
+
+<option value="inside">
+ঢাকার ভিতরে
+</option>
+
+<option value="outside">
+ঢাকার বাইরে
+</option>
+
+</select>
+
+
+<input
+class="input"
+id="name"
+placeholder="আপনার নাম"
+>
+
+
+<input
+class="input"
+id="phone"
+placeholder="মোবাইল নাম্বার"
+>
+
+
+<input
+class="input"
+id="address"
+placeholder="সম্পূর্ণ ঠিকানা"
+>
+
+
+<div
+class="delivery"
+id="delivery"
+>
+🚚 Delivery Area নির্বাচন করুন
+</div>
+
+
+<div
+class="total"
+id="total"
+>
+মোট: 0৳
+</div>
+
+
+<button
+class="order"
+onclick="placeOrder()"
+>
+🚀 অর্ডার করুন
+</button>
+
+</div>
 
 </main>
 
 
+<footer class="footer">
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<div class="footer-logo">
+🐰 ADORE'S PET
+</div>
 
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-  <div class="footer-brand">
-    🐰 ADORE'S PET
-  </div>
-
-  <div class="footer-text">
-    আপনার বিশ্বস্ত Pet Shop
-  </div>
-
-  <div class="footer-line"></div>
-
-  <div class="copyright">
-    © 2026 ADORE'S PET — All Rights Reserved
-  </div>
+<div class="footer-tagline">
+আপনার বিশ্বস্ত Pet Shop
+</div>
 
 </footer>
 
 
+<script>
 
-<!-- =====================================================
-     CONFIG
-===================================================== -->
-
-<script src="config.js"></script>
-
+emailjs.init(
+"P7lqeBS7YKyU3Kpaq"
+);
 
 
-<!-- =====================================================
-     CATEGORY + CART
-===================================================== -->
+const PRODUCT_KEY=
+"adores_pet_products_v5";
 
-<script type="module">
-
-import {
-  createClient
-}
-from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const CART_KEY=
+"adores_pet_cart_v5";
 
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+let products=
+JSON.parse(
+localStorage.getItem(PRODUCT_KEY)||"[]"
+);
 
-const supabase =
-  createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const productGrid =
-  document.getElementById(
-    "productGrid"
-  );
-
-const pageTitle =
-  document.getElementById(
-    "pageTitle"
-  );
-
-const cartCount =
-  document.getElementById(
-    "cartCount"
-  );
-
-const toast =
-  document.getElementById(
-    "toast"
-  );
+let cart=
+JSON.parse(
+localStorage.getItem(CART_KEY)||"[]"
+);
 
 
-/* =====================================================
-   CATEGORY
-===================================================== */
+const params=
+new URLSearchParams(
+location.search
+);
 
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const selectedCategory =
-  (
-    params.get("category")
-    || ""
-  )
-  .trim();
+const category=
+params.get("category");
 
 
-pageTitle.textContent =
-  selectedCategory
-  || "All Products";
+document
+.getElementById("categoryTitle")
+.textContent=
+category || "Products";
 
 
-/* =====================================================
-   CART
-===================================================== */
+function saveProducts(){
 
-function getCart(){
-
-  try{
-
-    const data =
-      JSON.parse(
-        localStorage.getItem(
-          "cart"
-        ) || "[]"
-      );
-
-    return Array.isArray(data)
-      ? data
-      : [];
-
-  }catch(error){
-
-    return [];
-
-  }
+localStorage.setItem(
+PRODUCT_KEY,
+JSON.stringify(products)
+);
 
 }
 
 
-function saveCart(cart){
+function saveCart(){
 
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
-
-}
-
-
-function updateCartCount(){
-
-  const cart =
-    getCart();
-
-
-  const count =
-    cart.reduce(
-      (
-        total,
-        item
-      ) => {
-
-        return total +
-          (
-            Number(
-              item.quantity
-            ) || 1
-          );
-
-      },
-      0
-    );
-
-
-  cartCount.textContent =
-    count;
+localStorage.setItem(
+CART_KEY,
+JSON.stringify(cart)
+);
 
 }
 
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-function showToast(text){
-
-  toast.textContent =
-    text;
-
-  toast.style.display =
-    "block";
-
-
-  clearTimeout(
-    window.toastTimer
-  );
-
-
-  window.toastTimer =
-    setTimeout(
-      function(){
-
-        toast.style.display =
-          "none";
-
-      },
-      1800
-    );
-
-}
-
-
-/* =====================================================
-   ADD TO CART
-===================================================== */
-
-function addToCart(product){
-
-  try{
-
-    const cart =
-      getCart();
-
-
-    const productId =
-      String(
-        product.id
-      );
-
-
-    const existing =
-      cart.find(
-        function(item){
-
-          return String(
-            item.id
-          ) === productId;
-
-        }
-      );
-
-
-    if(existing){
-
-      existing.quantity =
-        (
-          Number(
-            existing.quantity
-          ) || 1
-        ) + 1;
-
-    }else{
-
-      cart.push({
-
-        id:
-          product.id,
-
-        title:
-          product.title || "Product",
-
-        price:
-          Number(
-            product.price
-          ) || 0,
-
-        image:
-          product.image_url || "",
-
-        quantity:
-          1
-
-      });
-
-    }
-
-
-    saveCart(
-      cart
-    );
-
-
-    updateCartCount();
-
-
-    showToast(
-      "✅ Cart-এ Product যোগ হয়েছে"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "CART ERROR:",
-      error
-    );
-
-
-    showToast(
-      "❌ Cart-এ যোগ করা যায়নি"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
 
 function escapeHTML(value){
 
-  return String(
-    value ?? ""
-  )
+return String(value)
 
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
-/* =====================================================
-   RENDER PRODUCTS
-===================================================== */
+/* PRODUCTS */
 
-function renderProducts(
-  products
+function renderProducts(){
+
+const box=
+document.getElementById(
+"products"
+);
+
+box.innerHTML="";
+
+
+const filtered=
+category
+?
+products.filter(
+p=>p.category===category
+)
+:
+products;
+
+
+if(!filtered.length){
+
+box.innerHTML=`
+
+<div class="empty">
+
+📦 এই Category-তে বর্তমানে
+কোনো Product নেই।
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+filtered.forEach(
+p=>{
+
+const div=
+document.createElement("div");
+
+div.className="product";
+
+
+div.innerHTML=`
+
+<img
+src="${escapeHTML(p.image)}"
+alt="${escapeHTML(p.name)}"
+>
+
+<h3>
+${escapeHTML(p.name)}
+</h3>
+
+<div class="category">
+${escapeHTML(p.category)}
+</div>
+
+<div class="price">
+${Number(p.price)}৳
+</div>
+
+<div
+class="stock ${
+p.stock>0
+?
+"available"
+:
+"out"
+}"
+>
+
+${
+p.stock>0
+?
+"📦 Stock: "+p.stock
+:
+"❌ Out of Stock"
+}
+
+</div>
+
+<button
+class="buy"
+${p.stock<=0?"disabled":""}
+onclick="addToCart('${p.id}')"
+>
+
+${
+p.stock>0
+?
+"🛒 Add to Cart"
+:
+"Out of Stock"
+}
+
+</button>
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* ADD CART */
+
+function addToCart(id){
+
+const p=
+products.find(
+x=>x.id===id
+);
+
+if(!p || p.stock<=0)
+return;
+
+
+const item=
+cart.find(
+x=>x.id===id
+);
+
+
+if(item){
+
+if(
+item.qty>=p.stock
 ){
 
-  if(
-    !products.length
-  ){
+alert(
+"⚠️ Stock শেষ"
+);
 
-    productGrid.innerHTML = `
+return;
 
-      <div
-        class="message"
-      >
+}
 
-        📦 এই Category-তে
-        কোনো Product নেই।
+item.qty++;
 
-      </div>
+}else{
 
-    `;
-
-    return;
-
-  }
-
-
-  productGrid.innerHTML =
-    "";
-
-
-  products.forEach(
-    function(product){
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-
-      card.className =
-        "product-card";
-
-
-      const title =
-        product.title
-        || "Product";
-
-
-      const category =
-        product.category
-        || "";
-
-
-      const price =
-        Number(
-          product.price
-        ) || 0;
-
-
-      const stock =
-        Number(
-          product.stock
-        ) || 0;
-
-
-      const image =
-        product.image_url
-        ||
-        "https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg";
-
-
-      card.innerHTML = `
-
-        <img
-          class="product-image"
-          src="${escapeHTML(image)}"
-          alt="${escapeHTML(title)}"
-          loading="lazy"
-          onerror="
-            this.src='https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg'
-          "
-        >
-
-
-        <div
-          class="product-body"
-        >
-
-          <div
-            class="product-title"
-          >
-            ${escapeHTML(title)}
-          </div>
-
-
-          <div
-            class="product-category"
-          >
-
-            Category:
-            ${escapeHTML(category)}
-
-          </div>
-
-
-          <div
-            class="product-price"
-          >
-
-            ৳${price.toLocaleString("en-BD")}
-
-          </div>
-
-
-          <div
-            class="product-stock"
-          >
-
-            Stock:
-            ${stock}
-
-          </div>
-
-
-          <button
-            type="button"
-            class="add-cart-btn"
-          >
-
-            ${
-              stock > 0
-              ? "🛒 Add to Cart"
-              : "Out of Stock"
-            }
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      const button =
-        card.querySelector(
-          ".add-cart-btn"
-        );
-
-
-      if(
-        stock <= 0
-      ){
-
-        button.disabled =
-          true;
-
-      }else{
-
-        button.addEventListener(
-          "click",
-          function(){
-
-            addToCart(
-              product
-            );
-
-          }
-        );
-
-      }
-
-
-      productGrid.appendChild(
-        card
-      );
-
-    }
-  );
+cart.push({
+id:id,
+qty:1
+});
 
 }
 
 
-/* =====================================================
-   LOAD PRODUCTS
-===================================================== */
+saveCart();
 
-async function loadProducts(){
+updateCart();
 
-  productGrid.innerHTML = `
-
-    <div
-      class="message"
-    >
-
-      ⏳ Product লোড হচ্ছে...
-
-    </div>
-
-  `;
-
-
-  try{
-
-
-    const result =
-      await supabase
-        .from("products")
-        .select("*")
-        .order(
-          "id",
-          {
-            ascending:false
-          }
-        );
-
-
-    const data =
-      result.data;
-
-
-    const error =
-      result.error;
-
-
-    if(error){
-
-      throw error;
-
-    }
-
-
-    let products =
-      data || [];
-
-
-    /* CATEGORY FILTER */
-
-    if(
-      selectedCategory
-    ){
-
-      const wanted =
-        selectedCategory
-          .toLowerCase()
-          .trim();
-
-
-      products =
-        products.filter(
-          function(product){
-
-            const category =
-              String(
-                product.category
-                || ""
-              )
-              .toLowerCase()
-              .trim();
-
-
-            return (
-              category === wanted
-              ||
-              category.includes(
-                wanted
-              )
-            );
-
-          }
-        );
-
-    }
-
-
-    renderProducts(
-      products
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "PRODUCT LOAD ERROR:",
-      error
-    );
-
-
-    productGrid.innerHTML = `
-
-      <div
-        class="message error"
-      >
-
-        ❌ Product লোড করা যায়নি।
-
-        <br><br>
-
-        ${escapeHTML(
-          error.message
-        )}
-
-      </div>
-
-    `;
-
-  }
+alert(
+"✅ Cart-এ যোগ হয়েছে"
+);
 
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+/* CART */
 
-updateCartCount();
+function updateCart(){
 
-loadProducts();
+document
+.getElementById("cartCount")
+.textContent=
+cart.reduce(
+(a,b)=>a+b.qty,
+0
+);
+
+renderCart();
+
+}
+
+
+function renderCart(){
+
+const box=
+document.getElementById(
+"cartItems"
+);
+
+box.innerHTML="";
+
+
+cart.forEach(
+(item,index)=>{
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+if(!p)
+return;
+
+
+const div=
+document.createElement("div");
+
+div.className="cart-item";
+
+
+div.innerHTML=`
+
+<img
+src="${escapeHTML(p.image)}"
+>
+
+<div class="cart-info">
+
+<b>
+${escapeHTML(p.name)}
+</b>
+
+<br>
+
+${p.price}৳ × ${item.qty}
+
+<div class="qty">
+
+<button
+onclick="changeQty(${index},1)"
+>
++
+</button>
+
+<span>
+${item.qty}
+</span>
+
+<button
+onclick="changeQty(${index},-1)"
+>
+−
+</button>
+
+<button
+class="remove"
+onclick="removeItem(${index})"
+>
+×
+</button>
+
+</div>
+
+</div>
+
+`;
+
+box.appendChild(div);
+
+});
+
+
+calculateTotal();
+
+}
+
+
+function changeQty(index,value){
+
+const item=
+cart[index];
+
+if(!item)
+return;
+
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+if(!p)
+return;
+
+
+if(
+value>0 &&
+item.qty>=p.stock
+){
+
+alert("⚠️ Stock শেষ");
+
+return;
+
+}
+
+
+item.qty+=value;
+
+
+if(item.qty<=0){
+
+cart.splice(index,1);
+
+}
+
+
+saveCart();
+
+updateCart();
+
+}
+
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+updateCart();
+
+}
+
+
+function toggleCart(){
+
+const box=
+document.getElementById("cart");
+
+
+box.style.display=
+box.style.display==="block"
+?
+"none"
+:
+"block";
+
+
+if(box.style.display==="block"){
+
+box.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* DELIVERY */
+
+function deliveryCharge(){
+
+const area=
+document.getElementById("area")
+.value;
+
+
+if(!area)
+return 0;
+
+
+const cats=
+cart.map(
+item=>{
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+return p?.category;
+
+});
+
+
+/*
+Rabbit = Highest Priority
+Hamster = Second
+Food/Accessories = Third
+*/
+
+if(
+cats.includes("Rabbit")
+){
+
+return area==="inside"
+?
+300
+:
+600;
+
+}
+
+
+if(
+cats.includes("Hamster")
+){
+
+return area==="inside"
+?
+300
+:
+400;
+
+}
+
+
+if(
+cats.includes("Pet Food") ||
+cats.includes("Accessories")
+){
+
+return area==="inside"
+?
+70
+:
+130;
+
+}
+
+
+return 0;
+
+}
+
+
+/* TOTAL */
+
+function calculateTotal(){
+
+let subtotal=0;
+
+
+cart.forEach(
+item=>{
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+if(p){
+
+subtotal+=
+p.price*item.qty;
+
+}
+
+});
+
+
+const delivery=
+deliveryCharge();
+
+
+document
+.getElementById("delivery")
+.textContent=
+delivery
+?
+"🚚 Delivery Charge: "+
+delivery+"৳"
+:
+"🚚 Delivery Area নির্বাচন করুন";
+
+
+document
+.getElementById("total")
+.textContent=
+"মোট: "+
+(subtotal+delivery)+
+"৳";
+
+}
+
+
+/* ORDER */
+
+function placeOrder(){
+
+if(!cart.length){
+
+alert(
+"❌ Cart Empty"
+);
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById("name")
+.value.trim();
+
+
+const phone=
+document
+.getElementById("phone")
+.value.trim();
+
+
+const address=
+document
+.getElementById("address")
+.value.trim();
+
+
+const area=
+document
+.getElementById("area")
+.value;
+
+
+if(
+!name ||
+!phone ||
+!address ||
+!area
+){
+
+alert(
+"❌ সব তথ্য পূরণ করুন"
+);
+
+return;
+
+}
+
+
+/* STOCK CHECK */
+
+for(
+const item of cart
+){
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+
+if(
+!p ||
+p.stock<item.qty
+){
+
+alert(
+"❌ "+
+(p?.name||"Product")+
+" এর পর্যাপ্ত Stock নেই"
+);
+
+return;
+
+}
+
+}
+
+
+let subtotal=0;
+
+let productText="";
+
+
+cart.forEach(
+item=>{
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+subtotal+=
+p.price*item.qty;
+
+
+productText+=
+`${p.name} × ${item.qty} = ${p.price*item.qty}৳ [${p.category}]\n`;
+
+});
+
+
+const delivery=
+deliveryCharge();
+
+
+const total=
+subtotal+delivery;
+
+
+const templateParams={
+
+customer_name:name,
+
+customer_phone:phone,
+
+customer_address:address,
+
+delivery_area:
+area==="inside"
+?
+"ঢাকার ভিতরে"
+:
+"ঢাকার বাইরে",
+
+products:productText,
+
+subtotal:subtotal,
+
+delivery_charge:delivery,
+
+total:total
+
+};
+
+
+emailjs.send(
+
+"service_5am5end",
+
+"template_45wz8f9",
+
+templateParams
+
+)
+
+.then(
+()=>{
+
+/* সফল Order-এর পর Stock কমবে */
+
+cart.forEach(
+item=>{
+
+const p=
+products.find(
+x=>x.id===item.id
+);
+
+if(p){
+
+p.stock=
+Math.max(
+0,
+p.stock-item.qty
+);
+
+}
+
+});
+
+
+saveProducts();
+
+
+cart=[];
+
+saveCart();
+
+updateCart();
+
+renderProducts();
+
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("address").value="";
+document.getElementById("area").value="";
+
+
+alert(
+"✅ Order সফলভাবে পাঠানো হয়েছে"
+);
+
+}
+
+)
+
+.catch(
+error=>{
+
+console.error(error);
+
+alert(
+"❌ Order পাঠানো যায়নি"
+);
+
+}
+
+);
+
+}
+
+
+/* START */
+
+renderProducts();
+
+updateCart();
+
+
+if(
+params.get("cart")==="1"
+){
+
+setTimeout(
+toggleCart,
+300
+);
+
+}
 
 </script>
 
-
 </body>
-
 </html>
