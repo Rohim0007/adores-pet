@@ -15,7 +15,7 @@
 
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#f4f9f6;
+    background:#f5faf7;
     color:#063c2c;
 }
 
@@ -23,7 +23,7 @@ body{
 
 header{
     height:180px;
-    background:#fff;
+    background:#ffffff;
     border-bottom:1px solid #ddd;
     display:flex;
     align-items:center;
@@ -32,21 +32,21 @@ header{
 }
 
 .logo{
-    cursor:pointer;
     font-size:30px;
     font-weight:800;
     line-height:1.15;
     color:#063c2c;
+    cursor:pointer;
 }
 
 .cart-btn{
-    background:#16834d;
-    color:white;
     border:none;
+    background:#16834d;
+    color:#fff;
     border-radius:60px;
-    min-width:360px;
+    width:365px;
     height:90px;
-    padding:0 20px 0 35px;
+    padding:0 20px 0 30px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -55,37 +55,44 @@ header{
     cursor:pointer;
 }
 
+.cart-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
 .cart-icon{
-    font-size:42px;
+    font-size:40px;
 }
 
 .cart-count{
-    background:white;
-    color:#16834d;
-    width:72px;
-    height:72px;
+    width:70px;
+    height:70px;
     border-radius:50%;
+    background:#fff;
+    color:#16834d;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:30px;
+    font-weight:800;
 }
 
 /* ================= MAIN ================= */
 
 main{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
-    padding:90px 35px;
+    padding:100px 35px;
 }
 
 .section-title{
     text-align:center;
-    font-size:42px;
-    letter-spacing:7px;
     color:#167b4b;
-    margin-bottom:65px;
+    font-size:40px;
     font-weight:800;
+    letter-spacing:6px;
+    margin-bottom:65px;
 }
 
 /* ================= CATEGORY ================= */
@@ -98,8 +105,8 @@ main{
 }
 
 .category-card{
-    background:white;
-    min-height:400px;
+    background:#fff;
+    height:410px;
     border:4px solid #dfe7e3;
     border-radius:55px;
     display:flex;
@@ -107,8 +114,7 @@ main{
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    transition:.25s;
-    box-shadow:0 8px 25px rgba(0,0,0,.04);
+    transition:0.25s ease;
 }
 
 .category-card:hover{
@@ -117,7 +123,7 @@ main{
 }
 
 .category-icon{
-    font-size:115px;
+    font-size:105px;
     margin-bottom:35px;
 }
 
@@ -136,8 +142,8 @@ main{
 }
 
 .why-card{
-    background:white;
-    min-height:300px;
+    background:#fff;
+    min-height:310px;
     border:4px solid #dfe7e3;
     border-radius:50px;
     display:flex;
@@ -145,26 +151,25 @@ main{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,.04);
+    padding:30px 20px;
 }
 
 .why-icon{
-    font-size:85px;
-    margin-bottom:25px;
+    font-size:75px;
+    margin-bottom:22px;
 }
 
 .why-title{
-    font-size:30px;
+    font-size:29px;
     font-weight:800;
-    color:#063c2c;
     margin-bottom:12px;
+    color:#063c2c;
 }
 
 .why-text{
-    font-size:18px;
-    color:#60736b;
+    font-size:17px;
     line-height:1.5;
+    color:#667870;
 }
 
 /* ================= FOOTER ================= */
@@ -174,7 +179,6 @@ footer{
     color:white;
     text-align:center;
     padding:40px 20px;
-    margin-top:50px;
 }
 
 footer h2{
@@ -183,7 +187,7 @@ footer h2{
 }
 
 footer p{
-    font-size:16px;
+    font-size:15px;
     opacity:.85;
 }
 
@@ -202,9 +206,9 @@ footer p{
     }
 
     .cart-btn{
-        min-width:210px;
+        width:210px;
         height:72px;
-        padding:0 12px 0 20px;
+        padding:0 12px 0 18px;
         font-size:25px;
     }
 
@@ -224,18 +228,18 @@ footer p{
 
     .section-title{
         font-size:25px;
-        letter-spacing:5px;
+        letter-spacing:4px;
         margin-bottom:55px;
     }
 
     .category-grid,
     .why-grid{
         grid-template-columns:repeat(2,1fr);
-        gap:30px;
+        gap:28px;
     }
 
     .category-card{
-        min-height:380px;
+        height:380px;
         border-radius:42px;
     }
 
@@ -251,19 +255,19 @@ footer p{
     .why-card{
         min-height:290px;
         border-radius:40px;
-        padding:20px 12px;
+        padding:20px 10px;
     }
 
     .why-icon{
-        font-size:65px;
+        font-size:62px;
     }
 
     .why-title{
-        font-size:23px;
+        font-size:22px;
     }
 
     .why-text{
-        font-size:15px;
+        font-size:14px;
     }
 }
 </style>
@@ -271,27 +275,30 @@ footer p{
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 
 <header>
 
     <div class="logo" onclick="goHome()">
-        ADORE'S<br>PET
+        ADORE'S<br>
+        PET
     </div>
 
     <button class="cart-btn" onclick="openCart()">
-        <span>
+
+        <span class="cart-left">
             <span class="cart-icon">🛒</span>
-            Cart
+            <span>Cart</span>
         </span>
 
         <span class="cart-count" id="cartCount">0</span>
+
     </button>
 
 </header>
 
 
-<!-- ================= MAIN ================= -->
+<!-- MAIN -->
 
 <main>
 
@@ -305,10 +312,14 @@ footer p{
 
         <div class="category-grid">
 
+            <!-- Rabbit -->
+
             <div class="category-card"
                  onclick="openCategory('Rabbit')">
 
-                <div class="category-icon">🐰</div>
+                <div class="category-icon">
+                    🐰
+                </div>
 
                 <div class="category-name">
                     Rabbit
@@ -317,10 +328,14 @@ footer p{
             </div>
 
 
+            <!-- Hamster -->
+
             <div class="category-card"
                  onclick="openCategory('Hamster')">
 
-                <div class="category-icon">🐹</div>
+                <div class="category-icon">
+                    🐹
+                </div>
 
                 <div class="category-name">
                     Hamster
@@ -329,10 +344,14 @@ footer p{
             </div>
 
 
+            <!-- Pet Food -->
+
             <div class="category-card"
                  onclick="openCategory('Pet Food')">
 
-                <div class="category-icon">🌿</div>
+                <div class="category-icon">
+                    🌿
+                </div>
 
                 <div class="category-name">
                     Pet Food
@@ -341,10 +360,14 @@ footer p{
             </div>
 
 
+            <!-- Accessories -->
+
             <div class="category-card"
                  onclick="openCategory('Accessories')">
 
-                <div class="category-icon">🧺</div>
+                <div class="category-icon">
+                    🧺
+                </div>
 
                 <div class="category-name">
                     Accessories
@@ -367,61 +390,81 @@ footer p{
 
         <div class="why-grid">
 
+            <!-- 1 -->
+
             <div class="why-card">
 
-                <div class="why-icon">⭐</div>
+                <div class="why-icon">
+                    ⭐
+                </div>
 
                 <div class="why-title">
                     Quality Products
                 </div>
 
                 <div class="why-text">
-                    We provide quality pets and products.
+                    Quality pets and products
+                    you can trust.
                 </div>
 
             </div>
 
 
+            <!-- 2 -->
+
             <div class="why-card">
 
-                <div class="why-icon">🤝</div>
+                <div class="why-icon">
+                    🤝
+                </div>
 
                 <div class="why-title">
                     Trusted Service
                 </div>
 
                 <div class="why-text">
-                    Reliable service for every customer.
+                    Reliable service for
+                    every customer.
                 </div>
 
             </div>
 
 
+            <!-- 3 -->
+
             <div class="why-card">
 
-                <div class="why-icon">🚚</div>
+                <div class="why-icon">
+                    🚚
+                </div>
 
                 <div class="why-title">
                     Fast Delivery
                 </div>
 
                 <div class="why-text">
-                    Delivery service available across Bangladesh.
+                    Delivery available
+                    across Bangladesh.
                 </div>
 
             </div>
 
 
+            <!-- 4 -->
+
             <div class="why-card">
 
-                <div class="why-icon">💬</div>
+                <div class="why-icon">
+                    💬
+                </div>
 
                 <div class="why-title">
                     Customer Support
                 </div>
 
                 <div class="why-text">
-                    We are always ready to help our customers.
+                    We are always ready
+                    to help you.
                 </div>
 
             </div>
@@ -433,7 +476,7 @@ footer p{
 </main>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -476,7 +519,6 @@ function goHome(){
 
 function openCart(){
 
-    // Category page-এ নিয়ে যাবে
     window.location.href = "category.html";
 
 }
@@ -486,23 +528,26 @@ function openCart(){
 
 function updateCartCount(){
 
-    let cart =
+    const cart =
         JSON.parse(
             localStorage.getItem("adores_pet_cart_v5")
         ) || [];
 
     let total = 0;
 
-    cart.forEach(item => {
+    cart.forEach(function(item){
 
-        total += Number(item.qty || 1);
+        total += Number(item.qty) || 1;
 
     });
 
-    document.getElementById("cartCount").innerText =
+    document.getElementById("cartCount").textContent =
         total;
 
 }
+
+
+/* LOAD CART COUNT */
 
 updateCartCount();
 
