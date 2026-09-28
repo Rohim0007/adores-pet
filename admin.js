@@ -1,1696 +1,972 @@
-// =====================================================
-// ADORE'S PET — ADMIN.JS
-// COMPLETE ADMIN PANEL
-// Login + Upload + Image + Edit + Delete + Orders
-// =====================================================
+<!DOCTYPE html>
+<html lang="bn">
 
-import {
-  createClient
-} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<title>ADORE'S PET - Admin</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f3f7f5;
+    color:#092d22;
+}
+
+.header{
+    background:#177b45;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+.login{
+    max-width:400px;
+    margin:100px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:18px;
+}
+
+.panel{
+    background:#fff;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:20px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.07);
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin:6px 0;
+
+    border:1px solid #ccc;
+    border-radius:8px;
+
+    font-size:15px;
+}
+
+button{
+    border:0;
+    padding:11px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add{
+    width:100%;
+    background:#177b45;
+    color:#fff;
+    font-size:16px;
+}
+
+.upload{
+    border:2px dashed #177b45;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+    margin-top:8px;
+}
+
+.preview{
+    width:130px;
+    height:130px;
+    object-fit:contain;
+    display:none;
+    margin:10px auto;
+}
+
+.home{
+    display:block;
+    background:#092d22;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+.product{
+    display:flex;
+    gap:12px;
+    align-items:center;
+
+    background:#f4f7f5;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    margin-top:10px;
+}
+
+.product img{
+    width:80px;
+    height:80px;
+
+    object-fit:contain;
+
+    background:#fff;
+
+    border-radius:10px;
+}
+
+.info{
+    flex:1;
+}
+
+.name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.price{
+    color:#177b45;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.stock{
+    margin-top:5px;
+}
+
+.actions{
+    display:flex;
+    gap:5px;
+    margin-top:8px;
+}
+
+.edit{
+    background:#1976d2;
+    color:#fff;
+}
+
+.save{
+    background:#177b45;
+    color:#fff;
+    display:none;
+}
+
+.delete{
+    background:#e53935;
+    color:#fff;
+}
+
+@media(max-width:600px){
+
+    .product{
+        align-items:flex-start;
+    }
+
+    .product img{
+        width:65px;
+        height:65px;
+    }
+
+    .actions{
+        flex-wrap:wrap;
+    }
+
+}
+
+</style>
+
+</head>
 
 
-// =====================================================
-// SUPABASE
-// =====================================================
+<body>
 
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
+
+<div class="header">
+
+<h1>
+ADORE'S PET
+</h1>
+
+<div>
+Admin Panel
+</div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div
+class="login"
+id="login"
+>
+
+<h2>
+🔐 Admin Login
+</h2>
+
+<input
+type="password"
+id="password"
+placeholder="Admin Password"
+>
+
+<button
+class="add"
+onclick="login()"
+>
+Login
+</button>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div
+class="container"
+id="admin"
+style="display:none"
+>
+
+
+<a
+href="index.html"
+class="home"
+>
+← Home Page
+</a>
+
+
+<!-- ADD PRODUCT -->
+
+<div class="panel">
+
+<h2>
+➕ Add Product
+</h2>
+
+
+<input
+id="name"
+placeholder="Product Name"
+>
+
+
+<input
+id="price"
+type="number"
+min="0"
+placeholder="Price"
+>
+
+
+<input
+id="stock"
+type="number"
+min="0"
+placeholder="Stock Quantity"
+>
+
+
+<select
+id="category"
+>
+
+<option value="">
+Category নির্বাচন করুন
+</option>
+
+<option value="Rabbit">
+🐰 Rabbit
+</option>
+
+<option value="Hamster">
+🐹 Hamster
+</option>
+
+<option value="Pet Food">
+🌿 Pet Food
+</option>
+
+<option value="Accessories">
+🧺 Accessories
+</option>
+
+</select>
+
+
+<div class="upload">
+
+<b>
+📷 Product Image Upload
+</b>
+
+<input
+type="file"
+id="image"
+accept="image/*"
+onchange="previewImage()"
+>
+
+<img
+id="preview"
+class="preview"
+>
+
+</div>
+
+
+<button
+class="add"
+onclick="addProduct()"
+>
+➕ Add Product
+</button>
+
+</div>
+
+
+<!-- PRODUCT MANAGEMENT -->
+
+<div class="panel">
+
+<h2>
+📦 Product Management
+</h2>
+
+<div
+id="products"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const PRODUCT_KEY=
+"adores_pet_products_v5";
+
+
+let products=
+JSON.parse(
+localStorage.getItem(PRODUCT_KEY)||"[]"
 );
 
 
-// =====================================================
-// ELEMENTS
-// =====================================================
-
-const loginBox = document.getElementById("loginBox");
-const dashboard = document.getElementById("dashboard");
-
-const loginForm = document.getElementById("loginForm");
-const loginMsg = document.getElementById("loginMsg");
-const logoutBtn = document.getElementById("logout");
-
-const productForm = document.getElementById("productForm");
-
-const idInput = document.getElementById("id");
-const titleInput = document.getElementById("title");
-const categoryInput = document.getElementById("category");
-const priceInput = document.getElementById("price");
-const stockInput = document.getElementById("stock");
-const imageInput = document.getElementById("image");
-const descriptionInput = document.getElementById("description");
-
-const preview = document.getElementById("preview");
-const formTitle = document.getElementById("formTitle");
-const cancelBtn = document.getElementById("cancel");
-
-const msg = document.getElementById("msg");
-
-const list = document.getElementById("list");
-const searchInput = document.getElementById("search");
-
-const ordersList = document.getElementById("ordersList");
-const refreshOrders = document.getElementById("refreshOrders");
+let imageData="";
 
 
-// =====================================================
-// VARIABLES
-// =====================================================
+/* LOGIN */
 
-let products = [];
-let editingId = null;
-let selectedImageFile = null;
+function login(){
 
-
-// =====================================================
-// LOGIN
-// =====================================================
-
-loginForm.addEventListener("submit", async (e) => {
-
-  e.preventDefault();
-
-  loginMsg.textContent = "⏳ Login হচ্ছে...";
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
+const password=
+document
+.getElementById("password")
+.value;
 
 
-  if (!email || !password) {
+if(
+password==="DJ778899"
+){
 
-    loginMsg.textContent =
-      "❌ Email এবং Password দিন।";
-
-    return;
-  }
-
-
-  try {
-
-    const {
-      data,
-      error
-    } = await supabase.auth.signInWithPassword({
-
-      email: email,
-
-      password: password
-
-    });
+document
+.getElementById("login")
+.style.display="none";
 
 
-    if (error) {
-
-      console.error("LOGIN ERROR:", error);
-
-      loginMsg.textContent =
-        "❌ " + getErrorMessage(error);
-
-      return;
-    }
+document
+.getElementById("admin")
+.style.display="block";
 
 
-    if (!data || !data.session) {
+renderProducts();
 
-      loginMsg.textContent =
-        "❌ Login session পাওয়া যায়নি।";
+}else{
 
-      return;
-    }
+alert(
+"❌ Wrong Password"
+);
+
+}
+
+}
 
 
-    loginMsg.textContent =
-      "✅ Login সফল হয়েছে।";
+/* IMAGE */
+
+function previewImage(){
+
+const file=
+document
+.getElementById("image")
+.files[0];
 
 
-    showDashboard();
+if(!file)
+return;
 
-  }
 
-  catch (error) {
+if(
+!file.type.startsWith("image/")
+){
 
-    console.error(error);
+alert(
+"❌ শুধু Image নির্বাচন করুন"
+);
 
-    loginMsg.textContent =
-      "❌ " + getErrorMessage(error);
+return;
 
-  }
+}
+
+
+const reader=
+new FileReader();
+
+
+reader.onload=
+function(e){
+
+const img=
+new Image();
+
+
+img.onload=
+function(){
+
+const max=1000;
+
+let width=
+img.width;
+
+let height=
+img.height;
+
+
+if(width>max){
+
+height=
+height*(max/width);
+
+width=max;
+
+}
+
+
+if(height>max){
+
+width=
+width*(max/height);
+
+height=max;
+
+}
+
+
+const canvas=
+document.createElement("canvas");
+
+
+canvas.width=width;
+canvas.height=height;
+
+
+const ctx=
+canvas.getContext("2d");
+
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+
+imageData=
+canvas.toDataURL(
+"image/jpeg",
+0.82
+);
+
+
+const preview=
+document
+.getElementById("preview");
+
+
+preview.src=
+imageData;
+
+
+preview.style.display=
+"block";
+
+};
+
+
+img.src=
+e.target.result;
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ADD PRODUCT */
+
+function addProduct(){
+
+const name=
+document
+.getElementById("name")
+.value.trim();
+
+
+const price=
+Number(
+document
+.getElementById("price")
+.value
+);
+
+
+const stock=
+Number(
+document
+.getElementById("stock")
+.value
+);
+
+
+const category=
+document
+.getElementById("category")
+.value;
+
+
+if(
+!name ||
+!Number.isFinite(price) ||
+price<0 ||
+!Number.isInteger(stock) ||
+stock<0 ||
+!category ||
+!imageData
+){
+
+alert(
+"❌ সব তথ্য পূরণ করুন"
+);
+
+return;
+
+}
+
+
+products.push({
+
+id:
+"product_"+
+Date.now()+
+"_"+
+Math.random()
+.toString(36)
+.substring(2,7),
+
+name:name,
+
+price:price,
+
+stock:stock,
+
+category:category,
+
+image:imageData
 
 });
 
 
-// =====================================================
-// CHECK LOGIN
-// =====================================================
-
-async function checkLogin() {
-
-  try {
-
-    const {
-      data,
-      error
-    } = await supabase.auth.getSession();
+saveProducts();
 
 
-    if (error) {
+resetForm();
 
-      console.error(error);
-
-      showLogin();
-
-      return;
-    }
+renderProducts();
 
 
-    if (data.session) {
-
-      showDashboard();
-
-    } else {
-
-      showLogin();
-
-    }
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    showLogin();
-
-  }
-
-}
-
-
-// =====================================================
-// AUTH STATE
-// =====================================================
-
-supabase.auth.onAuthStateChange(
-  (event, session) => {
-
-    if (event === "SIGNED_IN" && session) {
-
-      showDashboard();
-
-    }
-
-    if (event === "SIGNED_OUT") {
-
-      showLogin();
-
-    }
-
-  }
+alert(
+"✅ Product Added Successfully"
 );
 
+}
 
-// =====================================================
-// SHOW LOGIN
-// =====================================================
 
-function showLogin() {
+/* SAVE */
 
-  loginBox.classList.remove("hidden");
+function saveProducts(){
 
-  dashboard.classList.add("hidden");
+localStorage.setItem(
+PRODUCT_KEY,
+JSON.stringify(products)
+);
 
 }
 
 
-// =====================================================
-// SHOW DASHBOARD
-// =====================================================
+/* RESET */
 
-function showDashboard() {
+function resetForm(){
 
-  loginBox.classList.add("hidden");
-
-  dashboard.classList.remove("hidden");
+document
+.getElementById("name")
+.value="";
 
 
-  loadProducts();
+document
+.getElementById("price")
+.value="";
 
-  loadOrders();
+
+document
+.getElementById("stock")
+.value="";
+
+
+document
+.getElementById("category")
+.value="";
+
+
+document
+.getElementById("image")
+.value="";
+
+
+imageData="";
+
+
+document
+.getElementById("preview")
+.style.display="none";
 
 }
 
 
-// =====================================================
-// LOGOUT
-// =====================================================
+/* RENDER ADMIN */
 
-logoutBtn.addEventListener("click", async () => {
+function renderProducts(){
 
-  const {
-    error
-  } = await supabase.auth.signOut();
+const box=
+document
+.getElementById("products");
 
 
-  if (error) {
-
-    alert(
-      "❌ Logout Error: " +
-      getErrorMessage(error)
-    );
-
-    return;
-  }
+box.innerHTML="";
 
 
-  showLogin();
+if(!products.length){
+
+box.innerHTML=
+`
+<p>
+📦 এখনো কোনো Product যোগ করা হয়নি।
+</p>
+`;
+
+return;
+
+}
+
+
+products.forEach(
+p=>{
+
+const div=
+document.createElement("div");
+
+
+div.className=
+"product";
+
+
+div.innerHTML=`
+
+<img
+src="${escapeHTML(p.image)}"
+>
+
+
+<div class="info">
+
+<div class="name">
+${escapeHTML(p.name)}
+</div>
+
+<div class="price">
+${Number(p.price)}৳
+</div>
+
+<div>
+Category:
+${escapeHTML(p.category)}
+</div>
+
+<div class="stock">
+
+📦 Stock:
+
+<span id="stock-${p.id}">
+${p.stock}
+</span>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="edit"
+onclick="editStock('${p.id}')"
+>
+✏️ Edit Stock
+</button>
+
+
+<button
+class="save"
+id="save-${p.id}"
+onclick="saveStock('${p.id}')"
+>
+💾 Save
+</button>
+
+
+<button
+class="delete"
+onclick="deleteProduct('${p.id}')"
+>
+🗑️ Delete
+</button>
+
+</div>
+
+</div>
+
+`;
+
+
+box.appendChild(div);
 
 });
 
-
-// =====================================================
-// IMAGE SELECT
-// =====================================================
-
-imageInput.addEventListener("change", () => {
-
-  const file =
-    imageInput.files?.[0] || null;
+}
 
 
-  selectedImageFile = file;
+/* EDIT STOCK */
+
+function editStock(id){
+
+const p=
+products.find(
+x=>x.id===id
+);
 
 
-  if (!file) {
-
-    return;
-  }
+if(!p)
+return;
 
 
-  if (!file.type.startsWith("image/")) {
+document
+.getElementById(
+"stock-"+id
+)
+.innerHTML=
+`
 
-    alert("❌ শুধু Image File নির্বাচন করুন।");
+<input
+id="stockInput-${id}"
+type="number"
+min="0"
+value="${p.stock}"
+style="width:100px"
+>
 
-    imageInput.value = "";
-
-    selectedImageFile = null;
-
-    return;
-  }
-
-
-  const maxSize =
-    8 * 1024 * 1024;
-
-
-  if (file.size > maxSize) {
-
-    alert(
-      "❌ ছবির Size সর্বোচ্চ 8MB হতে হবে।"
-    );
-
-    imageInput.value = "";
-
-    selectedImageFile = null;
-
-    return;
-  }
+`;
 
 
-  const imageURL =
-    URL.createObjectURL(file);
+document
+.getElementById(
+"save-"+id
+)
+.style.display=
+"inline-block";
+
+}
 
 
-  preview.src = imageURL;
+/* SAVE STOCK */
 
-  preview.classList.remove("hidden");
+function saveStock(id){
+
+const input=
+document
+.getElementById(
+"stockInput-"+id
+);
+
+
+const value=
+Number(input.value);
+
+
+if(
+!Number.isInteger(value) ||
+value<0
+){
+
+alert(
+"❌ সঠিক Stock দিন"
+);
+
+return;
+
+}
+
+
+const p=
+products.find(
+x=>x.id===id
+);
+
+
+if(!p)
+return;
+
+
+p.stock=value;
+
+
+saveProducts();
+
+renderProducts();
+
+
+alert(
+"✅ Stock Updated"
+);
+
+}
+
+
+/* DELETE */
+
+function deleteProduct(id){
+
+const p=
+products.find(
+x=>x.id===id
+);
+
+
+if(!p)
+return;
+
+
+if(
+!confirm(
+`"${p.name}" Delete করবেন?`
+)
+){
+
+return;
+
+}
+
+
+products=
+products.filter(
+x=>x.id!==id
+);
+
+
+saveProducts();
+
+
+renderProducts();
+
+
+alert(
+"✅ Product Deleted"
+);
+
+}
+
+
+/* ESCAPE */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* ENTER LOGIN */
+
+document
+.getElementById("password")
+.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Enter"){
+
+login();
+
+}
 
 });
 
+</script>
 
-// =====================================================
-// UPLOAD IMAGE
-// =====================================================
-
-async function uploadImage(file) {
-
-  if (!file) {
-
-    return null;
-  }
-
-
-  const extension =
-    file.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-
-  const safeExtension =
-    ["jpg", "jpeg", "png", "webp"]
-      .includes(extension)
-      ? extension
-      : "jpg";
-
-
-  const fileName =
-    "product-" +
-    Date.now() +
-    "-" +
-    Math.random()
-      .toString(36)
-      .substring(2, 10) +
-    "." +
-    safeExtension;
-
-
-  const {
-    data,
-    error
-  } =
-    await supabase.storage
-      .from("product-images")
-      .upload(
-        fileName,
-        file,
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.type
-        }
-      );
-
-
-  if (error) {
-
-    console.error(
-      "IMAGE UPLOAD ERROR:",
-      error
-    );
-
-    throw new Error(
-      "Image Upload হয়নি: " +
-      getErrorMessage(error)
-    );
-  }
-
-
-  const publicURL =
-    supabase.storage
-      .from("product-images")
-      .getPublicUrl(data.path);
-
-
-  if (
-    !publicURL ||
-    !publicURL.data ||
-    !publicURL.data.publicUrl
-  ) {
-
-    throw new Error(
-      "Image Public URL পাওয়া যায়নি।"
-    );
-  }
-
-
-  return publicURL.data.publicUrl;
-
-}
-
-
-// =====================================================
-// SAVE PRODUCT
-// =====================================================
-
-productForm.addEventListener(
-  "submit",
-  async (e) => {
-
-    e.preventDefault();
-
-
-    msg.textContent =
-      "⏳ Product Save হচ্ছে...";
-
-
-    const saveButton =
-      document.getElementById("saveProduct");
-
-
-    if (saveButton) {
-
-      saveButton.disabled = true;
-
-      saveButton.textContent =
-        "⏳ Saving...";
-
-    }
-
-
-    try {
-
-      const title =
-        titleInput.value.trim();
-
-      const category =
-        categoryInput.value;
-
-      const price =
-        Number(priceInput.value);
-
-      const stock =
-        Number(stockInput.value);
-
-      const description =
-        descriptionInput.value.trim();
-
-
-      if (!title) {
-
-        throw new Error(
-          "Product Name দিন।"
-        );
-      }
-
-
-      if (!category) {
-
-        throw new Error(
-          "Category নির্বাচন করুন।"
-        );
-      }
-
-
-      if (
-        Number.isNaN(price) ||
-        price < 0
-      ) {
-
-        throw new Error(
-          "সঠিক Price দিন।"
-        );
-      }
-
-
-      if (
-        Number.isNaN(stock) ||
-        stock < 0
-      ) {
-
-        throw new Error(
-          "সঠিক Stock দিন।"
-        );
-      }
-
-
-      // =================================================
-      // PRODUCT DATA
-      // =================================================
-
-      const productData = {
-
-        title: title,
-
-        category: category,
-
-        price: price,
-
-        stock: stock,
-
-        description: description
-
-      };
-
-
-      // =================================================
-      // IMAGE
-      // =================================================
-
-      if (selectedImageFile) {
-
-        msg.textContent =
-          "⏳ ছবি Upload হচ্ছে...";
-
-
-        const imageURL =
-          await uploadImage(
-            selectedImageFile
-          );
-
-
-        /*
-          IMPORTANT:
-          Database column = image_url
-        */
-
-        productData.image_url =
-          imageURL;
-
-      }
-
-
-      // =================================================
-      // EDIT
-      // =================================================
-
-      if (editingId !== null) {
-
-        msg.textContent =
-          "⏳ Product Update হচ্ছে...";
-
-
-        const {
-          error
-        } =
-          await supabase
-            .from("products")
-            .update(productData)
-            .eq(
-              "id",
-              editingId
-            );
-
-
-        if (error) {
-
-          throw error;
-        }
-
-
-        msg.textContent =
-          "✅ Product সফলভাবে Update হয়েছে।";
-
-      }
-
-
-      // =================================================
-      // NEW PRODUCT
-      // =================================================
-
-      else {
-
-        msg.textContent =
-          "⏳ Product Add হচ্ছে...";
-
-
-        const {
-          error
-        } =
-          await supabase
-            .from("products")
-            .insert(
-              productData
-            );
-
-
-        if (error) {
-
-          throw error;
-        }
-
-
-        msg.textContent =
-          "✅ Product সফলভাবে Add হয়েছে।";
-
-      }
-
-
-      resetForm();
-
-      await loadProducts();
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "SAVE PRODUCT ERROR:",
-        error
-      );
-
-
-      msg.textContent =
-        "❌ Error: " +
-        getErrorMessage(error);
-
-    }
-
-    finally {
-
-      if (saveButton) {
-
-        saveButton.disabled = false;
-
-        saveButton.textContent =
-          "✅ Save Product";
-
-      }
-
-    }
-
-  }
-);
-
-
-// =====================================================
-// LOAD PRODUCTS
-// =====================================================
-
-async function loadProducts() {
-
-  list.innerHTML =
-    "⏳ পণ্য লোড হচ্ছে...";
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await supabase
-        .from("products")
-        .select("*")
-        .order(
-          "id",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (error) {
-
-      throw error;
-    }
-
-
-    products =
-      Array.isArray(data)
-        ? data
-        : [];
-
-
-    renderProducts(products);
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "LOAD PRODUCTS ERROR:",
-      error
-    );
-
-
-    list.innerHTML =
-      `
-      <div class="empty">
-        ❌ Product Load Error<br><br>
-        ${escapeHTML(
-          getErrorMessage(error)
-        )}
-      </div>
-      `;
-
-  }
-
-}
-
-
-// =====================================================
-// RENDER PRODUCTS
-// =====================================================
-
-function renderProducts(items) {
-
-  if (!items.length) {
-
-    list.innerHTML =
-      `
-      <div class="empty">
-        📦 এখনো কোনো Product নেই।
-      </div>
-      `;
-
-    return;
-  }
-
-
-  list.innerHTML = "";
-
-
-  items.forEach((product) => {
-
-    const item =
-      document.createElement("div");
-
-
-    /*
-      HTML class names kept compatible
-      with your admin.html CSS
-    */
-
-    item.className =
-      "product-item";
-
-
-    const image =
-      product.image_url
-        ? `
-          <img
-            class="product-image"
-            src="${escapeAttribute(
-              product.image_url
-            )}"
-            alt="${escapeAttribute(
-              product.title || "Product"
-            )}"
-          >
-        `
-        : `
-          <div
-            class="product-image"
-            style="
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              font-size:30px;
-            "
-          >
-            🐰
-          </div>
-        `;
-
-
-    item.innerHTML = `
-
-      ${image}
-
-
-      <div class="product-info">
-
-        <h3>
-          ${escapeHTML(
-            product.title || "Unnamed Product"
-          )}
-        </h3>
-
-
-        <p>
-          Category:
-          <b>
-            ${escapeHTML(
-              product.category || "-"
-            )}
-          </b>
-        </p>
-
-
-        <p>
-          Price:
-          <b>
-            ৳${formatNumber(
-              product.price
-            )}
-          </b>
-        </p>
-
-
-        <p>
-          Stock:
-          <b>
-            ${formatNumber(
-              product.stock
-            )}
-          </b>
-        </p>
-
-      </div>
-
-
-      <div class="product-actions">
-
-        <button
-          type="button"
-          class="edit-btn"
-          data-id="${escapeAttribute(
-            String(product.id)
-          )}"
-        >
-          ✏️ Edit
-        </button>
-
-
-        <button
-          type="button"
-          class="delete-btn"
-          data-id="${escapeAttribute(
-            String(product.id)
-          )}"
-        >
-          🗑️ Delete
-        </button>
-
-      </div>
-
-    `;
-
-
-    list.appendChild(item);
-
-  });
-
-
-  // ===================================================
-  // EDIT
-  // ===================================================
-
-  list
-    .querySelectorAll(".edit-btn")
-    .forEach((button) => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          editProduct(
-            button.dataset.id
-          );
-
-        }
-      );
-
-    });
-
-
-  // ===================================================
-  // DELETE
-  // ===================================================
-
-  list
-    .querySelectorAll(".delete-btn")
-    .forEach((button) => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          deleteProduct(
-            button.dataset.id
-          );
-
-        }
-      );
-
-    });
-
-}
-
-
-// =====================================================
-// SEARCH
-// =====================================================
-
-searchInput.addEventListener(
-  "input",
-  () => {
-
-    const search =
-      searchInput.value
-        .trim()
-        .toLowerCase();
-
-
-    if (!search) {
-
-      renderProducts(products);
-
-      return;
-    }
-
-
-    const filtered =
-      products.filter((product) => {
-
-        const title =
-          String(
-            product.title || ""
-          ).toLowerCase();
-
-
-        const category =
-          String(
-            product.category || ""
-          ).toLowerCase();
-
-
-        const description =
-          String(
-            product.description || ""
-          ).toLowerCase();
-
-
-        return (
-          title.includes(search) ||
-          category.includes(search) ||
-          description.includes(search)
-        );
-
-      });
-
-
-    renderProducts(filtered);
-
-  }
-);
-
-
-// =====================================================
-// EDIT PRODUCT
-// =====================================================
-
-function editProduct(id) {
-
-  const product =
-    products.find(
-      (item) =>
-        String(item.id) === String(id)
-    );
-
-
-  if (!product) {
-
-    alert(
-      "❌ Product পাওয়া যায়নি।"
-    );
-
-    return;
-  }
-
-
-  editingId =
-    product.id;
-
-
-  idInput.value =
-    product.id;
-
-
-  titleInput.value =
-    product.title || "";
-
-
-  categoryInput.value =
-    product.category || "";
-
-
-  priceInput.value =
-    product.price ?? "";
-
-
-  stockInput.value =
-    product.stock ?? "";
-
-
-  descriptionInput.value =
-    product.description || "";
-
-
-  selectedImageFile =
-    null;
-
-
-  imageInput.value =
-    "";
-
-
-  if (product.image_url) {
-
-    preview.src =
-      product.image_url;
-
-    preview.classList.remove(
-      "hidden"
-    );
-
-  }
-
-  else {
-
-    preview.src =
-      "";
-
-    preview.classList.add(
-      "hidden"
-    );
-
-  }
-
-
-  formTitle.textContent =
-    "✏️ Product Edit করুন";
-
-
-  cancelBtn.classList.remove(
-    "hidden"
-  );
-
-
-  window.scrollTo({
-
-    top: 0,
-
-    behavior: "smooth"
-
-  });
-
-}
-
-
-// =====================================================
-// DELETE PRODUCT
-// =====================================================
-
-async function deleteProduct(id) {
-
-  const product =
-    products.find(
-      (item) =>
-        String(item.id) === String(id)
-    );
-
-
-  const productName =
-    product?.title ||
-    "এই Product";
-
-
-  const ok =
-    confirm(
-      `"${productName}" Delete করবেন?`
-    );
-
-
-  if (!ok) {
-
-    return;
-  }
-
-
-  try {
-
-    const {
-      error
-    } =
-      await supabase
-        .from("products")
-        .delete()
-        .eq(
-          "id",
-          id
-        );
-
-
-    if (error) {
-
-      throw error;
-    }
-
-
-    alert(
-      "✅ Product Delete হয়েছে।"
-    );
-
-
-    await loadProducts();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    alert(
-      "❌ Delete Error: " +
-      getErrorMessage(error)
-    );
-
-  }
-
-}
-
-
-// =====================================================
-// CANCEL
-// =====================================================
-
-cancelBtn.addEventListener(
-  "click",
-  () => {
-
-    resetForm();
-
-  }
-);
-
-
-// =====================================================
-// RESET FORM
-// =====================================================
-
-function resetForm() {
-
-  productForm.reset();
-
-
-  idInput.value =
-    "";
-
-
-  editingId =
-    null;
-
-
-  selectedImageFile =
-    null;
-
-
-  imageInput.value =
-    "";
-
-
-  preview.src =
-    "";
-
-
-  preview.classList.add(
-    "hidden"
-  );
-
-
-  formTitle.textContent =
-    "➕ নতুন Product Upload";
-
-
-  cancelBtn.classList.add(
-    "hidden"
-  );
-
-}
-
-
-// =====================================================
-// LOAD ORDERS
-// =====================================================
-
-async function loadOrders() {
-
-  ordersList.innerHTML =
-    "⏳ অর্ডার লোড হচ্ছে...";
-
-
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await supabase
-        .from("orders")
-        .select("*")
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (error) {
-
-      throw error;
-    }
-
-
-    if (
-      !data ||
-      !data.length
-    ) {
-
-      ordersList.innerHTML =
-        `
-        <div class="empty">
-          📦 এখনো কোনো Order নেই।
-        </div>
-        `;
-
-      return;
-    }
-
-
-    ordersList.innerHTML =
-      "";
-
-
-    data.forEach((order) => {
-
-      const card =
-        document.createElement("div");
-
-
-      card.className =
-        "order-card";
-
-
-      const status =
-        order.status ||
-        "pending";
-
-
-      card.innerHTML = `
-
-        <div class="order-top">
-
-          <div>
-
-            <h3>
-              📦 Customer Order
-            </h3>
-
-            <div class="order-id">
-              ID:
-              ${escapeHTML(
-                String(
-                  order.id || ""
-                )
-              )}
-            </div>
-
-          </div>
-
-
-          <span class="status">
-            ${escapeHTML(status)}
-          </span>
-
-        </div>
-
-
-        <div class="order-info">
-
-          <b>নাম:</b>
-          ${escapeHTML(
-            order.customer_name ||
-            ""
-          )}
-
-          <br>
-
-
-          <b>মোবাইল:</b>
-          ${escapeHTML(
-            order.customer_phone ||
-            ""
-          )}
-
-          <br>
-
-
-          <b>জেলা:</b>
-          ${escapeHTML(
-            order.district ||
-            ""
-          )}
-
-          <br>
-
-
-          <b>ঠিকানা:</b>
-          ${escapeHTML(
-            order.address ||
-            ""
-          )}
-
-          <br>
-
-
-          <b>Total:</b>
-          ৳${formatNumber(
-            order.total
-          )}
-
-        </div>
-
-
-        <div class="order-actions">
-
-          <button
-            type="button"
-            class="complete-btn"
-            data-order-id="${escapeAttribute(
-              String(order.id)
-            )}"
-          >
-            ✅ Complete
-          </button>
-
-
-          <button
-            type="button"
-            class="cancel-btn"
-            data-order-id="${escapeAttribute(
-              String(order.id)
-            )}"
-          >
-            ❌ Cancel
-          </button>
-
-
-          <button
-            type="button"
-            class="delete-order"
-            data-order-id="${escapeAttribute(
-              String(order.id)
-            )}"
-          >
-            🗑️ Delete
-          </button>
-
-        </div>
-
-      `;
-
-
-      ordersList.appendChild(card);
-
-    });
-
-
-    // =================================================
-    // COMPLETE
-    // =================================================
-
-    ordersList
-      .querySelectorAll(".complete-btn")
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            updateOrderStatus(
-              button.dataset.orderId,
-              "completed"
-            );
-
-          }
-        );
-
-      });
-
-
-    // =================================================
-    // CANCEL
-    // =================================================
-
-    ordersList
-      .querySelectorAll(".cancel-btn")
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            updateOrderStatus(
-              button.dataset.orderId,
-              "cancelled"
-            );
-
-          }
-        );
-
-      });
-
-
-    // =================================================
-    // DELETE ORDER
-    // =================================================
-
-    ordersList
-      .querySelectorAll(".delete-order")
-      .forEach((button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            deleteOrder(
-              button.dataset.orderId
-            );
-
-          }
-        );
-
-      });
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    ordersList.innerHTML =
-      `
-      <div class="empty">
-        ❌ Orders Load Error<br><br>
-        ${escapeHTML(
-          getErrorMessage(error)
-        )}
-      </div>
-      `;
-
-  }
-
-}
-
-
-// =====================================================
-// UPDATE ORDER STATUS
-// =====================================================
-
-async function updateOrderStatus(
-  id,
-  status
-) {
-
-  try {
-
-    const {
-      error
-    } =
-      await supabase
-        .from("orders")
-        .update({
-          status: status
-        })
-        .eq(
-          "id",
-          id
-        );
-
-
-    if (error) {
-
-      throw error;
-    }
-
-
-    await loadOrders();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    alert(
-      "❌ Status Update Error: " +
-      getErrorMessage(error)
-    );
-
-  }
-
-}
-
-
-// =====================================================
-// DELETE ORDER
-// =====================================================
-
-async function deleteOrder(id) {
-
-  const ok =
-    confirm(
-      "এই Order Delete করবেন?"
-    );
-
-
-  if (!ok) {
-
-    return;
-  }
-
-
-  try {
-
-    const {
-      error
-    } =
-      await supabase
-        .from("orders")
-        .delete()
-        .eq(
-          "id",
-          id
-        );
-
-
-    if (error) {
-
-      throw error;
-    }
-
-
-    await loadOrders();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    alert(
-      "❌ Order Delete Error: " +
-      getErrorMessage(error)
-    );
-
-  }
-
-}
-
-
-// =====================================================
-// REFRESH ORDERS
-// =====================================================
-
-refreshOrders.addEventListener(
-  "click",
-  () => {
-
-    loadOrders();
-
-  }
-);
-
-
-// =====================================================
-// ERROR MESSAGE
-// =====================================================
-
-function getErrorMessage(error) {
-
-  if (!error) {
-
-    return "Unknown error";
-
-  }
-
-
-  if (
-    error.message &&
-    typeof error.message === "string"
-  ) {
-
-    return error.message;
-
-  }
-
-
-  return String(error);
-
-}
-
-
-// =====================================================
-// FORMAT NUMBER
-// =====================================================
-
-function formatNumber(value) {
-
-  const number =
-    Number(value || 0);
-
-
-  return number.toLocaleString(
-    "en-US"
-  );
-
-}
-
-
-// =====================================================
-// ESCAPE HTML
-// =====================================================
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
-
-
-// =====================================================
-// ESCAPE ATTRIBUTE
-// =====================================================
-
-function escapeAttribute(value) {
-
-  return escapeHTML(value);
-
-}
-
-
-// =====================================================
-// START
-// =====================================================
-
-checkLogin();
+</body>
+</html>
