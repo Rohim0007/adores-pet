@@ -1,929 +1,453 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>ADORE'S PET</title>
 
 <style>
-
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,"Noto Sans Bengali","Noto Sans",sans-serif;
-  background:#f6f9f7;
-  color:#10251d;
-  line-height:1.5;
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f9f6;
+    color:#092d22;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+/* HEADER */
+.header{
+    height:105px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    border-bottom:1px solid #e5e5e5;
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.site-header{
-  width:100%;
-  background:#fff;
-  border-bottom:1px solid #dfe8e3;
-
-  position:sticky;
-  top:0;
-
-  z-index:1000;
+.logo{
+    width:75px;
+    cursor:pointer;
 }
-
-.header-inner{
-  max-width:1200px;
-  min-height:105px;
-
-  margin:auto;
-
-  padding:14px 24px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:20px;
-}
-
-
-/* LOGO */
-
-.brand-logo{
-  display:flex;
-  align-items:center;
-  height:78px;
-}
-
-.brand-logo img{
-  display:block;
-
-  height:72px;
-  width:auto;
-
-  max-width:280px;
-
-  object-fit:contain;
-}
-
-
-/* CART */
 
 .cart-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  gap:10px;
-
-  background:#19733f;
-  color:#fff;
-
-  border-radius:24px;
-
-  min-width:190px;
-
-  padding:12px 16px;
-
-  font-size:20px;
-  font-weight:700;
+    background:#177b45;
+    color:#fff;
+    border:0;
+    border-radius:35px;
+    height:64px;
+    min-width:235px;
+    padding:0 15px;
+    font-size:22px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
 }
 
 .cart-count{
-  width:52px;
-  height:52px;
-
-  border-radius:50%;
-
-  background:#fff;
-  color:#19733f;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:22px;
-  font-weight:800;
+    background:#fff;
+    color:#177b45;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-
-/* =====================================================
-   SECTION
-===================================================== */
-
-.section{
-  padding:72px 24px;
+/* CATEGORY */
+.category-section{
+    padding:90px 5%;
 }
 
-.section-inner{
-  max-width:1200px;
-  margin:auto;
+.section-title{
+    text-align:center;
+    font-size:27px;
+    letter-spacing:7px;
+    margin:0 0 55px;
+    color:#197647;
 }
 
-.section-label{
-  text-align:center;
-
-  color:#19733f;
-
-  font-size:18px;
-
-  font-weight:800;
-
-  letter-spacing:6px;
-
-  margin-bottom:36px;
-
-  text-transform:uppercase;
-}
-
-
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-.category-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:28px;
-
-  max-width:850px;
-
-  margin:0 auto;
-
+.categories{
+    max-width:650px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
 }
 
 .category-card{
+    height:300px;
+    background:#fff;
+    border:2px solid #dce4e0;
+    border-radius:40px;
 
-  width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-  aspect-ratio:1/1;
+    cursor:pointer;
+    transition:.25s;
 
-  background:#fff;
-
-  border:1px solid #d9e3de;
-
-  border-radius:30px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:28px;
-
-  box-shadow:
-    0 5px 18px rgba(16,37,29,.04);
-
-  transition:.2s;
-
+    box-shadow:0 5px 15px rgba(0,0,0,.04);
 }
 
 .category-card:hover{
-
-  transform:translateY(-4px);
-
-  box-shadow:
-    0 12px 30px rgba(16,37,29,.10);
-
+    transform:translateY(-5px);
+    border-color:#177b45;
 }
 
 .category-icon{
-
-  width:115px;
-  height:115px;
-
-  object-fit:contain;
-
-  margin-bottom:24px;
-
+    font-size:105px;
+    margin-bottom:20px;
 }
 
 .category-name{
-
-  font-size:27px;
-
-  font-weight:800;
-
-  text-align:center;
-
+    font-size:28px;
+    font-weight:800;
 }
 
-
-/* =====================================================
-   WHY CHOOSE US
-===================================================== */
-
+/* WHY */
 .why-section{
-  background:#eaf6ef;
+    background:#eaf7f0;
+    padding:90px 5%;
 }
 
 .why-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-  gap:28px;
-
-  max-width:850px;
-
-  margin:0 auto;
-
+    max-width:650px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
 }
 
 .why-card{
+    background:#fff;
+    border:2px solid #d8e2de;
+    border-radius:38px;
+    min-height:300px;
+    padding:25px 18px;
 
-  width:100%;
+    text-align:center;
 
-  aspect-ratio:1/1;
-
-  background:#fff;
-
-  border:1px solid #d9e3de;
-
-  border-radius:30px;
-
-  padding:30px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  box-shadow:
-    0 5px 18px rgba(16,37,29,.04);
-
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
 .why-icon{
-
-  width:92px;
-  height:92px;
-
-  object-fit:contain;
-
-  margin-bottom:20px;
-
+    font-size:75px;
 }
 
-.why-title{
-
-  font-size:25px;
-
-  font-weight:800;
-
-  margin-bottom:12px;
-
+.why-card h3{
+    font-size:23px;
+    margin:12px 0;
 }
 
-.why-text{
-
-  color:#7a827f;
-
-  font-size:17px;
-
-  line-height:1.75;
-
+.why-card p{
+    color:#858c88;
+    font-size:16px;
+    line-height:1.6;
 }
 
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-
-  background:#06251a;
-
-  color:#fff;
-
-  padding:55px 24px 28px;
-
-  text-align:center;
-
+/* FOOTER */
+.footer{
+    background:#002c20;
+    color:#fff;
+    text-align:center;
+    padding:65px 20px 30px;
 }
 
-.footer-brand{
-
-  font-size:30px;
-
-  font-weight:800;
-
-  margin-bottom:10px;
-
+.footer-logo{
+    font-size:38px;
+    font-weight:bold;
 }
 
 .footer-tagline{
-
-  color:#b8c8c1;
-
-  font-size:17px;
-
-  margin-bottom:32px;
-
+    color:#b7c9c3;
+    margin-top:18px;
+    font-size:18px;
 }
 
 .footer-line{
-
-  height:1px;
-
-  background:rgba(255,255,255,.18);
-
-  max-width:900px;
-
-  margin:0 auto 22px;
-
+    max-width:600px;
+    height:1px;
+    background:#31554c;
+    margin:30px auto 20px;
 }
 
 .copyright{
-
-  color:#9eafa8;
-
-  font-size:14px;
-
+    color:#aebdb8;
 }
 
+/* MOBILE */
+@media(max-width:600px){
 
-/* =====================================================
-   MOBILE
-===================================================== */
+    .header{
+        height:95px;
+        padding:0 25px;
+    }
 
-@media(max-width:700px){
+    .logo{
+        width:65px;
+    }
 
-  .header-inner{
+    .cart-btn{
+        min-width:190px;
+        height:56px;
+        font-size:18px;
+    }
 
-    min-height:88px;
+    .cart-count{
+        width:42px;
+        height:42px;
+    }
 
-    padding:10px 16px;
+    .category-section{
+        padding:75px 20px;
+    }
 
-  }
+    .section-title{
+        font-size:22px;
+        letter-spacing:4px;
+    }
 
-  .brand-logo{
+    .categories{
+        gap:18px;
+    }
 
-    height:62px;
+    .category-card{
+        height:220px;
+        border-radius:28px;
+    }
 
-  }
+    .category-icon{
+        font-size:70px;
+    }
 
-  .brand-logo img{
+    .category-name{
+        font-size:20px;
+    }
 
-    height:58px;
+    .why-section{
+        padding:75px 20px;
+    }
 
-    max-width:175px;
+    .why-grid{
+        gap:18px;
+    }
 
-  }
+    .why-card{
+        min-height:260px;
+        border-radius:28px;
+    }
 
-  .cart-btn{
+    .why-icon{
+        font-size:55px;
+    }
 
-    min-width:135px;
+    .why-card h3{
+        font-size:18px;
+    }
 
-    border-radius:20px;
-
-    padding:8px 10px;
-
-    font-size:17px;
-
-  }
-
-  .cart-count{
-
-    width:44px;
-    height:44px;
-
-    font-size:19px;
-
-  }
-
-
-  .section{
-
-    padding:52px 18px;
-
-  }
-
-  .section-label{
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    margin-bottom:28px;
-
-  }
-
-
-  .category-grid,
-  .why-grid{
-
-    gap:16px;
-
-  }
-
-
-  .category-card,
-  .why-card{
-
-    border-radius:24px;
-
-    padding:18px;
-
-  }
-
-
-  .category-icon{
-
-    width:76px;
-    height:76px;
-
-    margin-bottom:16px;
-
-  }
-
-  .category-name{
-
-    font-size:20px;
-
-  }
-
-
-  .why-icon{
-
-    width:68px;
-    height:68px;
-
-    margin-bottom:14px;
-
-  }
-
-  .why-title{
-
-    font-size:20px;
-
-    margin-bottom:8px;
-
-  }
-
-  .why-text{
-
-    font-size:14px;
-
-    line-height:1.55;
-
-  }
-
+    .why-card p{
+        font-size:14px;
+    }
 }
-
-
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
-
-@media(max-width:380px){
-
-  .brand-logo img{
-
-    max-width:150px;
-
-  }
-
-  .cart-btn{
-
-    min-width:118px;
-
-    font-size:15px;
-
-  }
-
-  .cart-count{
-
-    width:38px;
-    height:38px;
-
-  }
-
-  .category-name{
-
-    font-size:17px;
-
-  }
-
-  .why-title{
-
-    font-size:17px;
-
-  }
-
-  .why-text{
-
-    font-size:12px;
-
-  }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<header class="header">
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<img
+    src="logo.png"
+    class="logo"
+    onclick="location.href='index.html'"
+    alt="ADORE'S PET"
+>
 
-<header class="site-header">
+<button
+    class="cart-btn"
+    onclick="location.href='category.html?cart=1'"
+>
+    <span>🛒 Cart</span>
 
-  <div class="header-inner">
-
-
-    <!-- LOGO -->
-
-    <a
-      href="index.html"
-      class="brand-logo"
-      aria-label="ADORE'S PET Home"
-    >
-
-      <img
-        src="logo.png.png"
-        alt="ADORE'S PET"
-      >
-
-    </a>
-
-
-    <!-- CART -->
-
-    <a
-      href="cart.html"
-      class="cart-btn"
-    >
-
-      <span>🛒</span>
-
-      <span>Cart</span>
-
-      <span
+    <span
         class="cart-count"
         id="cartCount"
-      >
-        0
-      </span>
-
-    </a>
-
-
-  </div>
+    >0</span>
+</button>
 
 </header>
 
 
+<!-- HOME-এ কোনো PRODUCT নেই -->
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<section class="category-section">
 
-<main>
+<h2 class="section-title">
+SHOP BY CATEGORY
+</h2>
 
+<div class="categories">
 
-<!-- =====================================================
-     SHOP BY CATEGORY
-===================================================== -->
-
-<section class="section">
-
-  <div class="section-inner">
-
-
-    <div class="section-label">
-      SHOP BY CATEGORY
-    </div>
+<div
+    class="category-card"
+    onclick="openCategory('Rabbit')"
+>
+    <div class="category-icon">🐰</div>
+    <div class="category-name">Rabbit</div>
+</div>
 
 
-    <div class="category-grid">
+<div
+    class="category-card"
+    onclick="openCategory('Hamster')"
+>
+    <div class="category-icon">🐹</div>
+    <div class="category-name">Hamster</div>
+</div>
 
 
-      <!-- RABBIT -->
-
-      <a
-        class="category-card"
-        href="category.html?category=Rabbit"
-      >
-
-        <img
-          class="category-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg"
-          alt="Rabbit"
-        >
-
-        <div class="category-name">
-          Rabbit
-        </div>
-
-      </a>
+<div
+    class="category-card"
+    onclick="openCategory('Pet Food')"
+>
+    <div class="category-icon">🌿</div>
+    <div class="category-name">Pet Food</div>
+</div>
 
 
+<div
+    class="category-card"
+    onclick="openCategory('Accessories')"
+>
+    <div class="category-icon">🧺</div>
+    <div class="category-name">Accessories</div>
+</div>
 
-      <!-- HAMSTER -->
-
-      <a
-        class="category-card"
-        href="category.html?category=Hamster"
-      >
-
-        <img
-          class="category-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f439.svg"
-          alt="Hamster"
-        >
-
-        <div class="category-name">
-          Hamster
-        </div>
-
-      </a>
-
-
-
-      <!-- PET FOOD -->
-
-      <a
-        class="category-card"
-        href="category.html?category=Pet%20Food"
-      >
-
-        <img
-          class="category-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f33e.svg"
-          alt="Pet Food"
-        >
-
-        <div class="category-name">
-          Pet Food
-        </div>
-
-      </a>
-
-
-
-      <!-- ACCESSORIES -->
-
-      <a
-        class="category-card"
-        href="category.html?category=Accessories"
-      >
-
-        <img
-          class="category-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f9fa.svg"
-          alt="Accessories"
-        >
-
-        <div class="category-name">
-          Accessories
-        </div>
-
-      </a>
-
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
+<!-- WHY CHOOSE US -->
 
-<!-- =====================================================
-     WHY CHOOSE US
-===================================================== -->
+<section class="why-section">
 
-<section class="section why-section">
+<h2 class="section-title">
+WHY CHOOSE US
+</h2>
 
-  <div class="section-inner">
+<div class="why-grid">
 
-
-    <div class="section-label">
-      WHY CHOOSE US
-    </div>
-
-
-    <div class="why-grid">
-
-
-      <!-- 1 -->
-
-      <div class="why-card">
-
-        <img
-          class="why-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f430.svg"
-          alt="Healthy Pet"
-        >
-
-        <h2 class="why-title">
-          সুস্থ পোষা প্রাণী
-        </h2>
-
-        <p class="why-text">
-          যত্নসহকারে পালন করা
-          স্বাস্থ্যকর ও সুন্দর
-          পোষা প্রাণী।
-        </p>
-
-      </div>
+<div class="why-card">
+<div class="why-icon">🐰</div>
+<h3>সুস্থ পোষা প্রাণী</h3>
+<p>
+যত্নসহকারে পালন করা স্বাস্থ্যকর
+ও সুন্দর পোষা প্রাণী।
+</p>
+</div>
 
 
-
-      <!-- 2 -->
-
-      <div class="why-card">
-
-        <img
-          class="why-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f69a.svg"
-          alt="Delivery"
-        >
-
-        <h2 class="why-title">
-          Delivery সুবিধা
-        </h2>
-
-        <p class="why-text">
-          দেশের বিভিন্ন জায়গায়
-          সহজে অর্ডার ও ডেলিভারি
-          সুবিধা।
-        </p>
-
-      </div>
+<div class="why-card">
+<div class="why-icon">🚚</div>
+<h3>Delivery সুবিধা</h3>
+<p>
+দেশের বিভিন্ন জায়গায় সহজে
+অর্ডার ও ডেলিভারি সুবিধা।
+</p>
+</div>
 
 
-
-      <!-- 3 -->
-
-      <div class="why-card">
-
-        <img
-          class="why-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/2b50.svg"
-          alt="Trusted Service"
-        >
-
-        <h2 class="why-title">
-          বিশ্বস্ত সেবা
-        </h2>
-
-        <p class="why-text">
-          গ্রাহকের সন্তুষ্টি ও
-          ভালো সার্ভিসকে আমরা
-          সর্বোচ্চ গুরুত্ব দিই।
-        </p>
-
-      </div>
+<div class="why-card">
+<div class="why-icon">🤝</div>
+<h3>বিশ্বস্ত সেবা</h3>
+<p>
+গ্রাহকের সন্তুষ্টি ও ভালো
+সার্ভিসকে গুরুত্ব দেওয়া হয়।
+</p>
+</div>
 
 
+<div class="why-card">
+<div class="why-icon">⭐</div>
+<h3>মানসম্মত পণ্য</h3>
+<p>
+পোষা প্রাণীর জন্য প্রয়োজনীয়
+ভালো মানের পণ্য।
+</p>
+</div>
 
-      <!-- 4 -->
-
-      <div class="why-card">
-
-        <img
-          class="why-icon"
-          src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f6e1.svg"
-          alt="Quality Product"
-        >
-
-        <h2 class="why-title">
-          মানসম্মত পণ্য
-        </h2>
-
-        <p class="why-text">
-          পোষা প্রাণীর জন্য
-          প্রয়োজনীয় ভালো মানের
-          পণ্য।
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-</main>
+<footer class="footer">
 
+<div class="footer-logo">
+🐰 ADORE'S PET
+</div>
 
+<div class="footer-tagline">
+আপনার বিশ্বস্ত Pet Shop
+</div>
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<div class="footer-line"></div>
 
-<footer>
-
-  <div class="footer-brand">
-    🐰 ADORE'S PET
-  </div>
-
-  <div class="footer-tagline">
-    আপনার বিশ্বস্ত Pet Shop
-  </div>
-
-  <div class="footer-line"></div>
-
-  <div class="copyright">
-    © 2026 ADORE'S PET — All Rights Reserved
-  </div>
+<div class="copyright">
+© 2026 ADORE'S PET — All Rights Reserved
+</div>
 
 </footer>
 
 
-
-<!-- =====================================================
-     CART COUNT
-===================================================== -->
-
 <script>
 
-try{
+const CART_KEY="adores_pet_cart_v5";
 
-  const cart =
-    JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
+function openCategory(category){
 
-
-  const count =
-    Array.isArray(cart)
-
-      ? cart.reduce(
-          function(total,item){
-
-            return total +
-              (
-                Number(item.quantity) || 1
-              );
-
-          },
-          0
-        )
-
-      : 0;
-
-
-  document.getElementById(
-    "cartCount"
-  ).textContent = count;
-
-
-}catch(error){
-
-  document.getElementById(
-    "cartCount"
-  ).textContent = "0";
+    location.href=
+    "category.html?category="+
+    encodeURIComponent(category);
 
 }
 
+function updateCart(){
+
+    const cart=
+    JSON.parse(
+        localStorage.getItem(CART_KEY)||"[]"
+    );
+
+    document.getElementById("cartCount")
+    .textContent=
+    cart.reduce(
+        (total,item)=>total+item.qty,
+        0
+    );
+}
+
+updateCart();
+
 </script>
 
-
 </body>
-
 </html>
