@@ -6,7 +6,12 @@
 <title>ADORE'S PET</title>
 
 <!-- Web App Manifest (PWA Config for Free App Install) -->
-<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkFET1JFUyBQRVQiLAogICJzaG9ydF9uYW1lIjogIkFET1JFUyBQRVQiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY2ZjgiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA4OTdiIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pLnBvc3RpbWcuY2MvVHlLd2Y3S1MvMjAyNjEwMDgtMTkxOTQ1LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkFET1JFUyBQRVQiLAogICJzaG9ydF9uYW1lIjogIkFET1JFUyBQRVQiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY2ZjgiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA4OTdiIiwKICAiaWNvbnMiOiBbCiAgIC {
+      InNyYyI6ICJodHRwczovL2kucG9zdGltZy5jYy9UeUt3ZjdLUy8yMDI2MTAwOC0xOTE5NDUucG5nIiw
+      InNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmci
+    }
+  ]
+}">
 <meta name="theme-color" content="#00897b">
 
 <!-- FontAwesome Icons -->
@@ -557,7 +562,6 @@ body{
     overflow-y:auto;
 }
 
-/* CART HEADER WITH CENTERED TITLE */
 .cart-header{
     background: var(--teal);
     padding: 16px 20px;
@@ -666,7 +670,6 @@ body{
     margin-top: 15px;
 }
 
-/* MODALS & SLIDE-UP ANIMATION */
 .thankyou-overlay{
     display: none;
     position: fixed;
@@ -729,7 +732,6 @@ body{
     cursor: pointer;
 }
 
-/* ORDER TRACKER STYLING */
 .order-card{
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -765,7 +767,6 @@ body{
     color: var(--text-dark);
 }
 
-/* PRINTABLE VOUCHER MODAL STYLING */
 .voucher-modal{
     display: none;
     position: fixed;
@@ -846,32 +847,45 @@ body{
     gap: 10px;
 }
 
-/* ADMIN PANEL STYLING */
-#adminSection{
-    display:none;
-    max-width:600px;
-    margin:20px auto;
-    padding:0 16px;
+/* FULL SCREEN EXCLUSIVE ADMIN VIEW */
+#fullAdminScreen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #f4f6f8;
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 20px 16px;
 }
 
-.admin-login, .admin-card{
+.admin-card{
     background:white;
     padding:25px;
     border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,0.05);
     border:1px solid #e2e8f0;
     margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.admin-login input, .admin-card input, .admin-card select, .admin-card textarea{
+.admin-card input, .admin-card select, .admin-card textarea{
     width: 100%;
     padding: 12px;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 14px;
     outline: none;
-    margin-top: 8px;
-    margin-bottom: 15px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-card input:focus, .admin-card select:focus, .admin-card textarea:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,137,123,0.1);
 }
 
 .admin-submit-btn{
@@ -883,6 +897,41 @@ body{
     color: white;
     font-weight: 800;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,137,123,0.25);
+    transition: opacity 0.2s;
+}
+.admin-submit-btn:active{
+    opacity: 0.9;
+}
+
+/* BEAUTIFUL FILE UPLOAD BOX SYSTEM */
+.admin-file-box {
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+.admin-file-box:hover {
+    border-color: var(--teal);
+    background: #f0fdf4;
+}
+.admin-file-box label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--teal);
+    margin-bottom: 8px;
+}
+.admin-file-box input[type="file"] {
+    width: 100%;
+    font-size: 12px;
+    color: #475569;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 
 .admin-product-card{
@@ -910,7 +959,6 @@ body{
     border-radius: 8px;
 }
 
-/* ADMIN NOTIFICATION ORDER BOX STYLING */
 .admin-notif-box{
     background: #ffffff;
     border: 2px solid var(--teal);
@@ -986,7 +1034,7 @@ body{
 
 <body>
 
-<!-- APP HEADER -->
+<!-- APP HEADER (Always Visible for Admin Login) -->
 <header class="app-header">
 <div class="header-inner">
     <div class="logo-area" onclick="goHome()">
@@ -1009,41 +1057,58 @@ body{
 <!-- MAIN -->
 <main class="container">
 
-<!-- FREE PWA APP INSTALL BANNER -->
-<div id="pwaBanner" class="pwa-banner">
-    <div style="display:flex; align-items:center; gap:10px;">
-        <i class="fa-solid fa-mobile-screen-button" style="font-size:20px; color:var(--teal);"></i>
-        <span class="pwa-banner-text">ADORE'S PET অ্যাপ ইনস্টল করুন</span>
+<!-- VACATION MODE BOX -->
+<div id="vacationBoxContainer" style="display:none; background:white; border-radius:24px; padding:32px 24px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.08); margin-top:20px; border:2px dashed #ef4444;">
+    <div style="width:75px; height:75px; background:#fef2f2; color:#ef4444; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 18px; box-shadow:0 6px 20px rgba(239,68,68,0.25);">
+        <i class="fa-solid fa-mug-hot"></i>
     </div>
-    <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
+    <h2 style="font-size:20px; font-weight:900; color:#1e293b; margin-bottom:8px;">সাময়িক বিরতিতে আছি! 🌴</h2>
+    <p style="font-size:13.5px; color:#64748b; line-height:1.6; margin-bottom:24px;">
+        আমরা বর্তমানে কিছুদিনের জন্য ভ্রমণে বা ব্যক্তিগত কাজে বাইরে আছি। এই সময়ে আমাদের শপ থেকে নতুন কোনো অর্ডার গ্রহণ করা হচ্ছে না। খুব শীঘ্রই আমরা আবার ফিরে আসবো ইনশাআল্লাহ! সঙ্গে থাকার জন্য ধন্যবাদ।
+    </p>
+    <button onclick="openSupportModal()" style="display:block; width:100%; background:var(--teal); color:white; padding:13px; border:none; border-radius:12px; font-weight:800; font-size:14px; cursor:pointer; box-shadow:0 4px 15px rgba(0,137,123,0.35);">
+        <i class="fa-solid fa-headset"></i> যোগাযোগ বা সাপোর্ট (Support)
+    </button>
 </div>
 
-<!-- BANNER -->
-<div class="hero-image-banner">
-    <img src="https://i.postimg.cc/JzmwDZBp/file-000000004a4482438eebd37b7fd9db5f.png" alt="ADORE'S PET Banner">
+<!-- NORMAL HOME CONTENT -->
+<div id="normalHomeContent">
+    <!-- FREE PWA APP INSTALL BANNER -->
+    <div id="pwaBanner" class="pwa-banner">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <i class="fa-solid fa-mobile-screen-button" style="font-size:20px; color:var(--teal);"></i>
+            <span class="pwa-banner-text">ADORE'S PET অ্যাপ ইনস্টল করুন</span>
+        </div>
+        <button id="pwaInstallBtn" class="pwa-install-btn">Install App</button>
+    </div>
+
+    <!-- BANNER -->
+    <div class="hero-image-banner">
+        <img src="https://i.postimg.cc/JzmwDZBp/file-000000004a4482438eebd37b7fd9db5f.png" alt="ADORE'S PET Banner">
+    </div>
+
+    <!-- CATEGORY CHIPS -->
+    <section class="category-section">
+        <div class="category-header-row">
+            <h3>Categories</h3>
+            <span class="show-all" onclick="goHome()">Showing All</span>
+        </div>
+        <div class="category-chips">
+            <button class="chip-btn" onclick="selectCategory('Rabbit',this)">Rabbit</button>
+            <button class="chip-btn" onclick="selectCategory('Hamster',this)">Hamster</button>
+            <button class="chip-btn" onclick="selectCategory('Pet Food',this)">Pet Food</button>
+            <button class="chip-btn" onclick="selectCategory('Accessories',this)">Accessories</button>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+        <div class="products-header-row">
+            <h3 id="productsTitle">Popular Pet Supplies</h3>
+        </div>
+        <div id="productsGrid" class="products-grid"></div>
+    </section>
 </div>
-
-<!-- CATEGORY CHIPS -->
-<section class="category-section">
-    <div class="category-header-row">
-        <h3>Categories</h3>
-        <span class="show-all" onclick="goHome()">Showing All</span>
-    </div>
-    <div class="category-chips">
-        <button class="chip-btn" onclick="selectCategory('Rabbit',this)">Rabbit</button>
-        <button class="chip-btn" onclick="selectCategory('Hamster',this)">Hamster</button>
-        <button class="chip-btn" onclick="selectCategory('Pet Food',this)">Pet Food</button>
-        <button class="chip-btn" onclick="selectCategory('Accessories',this)">Accessories</button>
-    </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products-section">
-    <div class="products-header-row">
-        <h3 id="productsTitle">Popular Pet Supplies</h3>
-    </div>
-    <div id="productsGrid" class="products-grid"></div>
-</section>
 
 </main>
 
@@ -1070,7 +1135,7 @@ body{
     </button>
 </nav>
 
-<!-- PRODUCT DETAILS POPUP MODAL (FULL 1:1 / 4x4 SQUARE FIT - NO CLIPPING) -->
+<!-- PRODUCT DETAILS POPUP MODAL -->
 <div id="productDetailModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <div style="width:40px; height:5px; background:#cbd5e1; border-radius:10px; margin:0 auto 12px;"></div>
@@ -1080,25 +1145,20 @@ body{
             <button onclick="closeProductModal()" style="background:#e2e8f0; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; font-weight:bold;">✕</button>
         </div>
 
-        <!-- Perfect 1:1 (4x4) Responsive Square Box Frame -->
         <div style="width:100%; aspect-ratio:1 / 1; background:#ffffff; border-radius:16px; overflow:hidden; margin-bottom:12px; display:flex; align-items:center; justify-content:center; border:1px solid #e2e8f0; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
             <img id="modalMainImg" src="" style="width:100%; height:100%; object-fit:contain;" alt="">
             <video id="modalMainVideo" src="" style="width:100%; height:100%; object-fit:contain; display:none;" controls autoplay loop muted></video>
         </div>
 
-        <!-- Multiple Images / Video Thumbnails (Only if >1 items) -->
         <div id="modalThumbnails" style="display:none; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px;"></div>
 
-        <!-- 1. Price & Stock Row -->
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; background:#f8fafc; padding:10px 12px; border-radius:12px; border:1px solid #e2e8f0;">
             <div id="modalPriceContainer"></div>
             <span id="modalProdStock" class="stock-pill-badge stock-in">In Stock: 0 Pcs</span>
         </div>
 
-        <!-- 2. Add To Cart Button -->
         <button id="modalAddCartBtn" onclick="addModalProductToCart()" class="thankyou-btn" style="margin-bottom:16px; font-size:16px; box-shadow:0 4px 12px rgba(0,137,123,0.3);"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
 
-        <!-- 3. Full Product Details / Description -->
         <div style="border-top:1px dashed #cbd5e1; padding-top:12px;">
             <div style="font-size:13px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
                 <i class="fa-solid fa-circle-info"></i> পণ্য সম্পর্কে বিস্তারিত
@@ -1176,7 +1236,7 @@ body{
 </div>
 </div>
 
-<!-- USER ORDERS LIST MODAL (MY ORDERS & CANCELLATION) -->
+<!-- USER ORDERS LIST MODAL -->
 <div id="ordersModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">My Orders (আমার অর্ডারসমূহ)</h2>
@@ -1236,166 +1296,222 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL -->
+<!-- EDIT PRODUCT MODAL (REDESIGNED WITH BOX SYSTEM) -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
-        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">Edit Product</h2>
+        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
         <input type="hidden" id="editProductId">
         
-        <label style="font-size:12px; font-weight:700;">Product Name</label>
-        <input id="editProductName" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+        <label style="font-size:12px; font-weight:700; color:#475569;">Product Name</label>
+        <input id="editProductName" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
         
         <div style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Regular Price (৳)</label>
-                <input id="editProductPrice" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700; color:#475569;">Regular Price (৳)</label>
+                <input id="editProductPrice" type="number" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
             </div>
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700; color:#ef4444;">Discount Price (৳) [Optional]</label>
-                <input id="editProductDiscountPrice" type="number" placeholder="e.g. 800" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700; color:#ef4444;">Discount Price (৳)</label>
+                <input id="editProductDiscountPrice" type="number" placeholder="e.g. 800" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
             </div>
         </div>
 
         <div style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Stock Quantity</label>
-                <input id="editProductStock" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700; color:#475569;">Stock Quantity</label>
+                <input id="editProductStock" type="number" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
             </div>
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Color (Optional)</label>
-                <input id="editProductColor" placeholder="e.g. White & Brown" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700; color:#475569;">Color (Optional)</label>
+                <input id="editProductColor" placeholder="e.g. White" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
             </div>
         </div>
 
-        <label style="font-size:12px; font-weight:700;">Category</label>
-        <select id="editProductCategory" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+        <label style="font-size:12px; font-weight:700; color:#475569;">Category</label>
+        <select id="editProductCategory" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none; background:#fff;">
             <option>Rabbit</option>
             <option>Hamster</option>
             <option>Pet Food</option>
             <option>Accessories</option>
         </select>
 
-        <label style="font-size:12px; font-weight:700;">Full Description / Details</label>
-        <textarea id="editProductDesc" placeholder="Detailed product info..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px; height:80px; outline:none;"></textarea>
+        <label style="font-size:12px; font-weight:700; color:#475569;">Full Description / Details</label>
+        <textarea id="editProductDesc" placeholder="Detailed product info..." style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:14px; height:80px; outline:none;"></textarea>
 
-        <!-- Edit Multiple Images & Video -->
-        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 1 (Main)</label>
-        <input type="file" accept="image/*" onchange="handleEditFile(this, 0)" style="margin-bottom:8px;">
-        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 2 (Optional)</label>
-        <input type="file" accept="image/*" onchange="handleEditFile(this, 1)" style="margin-bottom:8px;">
-        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 3 (Optional)</label>
-        <input type="file" accept="image/*" onchange="handleEditFile(this, 2)" style="margin-bottom:8px;">
-        
-        <label style="font-size:12px; font-weight:700; color:#ef4444;">Short Video Clip (5-10s)</label>
-        <input type="file" accept="video/*" onchange="handleEditVideo(this)" style="margin-bottom:15px;">
+        <!-- BEAUTIFUL FILE UPLOAD BOXES FOR EDIT -->
+        <div class="admin-file-box">
+            <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
+            <input type="file" accept="image/*" onchange="handleEditFile(this, 0)">
+        </div>
 
-        <div style="display:flex; gap:10px; margin-top:10px;">
+        <div class="admin-file-box">
+            <label>ছবি ২ (ঐচ্ছিক)</label>
+            <input type="file" accept="image/*" onchange="handleEditFile(this, 1)">
+        </div>
+
+        <div class="admin-file-box">
+            <label>ছবি ৩ (ঐচ্ছিক)</label>
+            <input type="file" accept="image/*" onchange="handleEditFile(this, 2)">
+        </div>
+
+        <div class="admin-file-box" style="border-color:#fca5a5; background:#fff5f5;">
+            <label style="color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
+            <input type="file" accept="video/*" onchange="handleEditVideo(this)">
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:15px;">
             <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save</button>
             <button onclick="closeEditModal()" class="thankyou-btn" style="margin:0; flex:1; background:#64748b;">Cancel</button>
         </div>
     </div>
 </div>
 
-<!-- ADMIN SECTION -->
-<section id="adminSection">
-<div id="adminLogin" class="admin-login">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <h2>Admin Login</h2>
-        <button onclick="hideAdmin()" style="background:#64748b; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Close</button>
-    </div>
-    <input id="adminPassword" type="password" placeholder="Enter Admin Password">
-    <button onclick="adminLogin()" class="admin-submit-btn">Login</button>
-</div>
-
-<div id="adminPanel" style="display:none;" class="admin-card">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <h2>Admin Panel</h2>
-        <button onclick="logoutAdmin()" style="background:#ef4444; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Logout</button>
-    </div>
-
-    <!-- ADMIN NOTIFICATION ORDER BOX -->
-    <div class="admin-notif-box">
-        <div class="admin-notif-header" onclick="toggleAdminOrderList()">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <i class="fa-solid fa-bell" style="color:var(--teal); font-size:18px;"></i>
-                <span style="font-weight:800; font-size:15px; color:var(--text-dark);">নতুন অর্ডার নোটিফিকেশন</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px;">
-                <span class="notif-badge-pill" id="pendingNotifBadge">0 নতুন অর্ডার</span>
-                <i class="fa-solid fa-chevron-down" id="notifArrow" style="color:var(--text-muted); transition:transform 0.3s; transform: rotate(180deg);"></i>
-            </div>
+<!-- ADMIN LOGIN POPUP MODAL -->
+<div id="adminLoginModal" class="thankyou-overlay">
+    <div class="thankyou-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h2 style="font-size:18px; color:var(--teal);">Admin Login</h2>
+            <button onclick="closeAdminLoginModal()" style="background:#e2e8f0; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; font-weight:bold;">✕</button>
         </div>
-
-        <!-- Order Management Panel -->
-        <div id="collapsibleOrderPanel" style="display:block; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
-            <div class="admin-order-tabs">
-                <button class="order-tab-btn active" id="tabPending" onclick="switchOrderTab('pending')">পেন্ডিং (<span id="countPending">0</span>)</button>
-                <button class="order-tab-btn" id="tabCompleted" onclick="switchOrderTab('completed')">কমপ্লিট (<span id="countCompleted">0</span>)</button>
-                <button class="order-tab-btn" id="tabCancelled" onclick="switchOrderTab('cancelled')">বাতিল (<span id="countCancelled">0</span>)</button>
-            </div>
-
-            <div id="adminOrdersListContainer" style="max-height:350px; overflow-y:auto;"></div>
-        </div>
-    </div>
-    
-    <h2 style="margin-top:20px; margin-bottom:15px; font-size:18px;">Add New Product</h2>
-    <label style="font-size:13px; font-weight:700;">Product Name</label>
-    <input id="productName" placeholder="e.g. Dwarf Rabbit">
-
-    <div style="display:flex; gap:10px;">
-        <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Regular Price (৳)</label>
-            <input id="productPrice" type="number" placeholder="1000">
-        </div>
-        <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700; color:#ef4444;">Discount Price (৳) [Option]</label>
-            <input id="productDiscountPrice" type="number" placeholder="850">
-        </div>
-    </div>
-
-    <div style="display:flex; gap:10px;">
-        <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Stock Quantity</label>
-            <input id="productStock" type="number" placeholder="10">
-        </div>
-        <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Color (Option)</label>
-            <input id="productColor" placeholder="e.g. White / Golden">
-        </div>
-    </div>
-
-    <label style="font-size:13px; font-weight:700;">Category</label>
-    <select id="productCategory">
-        <option>Rabbit</option>
-        <option>Hamster</option>
-        <option>Pet Food</option>
-        <option>Accessories</option>
-    </select>
-
-    <label style="font-size:13px; font-weight:700;">Full Product Details / Description</label>
-    <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px;"></textarea>
-
-    <!-- Multiple Images & Video Upload Inputs -->
-    <div style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid #cbd5e1; margin-bottom:15px;">
-        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
-        <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)" style="margin-bottom:8px;">
+        <p style="font-size:12px; color:#64748b; margin-bottom:15px;">এডমিন প্যানেলে প্রবেশ করতে পাসওয়ার্ড দিন</p>
+        <input id="modalAdminPassword" type="password" placeholder="Enter Admin Password" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:10px; margin-bottom:8px; outline:none;">
         
-        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ২ (ঐচ্ছিক)</label>
-        <input type="file" id="imgFile2" accept="image/*" onchange="previewNewImage(this, 1)" style="margin-bottom:8px;">
+        <div style="text-align: right; margin-bottom: 15px;">
+            <span onclick="forgotPassword()" style="font-size: 12px; color: var(--teal); cursor: pointer; font-weight: 700;">পাসওয়ার্ড ভুলে গেছেন?</span>
+        </div>
 
-        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ৩ (ঐচ্ছিক)</label>
-        <input type="file" id="imgFile3" accept="image/*" onchange="previewNewImage(this, 2)" style="margin-bottom:8px;">
-
-        <label style="font-size:12px; font-weight:800; color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
-        <input type="file" id="videoFile" accept="video/*" onchange="previewNewVideo(this)">
+        <button onclick="submitAdminLogin()" class="thankyou-btn">Login</button>
     </div>
-
-    <button onclick="addProduct()" class="admin-submit-btn">Add Product</button>
-
-    <h2 style="margin-top:25px; margin-bottom:15px; font-size:18px;">Manage Products</h2>
-    <div id="adminProducts"></div>
 </div>
-</section>
+
+<!-- FULL SCREEN EXCLUSIVE ADMIN DASHBOARD VIEW -->
+<div id="fullAdminScreen">
+    <div style="max-width:600px; margin:0 auto; padding-bottom:40px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; background:var(--teal); padding:16px 20px; border-radius:16px; color:white; margin-bottom:20px; box-shadow:0 4px 15px rgba(0,137,123,0.2);">
+            <div>
+                <h2 style="font-size:18px; font-weight:900;">Admin Dashboard</h2>
+                <span style="font-size:11px; color:#e0f2f1;">ADORE'S PET Control Panel</span>
+            </div>
+            <button onclick="logoutAdmin()" style="background:#ef4444; color:#fff; border:none; padding:8px 14px; border-radius:10px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-right-from-bracket"></i> লগআউট</button>
+        </div>
+
+        <!-- VACATION MODE TOGGLE CONTROL CARD -->
+        <div class="admin-card">
+            <h2 style="margin-bottom:12px; font-size:18px; color:var(--teal);">Shop Mode / Vacation Setting</h2>
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; padding:12px 16px; border-radius:12px; border:1px solid #e2e8f0;">
+                <div>
+                    <div style="font-weight:800; font-size:14px; color:var(--text-dark);">সাময়িক বিরতি / ভ্যাকেশন মোড</div>
+                    <div style="font-size:11px; color:#64748b;">চালু করলে হোমপেজে পণ্যের বদলে বিরতির নোটিশ দেখাবে।</div>
+                </div>
+                <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" id="adminVacationCheckbox" onchange="toggleVacationMode()" style="width:20px; height:20px; accent-color:var(--teal); cursor:pointer; margin:0;">
+                    <span style="font-weight:800; font-size:13px; color:var(--teal);">অন / অফ</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- CHANGE ADMIN PASSWORD CARD -->
+        <div class="admin-card">
+            <h2 style="margin-bottom:12px; font-size:18px; color:var(--teal);">Change Admin Password</h2>
+            <label style="font-size:12px; font-weight:700;">New Password</label>
+            <input id="newAdminPasswordInput" type="password" placeholder="Enter new password">
+            <button onclick="changeAdminPassword()" class="admin-submit-btn" style="padding:10px; font-size:13px;">পাসওয়ার্ড আপডেট করুন</button>
+        </div>
+
+        <!-- ADMIN NOTIFICATION ORDER BOX -->
+        <div class="admin-notif-box">
+            <div class="admin-notif-header" onclick="toggleAdminOrderList()">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-bell" style="color:var(--teal); font-size:18px;"></i>
+                    <span style="font-weight:800; font-size:15px; color:var(--text-dark);">নতুন অর্ডার নোটিফিকেশন</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="notif-badge-pill" id="pendingNotifBadge">0 নতুন অর্ডার</span>
+                    <i class="fa-solid fa-chevron-down" id="notifArrow" style="color:var(--text-muted); transition:transform 0.3s; transform: rotate(180deg);"></i>
+                </div>
+            </div>
+
+            <div id="collapsibleOrderPanel" style="display:block; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
+                <div class="admin-order-tabs">
+                    <button class="order-tab-btn active" id="tabPending" onclick="switchOrderTab('pending')">পেন্ডিং (<span id="countPending">0</span>)</button>
+                    <button class="order-tab-btn" id="tabCompleted" onclick="switchOrderTab('completed')">কমপ্লিট (<span id="countCompleted">0</span>)</button>
+                    <button class="order-tab-btn" id="tabCancelled" onclick="switchOrderTab('cancelled')">বাতিল (<span id="countCancelled">0</span>)</button>
+                </div>
+
+                <div id="adminOrdersListContainer" style="max-height:350px; overflow-y:auto;"></div>
+            </div>
+        </div>
+        
+        <!-- ADD NEW PRODUCT CARD (REDESIGNED WITH BOX SYSTEM) -->
+        <div class="admin-card">
+            <h2 style="margin-bottom:15px; font-size:18px; color:var(--teal);"><i class="fa-solid fa-circle-plus"></i> Add New Product</h2>
+            
+            <label style="font-size:13px; font-weight:700; color:#475569;">Product Name</label>
+            <input id="productName" placeholder="e.g. Dwarf Rabbit">
+
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label style="font-size:13px; font-weight:700; color:#475569;">Regular Price (৳)</label>
+                    <input id="productPrice" type="number" placeholder="1000">
+                </div>
+                <div style="flex:1;">
+                    <label style="font-size:13px; font-weight:700; color:#ef4444;">Discount Price (৳)</label>
+                    <input id="productDiscountPrice" type="number" placeholder="850">
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label style="font-size:13px; font-weight:700; color:#475569;">Stock Quantity</label>
+                    <input id="productStock" type="number" placeholder="10">
+                </div>
+                <div style="flex:1;">
+                    <label style="font-size:13px; font-weight:700; color:#475569;">Color (Option)</label>
+                    <input id="productColor" placeholder="e.g. White / Golden">
+                </div>
+            </div>
+
+            <label style="font-size:13px; font-weight:700; color:#475569;">Category</label>
+            <select id="productCategory">
+                <option>Rabbit</option>
+                <option>Hamster</option>
+                <option>Pet Food</option>
+                <option>Accessories</option>
+            </select>
+
+            <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
+            <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
+
+            <!-- BEAUTIFUL FILE UPLOAD BOXES FOR ADD -->
+            <div class="admin-file-box">
+                <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
+                <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)">
+            </div>
+
+            <div class="admin-file-box">
+                <label>ছবি ২ (ঐচ্ছিক)</label>
+                <input type="file" id="imgFile2" accept="image/*" onchange="previewNewImage(this, 1)">
+            </div>
+
+            <div class="admin-file-box">
+                <label>ছবি ৩ (ঐচ্ছিক)</label>
+                <input type="file" id="imgFile3" accept="image/*" onchange="previewNewImage(this, 2)">
+            </div>
+
+            <div class="admin-file-box" style="border-color:#fca5a5; background:#fff5f5;">
+                <label style="color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
+                <input type="file" id="videoFile" accept="video/*" onchange="previewNewVideo(this)">
+            </div>
+
+            <button onclick="addProduct()" class="admin-submit-btn" style="margin-top:10px;">Add Product</button>
+        </div>
+
+        <div class="admin-card">
+            <h2 style="margin-bottom:15px; font-size:18px; color:var(--teal);"><i class="fa-solid fa-boxes-stacked"></i> Manage Products</h2>
+            <div id="adminProducts"></div>
+        </div>
+    </div>
+</div>
 
 <script>
 /* EMAILJS INIT */
@@ -1409,7 +1525,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     const banner = document.getElementById('pwaBanner');
-    if (banner) banner.style.display = 'flex';
+    if (banner && !vacationMode) banner.style.display = 'flex';
 });
 
 document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => {
@@ -1478,6 +1594,8 @@ products = products.map(p => {
 
 let cart = JSON.parse(localStorage.getItem("adoresCart")) || [];
 let myOrders = JSON.parse(localStorage.getItem("adoresMyOrders")) || [];
+let vacationMode = JSON.parse(localStorage.getItem("adoresVacationMode")) || false;
+let currentAdminPassword = localStorage.getItem("adoresAdminPass") || "DJ778899";
 let currentCategory = "";
 
 let newImagesBase64 = ["", "", ""];
@@ -1497,6 +1615,68 @@ function saveCart(){
 
 function saveMyOrders(){
     localStorage.setItem("adoresMyOrders", JSON.stringify(myOrders));
+}
+
+/* FORGOT PASSWORD LOGIC */
+function forgotPassword(){
+    const currentPass = localStorage.getItem("adoresAdminPass") || "DJ778899";
+    const templateParams = {
+        customer_name: "ADORE'S PET Admin",
+        customer_phone: "N/A",
+        district: "N/A",
+        address: "Password Recovery Request",
+        order_items: `আপনার অ্যাডমিন প্যানেলের বর্তমান পাসওয়ার্ড হলো: <b>${currentPass}</b>`,
+        products: `Password: ${currentPass}`,
+        subtotal: 0,
+        delivery_charge: 0,
+        total: 0
+    };
+
+    emailjs.send("service_5am5end", "template_45wz8f9", templateParams)
+        .then(() => {
+            showSuccessPopup("আপনার ইমেইলে অ্যাডমিন পাসওয়ার্ডটি পাঠিয়ে দেওয়া হয়েছে!");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+    showCustomAlert("আপনার বর্তমান অ্যাডমিন পাসওয়ার্ড হলো: " + currentPass);
+}
+
+function changeAdminPassword(){
+    const newPass = document.getElementById("newAdminPasswordInput").value.trim();
+    if(!newPass){
+        showCustomAlert("দয়া করে নতুন পাসওয়ার্ড লিখুন।");
+        return;
+    }
+    localStorage.setItem("adoresAdminPass", newPass);
+    currentAdminPassword = newPass;
+    document.getElementById("newAdminPasswordInput").value = "";
+    showSuccessPopup("অ্যাডমিন পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
+}
+
+/* VACATION MODE TOGGLE */
+function toggleVacationMode(){
+    const checkbox = document.getElementById("adminVacationCheckbox");
+    vacationMode = checkbox.checked;
+    localStorage.setItem("adoresVacationMode", JSON.stringify(vacationMode));
+    checkVacationStatus();
+    showSuccessPopup(vacationMode ? "শপ সাময়িক বিরতি মোড চালু করা হয়েছে!" : "শপ ভ্যাকেশন মোড বন্ধ করা হয়েছে।");
+}
+
+function checkVacationStatus(){
+    const vacationBox = document.getElementById("vacationBoxContainer");
+    const normalContent = document.getElementById("normalHomeContent");
+    const bottomNav = document.querySelector(".bottom-nav");
+    if(vacationMode){
+        if(vacationBox) vacationBox.style.display = "block";
+        if(normalContent) normalContent.style.display = "none";
+        if(bottomNav) bottomNav.style.display = "none";
+    } else {
+        if(vacationBox) vacationBox.style.display = "none";
+        if(normalContent) normalContent.style.display = "block";
+        if(bottomNav) bottomNav.style.display = "flex";
+    }
 }
 
 function showCustomAlert(message){
@@ -1577,7 +1757,7 @@ function selectCategory(category, button){
     renderProducts();
 }
 
-/* RENDER HOME PAGE PRODUCTS WITH DISCOUNT & BEAUTIFIED STOCK */
+/* RENDER PRODUCTS */
 function renderProducts(){
     const grid = document.getElementById("productsGrid");
     const title = document.getElementById("productsTitle");
@@ -1621,7 +1801,6 @@ function renderProducts(){
                 <div class="product-info">
                     <div class="product-name">${escapeHTML(product.name)}</div>
                     
-                    <!-- Beautified Stock Display -->
                     <span class="stock-pill-badge ${stockBadgeClass}">${stockText}</span>
 
                     <div class="product-footer-row">
@@ -1637,16 +1816,15 @@ function renderProducts(){
     }).join("");
 }
 
-/* PRODUCT DETAILS MODAL (FULL 1:1 / 4x4 SQUARE FIT) */
+/* PRODUCT DETAILS MODAL */
 function openProductModal(id){
-    const product = products.find(p => p.id === id);
+    const product = products.find(p => Number(p.id) === Number(id));
     if(!product) return;
     activeSelectedProductId = product.id;
 
     document.getElementById("modalProdName").innerText = product.name;
     document.getElementById("modalProdDetails").innerText = product.desc || "কোনো বিবরণ দেওয়া হয়নি।";
 
-    // Handle Discount Price Display in Modal
     const hasDiscount = product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price;
     const effectivePrice = hasDiscount ? product.discountPrice : product.price;
     const priceBoxHtml = hasDiscount ? `
@@ -1660,7 +1838,6 @@ function openProductModal(id){
     
     document.getElementById("modalPriceContainer").innerHTML = priceBoxHtml;
 
-    // Stock Badge
     const stockBadge = document.getElementById("modalProdStock");
     if(product.stock > 0){
         stockBadge.className = "stock-pill-badge stock-in";
@@ -1678,7 +1855,6 @@ function openProductModal(id){
     
     let validImages = product.images && product.images.length > 0 ? product.images.filter(img => img) : ['https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png'];
     
-    // Hide Thumbnails Container if there's only 1 image and no video
     if(validImages.length <= 1 && !product.video){
         thumbContainer.style.display = "none";
     } else {
@@ -1730,6 +1906,10 @@ function closeProductModal(){
 }
 
 function addModalProductToCart(){
+    if(vacationMode){
+        showCustomAlert("বর্তমানে আমাদের শপ সাময়িক বিরতিতে রয়েছে।");
+        return;
+    }
     if(activeSelectedProductId){
         addToCart(activeSelectedProductId);
         closeProductModal();
@@ -1743,13 +1923,17 @@ function searchProducts(){
 }
 
 function addToCart(id){
-    const product = products.find(p => p.id === id);
+    if(vacationMode){
+        showCustomAlert("বর্তমানে আমাদের শপ সাময়িক বিরতিতে রয়েছে।");
+        return;
+    }
+    const product = products.find(p => Number(p.id) === Number(id));
     if(!product) return;
     if(product.stock <= 0){
         showCustomAlert("এই পণ্যটি স্টকে নেই।");
         return;
     }
-    const existing = cart.find(item => item.id === id);
+    const existing = cart.find(item => Number(item.id) === Number(id));
     if(existing){
         if(existing.qty >= product.stock){
             showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
@@ -1783,7 +1967,7 @@ function updateCart(){
         container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">আপনার কার্ট খালি রয়েছে।</p>`;
     } else {
         container.innerHTML = cart.map(item => {
-            const product = products.find(p => p.id === item.id);
+            const product = products.find(p => Number(p.id) === Number(item.id));
             if(!product) return "";
             
             const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
@@ -1818,13 +2002,13 @@ function updateCart(){
 }
 
 function changeCartQty(id, change){
-    const item = cart.find(i => i.id === id);
-    const product = products.find(p => p.id === id);
+    const item = cart.find(i => Number(i.id) === Number(id));
+    const product = products.find(p => Number(p.id) === Number(id));
     if(!item || !product) return;
 
     item.qty += change;
     if(item.qty <= 0){
-        cart = cart.filter(i => i.id !== id);
+        cart = cart.filter(i => Number(i.id) !== Number(id));
     } else if(item.qty > product.stock){
         showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
         item.qty = product.stock;
@@ -1834,7 +2018,7 @@ function changeCartQty(id, change){
 }
 
 function removeFromCart(id){
-    cart = cart.filter(i => i.id !== id);
+    cart = cart.filter(i => Number(i.id) !== Number(id));
     saveCart();
     updateCart();
 }
@@ -1848,7 +2032,6 @@ function closeCart(){
     document.getElementById("cartOverlay").classList.remove("show");
 }
 
-/* DYNAMIC DELIVERY CHARGE CALCULATION LOGIC */
 function updateDelivery(){
     const district = document.getElementById("customerDistrict").value;
     let delivery = 0;
@@ -1858,7 +2041,7 @@ function updateDelivery(){
         let hasHamster = false;
 
         cart.forEach(item => {
-            const product = products.find(p => p.id === item.id);
+            const product = products.find(p => Number(p.id) === Number(item.id));
             if(product){
                 const cat = product.category.toLowerCase();
                 if(cat === "rabbit") hasRabbit = true;
@@ -1886,6 +2069,10 @@ function updateDelivery(){
 }
 
 function placeOrder(){
+    if(vacationMode){
+        showCustomAlert("বর্তমানে আমাদের শপ সাময়িক বিরতিতে রয়েছে।");
+        return;
+    }
     if(cart.length === 0){
         showCustomAlert("আপনার কার্ট খালি!");
         return;
@@ -1907,7 +2094,7 @@ function placeOrder(){
     let whatsappProductsText = "";
 
     cart.forEach(item => {
-        const product = products.find(p => p.id === item.id);
+        const product = products.find(p => Number(p.id) === Number(item.id));
         if(!product) return;
 
         const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
@@ -1954,7 +2141,6 @@ function placeOrder(){
     myOrders.unshift(newOrderObj);
     saveMyOrders();
 
-    // EmailJS backup
     const templateParams = {
         customer_name: name,
         customer_phone: phone,
@@ -1969,7 +2155,6 @@ function placeOrder(){
     };
     emailjs.send("service_5am5end", "template_45wz8f9", templateParams).catch(err => console.log(err));
 
-    // WhatsApp Direct Integration
     const whatsappMessage = `🛒 *New Order From ADORE'S PET*\n\n` +
         `🆔 Order ID: ${orderId}\n` +
         `👤 Name: ${name}\n` +
@@ -2001,7 +2186,6 @@ function placeOrder(){
     }, 1500);
 }
 
-/* CUSTOMER ORDERS MODAL & CANCELLATION */
 function openOrdersModal(){
     const container = document.getElementById("userOrdersList");
     if(myOrders.length === 0){
@@ -2087,7 +2271,7 @@ function closeVoucherModal(){
     document.getElementById("voucherModal").classList.remove("show");
 }
 
-/* SECRET TRIPLE CLICK FOR ADMIN ON LIVE BADGE */
+/* SECRET TRIPLE CLICK FOR ADMIN LOGIN POPUP */
 let secretClickCount = 0;
 let secretClickTimer = null;
 
@@ -2096,7 +2280,7 @@ function handleSecretClick() {
     clearTimeout(secretClickTimer);
     
     if (secretClickCount === 3) {
-        showAdmin();
+        openAdminLoginModal();
         secretClickCount = 0;
     } else {
         secretClickTimer = setTimeout(() => {
@@ -2105,20 +2289,22 @@ function handleSecretClick() {
     }
 }
 
-function showAdmin(){
-    document.getElementById("adminSection").style.display = "block";
-    document.getElementById("adminSection").scrollIntoView({ behavior: "smooth" });
+function openAdminLoginModal(){
+    document.getElementById("modalAdminPassword").value = "";
+    document.getElementById("adminLoginModal").classList.add("show");
 }
 
-function hideAdmin(){
-    document.getElementById("adminSection").style.display = "none";
+function closeAdminLoginModal(){
+    document.getElementById("adminLoginModal").classList.remove("show");
 }
 
-function adminLogin(){
-    const pass = document.getElementById("adminPassword").value;
-    if(pass === "DJ778899"){
-        document.getElementById("adminLogin").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
+function submitAdminLogin(){
+    const pass = document.getElementById("modalAdminPassword").value;
+    const correctPass = localStorage.getItem("adoresAdminPass") || "DJ778899";
+    if(pass === correctPass){
+        closeAdminLoginModal();
+        document.getElementById("fullAdminScreen").style.display = "block";
+        document.getElementById("adminVacationCheckbox").checked = vacationMode;
         renderAdminProducts();
         renderAdminOrders();
     } else {
@@ -2127,9 +2313,7 @@ function adminLogin(){
 }
 
 function logoutAdmin(){
-    document.getElementById("adminPanel").style.display = "none";
-    document.getElementById("adminLogin").style.display = "block";
-    hideAdmin();
+    document.getElementById("fullAdminScreen").style.display = "none";
 }
 
 /* TOGGLE ADMIN ORDER COLLAPSIBLE NOTIFICATION BOX */
@@ -2145,7 +2329,6 @@ function toggleAdminOrderList(){
     }
 }
 
-/* ADMIN ORDER MANAGEMENT WITH TABS & STATUS */
 function switchOrderTab(tab){
     currentAdminTab = tab;
     document.querySelectorAll(".order-tab-btn").forEach(btn => btn.classList.remove("active"));
@@ -2227,7 +2410,7 @@ function addProduct(){
     const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("productStock").value);
     const color = document.getElementById("productColor").value.trim();
-    const rating = document.getElementById("productRating").value.trim() || "4.8";
+    const rating = "4.8";
     const category = document.getElementById("productCategory").value;
     const desc = document.getElementById("productDesc").value.trim();
     
@@ -2265,7 +2448,6 @@ function addProduct(){
     document.getElementById("productDiscountPrice").value = "";
     document.getElementById("productStock").value = "";
     document.getElementById("productColor").value = "";
-    document.getElementById("productRating").value = "";
     document.getElementById("productDesc").value = "";
     document.getElementById("imgFile1").value = "";
     document.getElementById("imgFile2").value = "";
@@ -2308,7 +2490,7 @@ function renderAdminProducts(){
 }
 
 function openEditModal(id){
-    const p = products.find(prod => prod.id === id);
+    const p = products.find(prod => Number(prod.id) === Number(id));
     if(!p) return;
     document.getElementById("editProductId").value = p.id;
     document.getElementById("editProductName").value = p.name;
@@ -2316,7 +2498,6 @@ function openEditModal(id){
     document.getElementById("editProductDiscountPrice").value = p.discountPrice || "";
     document.getElementById("editProductStock").value = p.stock;
     document.getElementById("editProductColor").value = p.color || "";
-    document.getElementById("editProductRating").value = p.rating || "4.8";
     document.getElementById("editProductCategory").value = p.category;
     document.getElementById("editProductDesc").value = p.desc || "";
     
@@ -2332,7 +2513,7 @@ function closeEditModal(){
 
 function saveEditProduct(){
     const id = Number(document.getElementById("editProductId").value);
-    const p = products.find(prod => prod.id === id);
+    const p = products.find(prod => Number(prod.id) === Number(id));
     if(!p) return;
 
     const name = document.getElementById("editProductName").value.trim();
@@ -2341,7 +2522,7 @@ function saveEditProduct(){
     const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("editProductStock").value);
     const color = document.getElementById("editProductColor").value.trim();
-    const rating = document.getElementById("editProductRating").value.trim() || "4.8";
+    const rating = p.rating || "4.8";
     const category = document.getElementById("editProductCategory").value;
     const desc = document.getElementById("editProductDesc").value.trim();
 
@@ -2375,7 +2556,7 @@ function saveEditProduct(){
 }
 
 function deleteProduct(id){
-    products = products.filter(p => p.id !== id);
+    products = products.filter(p => Number(p.id) !== Number(id));
     saveProducts();
     renderAdminProducts();
     renderProducts();
@@ -2394,7 +2575,7 @@ function escapeHTML(value){
 /* INITIALIZE */
 updateCartBadge();
 renderProducts();
-renderAdminOrders();
+checkVacationStatus();
 </script>
 
 </body>
