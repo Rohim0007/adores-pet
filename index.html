@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ADORE'S PET</title>
 
-<!-- Web App Manifest (PWA Config for Free App Install) -->
+<!-- Web App Manifest (PWA Config) -->
 <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkFET1JFUyBQRVQiLAogICJzaG9ydF9uYW1lIjogIkFET1JFUyBQRVQiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY2ZjgiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA4OTdiIiwKICAiaWNvbnMiOiBbCiAgIC {
       InNyYyI6ICJodHRwczovL2kucG9zdGltZy5jYy9UeUt3ZjdLUy8yMDI2MTAwOC0xOTE5NDUucG5nIiw
       InNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmci
@@ -919,39 +919,6 @@ body{
     opacity: 0.9;
 }
 
-/* CLEAN FILE UPLOAD BOX SYSTEM */
-.admin-file-box {
-    background: #f8fafc;
-    border: 1.5px dashed #cbd5e1;
-    padding: 12px 14px;
-    border-radius: 14px;
-    margin-bottom: 12px;
-    transition: all 0.2s;
-}
-.admin-file-box:hover {
-    border-color: var(--teal);
-    background: #f0fdf4;
-}
-.admin-file-box label {
-    display: block;
-    font-size: 12.5px;
-    font-weight: 800;
-    color: var(--teal);
-    margin-bottom: 6px;
-}
-.admin-file-box input[type="file"] {
-    display: block;
-    width: 100%;
-    font-size: 12px;
-    color: #475569;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 6px;
-    margin: 0;
-    outline: none;
-}
-
 .admin-product-card{
     display: flex;
     align-items: center;
@@ -1313,7 +1280,7 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL (WITH BOTH FILE & URL OPTIONS) -->
+<!-- EDIT PRODUCT MODAL -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:10px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
@@ -1352,7 +1319,7 @@ body{
         <label style="font-size:12px; font-weight:700; color:#475569;">Color (Optional)</label>
         <input id="editProductColor" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:10px; outline:none;">
 
-        <label style="font-size:12px; font-weight:700; color:var(--teal);">নতুন ছবি ১ লিংক (Image URL - প্রস্তাবিত)</label>
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">নতুন ছবি ১ লিংক (Image URL)</label>
         <input id="editProductImgUrl" placeholder="https://..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:12px; outline:none;">
 
         <div style="display:flex; gap:10px; margin-top:10px;">
@@ -1489,36 +1456,13 @@ body{
             <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
             <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
 
-            <!-- OPTION 1: IMAGE URL / LINK INPUT (RECOMMENDED) -->
+            <!-- IMAGE URL / LINK INPUT BOXES -->
             <div style="background:#e0f2f1; padding:12px; border-radius:12px; border:1px solid var(--teal); margin-bottom:14px;">
-                <label style="font-size:13px; font-weight:800; color:var(--teal);">🔗 ছবির লিংক দিন (Image URL - সবচেয়ে সেরা পদ্ধতি)</label>
-                <p style="font-size:11px; color:#475569; margin-bottom:8px;">Postimages / Imgbb / WhatsApp থেকে পাওয়া ছবির Direct URL লিংক পেস্ট করুন:</p>
+                <label style="font-size:13px; font-weight:800; color:var(--teal);">🔗 ছবির লিংক দিন (Image URL)</label>
+                <p style="font-size:11px; color:#475569; margin-bottom:8px;">Postimages থেকে পাওয়া ছবির Direct URL লিংকটি পেস্ট করুন:</p>
                 <input id="imageUrl1" placeholder="Image 1 Link (https://...)" style="margin-bottom:6px;">
                 <input id="imageUrl2" placeholder="Image 2 Link (Optional)" style="margin-bottom:6px;">
                 <input id="imageUrl3" placeholder="Image 3 Link (Optional)" style="margin-bottom:0;">
-            </div>
-
-            <div style="text-align:center; font-weight:800; color:#94a3b8; font-size:12px; margin-bottom:14px;">— অথবা ফাইল থেকে আপলোড করুন —</div>
-
-            <!-- OPTION 2: FILE UPLOAD BOXES -->
-            <div class="admin-file-box">
-                <label>ছবি ১ (ফাইল থেকে নির্বাচন)</label>
-                <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)">
-            </div>
-
-            <div class="admin-file-box">
-                <label>ছবি ২ (ঐচ্ছিক)</label>
-                <input type="file" id="imgFile2" accept="image/*" onchange="previewNewImage(this, 1)">
-            </div>
-
-            <div class="admin-file-box">
-                <label>ছবি ৩ (ঐচ্ছিক)</label>
-                <input type="file" id="imgFile3" accept="image/*" onchange="previewNewImage(this, 2)">
-            </div>
-
-            <div class="admin-file-box" style="border-color:#fca5a5; background:#fff5f5;">
-                <label style="color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
-                <input type="file" id="videoFile" accept="video/*" onchange="previewNewVideo(this)">
             </div>
 
             <button onclick="addProduct()" class="admin-submit-btn" style="margin-top:10px;">Add Product</button>
@@ -1621,18 +1565,15 @@ let vacationMode = JSON.parse(localStorage.getItem("adoresVacationMode")) || fal
 let currentAdminPassword = localStorage.getItem("adoresAdminPass") || "DJ778899";
 let currentCategory = "";
 
-let newImagesBase64 = ["", "", ""];
-let newVideoBase64 = "";
 let currentAdminTab = "pending";
 let activeSelectedProductId = null;
 
-/* ROBUST LOCALSTORAGE SAVE WITH STORAGE CHECK */
+/* SAFE SAVE FUNCTION */
 function saveProducts(){
     try {
         localStorage.setItem("adoresProducts", JSON.stringify(products));
     } catch (e) {
-        showCustomAlert("মেমরি পূর্ণ হয়ে গেছে! ফাইল আপলোডের বদলে উপরের লিংকের (URL) ঘরে সরাসরি ছবির লিংক বসান।");
-        throw e;
+        showCustomAlert("ব্রাউজারের পুরোনো মেমরি ফুল দেখাচ্ছে! কাইন্ডলি আপনার ব্রাউজারের History / Cache Clear করে আবার চেষ্টা করুন।");
     }
 }
 
@@ -1722,60 +1663,6 @@ function showSuccessPopup(msg){
 
 function closeThankYouModal(){
     document.getElementById("thankyouModal").classList.remove("show");
-}
-
-/* ULTRA-COMPACT IMAGE COMPRESSOR FOR LOCALSTORAGE */
-function compressImage(file, callback) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const img = new Image();
-        img.onload = function () {
-            const canvas = document.createElement("canvas");
-            let width = img.width;
-            let height = img.height;
-            const max = 250;
-            
-            if (width > height) {
-                if (width > max) {
-                    height *= max / width;
-                    width = max;
-                }
-            } else {
-                if (height > max) {
-                    width *= max / height;
-                    height = max;
-                }
-            }
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, width, height);
-            callback(canvas.toDataURL("image/jpeg", 0.45));
-        };
-        img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-/* UPLOAD FILE READERS */
-function previewNewImage(input, index) {
-    const file = input.files[0];
-    if (file) {
-        compressImage(file, function(compressedBase64) {
-            newImagesBase64[index] = compressedBase64;
-        });
-    }
-}
-
-function previewNewVideo(input) {
-    const file = input.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            newVideoBase64 = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
 }
 
 function goHome(){
@@ -1926,21 +1813,6 @@ function openProductModal(id){
         };
         thumbContainer.appendChild(thumb);
     });
-
-    if(product.video){
-        const vidThumbWrap = document.createElement("div");
-        vidThumbWrap.style.cssText = "width:50px; height:50px; background:#1e293b; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; border:2px solid #cbd5e1; position:relative;";
-        vidThumbWrap.innerHTML = '<i class="fa-solid fa-play"></i>';
-        vidThumbWrap.onclick = () => {
-            mainVideo.src = product.video;
-            mainVideo.style.display = "block";
-            mainImg.style.display = "none";
-            mainVideo.play();
-            Array.from(thumbContainer.children).forEach(el => el.style.borderColor = "#cbd5e1");
-            vidThumbWrap.style.borderColor = "var(--teal)";
-        };
-        thumbContainer.appendChild(vidThumbWrap);
-    }
 
     document.getElementById("productDetailModal").classList.add("show");
 }
@@ -2450,7 +2322,7 @@ function updateOrderStatus(index, newStatus){
     }
 }
 
-/* ADD PRODUCT (HANDLES BOTH IMAGE URL & FILE UPLOAD) */
+/* ADD PRODUCT VIA IMAGE LINK ONLY */
 function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
@@ -2463,7 +2335,7 @@ function addProduct(){
     const rating = document.getElementById("productRating").value.trim() || "4.8";
     const desc = document.getElementById("productDesc").value.trim();
     
-    // Check URL Inputs First
+    // Collect URL Inputs
     const url1 = document.getElementById("imageUrl1").value.trim();
     const url2 = document.getElementById("imageUrl2").value.trim();
     const url3 = document.getElementById("imageUrl3").value.trim();
@@ -2473,15 +2345,9 @@ function addProduct(){
     if(url2) images.push(url2);
     if(url3) images.push(url3);
 
-    // If no URL input, fallback to uploaded files
-    if(images.length === 0){
-        images = newImagesBase64.filter(img => img && img.trim() !== "");
-    }
-
     if(images.length === 0){
         images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
     }
-    const video = newVideoBase64 || "";
 
     if(!name || price <= 0 || stock < 0){
         showCustomAlert("সঠিক নাম, দাম ও স্টক দিন।");
@@ -2500,19 +2366,14 @@ function addProduct(){
         rating,
         desc: desc || "High quality product.",
         images,
-        video
+        video: ""
     });
 
-    try {
-        saveProducts();
-    } catch(err) {
-        return;
-    }
-
+    saveProducts();
     renderAdminProducts();
     renderProducts();
 
-    /* CLEAR ALL INPUT FIELDS AFTER UPLOAD */
+    /* CLEAR INPUT FIELDS */
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
     document.getElementById("productDiscountPrice").value = "";
@@ -2524,13 +2385,6 @@ function addProduct(){
     document.getElementById("imageUrl1").value = "";
     document.getElementById("imageUrl2").value = "";
     document.getElementById("imageUrl3").value = "";
-    document.getElementById("imgFile1").value = "";
-    document.getElementById("imgFile2").value = "";
-    document.getElementById("imgFile3").value = "";
-    document.getElementById("videoFile").value = "";
-    
-    newImagesBase64 = ["", "", ""];
-    newVideoBase64 = "";
 
     showSuccessPopup("পণ্যটি সফলভাবে যোগ করা হয়েছে!");
 }
@@ -2615,12 +2469,7 @@ function saveEditProduct(){
     p.color = color;
     if(imgUrl) p.images = [imgUrl];
 
-    try {
-        saveProducts();
-    } catch(err) {
-        return;
-    }
-
+    saveProducts();
     renderAdminProducts();
     renderProducts();
     closeEditModal();
