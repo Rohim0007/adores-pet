@@ -298,18 +298,40 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:active{
+    transform: scale(0.97);
 }
 
 .product-img-wrap{
     position: relative;
     width: 100%;
-    height: 140px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f8fafc;
 }
 
 .product-card img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* DISCOUNT TAG ON CARD */
+.discount-badge-tag{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
 }
 
 .rating-badge{
@@ -352,7 +374,7 @@ body{
     font-size: 14px;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -360,15 +382,29 @@ body{
     overflow: hidden;
 }
 
-.product-desc{
+/* BEAUTIFIED STOCK BADGE */
+.stock-pill-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     font-size: 11px;
-    color: #64748b;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
     margin-bottom: 8px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    width: fit-content;
+}
+
+.stock-in{
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+.stock-out{
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
 }
 
 .product-footer-row{
@@ -378,29 +414,36 @@ body{
     margin-top: auto;
 }
 
+.price-box-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.old-price-strike{
+    font-size: 11px;
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-weight: 600;
+    line-height: 1;
+}
+
 .product-price{
     font-size: 16px;
     font-weight: 900;
     color: var(--teal);
 }
 
-.add-btn{
-    background: var(--teal);
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 137, 123, 0.3);
-    transition: transform 0.15s;
+.product-price.discounted{
+    color: #ef4444;
 }
 
-.add-btn:active{
-    transform: scale(0.85);
+.view-details-tag{
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    background: #e0f2f1;
+    padding: 4px 8px;
+    border-radius: 8px;
 }
 
 /* SUPPORT & SOCIAL MODAL STYLING */
@@ -623,16 +666,16 @@ body{
     margin-top: 15px;
 }
 
-/* MODALS */
+/* MODALS & SLIDE-UP ANIMATION */
 .thankyou-overlay{
     display: none;
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.7);
     z-index: 4000;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    padding: 20px;
+    padding: 0;
 }
 
 .thankyou-overlay.show{
@@ -641,13 +684,24 @@ body{
 
 .thankyou-card{
     background: white;
-    padding: 25px;
-    border-radius: 20px;
+    padding: 20px 22px 25px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
     text-align: center;
-    max-width: 380px;
     width: 100%;
-    max-height: 85vh;
+    max-width: 500px;
+    max-height: 90vh;
     overflow-y: auto;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 .thankyou-icon{
@@ -665,14 +719,14 @@ body{
 
 .thankyou-btn{
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     background: var(--teal);
     color: white;
     font-weight: 800;
+    font-size: 15px;
     cursor: pointer;
-    margin-top: 15px;
 }
 
 /* ORDER TRACKER STYLING */
@@ -1016,6 +1070,44 @@ body{
     </button>
 </nav>
 
+<!-- PRODUCT DETAILS POPUP MODAL (FULL 1:1 / 4x4 SQUARE FIT - NO CLIPPING) -->
+<div id="productDetailModal" class="thankyou-overlay">
+    <div class="thankyou-card" style="text-align:left;">
+        <div style="width:40px; height:5px; background:#cbd5e1; border-radius:10px; margin:0 auto 12px;"></div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h2 id="modalProdName" style="font-size:17px; color:var(--teal); font-weight:900;">Product Name</h2>
+            <button onclick="closeProductModal()" style="background:#e2e8f0; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; font-weight:bold;">✕</button>
+        </div>
+
+        <!-- Perfect 1:1 (4x4) Responsive Square Box Frame -->
+        <div style="width:100%; aspect-ratio:1 / 1; background:#ffffff; border-radius:16px; overflow:hidden; margin-bottom:12px; display:flex; align-items:center; justify-content:center; border:1px solid #e2e8f0; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+            <img id="modalMainImg" src="" style="width:100%; height:100%; object-fit:contain;" alt="">
+            <video id="modalMainVideo" src="" style="width:100%; height:100%; object-fit:contain; display:none;" controls autoplay loop muted></video>
+        </div>
+
+        <!-- Multiple Images / Video Thumbnails (Only if >1 items) -->
+        <div id="modalThumbnails" style="display:none; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px;"></div>
+
+        <!-- 1. Price & Stock Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; background:#f8fafc; padding:10px 12px; border-radius:12px; border:1px solid #e2e8f0;">
+            <div id="modalPriceContainer"></div>
+            <span id="modalProdStock" class="stock-pill-badge stock-in">In Stock: 0 Pcs</span>
+        </div>
+
+        <!-- 2. Add To Cart Button -->
+        <button id="modalAddCartBtn" onclick="addModalProductToCart()" class="thankyou-btn" style="margin-bottom:16px; font-size:16px; box-shadow:0 4px 12px rgba(0,137,123,0.3);"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
+
+        <!-- 3. Full Product Details / Description -->
+        <div style="border-top:1px dashed #cbd5e1; padding-top:12px;">
+            <div style="font-size:13px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-circle-info"></i> পণ্য সম্পর্কে বিস্তারিত
+            </div>
+            <div id="modalProdDetails" style="font-size:13px; color:#334155; line-height:1.6; background:#f8fafc; padding:12px; border-radius:12px; border:1px solid #e2e8f0; white-space:pre-line;"></div>
+        </div>
+    </div>
+</div>
+
 <!-- SUPPORT & SOCIAL MEDIA MODAL -->
 <div id="supportModal" class="thankyou-overlay">
     <div class="thankyou-card">
@@ -1130,7 +1222,7 @@ body{
         <div class="thankyou-icon"><i class="fa-solid fa-circle-check"></i></div>
         <h2>ধন্যবাদ!</h2>
         <p id="successPopupText">আপনার অর্ডারটি সফলভাবে জমা হয়ে গেছে।<br>আপনার সাথে যত দ্রুত সম্ভব যোগাযোগ করা হবে।</p>
-        <button onclick="closeThankYouModal()" class="thankyou-btn">ঠিক আছে</button>
+        <button onclick="closeThankYouModal()" class="thankyou-btn" style="margin-top:15px;">ঠিক আছে</button>
     </div>
 </div>
 
@@ -1140,7 +1232,7 @@ body{
         <div class="thankyou-icon" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <h2>সতর্কতা</h2>
         <p id="customAlertMessage">একটি ত্রুটি ঘটেছে।</p>
-        <button onclick="closeCustomAlert()" class="thankyou-btn">ঠিক আছে</button>
+        <button onclick="closeCustomAlert()" class="thankyou-btn" style="margin-top:15px;">ঠিক আছে</button>
     </div>
 </div>
 
@@ -1155,23 +1247,23 @@ body{
         
         <div style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Price (৳)</label>
+                <label style="font-size:12px; font-weight:700;">Regular Price (৳)</label>
                 <input id="editProductPrice" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
             </div>
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Stock</label>
-                <input id="editProductStock" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700; color:#ef4444;">Discount Price (৳) [Optional]</label>
+                <input id="editProductDiscountPrice" type="number" placeholder="e.g. 800" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
             </div>
         </div>
 
         <div style="display:flex; gap:10px;">
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Color (Optional)</label>
-                <input id="editProductColor" placeholder="e.g. White & Brown" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+                <label style="font-size:12px; font-weight:700;">Stock Quantity</label>
+                <input id="editProductStock" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
             </div>
             <div style="flex:1;">
-                <label style="font-size:12px; font-weight:700;">Rating (e.g. 4.9)</label>
-                <input id="editProductRating" type="text" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;" placeholder="4.8">
+                <label style="font-size:12px; font-weight:700;">Color (Optional)</label>
+                <input id="editProductColor" placeholder="e.g. White & Brown" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
             </div>
         </div>
 
@@ -1183,12 +1275,19 @@ body{
             <option>Accessories</option>
         </select>
 
-        <label style="font-size:12px; font-weight:700;">Short Description / Details</label>
-        <textarea id="editProductDesc" placeholder="Product details..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px; height:60px; outline:none;"></textarea>
+        <label style="font-size:12px; font-weight:700;">Full Description / Details</label>
+        <textarea id="editProductDesc" placeholder="Detailed product info..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px; height:80px; outline:none;"></textarea>
 
-        <label style="font-size:12px; font-weight:700;">Change Image (Optional)</label>
-        <input type="file" id="editProductImageFile" accept="image/*" onchange="previewUploadImage(this, 'editPreview')" style="width:100%; margin-top:4px; margin-bottom:10px;">
-        <img id="editPreview" style="max-height:70px; border-radius:6px; margin-bottom:10px; display:none;" alt="Preview">
+        <!-- Edit Multiple Images & Video -->
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 1 (Main)</label>
+        <input type="file" accept="image/*" onchange="handleEditFile(this, 0)" style="margin-bottom:8px;">
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 2 (Optional)</label>
+        <input type="file" accept="image/*" onchange="handleEditFile(this, 1)" style="margin-bottom:8px;">
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">Image 3 (Optional)</label>
+        <input type="file" accept="image/*" onchange="handleEditFile(this, 2)" style="margin-bottom:8px;">
+        
+        <label style="font-size:12px; font-weight:700; color:#ef4444;">Short Video Clip (5-10s)</label>
+        <input type="file" accept="video/*" onchange="handleEditVideo(this)" style="margin-bottom:15px;">
 
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save</button>
@@ -1227,18 +1326,15 @@ body{
             </div>
         </div>
 
-        <!-- Order Management Panel (ALWAYS OPEN BY DEFAULT WHEN ADMIN OPENS) -->
+        <!-- Order Management Panel -->
         <div id="collapsibleOrderPanel" style="display:block; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
-            <!-- Order Tabs -->
             <div class="admin-order-tabs">
                 <button class="order-tab-btn active" id="tabPending" onclick="switchOrderTab('pending')">পেন্ডিং (<span id="countPending">0</span>)</button>
                 <button class="order-tab-btn" id="tabCompleted" onclick="switchOrderTab('completed')">কমপ্লিট (<span id="countCompleted">0</span>)</button>
                 <button class="order-tab-btn" id="tabCancelled" onclick="switchOrderTab('cancelled')">বাতিল (<span id="countCancelled">0</span>)</button>
             </div>
 
-            <div id="adminOrdersListContainer" style="max-height:350px; overflow-y:auto;">
-                <!-- Dynamic Admin Orders List -->
-            </div>
+            <div id="adminOrdersListContainer" style="max-height:350px; overflow-y:auto;"></div>
         </div>
     </div>
     
@@ -1248,23 +1344,23 @@ body{
 
     <div style="display:flex; gap:10px;">
         <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Price (৳)</label>
-            <input id="productPrice" type="number" placeholder="850">
+            <label style="font-size:13px; font-weight:700;">Regular Price (৳)</label>
+            <input id="productPrice" type="number" placeholder="1000">
         </div>
         <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Stock Quantity</label>
-            <input id="productStock" type="number" placeholder="10">
+            <label style="font-size:13px; font-weight:700; color:#ef4444;">Discount Price (৳) [Option]</label>
+            <input id="productDiscountPrice" type="number" placeholder="850">
         </div>
     </div>
 
     <div style="display:flex; gap:10px;">
         <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Color (Option)</label>
-            <input id="productColor" placeholder="e.g. White / Golden">
+            <label style="font-size:13px; font-weight:700;">Stock Quantity</label>
+            <input id="productStock" type="number" placeholder="10">
         </div>
         <div style="flex:1;">
-            <label style="font-size:13px; font-weight:700;">Rating (e.g. 4.9)</label>
-            <input id="productRating" type="text" placeholder="4.8">
+            <label style="font-size:13px; font-weight:700;">Color (Option)</label>
+            <input id="productColor" placeholder="e.g. White / Golden">
         </div>
     </div>
 
@@ -1276,12 +1372,23 @@ body{
         <option>Accessories</option>
     </select>
 
-    <label style="font-size:13px; font-weight:700;">Product Details / Short Description</label>
-    <textarea id="productDesc" placeholder="e.g. High quality breed, healthy and active." style="height:70px;"></textarea>
+    <label style="font-size:13px; font-weight:700;">Full Product Details / Description</label>
+    <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px;"></textarea>
 
-    <label style="font-size:13px; font-weight:700;">Product Image</label>
-    <input type="file" id="productImageFile" accept="image/*" onchange="previewUploadImage(this, 'addPreview')">
-    <img id="addPreview" style="max-height:80px; border-radius:8px; margin-bottom:10px; display:none;" alt="Preview">
+    <!-- Multiple Images & Video Upload Inputs -->
+    <div style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid #cbd5e1; margin-bottom:15px;">
+        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
+        <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)" style="margin-bottom:8px;">
+        
+        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ২ (ঐচ্ছিক)</label>
+        <input type="file" id="imgFile2" accept="image/*" onchange="previewNewImage(this, 1)" style="margin-bottom:8px;">
+
+        <label style="font-size:12px; font-weight:800; color:var(--teal);">ছবি ৩ (ঐচ্ছিক)</label>
+        <input type="file" id="imgFile3" accept="image/*" onchange="previewNewImage(this, 2)" style="margin-bottom:8px;">
+
+        <label style="font-size:12px; font-weight:800; color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
+        <input type="file" id="videoFile" accept="video/*" onchange="previewNewVideo(this)">
+    </div>
 
     <button onclick="addProduct()" class="admin-submit-btn">Add Product</button>
 
@@ -1330,34 +1437,55 @@ const defaultProducts = [
 {
     id: 1,
     name: "Nipple Feeder",
-    price: 40,
+    price: 50,
+    discountPrice: 40,
     stock: 10,
     category: "Accessories",
     color: "Silver/Red",
-    desc: "Stainless steel automatic nipple feeder for pets.",
+    desc: "Stainless steel automatic nipple feeder for pets. High durability and leak-proof design.",
     rating: "4.8",
-    image: "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"
+    images: [
+        "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"
+    ],
+    video: ""
 },
 {
     id: 2,
     name: "Dwarf Rabbit Pair",
-    price: 2500,
-    stock: 10,
+    price: 2800,
+    discountPrice: 2500,
+    stock: 5,
     category: "Rabbit",
     color: "Mixed Color",
-    desc: "Healthy & active pair of Netherland Dwarf Rabbits.",
+    desc: "Healthy & active pair of Netherland Dwarf Rabbits. Fully vaccinated and playful.",
     rating: "4.8",
-    image: "https://i.postimg.cc/hGyVG8y6/file-000000006f14720b98a7a5a54d184cb0.png"
+    images: [
+        "https://i.postimg.cc/hGyVG8y6/file-000000006f14720b98a7a5a54d184cb0.png"
+    ],
+    video: ""
 }
 ];
 
 let products = JSON.parse(localStorage.getItem("adoresProducts")) || defaultProducts;
+
+products = products.map(p => {
+    if(!p.images && p.image) p.images = [p.image];
+    if(!p.images) p.images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
+    if(!p.video) p.video = "";
+    if(p.discountPrice === undefined) p.discountPrice = null;
+    return p;
+});
+
 let cart = JSON.parse(localStorage.getItem("adoresCart")) || [];
 let myOrders = JSON.parse(localStorage.getItem("adoresMyOrders")) || [];
 let currentCategory = "";
-let uploadedBase64Image = "";
-let editUploadedBase64Image = "";
+
+let newImagesBase64 = ["", "", ""];
+let newVideoBase64 = "";
+let editImagesBase64 = ["", "", ""];
+let editVideoBase64 = "";
 let currentAdminTab = "pending";
+let activeSelectedProductId = null;
 
 function saveProducts(){
     localStorage.setItem("adoresProducts", JSON.stringify(products));
@@ -1389,19 +1517,46 @@ function closeThankYouModal(){
     document.getElementById("thankyouModal").classList.remove("show");
 }
 
-function previewUploadImage(input, previewId) {
+/* FILE READERS */
+function previewNewImage(input, index) {
     const file = input.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const preview = document.getElementById(previewId);
-            preview.src = e.target.result;
-            preview.style.display = "block";
-            if(previewId === 'addPreview'){
-                uploadedBase64Image = e.target.result;
-            } else {
-                editUploadedBase64Image = e.target.result;
-            }
+            newImagesBase64[index] = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewNewVideo(input) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            newVideoBase64 = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleEditFile(input, index) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            editImagesBase64[index] = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleEditVideo(input) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            editVideoBase64 = e.target.result;
         }
         reader.readAsDataURL(file);
     }
@@ -1422,6 +1577,7 @@ function selectCategory(category, button){
     renderProducts();
 }
 
+/* RENDER HOME PAGE PRODUCTS WITH DISCOUNT & BEAUTIFIED STOCK */
 function renderProducts(){
     const grid = document.getElementById("productsGrid");
     const title = document.getElementById("productsTitle");
@@ -1444,28 +1600,140 @@ function renderProducts(){
         return;
     }
 
-    grid.innerHTML = filtered.map(product => `
-        <div class="product-card">
-            <div class="product-img-wrap">
-                <img src="${product.image}" alt="${escapeHTML(product.name)}" onerror="this.src='https://via.placeholder.com/400x300?text=Pet'">
-                <div class="rating-badge">
-                    <i class="fa-solid fa-star"></i> ${product.rating || '4.8'}
+    grid.innerHTML = filtered.map(product => {
+        const mainImg = product.images && product.images[0] ? product.images[0] : 'https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png';
+        const hasDiscount = product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price;
+        const effectivePrice = hasDiscount ? product.discountPrice : product.price;
+        
+        const stockBadgeClass = product.stock > 0 ? "stock-in" : "stock-out";
+        const stockText = product.stock > 0 ? `<i class="fa-solid fa-box-open"></i> Stock: ${product.stock} Pcs` : `<i class="fa-solid fa-circle-xmark"></i> Out of Stock`;
+
+        return `
+            <div class="product-card" onclick="openProductModal(${product.id})">
+                <div class="product-img-wrap">
+                    <img src="${mainImg}" alt="${escapeHTML(product.name)}" onerror="this.src='https://via.placeholder.com/400x300?text=Pet'">
+                    ${hasDiscount ? `<div class="discount-badge-tag">OFFER</div>` : ''}
+                    <div class="rating-badge">
+                        <i class="fa-solid fa-star"></i> ${product.rating || '4.8'}
+                    </div>
+                    ${product.color ? `<div class="color-badge">${escapeHTML(product.color)}</div>` : ''}
                 </div>
-                ${product.color ? `<div class="color-badge">${escapeHTML(product.color)}</div>` : ''}
-            </div>
-            <div class="product-info">
-                <div class="product-name">${escapeHTML(product.name)}</div>
-                ${product.desc ? `<div class="product-desc">${escapeHTML(product.desc)}</div>` : ''}
-                <div style="font-size:11px; color:#10b981; font-weight:700; margin-bottom:6px;">Stock: ${product.stock}</div>
-                <div class="product-footer-row">
-                    <div class="product-price">৳${product.price}</div>
-                    <button class="add-btn" onclick="addToCart(${product.id})" ${product.stock <= 0 ? "disabled" : ""}>
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                <div class="product-info">
+                    <div class="product-name">${escapeHTML(product.name)}</div>
+                    
+                    <!-- Beautified Stock Display -->
+                    <span class="stock-pill-badge ${stockBadgeClass}">${stockText}</span>
+
+                    <div class="product-footer-row">
+                        <div class="price-box-wrapper">
+                            ${hasDiscount ? `<span class="old-price-strike">৳${product.price}</span>` : ''}
+                            <span class="product-price ${hasDiscount ? 'discounted' : ''}">৳${effectivePrice}</span>
+                        </div>
+                        <span class="view-details-tag">View Details</span>
+                    </div>
                 </div>
             </div>
+        `;
+    }).join("");
+}
+
+/* PRODUCT DETAILS MODAL (FULL 1:1 / 4x4 SQUARE FIT) */
+function openProductModal(id){
+    const product = products.find(p => p.id === id);
+    if(!product) return;
+    activeSelectedProductId = product.id;
+
+    document.getElementById("modalProdName").innerText = product.name;
+    document.getElementById("modalProdDetails").innerText = product.desc || "কোনো বিবরণ দেওয়া হয়নি।";
+
+    // Handle Discount Price Display in Modal
+    const hasDiscount = product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price;
+    const effectivePrice = hasDiscount ? product.discountPrice : product.price;
+    const priceBoxHtml = hasDiscount ? `
+        <div style="display:flex; flex-direction:column;">
+            <span style="font-size:12px; color:#94a3b8; text-decoration:line-through; font-weight:700;">৳${product.price}</span>
+            <span style="font-size:22px; font-weight:900; color:#ef4444;">৳${effectivePrice} <span style="font-size:10px; background:#ef4444; color:white; padding:2px 6px; border-radius:6px; vertical-align:middle;">OFFER</span></span>
         </div>
-    `).join("");
+    ` : `
+        <span style="font-size:22px; font-weight:900; color:var(--teal);">৳${product.price}</span>
+    `;
+    
+    document.getElementById("modalPriceContainer").innerHTML = priceBoxHtml;
+
+    // Stock Badge
+    const stockBadge = document.getElementById("modalProdStock");
+    if(product.stock > 0){
+        stockBadge.className = "stock-pill-badge stock-in";
+        stockBadge.innerHTML = `<i class="fa-solid fa-box-open"></i> Stock: ${product.stock} Pcs`;
+    } else {
+        stockBadge.className = "stock-pill-badge stock-out";
+        stockBadge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Out of Stock`;
+    }
+
+    const mainImg = document.getElementById("modalMainImg");
+    const mainVideo = document.getElementById("modalMainVideo");
+    const thumbContainer = document.getElementById("modalThumbnails");
+
+    thumbContainer.innerHTML = "";
+    
+    let validImages = product.images && product.images.length > 0 ? product.images.filter(img => img) : ['https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png'];
+    
+    // Hide Thumbnails Container if there's only 1 image and no video
+    if(validImages.length <= 1 && !product.video){
+        thumbContainer.style.display = "none";
+    } else {
+        thumbContainer.style.display = "flex";
+    }
+
+    mainImg.src = validImages[0];
+    mainImg.style.display = "block";
+    mainVideo.style.display = "none";
+    mainVideo.pause();
+
+    validImages.forEach((imgSrc, idx) => {
+        const thumb = document.createElement("img");
+        thumb.src = imgSrc;
+        thumb.style.cssText = "width:50px; height:50px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid " + (idx === 0 ? "var(--teal)" : "#cbd5e1");
+        thumb.onclick = () => {
+            mainImg.src = imgSrc;
+            mainImg.style.display = "block";
+            mainVideo.style.display = "none";
+            mainVideo.pause();
+            Array.from(thumbContainer.children).forEach(el => el.style.borderColor = "#cbd5e1");
+            thumb.style.borderColor = "var(--teal)";
+        };
+        thumbContainer.appendChild(thumb);
+    });
+
+    if(product.video){
+        const vidThumbWrap = document.createElement("div");
+        vidThumbWrap.style.cssText = "width:50px; height:50px; background:#1e293b; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; border:2px solid #cbd5e1; position:relative;";
+        vidThumbWrap.innerHTML = '<i class="fa-solid fa-play"></i>';
+        vidThumbWrap.onclick = () => {
+            mainVideo.src = product.video;
+            mainVideo.style.display = "block";
+            mainImg.style.display = "none";
+            mainVideo.play();
+            Array.from(thumbContainer.children).forEach(el => el.style.borderColor = "#cbd5e1");
+            vidThumbWrap.style.borderColor = "var(--teal)";
+        };
+        thumbContainer.appendChild(vidThumbWrap);
+    }
+
+    document.getElementById("productDetailModal").classList.add("show");
+}
+
+function closeProductModal(){
+    const mainVideo = document.getElementById("modalMainVideo");
+    mainVideo.pause();
+    document.getElementById("productDetailModal").classList.remove("show");
+}
+
+function addModalProductToCart(){
+    if(activeSelectedProductId){
+        addToCart(activeSelectedProductId);
+        closeProductModal();
+    }
 }
 
 function searchProducts(){
@@ -1493,6 +1761,7 @@ function addToCart(id){
     }
     saveCart();
     updateCartBadge();
+    showSuccessPopup("পণ্যটি সফলভাবে কার্টে যোগ করা হয়েছে!");
 }
 
 function updateCartBadge(){
@@ -1516,14 +1785,18 @@ function updateCart(){
         container.innerHTML = cart.map(item => {
             const product = products.find(p => p.id === item.id);
             if(!product) return "";
-            subtotal += product.price * item.qty;
+            
+            const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
+            subtotal += effectivePrice * item.qty;
+            
+            const itemImg = product.images && product.images[0] ? product.images[0] : 'https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png';
             return `
                 <div class="cart-item">
-                    <img src="${product.image}" alt="">
+                    <img src="${itemImg}" alt="">
                     <div style="flex:1;">
                         <div style="font-weight:700; font-size:14px; margin-bottom:2px;">${escapeHTML(product.name)}</div>
                         ${product.color ? `<div style="font-size:11px; color:#64748b; margin-bottom:4px;">Color: ${escapeHTML(product.color)}</div>` : ''}
-                        <div style="color:var(--teal); font-weight:800; font-size:14px; margin-bottom:8px;">৳${product.price * item.qty}</div>
+                        <div style="color:var(--teal); font-weight:800; font-size:14px; margin-bottom:8px;">৳${effectivePrice * item.qty}</div>
                         
                         <div style="display:flex; align-items:center; gap:10px;">
                             <div style="display:flex; align-items:center; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc;">
@@ -1636,18 +1909,21 @@ function placeOrder(){
     cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
         if(!product) return;
-        subtotal += product.price * item.qty;
+
+        const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
+        const itemTotal = effectivePrice * item.qty;
+        subtotal += itemTotal;
         const colorText = product.color ? ` (${product.color})` : '';
         
-        orderItemsHtml += `• ${product.name}${colorText} (${item.qty}টি) - ৳${product.price * item.qty}<br>`;
-        orderItemsText += `• ${product.name}${colorText} (${item.qty}টি) - ৳${product.price * item.qty}\n`;
-        whatsappProductsText += `- ${product.name}${colorText} x ${item.qty} = ৳${product.price * item.qty}\n`;
+        orderItemsHtml += `• ${product.name}${colorText} (${item.qty}টি) - ৳${itemTotal}<br>`;
+        orderItemsText += `• ${product.name}${colorText} (${item.qty}টি) - ৳${itemTotal}\n`;
+        whatsappProductsText += `- ${product.name}${colorText} x ${item.qty} = ৳${itemTotal}\n`;
         
         voucherItemsTableHtml += `
             <tr>
                 <td>${escapeHTML(product.name)}${colorText}</td>
                 <td>${item.qty}</td>
-                <td>৳${product.price * item.qty}</td>
+                <td>৳${itemTotal}</td>
             </tr>
         `;
 
@@ -1672,7 +1948,7 @@ function placeOrder(){
         subtotal: subtotal,
         delivery: delivery,
         total: total,
-        status: 'pending' // pending, completed, cancelled
+        status: 'pending'
     };
 
     myOrders.unshift(newOrderObj);
@@ -1947,12 +2223,19 @@ function updateOrderStatus(index, newStatus){
 function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
+    const discountPriceInput = document.getElementById("productDiscountPrice").value.trim();
+    const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("productStock").value);
     const color = document.getElementById("productColor").value.trim();
     const rating = document.getElementById("productRating").value.trim() || "4.8";
     const category = document.getElementById("productCategory").value;
     const desc = document.getElementById("productDesc").value.trim();
-    const image = uploadedBase64Image || "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png";
+    
+    let images = newImagesBase64.filter(img => img);
+    if(images.length === 0){
+        images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
+    }
+    const video = newVideoBase64 || "";
 
     if(!name || price <= 0 || stock < 0){
         showCustomAlert("সঠিক নাম, দাম ও স্টক দিন।");
@@ -1963,12 +2246,14 @@ function addProduct(){
         id: Date.now(),
         name,
         price,
+        discountPrice,
         stock,
         color,
         category,
         desc,
         rating,
-        image
+        images,
+        video
     });
 
     saveProducts();
@@ -1977,13 +2262,18 @@ function addProduct(){
 
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
+    document.getElementById("productDiscountPrice").value = "";
     document.getElementById("productStock").value = "";
     document.getElementById("productColor").value = "";
     document.getElementById("productRating").value = "";
     document.getElementById("productDesc").value = "";
-    document.getElementById("productImageFile").value = "";
-    document.getElementById("addPreview").style.display = "none";
-    uploadedBase64Image = "";
+    document.getElementById("imgFile1").value = "";
+    document.getElementById("imgFile2").value = "";
+    document.getElementById("imgFile3").value = "";
+    document.getElementById("videoFile").value = "";
+    
+    newImagesBase64 = ["", "", ""];
+    newVideoBase64 = "";
 
     showSuccessPopup("পণ্যটি সফলভাবে আপলোড হয়ে গেছে!");
 }
@@ -1994,21 +2284,27 @@ function renderAdminProducts(){
         container.innerHTML = "<p style='color:#64748b;'>কোনো পণ্য নেই।</p>";
         return;
     }
-    container.innerHTML = products.map(p => `
-        <div class="admin-product-card">
-            <div class="admin-product-info">
-                <img src="${p.image}" alt="">
-                <div>
-                    <div style="font-weight:700; font-size:13px;">${escapeHTML(p.name)} ${p.color ? `(${escapeHTML(p.color)})` : ''}</div>
-                    <div style="font-size:12px; color:#64748b;">৳${p.price} | Stock: ${p.stock} | Rating: ${p.rating || '4.8'}</div>
+    container.innerHTML = products.map(p => {
+        const adminThumb = p.images && p.images[0] ? p.images[0] : 'https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png';
+        const hasDiscount = p.discountPrice && p.discountPrice > 0;
+        return `
+            <div class="admin-product-card">
+                <div class="admin-product-info">
+                    <img src="${adminThumb}" alt="">
+                    <div>
+                        <div style="font-weight:700; font-size:13px;">${escapeHTML(p.name)} ${p.color ? `(${escapeHTML(p.color)})` : ''}</div>
+                        <div style="font-size:12px; color:#64748b;">
+                            Price: ৳${p.price} ${hasDiscount ? `<span style="color:#ef4444; font-weight:700;">(Disc: ৳${p.discountPrice})</span>` : ''} | Stock: ${p.stock} Pcs
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:6px;">
+                    <button onclick="openEditModal(${p.id})" style="background:#2563eb; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteProduct(${p.id})" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>
-            <div style="display:flex; gap:6px;">
-                <button onclick="openEditModal(${p.id})" style="background:#2563eb; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
-                <button onclick="deleteProduct(${p.id})" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-            </div>
-        </div>
-    `).join("");
+        `;
+    }).join("");
 }
 
 function openEditModal(id){
@@ -2017,16 +2313,15 @@ function openEditModal(id){
     document.getElementById("editProductId").value = p.id;
     document.getElementById("editProductName").value = p.name;
     document.getElementById("editProductPrice").value = p.price;
+    document.getElementById("editProductDiscountPrice").value = p.discountPrice || "";
     document.getElementById("editProductStock").value = p.stock;
     document.getElementById("editProductColor").value = p.color || "";
     document.getElementById("editProductRating").value = p.rating || "4.8";
     document.getElementById("editProductCategory").value = p.category;
     document.getElementById("editProductDesc").value = p.desc || "";
     
-    const preview = document.getElementById("editPreview");
-    preview.src = p.image;
-    preview.style.display = "block";
-    editUploadedBase64Image = "";
+    editImagesBase64 = p.images ? [...p.images] : [p.image || ""];
+    editVideoBase64 = p.video || "";
 
     document.getElementById("editModal").classList.add("show");
 }
@@ -2042,6 +2337,8 @@ function saveEditProduct(){
 
     const name = document.getElementById("editProductName").value.trim();
     const price = Number(document.getElementById("editProductPrice").value);
+    const discountPriceInput = document.getElementById("editProductDiscountPrice").value.trim();
+    const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("editProductStock").value);
     const color = document.getElementById("editProductColor").value.trim();
     const rating = document.getElementById("editProductRating").value.trim() || "4.8";
@@ -2055,14 +2352,19 @@ function saveEditProduct(){
 
     p.name = name;
     p.price = price;
+    p.discountPrice = discountPrice;
     p.stock = stock;
     p.color = color;
     p.rating = rating;
     p.category = category;
     p.desc = desc;
 
-    if(editUploadedBase64Image){
-        p.image = editUploadedBase64Image;
+    let validEditImgs = editImagesBase64.filter(img => img);
+    if(validEditImgs.length > 0){
+        p.images = validEditImgs;
+    }
+    if(editVideoBase64 !== undefined){
+        p.video = editVideoBase64;
     }
 
     saveProducts();
@@ -2092,6 +2394,7 @@ function escapeHTML(value){
 /* INITIALIZE */
 updateCartBadge();
 renderProducts();
+renderAdminOrders();
 </script>
 
 </body>
