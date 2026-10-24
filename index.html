@@ -1302,7 +1302,14 @@ body{
 <!-- EDIT PRODUCT MODAL -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
-        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
+        <h2 style="font-size:18px; margin-bottom:10px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
+        
+        <!-- CURRENT PRODUCT IMAGE PREVIEW -->
+        <div style="text-align:center; margin-bottom:15px;">
+            <img id="editModalCurrentImg" src="" alt="Product Preview" style="width:70px; height:70px; object-fit:cover; border-radius:12px; border:2px solid var(--teal); box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+            <div style="font-size:11px; color:#64748b; margin-top:3px; font-weight:700;">বর্তমান পণ্যের ছবি</div>
+        </div>
+
         <input type="hidden" id="editProductId">
         
         <label style="font-size:12px; font-weight:700; color:#475569;">Product Name</label>
@@ -2493,6 +2500,12 @@ function renderAdminProducts(){
 function openEditModal(id){
     const p = products.find(prod => Number(prod.id) === Number(id));
     if(!p) return;
+    
+    // Set current product image preview
+    const previewImg = document.getElementById("editModalCurrentImg");
+    const currentImgSrc = (p.images && p.images[0]) ? p.images[0] : (p.image || 'https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png');
+    if(previewImg) previewImg.src = currentImgSrc;
+
     document.getElementById("editProductId").value = p.id;
     document.getElementById("editProductName").value = p.name;
     document.getElementById("editProductPrice").value = p.price;
