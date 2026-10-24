@@ -1313,7 +1313,7 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL -->
+<!-- EDIT PRODUCT MODAL (WITH BOTH FILE & URL OPTIONS) -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:10px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
@@ -1350,10 +1350,13 @@ body{
         </div>
 
         <label style="font-size:12px; font-weight:700; color:#475569;">Color (Optional)</label>
-        <input id="editProductColor" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:12px; outline:none;">
+        <input id="editProductColor" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:10px; outline:none;">
+
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">নতুন ছবি ১ লিংক (Image URL - প্রস্তাবিত)</label>
+        <input id="editProductImgUrl" placeholder="https://..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:12px; outline:none;">
 
         <div style="display:flex; gap:10px; margin-top:10px;">
-            <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save Quick Changes</button>
+            <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save Changes</button>
             <button onclick="closeEditModal()" class="thankyou-btn" style="margin:0; flex:1; background:#64748b;">Cancel</button>
         </div>
     </div>
@@ -1486,8 +1489,20 @@ body{
             <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
             <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
 
+            <!-- OPTION 1: IMAGE URL / LINK INPUT (RECOMMENDED) -->
+            <div style="background:#e0f2f1; padding:12px; border-radius:12px; border:1px solid var(--teal); margin-bottom:14px;">
+                <label style="font-size:13px; font-weight:800; color:var(--teal);">🔗 ছবির লিংক দিন (Image URL - সবচেয়ে সেরা পদ্ধতি)</label>
+                <p style="font-size:11px; color:#475569; margin-bottom:8px;">Postimages / Imgbb / WhatsApp থেকে পাওয়া ছবির Direct URL লিংক পেস্ট করুন:</p>
+                <input id="imageUrl1" placeholder="Image 1 Link (https://...)" style="margin-bottom:6px;">
+                <input id="imageUrl2" placeholder="Image 2 Link (Optional)" style="margin-bottom:6px;">
+                <input id="imageUrl3" placeholder="Image 3 Link (Optional)" style="margin-bottom:0;">
+            </div>
+
+            <div style="text-align:center; font-weight:800; color:#94a3b8; font-size:12px; margin-bottom:14px;">— অথবা ফাইল থেকে আপলোড করুন —</div>
+
+            <!-- OPTION 2: FILE UPLOAD BOXES -->
             <div class="admin-file-box">
-                <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
+                <label>ছবি ১ (ফাইল থেকে নির্বাচন)</label>
                 <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)">
             </div>
 
@@ -1616,7 +1631,7 @@ function saveProducts(){
     try {
         localStorage.setItem("adoresProducts", JSON.stringify(products));
     } catch (e) {
-        showCustomAlert("স্টোরেজ মেমরি পূর্ণ হয়ে গেছে! দয়া করে কিছু পুরানো পণ্য ডিলিট করুন।");
+        showCustomAlert("মেমরি পূর্ণ হয়ে গেছে! ফাইল আপলোডের বদলে উপরের লিংকের (URL) ঘরে সরাসরি ছবির লিংক বসান।");
         throw e;
     }
 }
@@ -1718,7 +1733,7 @@ function compressImage(file, callback) {
             const canvas = document.createElement("canvas");
             let width = img.width;
             let height = img.height;
-            const max = 250; // Smaller max dimension to save storage memory space
+            const max = 250;
             
             if (width > height) {
                 if (width > max) {
@@ -1735,7 +1750,7 @@ function compressImage(file, callback) {
             canvas.height = height;
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, width, height);
-            callback(canvas.toDataURL("image/jpeg", 0.45)); // 45% quality for lightweight storage
+            callback(canvas.toDataURL("image/jpeg", 0.45));
         };
         img.src = e.target.result;
     };
@@ -2435,7 +2450,7 @@ function updateOrderStatus(index, newStatus){
     }
 }
 
-/* ADD PRODUCT */
+/* ADD PRODUCT (HANDLES BOTH IMAGE URL & FILE UPLOAD) */
 function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
@@ -2448,7 +2463,21 @@ function addProduct(){
     const rating = document.getElementById("productRating").value.trim() || "4.8";
     const desc = document.getElementById("productDesc").value.trim();
     
-    let images = newImagesBase64.filter(img => img && img.trim() !== "");
+    // Check URL Inputs First
+    const url1 = document.getElementById("imageUrl1").value.trim();
+    const url2 = document.getElementById("imageUrl2").value.trim();
+    const url3 = document.getElementById("imageUrl3").value.trim();
+
+    let images = [];
+    if(url1) images.push(url1);
+    if(url2) images.push(url2);
+    if(url3) images.push(url3);
+
+    // If no URL input, fallback to uploaded files
+    if(images.length === 0){
+        images = newImagesBase64.filter(img => img && img.trim() !== "");
+    }
+
     if(images.length === 0){
         images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
     }
@@ -2483,7 +2512,7 @@ function addProduct(){
     renderAdminProducts();
     renderProducts();
 
-    /* CLEAR INPUT FIELDS AFTER UPLOAD */
+    /* CLEAR ALL INPUT FIELDS AFTER UPLOAD */
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
     document.getElementById("productDiscountPrice").value = "";
@@ -2492,6 +2521,9 @@ function addProduct(){
     document.getElementById("productColor").value = "";
     document.getElementById("productRating").value = "";
     document.getElementById("productDesc").value = "";
+    document.getElementById("imageUrl1").value = "";
+    document.getElementById("imageUrl2").value = "";
+    document.getElementById("imageUrl3").value = "";
     document.getElementById("imgFile1").value = "";
     document.getElementById("imgFile2").value = "";
     document.getElementById("imgFile3").value = "";
@@ -2547,6 +2579,7 @@ function openEditModal(id){
     document.getElementById("editProductStock").value = p.stock;
     document.getElementById("editProductAge").value = p.age || "";
     document.getElementById("editProductColor").value = p.color || "";
+    document.getElementById("editProductImgUrl").value = p.images && p.images[0] ? p.images[0] : "";
 
     document.getElementById("editModal").classList.add("show");
 }
@@ -2567,6 +2600,7 @@ function saveEditProduct(){
     const stock = Number(document.getElementById("editProductStock").value);
     const age = document.getElementById("editProductAge").value.trim();
     const color = document.getElementById("editProductColor").value.trim();
+    const imgUrl = document.getElementById("editProductImgUrl").value.trim();
 
     if(!name || price <= 0){
         showCustomAlert("সঠিক নাম ও দাম দিন।");
@@ -2579,6 +2613,7 @@ function saveEditProduct(){
     p.stock = stock;
     p.age = age;
     p.color = color;
+    if(imgUrl) p.images = [imgUrl];
 
     try {
         saveProducts();
