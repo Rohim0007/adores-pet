@@ -1313,7 +1313,7 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL (WITH AGE OPTION) -->
+<!-- EDIT PRODUCT MODAL -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:10px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
@@ -1435,7 +1435,7 @@ body{
             </div>
         </div>
         
-        <!-- ADD NEW PRODUCT CARD (FULL FEATURED UPLOAD FORM WITH AGE FIELD) -->
+        <!-- ADD NEW PRODUCT CARD -->
         <div class="admin-card">
             <h2 style="margin-bottom:15px; font-size:18px; color:var(--teal);"><i class="fa-solid fa-circle-plus"></i> Add New Product</h2>
             
@@ -1611,9 +1611,14 @@ let newVideoBase64 = "";
 let currentAdminTab = "pending";
 let activeSelectedProductId = null;
 
-/* LOCALSTORAGE SAFE SAVE FUNCTION */
+/* ROBUST LOCALSTORAGE SAVE WITH STORAGE CHECK */
 function saveProducts(){
-    localStorage.setItem("adoresProducts", JSON.stringify(products));
+    try {
+        localStorage.setItem("adoresProducts", JSON.stringify(products));
+    } catch (e) {
+        showCustomAlert("স্টোরেজ মেমরি পূর্ণ হয়ে গেছে! দয়া করে কিছু পুরানো পণ্য ডিলিট করুন।");
+        throw e;
+    }
 }
 
 function saveCart(){
@@ -1704,7 +1709,7 @@ function closeThankYouModal(){
     document.getElementById("thankyouModal").classList.remove("show");
 }
 
-/* HELPER: IMAGE COMPRESSOR FOR UPLOAD */
+/* ULTRA-COMPACT IMAGE COMPRESSOR FOR LOCALSTORAGE */
 function compressImage(file, callback) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -1713,7 +1718,7 @@ function compressImage(file, callback) {
             const canvas = document.createElement("canvas");
             let width = img.width;
             let height = img.height;
-            const max = 350;
+            const max = 250; // Smaller max dimension to save storage memory space
             
             if (width > height) {
                 if (width > max) {
@@ -1730,7 +1735,7 @@ function compressImage(file, callback) {
             canvas.height = height;
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, width, height);
-            callback(canvas.toDataURL("image/jpeg", 0.55));
+            callback(canvas.toDataURL("image/jpeg", 0.45)); // 45% quality for lightweight storage
         };
         img.src = e.target.result;
     };
@@ -1773,7 +1778,7 @@ function selectCategory(category, button){
     renderProducts();
 }
 
-/* RENDER PRODUCTS WITH AGE BADGE UNDER PRODUCT NAME */
+/* RENDER PRODUCTS */
 function renderProducts(){
     const grid = document.getElementById("productsGrid");
     const title = document.getElementById("productsTitle");
@@ -2430,7 +2435,7 @@ function updateOrderStatus(index, newStatus){
     }
 }
 
-/* ADD PRODUCT WITH AGE PARAMETER */
+/* ADD PRODUCT */
 function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
@@ -2469,7 +2474,12 @@ function addProduct(){
         video
     });
 
-    saveProducts();
+    try {
+        saveProducts();
+    } catch(err) {
+        return;
+    }
+
     renderAdminProducts();
     renderProducts();
 
@@ -2570,7 +2580,12 @@ function saveEditProduct(){
     p.age = age;
     p.color = color;
 
-    saveProducts();
+    try {
+        saveProducts();
+    } catch(err) {
+        return;
+    }
+
     renderAdminProducts();
     renderProducts();
     closeEditModal();
