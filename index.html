@@ -403,45 +403,33 @@ body{
     transform: scale(0.85);
 }
 
-/* SOCIAL FOOTER SECTION */
-.social-footer-box{
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    text-align: center;
-    margin-top: 24px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-    border: 1px solid #f1f5f9;
-}
-
-.social-footer-box h4{
-    font-size: 14px;
-    color: var(--text-dark);
-    margin-bottom: 10px;
-}
-
-.social-buttons-wrapper{
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.social-link-btn{
+/* SUPPORT & SOCIAL MODAL STYLING */
+.support-link-card{
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 9px 18px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
     text-decoration: none;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
 }
+.support-link-card:active{
+    transform: scale(0.98);
+}
+.wa-card{ background: #25d366; }
+.fb-card{ background: #1877f2; }
+.yt-card{ background: #ff0000; }
 
-.fb-btn{ background: #1877f2; }
-.yt-btn{ background: #ff0000; }
+.support-link-card i{
+    font-size: 22px;
+    width: 30px;
+    text-align: center;
+}
 
 /* BOTTOM NAVIGATION BAR */
 .bottom-nav{
@@ -1003,19 +991,6 @@ body{
     <div id="productsGrid" class="products-grid"></div>
 </section>
 
-<!-- SOCIAL FOOTER BUTTONS -->
-<div class="social-footer-box">
-    <h4>Follow Us On Social Media</h4>
-    <div class="social-buttons-wrapper">
-        <a href="https://www.facebook.com/share/1dPRm7hNg7/" target="_blank" class="social-link-btn fb-btn">
-            <i class="fa-brands fa-facebook-f"></i> Facebook
-        </a>
-        <a href="https://youtube.com/@adorespet?si=qmFRL3EOkpCYU_za" target="_blank" class="social-link-btn yt-btn">
-            <i class="fa-brands fa-youtube"></i> YouTube
-        </a>
-    </div>
-</div>
-
 </main>
 
 <!-- BOTTOM NAVIGATION BAR -->
@@ -1035,11 +1010,34 @@ body{
         <i class="fa-solid fa-receipt"></i>
         <span>My Orders</span>
     </button>
-    <a href="https://wa.me/message/NTZHEUXXC6DTN1" target="_blank" class="nav-item">
-        <i class="fa-brands fa-whatsapp" style="font-size:20px; color:#25d366;"></i>
+    <button class="nav-item" onclick="openSupportModal()">
+        <i class="fa-solid fa-headset" style="font-size:18px; color:var(--teal);"></i>
         <span>Support</span>
-    </a>
+    </button>
 </nav>
+
+<!-- SUPPORT & SOCIAL MEDIA MODAL -->
+<div id="supportModal" class="thankyou-overlay">
+    <div class="thankyou-card">
+        <div class="thankyou-icon" style="background:#e0f2f1; color:var(--teal);">
+            <i class="fa-solid fa-headset"></i>
+        </div>
+        <h2 style="font-size:18px; color:var(--text-dark); margin-bottom:6px;">Help & Support</h2>
+        <p style="font-size:12px; color:#64748b; margin-bottom:18px;">যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন</p>
+        
+        <a href="https://wa.me/message/NTZHEUXXC6DTN1" target="_blank" class="support-link-card wa-card">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Support
+        </a>
+        <a href="https://www.facebook.com/share/1dPRm7hNg7/" target="_blank" class="support-link-card fb-card">
+            <i class="fa-brands fa-facebook-f"></i> Facebook Page
+        </a>
+        <a href="https://youtube.com/@adorespet?si=qmFRL3EOkpCYU_za" target="_blank" class="support-link-card yt-card">
+            <i class="fa-brands fa-youtube"></i> YouTube Channel
+        </a>
+
+        <button onclick="closeSupportModal()" class="thankyou-btn" style="background:#64748b; margin-top:10px;">বন্ধ করুন</button>
+    </div>
+</div>
 
 <!-- CART OVERLAY -->
 <div id="cartOverlay" class="cart-overlay">
@@ -1225,12 +1223,12 @@ body{
             </div>
             <div style="display:flex; align-items:center; gap:8px;">
                 <span class="notif-badge-pill" id="pendingNotifBadge">0 নতুন অর্ডার</span>
-                <i class="fa-solid fa-chevron-down" id="notifArrow" style="color:var(--text-muted); transition:transform 0.3s;"></i>
+                <i class="fa-solid fa-chevron-down" id="notifArrow" style="color:var(--text-muted); transition:transform 0.3s; transform: rotate(180deg);"></i>
             </div>
         </div>
 
-        <!-- Collapsible Order Management Panel -->
-        <div id="collapsibleOrderPanel" style="display:none; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
+        <!-- Order Management Panel (ALWAYS OPEN BY DEFAULT WHEN ADMIN OPENS) -->
+        <div id="collapsibleOrderPanel" style="display:block; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
             <!-- Order Tabs -->
             <div class="admin-order-tabs">
                 <button class="order-tab-btn active" id="tabPending" onclick="switchOrderTab('pending')">পেন্ডিং (<span id="countPending">0</span>)</button>
@@ -1317,6 +1315,15 @@ document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => 
         deferredPrompt = null;
     }
 });
+
+/* SUPPORT MODAL FUNCTIONS */
+function openSupportModal(){
+    document.getElementById("supportModal").classList.add("show");
+}
+
+function closeSupportModal(){
+    document.getElementById("supportModal").classList.remove("show");
+}
 
 /* DEFAULT PRODUCTS */
 const defaultProducts = [
@@ -1518,7 +1525,6 @@ function updateCart(){
                         ${product.color ? `<div style="font-size:11px; color:#64748b; margin-bottom:4px;">Color: ${escapeHTML(product.color)}</div>` : ''}
                         <div style="color:var(--teal); font-weight:800; font-size:14px; margin-bottom:8px;">৳${product.price * item.qty}</div>
                         
-                        <!-- Larger & Fixed Quantity Control Box (- / +) -->
                         <div style="display:flex; align-items:center; gap:10px;">
                             <div style="display:flex; align-items:center; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc;">
                                 <button type="button" onclick="changeCartQty(${product.id}, -1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:#64748b;">-</button>
@@ -1903,7 +1909,7 @@ function renderAdminOrders(){
         const originalIndex = myOrders.indexOf(order);
         const status = order.status || 'pending';
         return `
-            <div style="background:white; border:1px solid #cbd5e1; border-radius:10px; padding:10px; margin-bottom:10px;">
+            <div style="background:white; border:1px solid #cbd5e1; border-radius:10px; padding:10px; margin-bottom:10px; margin-top:8px;">
                 <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; color:var(--teal); margin-bottom:4px;">
                     <span>${order.id} (${order.date})</span>
                     <span>৳${order.total}</span>
