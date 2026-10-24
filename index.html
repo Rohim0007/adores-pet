@@ -537,14 +537,14 @@ body{
     justify-content: center;
 }
 
-/* OVERLAYS & MODALS */
+/* OVERLAYS & MODALS - Z-INDEX INCREASED SO THEY APPEAR ABOVE ADMIN DASHBOARD */
 .cart-overlay{
     display:none;
     position:fixed;
     inset:0;
     background:rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(4px);
-    z-index:2000;
+    z-index:20000;
 }
 
 .cart-overlay.show{
@@ -675,7 +675,7 @@ body{
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.7);
-    z-index: 4000;
+    z-index: 25000;
     align-items: flex-end;
     justify-content: center;
     padding: 0;
@@ -772,7 +772,7 @@ body{
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.75);
-    z-index: 5000;
+    z-index: 30000;
     align-items: center;
     justify-content: center;
     padding: 15px;
@@ -904,11 +904,11 @@ body{
     opacity: 0.9;
 }
 
-/* BEAUTIFUL FILE UPLOAD BOX SYSTEM */
+/* CLEAN AND PERFECT FILE UPLOAD BOX SYSTEM */
 .admin-file-box {
     background: #f8fafc;
     border: 1.5px dashed #cbd5e1;
-    padding: 14px;
+    padding: 12px 14px;
     border-radius: 14px;
     margin-bottom: 12px;
     transition: all 0.2s;
@@ -922,16 +922,19 @@ body{
     font-size: 12.5px;
     font-weight: 800;
     color: var(--teal);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 .admin-file-box input[type="file"] {
+    display: block;
     width: 100%;
     font-size: 12px;
     color: #475569;
-    background: transparent;
-    border: none;
-    padding: 0;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 6px;
     margin: 0;
+    outline: none;
 }
 
 .admin-product-card{
@@ -1296,7 +1299,7 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL (REDESIGNED WITH BOX SYSTEM) -->
+<!-- EDIT PRODUCT MODAL -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
@@ -1338,7 +1341,6 @@ body{
         <label style="font-size:12px; font-weight:700; color:#475569;">Full Description / Details</label>
         <textarea id="editProductDesc" placeholder="Detailed product info..." style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:14px; height:80px; outline:none;"></textarea>
 
-        <!-- BEAUTIFUL FILE UPLOAD BOXES FOR EDIT -->
         <div class="admin-file-box">
             <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
             <input type="file" accept="image/*" onchange="handleEditFile(this, 0)">
@@ -1442,7 +1444,7 @@ body{
             </div>
         </div>
         
-        <!-- ADD NEW PRODUCT CARD (REDESIGNED WITH BOX SYSTEM) -->
+        <!-- ADD NEW PRODUCT CARD -->
         <div class="admin-card">
             <h2 style="margin-bottom:15px; font-size:18px; color:var(--teal);"><i class="fa-solid fa-circle-plus"></i> Add New Product</h2>
             
@@ -1482,7 +1484,6 @@ body{
             <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
             <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
 
-            <!-- BEAUTIFUL FILE UPLOAD BOXES FOR ADD -->
             <div class="admin-file-box">
                 <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
                 <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)">
