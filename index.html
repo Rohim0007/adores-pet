@@ -11,18 +11,17 @@
 
 <style>
 /* =====================================================
-   ADORE'S PET - PERFECT SQUARE BOX DESIGN
+   ADORE'S PET - APP STYLE DESIGN
 ===================================================== */
 :root{
-    --coral: #ff5252;
-    --coral-grad: linear-gradient(135deg, #ff6b6b, #ff5252);
-    --dark: #0f172a;
-    --dark-card: #1e293b;
-    --light: #f8fafc;
+    --teal: #00897b;
+    --teal-dark: #00695c;
+    --bg-light: #f4f6f8;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
     --green: #10b981;
     --white: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
+    --coral: #ff5252;
 }
 
 *{
@@ -37,340 +36,440 @@ html{
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:var(--light);
-    color:var(--text);
+    background:var(--bg-light);
+    color:var(--text-dark);
+    padding-bottom: 70px;
 }
 
-/* HEADER */
-header{
-    background: var(--coral-grad);
-    color:white;
-    padding: 12px 20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow: 0 4px 20px rgba(255, 82, 82, 0.25);
+/* APP HEADER */
+.app-header{
+    background: var(--teal);
+    color: white;
+    padding: 15px 16px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 137, 123, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-inner{
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
 }
 
 .logo-area{
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    transition: transform 0.2s;
-}
-
-.logo-area:hover{
-    transform: scale(1.02);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
 }
 
 .brand-logo-img{
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
-    background: #fff;
-    border: 2px solid #fff;
+    background: white;
+    border: 2px solid white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.logo-text{
-    font-size:26px;
-    font-weight:900;
-    letter-spacing: 1px;
-    color:#fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    font-family: 'Arial Black', 'Segoe UI', sans-serif;
+.logo-text-box{
+    display: flex;
+    flex-direction: column;
 }
 
-/* CART BUTTON */
-.cart-btn{
-    border:none;
-    background: #000;
-    color:#fff;
-    padding: 8px 16px;
-    border-radius: 50px;
-    min-width: 120px;
-    height: 52px;
-    font-size: 15px;
+.logo-text{
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.logo-sub{
+    font-size: 11px;
+    color: #e0f2f1;
+}
+
+.live-badge{
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
     font-weight: 700;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
 }
 
-.cart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+.live-badge:hover{
+    background: rgba(255, 255, 255, 0.35);
 }
 
-.cart-number{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:#fff;
-    color:var(--coral);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:16px;
-    font-weight:900;
-}
-
-/* MAIN CONTAINER */
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 15px;
+.live-dot{
+    width: 7px;
+    height: 7px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 /* SEARCH BOX */
 .search-box{
-    margin-bottom:30px;
+    max-width: 600px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon{
+    position: absolute;
+    left: 16px;
+    color: #94a3b8;
+    font-size: 14px;
 }
 
 .search-box input{
-    width:100%;
-    padding:16px 20px;
-    background:white;
-    border:2px solid #e2e8f0;
-    border-radius:16px;
-    font-size:16px;
-    outline:none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    background: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     transition: all 0.3s;
 }
 
-.search-box input:focus{
-    border-color:var(--coral);
-    box-shadow: 0 4px 20px rgba(255, 82, 82, 0.15);
+/* MAIN CONTAINER */
+.container{
+    max-width: 600px;
+    margin: auto;
+    padding: 16px;
 }
 
-/* SECTION TITLE */
-.section-title{
-    text-align:center;
-    font-size:24px;
-    font-weight:800;
-    margin:35px 0 20px;
-    color:#0f172a;
-    letter-spacing: 0.5px;
+/* HIGH DEFINITION CLEAR BANNER */
+.hero-image-banner{
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 137, 123, 0.12);
+    background: #ffffff;
 }
 
-/* CATEGORY SECTION - SQUARE BOXES */
+.hero-image-banner img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* CATEGORIES CHIPS */
 .category-section{
-    margin-bottom:40px;
+    margin-bottom: 20px;
 }
 
-.category-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+.category-header-row, .products-header-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
-.category-btn{
-    border:2px solid #f1f5f9;
-    background:#fff;
-    border-radius:20px;
-    aspect-ratio: 1 / 1;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-    font-size:16px;
-    font-weight:700;
-    color:#334155;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding: 15px;
+.category-header-row h3, .products-header-row h3{
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-dark);
 }
 
-.category-btn:hover{
-    transform:translateY(-5px);
-    border-color: var(--coral);
-    box-shadow:0 15px 30px rgba(255, 82, 82, 0.12);
+.show-all{
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 700;
+    cursor: pointer;
+    background: #e0f2f1;
+    padding: 4px 10px;
+    border-radius: 12px;
+    transition: background 0.2s;
 }
 
-.category-btn.active{
-    background:var(--coral-grad);
-    color:#fff;
-    border-color: transparent;
-    box-shadow:0 10px 25px rgba(255, 82, 82, 0.3);
+.show-all:hover{
+    background: var(--teal);
+    color: white;
 }
 
-.category-icon{
-    font-size:42px;
-    margin-bottom:8px;
+.category-chips{
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
 }
 
-/* PRODUCTS SECTION */
-.products-section{
-    display:none;
-    margin-top:30px;
-    margin-bottom:40px;
+.category-chips::-webkit-scrollbar{
+    display: none;
 }
 
-.products-section.show{
-    display:block;
+.chip-btn{
+    background: white;
+    border: 1px solid #e2e8f0;
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    transition: all 0.25s ease;
 }
 
+.chip-btn:hover{
+    border-color: var(--teal);
+    color: var(--teal);
+}
+
+.chip-btn.active{
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+    box-shadow: 0 4px 12px rgba(0, 137, 123, 0.3);
+}
+
+/* PRODUCTS GRID */
 .products-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
 }
 
 .product-card{
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.04);
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     border: 1px solid #f1f5f9;
-    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
-.product-card:hover{
-    transform: translateY(-5px);
+.product-img-wrap{
+    position: relative;
+    width: 100%;
+    height: 140px;
 }
 
 .product-card img{
-    width:100%;
-    height:210px;
-    object-fit:cover;
-    display:block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rating-badge{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(4px);
+    color: #fbbf24;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.color-badge{
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(0, 137, 123, 0.85);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
 }
 
 .product-info{
-    padding:18px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .product-name{
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:6px;
-    color: #0f172a;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.product-category{
-    color:#64748b;
-    font-size:14px;
-    margin-bottom:12px;
+.product-desc{
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-footer-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
 }
 
 .product-price{
-    color:var(--coral);
-    font-size:24px;
-    font-weight:900;
-    margin-bottom:8px;
-}
-
-.stock{
-    color:var(--green);
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:15px;
-}
-
-.product-actions{
-    display:flex;
-    gap:8px;
-}
-
-.product-actions button{
-    flex:1;
-    border:none;
-    padding:12px 8px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:700;
-    transition: opacity 0.2s;
-}
-
-.product-actions button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--teal);
 }
 
 .add-btn{
-    background:#10b981;
-    color:#fff;
-    width: 100%;
+    background: var(--teal);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 137, 123, 0.3);
+    transition: transform 0.15s;
 }
 
-.add-btn:hover{
-    background:#059669;
+.add-btn:active{
+    transform: scale(0.85);
 }
 
-.empty-products{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-    color:#64748b;
-    grid-column:1/-1;
-    font-weight:600;
+/* SOCIAL FOOTER SECTION */
+.social-footer-box{
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    border: 1px solid #f1f5f9;
 }
 
-/* WHY CHOOSE US - SQUARE BOXES */
-.why{
-    margin-top:40px;
-    margin-bottom:40px;
+.social-footer-box h4{
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
 }
 
-.why-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+.social-buttons-wrapper{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
-.why-card{
-    border:2px solid #f1f5f9;
-    background:#fff;
-    border-radius:20px;
-    aspect-ratio: 1 / 1;
-    padding: 15px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+.social-link-btn{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-.why-card:hover{
-    transform:translateY(-5px);
-    border-color: var(--coral);
-    box-shadow:0 15px 30px rgba(255, 82, 82, 0.12);
+.fb-btn{ background: #1877f2; }
+.yt-btn{ background: #ff0000; }
+
+/* BOTTOM NAVIGATION BAR */
+.bottom-nav{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    border-top: 1px solid #e2e8f0;
+    z-index: 1000;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
 }
 
-.why-card .icon{
-    font-size:40px;
-    margin-bottom:8px;
+.nav-item{
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    flex: 1;
+    text-decoration: none;
 }
 
-.why-card h3{
-    font-size:14px;
-    font-weight:800;
-    color:#0f172a;
-    line-height:1.3;
+.nav-item i{
+    font-size: 18px;
 }
 
-/* CART OVERLAY */
+.nav-item.active{
+    color: var(--teal);
+}
+
+.nav-cart-icon-wrap{
+    position: relative;
+}
+
+.nav-cart-badge{
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #ef4444;
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* OVERLAYS & MODALS */
 .cart-overlay{
     display:none;
     position:fixed;
@@ -389,56 +488,34 @@ header{
     right:0;
     top:0;
     width:100%;
-    max-width:460px;
+    max-width:420px;
     height:100%;
     background:white;
-    padding:0 0 30px 0;
     overflow-y:auto;
 }
 
-/* YOUR CART HEADER */
 .cart-header{
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: var(--coral-grad);
+    background: var(--teal);
     padding: 16px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(255, 82, 82, 0.2);
+    color: white;
 }
 
 .cart-header h2{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'Arial Black', sans-serif;
-    text-align: center;
 }
 
 .close-btn{
-    position: absolute;
-    right: 20px;
-    width:36px;
-    height:36px;
-    border:none;
-    border-radius:50%;
-    background: #000;
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.close-btn:active{
-    transform: scale(0.9);
+    background: rgba(0,0,0,0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .cart-body-content{
@@ -447,188 +524,76 @@ header{
 
 .cart-item{
     display:flex;
-    gap:16px;
-    padding:18px 0;
+    gap:12px;
+    padding:12px 0;
     border-bottom:1px solid #f1f5f9;
     align-items: center;
 }
 
 .cart-item img{
-    width:80px;
-    height:80px;
+    width:60px;
+    height:60px;
     object-fit:cover;
-    border-radius:14px;
-    border: 1px solid #e2e8f0;
-}
-
-.cart-item-info{
-    flex:1;
-}
-
-.cart-item-name{
-    font-weight:800;
-    font-size: 16px;
-    color: #0f172a;
-    margin-bottom:4px;
-}
-
-.qty-title{
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--coral);
-    margin-top: 6px;
-    margin-bottom: 10px;
-}
-
-.qty-controls{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    flex-wrap: wrap;
-}
-
-.btn-qty{
-    width:36px;
-    height:36px;
-    border:none;
     border-radius:10px;
-    background:#f1f5f9;
-    color:#0f172a;
-    cursor:pointer;
-    font-size: 18px;
-    font-weight:bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.btn-qty:active{
-    transform: scale(0.88);
-    background: var(--coral);
-    color: white;
-}
-
-.qty-number{
-    font-size: 16px;
-    font-weight: 800;
-    min-width: 22px;
-    text-align: center;
-}
-
-.btn-remove{
-    border: none;
-    background: #ffe4e6;
-    color: #e11d48;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    margin-left: auto;
-}
-
-.btn-remove:active{
-    transform: scale(0.92);
-    background: #e11d48;
-    color: white;
 }
 
 .cart-total{
-    margin-top:25px;
-    padding:20px;
-    border-radius:18px;
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
     background:#f8fafc;
-    border: 1px solid #e2e8f0;
 }
 
 .total-row{
     display:flex;
     justify-content:space-between;
-    margin:10px 0;
-    font-size: 15px;
-    color: #475569;
+    margin:8px 0;
+    font-size: 14px;
 }
 
 .grand-total{
-    border-top:1.5px dashed #cbd5e1;
-    padding-top:14px;
-    margin-top: 12px;
-    font-size:20px;
+    border-top:1px dashed #cbd5e1;
+    padding-top:10px;
+    font-size:18px;
     font-weight:900;
-    color:var(--coral);
+    color:var(--teal);
 }
 
-/* ORDER FORM */
 .order-form{
-    margin-top:30px;
+    margin-top:20px;
 }
 
-.order-form h3{
-    margin-bottom:18px;
-    font-weight:800;
-    font-size: 18px;
-    color: #0f172a;
-}
-
-.order-form input,
-.order-form select,
-.order-form textarea{
+.order-form input, .order-form select, .order-form textarea{
     width:100%;
-    padding:15px;
-    margin-bottom:14px;
-    border:1.5px solid #e2e8f0;
-    border-radius:12px;
+    padding:12px;
+    margin-bottom:10px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:14px;
     outline:none;
-    font-size:15px;
-    background: #f8fafc;
-    transition: all 0.2s;
-}
-
-.order-form input:focus,
-.order-form select:focus,
-.order-form textarea:focus{
-    border-color: var(--coral);
-    background: #fff;
-}
-
-.order-form textarea{
-    min-height:90px;
-    resize:vertical;
 }
 
 .order-btn{
     width:100%;
-    padding:16px;
+    padding:14px;
     border:none;
-    border-radius:14px;
-    background:var(--coral-grad);
+    border-radius:12px;
+    background:var(--teal);
     color:#fff;
     font-weight:800;
     cursor:pointer;
-    font-size:16px;
-    box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
-    transition: transform 0.2s;
 }
 
-.order-btn:active{
-    transform: scale(0.97);
-}
-
-/* CART NOTICE */
 .cart-notice{
     background: #fff5f5;
-    border: 1.5px dashed var(--coral);
+    border: 1.5px dashed var(--teal);
     color: #b91c1c;
-    padding: 16px;
-    border-radius: 14px;
-    font-size: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 12px;
     font-weight: 700;
     text-align: center;
-    margin-top: 20px;
-    line-height: 1.6;
+    margin-top: 15px;
 }
 
 /* MODALS */
@@ -637,7 +602,6 @@ header{
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(4px);
     z-index: 4000;
     align-items: center;
     justify-content: center;
@@ -650,481 +614,388 @@ header{
 
 .thankyou-card{
     background: white;
-    padding: 35px 25px;
-    border-radius: 24px;
+    padding: 25px;
+    border-radius: 20px;
     text-align: center;
-    max-width: 400px;
+    max-width: 380px;
     width: 100%;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes popupScale{
-    from{ transform: scale(0.8); opacity: 0; }
-    to{ transform: scale(1); opacity: 1; }
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
 .thankyou-icon{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background: #e6f4ea;
-    color: var(--green);
+    color: #10b981;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
-    margin: 0 auto 18px;
-}
-
-.thankyou-card h2{
-    font-size: 24px;
-    font-weight: 900;
-    color: #0f172a;
-    margin-bottom: 12px;
-}
-
-.thankyou-card p{
-    font-size: 15px;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 22px;
+    font-size: 28px;
+    margin: 0 auto 15px;
 }
 
 .thankyou-btn{
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     border: none;
-    border-radius: 12px;
-    background: var(--coral-grad);
+    border-radius: 10px;
+    background: var(--teal);
     color: white;
     font-weight: 800;
-    font-size: 15px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
+    margin-top: 15px;
 }
 
-/* CUSTOM ALERT MODAL */
-#customAlertModal {
+/* ORDER TRACKER STYLING */
+.order-card{
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.order-card-header{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+
+.order-items-list{
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.order-card-footer{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+/* PRINTABLE VOUCHER MODAL STYLING */
+.voucher-modal{
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(4px);
+    background: rgba(15, 23, 42, 0.75);
     z-index: 5000;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
 }
-
-#customAlertModal.show {
+.voucher-modal.show{
     display: flex;
 }
-
-/* ADMIN PANEL & MODAL */
-#adminSection{
-    display:none;
-    max-width:600px;
-    margin:30px auto;
-    padding:0 15px;
-}
-
-.admin-login{
-    background:white;
-    padding:35px 30px;
-    border-radius:24px;
-    box-shadow:0 15px 35px rgba(0,0,0,0.08);
-    border:1px solid #e2e8f0;
-}
-
-.admin-login input{
+.voucher-box{
+    background: white;
     width: 100%;
-    padding: 15px 18px;
-    border: 2px solid #e2e8f0;
-    border-radius: 14px;
-    font-size: 16px;
-    outline: none;
-    margin-top: 15px;
-    transition: all 0.3s;
+    max-width: 480px;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.voucher-header{
+    text-align: center;
+    border-bottom: 2px dashed #cbd5e1;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.voucher-logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 6px;
+}
+.voucher-title{
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--teal);
+}
+.voucher-subtitle{
+    font-size: 11px;
+    color: #64748b;
+}
+.voucher-info-grid{
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 15px;
     background: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
 }
-
-.admin-login input:focus{
-    border-color: var(--coral);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(255, 82, 82, 0.12);
+.voucher-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    font-size: 13px;
 }
-
-.admin-card{
-    background:white;
-    padding:30px;
-    border-radius:24px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
-    border:1px solid #e2e8f0;
-    margin-bottom: 30px;
+.voucher-table th, .voucher-table td{
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    text-align: left;
 }
-
-.admin-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.voucher-table th{
+    background: #f1f5f9;
+    color: var(--text-dark);
+}
+.voucher-totals{
+    font-size: 13px;
+    line-height: 1.6;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 10px;
     margin-bottom: 20px;
 }
-
-.admin-login h2, .admin-card h2{
-    font-size: 22px;
-    font-weight: 800;
-    color: #0f172a;
+.voucher-actions{
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
-.logout-btn{
-    background: #ef4444;
-    color: white;
-    border: none;
-    padding: 8px 16px;
+/* ADMIN PANEL STYLING */
+#adminSection{
+    display:none;
+    max-width:600px;
+    margin:20px auto;
+    padding:0 16px;
+}
+
+.admin-login, .admin-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    border:1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.admin-login input, .admin-card input, .admin-card select, .admin-card textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
     border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.admin-form-group{
-    margin-bottom: 15px;
-}
-
-.admin-form-group label{
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: #475569;
-    margin-bottom: 6px;
-}
-
-.admin-panel input, .admin-panel select{
-    width:100%;
-    padding:13px 16px;
-    border:1.5px solid #e2e8f0;
-    border-radius:12px;
-    font-size: 15px;
+    font-size: 14px;
     outline: none;
-    transition: all 0.2s;
-    background: #f8fafc;
-}
-
-.admin-panel input:focus, .admin-panel select:focus{
-    border-color: var(--coral);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(255, 82, 82, 0.1);
-}
-
-.file-input-wrapper{
-    position: relative;
-    background: #f8fafc;
-    border: 2px dashed #cbd5e1;
-    border-radius: 14px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.file-input-wrapper:hover{
-    border-color: var(--coral);
-    background: #fff5f5;
-}
-
-.file-input-wrapper input[type="file"]{
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.file-input-icon{
-    font-size: 28px;
-    color: var(--coral);
-    margin-bottom: 6px;
-}
-
-.preview-img{
-    max-height: 100px;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: none;
+    margin-top: 8px;
+    margin-bottom: 15px;
 }
 
 .admin-submit-btn{
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: none;
-    border-radius: 14px;
-    background: var(--coral-grad);
+    border-radius: 12px;
+    background: var(--teal);
     color: white;
     font-weight: 800;
-    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 82, 82, 0.25);
-    transition: transform 0.2s;
-}
-
-.admin-submit-btn:hover{
-    transform: translateY(-2px);
 }
 
 .admin-product-card{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 12px;
     background: #f8fafc;
-    border-radius: 16px;
+    border-radius: 12px;
     border: 1px solid #e2e8f0;
-    margin-bottom: 12px;
-    gap: 15px;
+    margin-bottom: 10px;
+    gap: 10px;
 }
 
 .admin-product-info{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .admin-product-info img{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
-.admin-actions button{
-    border: none;
-    padding: 9px 16px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 13px;
-    transition: opacity 0.2s;
-}
-
-.admin-actions button:hover{
-    opacity: 0.9;
-}
-
-/* EDIT MODAL */
-.modal-overlay{
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 3000;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.modal-overlay.show{
-    display: flex;
-}
-
-.modal-box{
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* FOOTER DESIGN */
-footer{
-    background: #0f172a;
-    color: white;
-    margin-top: 40px;
-    padding: 40px 20px 25px;
-    border-top: 4px solid var(--coral);
-}
-
-.footer-inner{
-    max-width: 1000px;
-    margin: auto;
-    text-align: center;
-}
-
-.footer-inner h2{
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-    color: #fff;
-}
-
-.footer-inner p{
-    font-size: 14px;
-    color: #94a3b8;
-}
-
-.socials{
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 25px 0;
-    flex-wrap: wrap;
-}
-
-.socials a{
-    color: white;
-    text-decoration: none;
-    background: #1e293b;
-    padding: 12px 24px;
+/* ADMIN NOTIFICATION ORDER BOX STYLING */
+.admin-notif-box{
+    background: #ffffff;
+    border: 2px solid var(--teal);
     border-radius: 14px;
-    font-weight: 700;
-    font-size: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 137, 123, 0.1);
+}
+.admin-notif-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.notif-badge-pill{
+    background: #ef4444;
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border: 1px solid #334155;
-    transition: all 0.3s ease;
+    gap: 5px;
+}
+.admin-order-tabs{
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.order-tab-btn{
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #cbd5e1;
+    background: #f1f5f9;
+    color: var(--text-dark);
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+.order-tab-btn.active{
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
 }
 
-.socials a:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-.socials a.fb:hover { background: #1877f2; border-color: #1877f2; }
-.socials a.yt:hover { background: #ff0000; border-color: #ff0000; }
-.socials a.wa:hover { background: #25d366; border-color: #25d366; }
-
-.copyright-text{
-    user-select: none;
-    cursor: default;
-    margin-top: 20px;
-    color: #64748b;
-    font-size: 13px;
-}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-    .category-grid{ grid-template-columns:repeat(2,1fr); gap: 16px; }
-    .products-grid{ grid-template-columns:repeat(2,1fr); gap: 16px; }
-    .why-grid{ grid-template-columns:repeat(2,1fr); gap: 16px; }
-}
-
-@media(max-width:600px){
-    header{ padding:12px 15px; }
-    .brand-logo-img{ width: 40px; height: 40px; }
-    .logo-text{ font-size:20px; }
-    .cart-btn{ min-width:110px; height:46px; font-size:14px; }
-    .cart-number{ width:32px; height:32px; font-size: 14px;}
-    .section-title{ font-size:22px; margin: 30px 0 15px; }
-    
-    .category-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
-    .category-btn{ padding:12px; }
-    .category-icon{ font-size:36px; }
-    
-    .products-grid{ grid-template-columns:repeat(2,1fr); gap:14px; }
-    .product-card img{ height:160px; }
-    .product-info{ padding:12px; }
-    .product-name{ font-size:15px; }
-    .product-price{ font-size:20px; }
-    .stock{ font-size:13px; }
-    
-    .why-grid{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .why-card{ padding: 12px; }
-    .why-card .icon{ font-size: 36px; }
-    .why-card h3{ font-size: 12px; }
-
-    .socials{ flex-direction:column; }
-    .socials a{ width:100%; justify-content: center; }
-    .admin-product-card{ flex-direction:column; align-items:flex-start; }
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printableVoucherBox, #printableVoucherBox * {
+        visibility: visible;
+    }
+    #printableVoucherBox {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
+<!-- APP HEADER -->
+<header class="app-header">
 <div class="header-inner">
     <div class="logo-area" onclick="goHome()">
         <img src="https://i.postimg.cc/TyKwf7KS/20261008-191945.png" alt="ADORE'S PET Logo" class="brand-logo-img">
-        <span class="logo-text">ADORE'S PET</span>
+        <div class="logo-text-box">
+            <span class="logo-text">ADORE'S PET</span>
+            <span class="logo-sub">Loved by pets, trusted by owners</span>
+        </div>
     </div>
-
-    <button class="cart-btn" onclick="openCart()">
-        🛒 <span>Cart</span>
-        <span class="cart-number" id="cartCount">0</span>
-    </button>
+    <div class="header-right-badges">
+        <span class="live-badge" onclick="handleSecretClick()"><span class="live-dot"></span> Live Site</span>
+    </div>
+</div>
+<div class="search-box">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    <input id="searchInput" type="text" placeholder="Search food, toys, grooming..." oninput="searchProducts()">
 </div>
 </header>
 
 <!-- MAIN -->
 <main class="container">
 
-<!-- SEARCH -->
-<div class="search-box">
-    <input id="searchInput" type="text" placeholder="Search products..." oninput="searchProducts()">
+<!-- BANNER -->
+<div class="hero-image-banner">
+    <img src="https://i.postimg.cc/JzmwDZBp/file-000000004a4482438eebd37b7fd9db5f.png" alt="ADORE'S PET Banner">
 </div>
 
-<!-- CATEGORY -->
+<!-- CATEGORY CHIPS -->
 <section class="category-section">
-    <h2 class="section-title">SHOP BY CATEGORY</h2>
-    <div class="category-grid">
-        <button class="category-btn" onclick="selectCategory('Rabbit',this)">
-            <span class="category-icon">🐰</span> Rabbit
-        </button>
-        <button class="category-btn" onclick="selectCategory('Hamster',this)">
-            <span class="category-icon">🐹</span> Hamster
-        </button>
-        <button class="category-btn" onclick="selectCategory('Pet Food',this)">
-            <span class="category-icon">🥣</span> Pet Food
-        </button>
-        <button class="category-btn" onclick="selectCategory('Accessories',this)">
-            <span class="category-icon">🧰</span> Accessories
-        </button>
+    <div class="category-header-row">
+        <h3>Categories</h3>
+        <span class="show-all" onclick="goHome()">Showing All</span>
+    </div>
+    <div class="category-chips">
+        <button class="chip-btn" onclick="selectCategory('Rabbit',this)">Rabbit</button>
+        <button class="chip-btn" onclick="selectCategory('Hamster',this)">Hamster</button>
+        <button class="chip-btn" onclick="selectCategory('Pet Food',this)">Pet Food</button>
+        <button class="chip-btn" onclick="selectCategory('Accessories',this)">Accessories</button>
     </div>
 </section>
 
 <!-- PRODUCTS -->
-<section id="productsSection" class="products-section">
-    <h2 id="productsTitle" class="section-title"></h2>
+<section class="products-section">
+    <div class="products-header-row">
+        <h3 id="productsTitle">Popular Pet Supplies</h3>
+    </div>
     <div id="productsGrid" class="products-grid"></div>
 </section>
 
-<!-- WHY CHOOSE US -->
-<section class="why">
-    <h2 class="section-title">WHY CHOOSE US</h2>
-    <div class="why-grid">
-        <div class="why-card">
-            <div class="icon">🐰</div>
-            <h3>Quality Pets, Food & Accessories</h3>
-        </div>
-        <div class="why-card">
-            <div class="icon">⚡</div>
-            <h3>FAST DELIVERY</h3>
-        </div>
-        <div class="why-card">
-            <div class="icon">🥇</div>
-            <h3>No.1 Trusted Service</h3>
-        </div>
-        <div class="why-card">
-            <div class="icon">🎧</div>
-            <h3>24/7 Customer Support</h3>
-        </div>
+<!-- SOCIAL FOOTER BUTTONS -->
+<div class="social-footer-box">
+    <h4>Follow Us On Social Media</h4>
+    <div class="social-buttons-wrapper">
+        <a href="https://www.facebook.com/share/1dPRm7hNg7/" target="_blank" class="social-link-btn fb-btn">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://youtube.com/@adorespet?si=qmFRL3EOkpCYU_za" target="_blank" class="social-link-btn yt-btn">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
     </div>
-</section>
+</div>
 
 </main>
+
+<!-- BOTTOM NAVIGATION BAR -->
+<nav class="bottom-nav">
+    <button class="nav-item active" onclick="goHome()">
+        <i class="fa-solid fa-store"></i>
+        <span>Shop</span>
+    </button>
+    <button class="nav-item" onclick="openCart()">
+        <div class="nav-cart-icon-wrap">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="nav-cart-badge" id="cartCount">0</span>
+        </div>
+        <span>Cart</span>
+    </button>
+    <button class="nav-item" onclick="openOrdersModal()">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+    </button>
+    <a href="https://wa.me/message/NTZHEUXXC6DTN1" target="_blank" class="nav-item">
+        <i class="fa-brands fa-whatsapp" style="font-size:20px; color:#25d366;"></i>
+        <span>Support</span>
+    </a>
+</nav>
 
 <!-- CART OVERLAY -->
 <div id="cartOverlay" class="cart-overlay">
 <div class="cart-box">
-    <!-- YOUR CART HEADER -->
     <div class="cart-header">
         <h2>YOUR CART</h2>
         <button class="close-btn" onclick="closeCart()">✕</button>
@@ -1139,7 +1010,7 @@ footer{
                 <strong>৳<span id="subtotal">0</span></strong>
             </div>
             <div class="total-row">
-                <span>Delivery</span>
+                <span>Delivery Charge</span>
                 <strong>৳<span id="deliveryCharge">0</span></strong>
             </div>
             <div class="total-row grand-total">
@@ -1156,10 +1027,9 @@ footer{
                 <option value="">Select District</option>
                 <option>Bagerhat</option><option>Bandarban</option><option>Barguna</option><option>Barishal</option><option>Bhola</option><option>Bogura</option><option>Brahmanbaria</option><option>Chandpur</option><option>Chapainawabganj</option><option>Chattogram</option><option>Chuadanga</option><option>Cox's Bazar</option><option>Cumilla</option><option>Dhaka</option><option>Dinajpur</option><option>Faridpur</option><option>Feni</option><option>Gaibandha</option><option>Gazipur</option><option>Gopalganj</option><option>Habiganj</option><option>Jamalpur</option><option>Jashore</option><option>Jhalokati</option><option>Jhenaidah</option><option>Joypurhat</option><option>Khagrachari</option><option>Khulna</option><option>Kishoreganj</option><option>Kurigram</option><option>Kushtia</option><option>Lakshmipur</option><option>Madaripur</option><option>Magura</option><option>Manikganj</option><option>Meherpur</option><option>Moulvibazar</option><option>Munshiganj</option><option>Mymensingh</option><option>Naogaon</option><option>Narail</option><option>Narayanganj</option><option>Narsingdi</option><option>Natore</option><option>Netrokona</option><option>Nilphamari</option><option>Noakhali</option><option>Pabna</option><option>Panchagarh</option><option>Patuakhali</option><option>Pirojpur</option><option>Rajbari</option><option>Rajshahi</option><option>Rangamati</option><option>Rangpur</option><option>Satkhira</option><option>Shariatpur</option><option>Sherpur</option><option>Sirajganj</option><option>Sunamganj</option><option>Sylhet</option><option>Tangail</option><option>Thakurgaon</option>
             </select>
-            <textarea id="customerAddress" placeholder="Full Address"></textarea>
+            <textarea id="customerAddress" placeholder="Full Address" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:10px; margin-bottom:10px; outline:none; min-height:80px;"></textarea>
             <button class="order-btn" onclick="placeOrder()">PLACE ORDER</button>
             
-            <!-- NOTICE -->
             <div class="cart-notice">
                 ⚠️ অর্ডার কনফার্ম করার আগে চিন্তা করে নিবেন তার পর অর্ডার করবেন তাহলে আপনার ও লস হবে না আমার ও না।
             </div>
@@ -1168,51 +1038,58 @@ footer{
 </div>
 </div>
 
-<!-- THANK YOU MODAL -->
-<div id="thankyouModal" class="thankyou-overlay">
-    <div class="thankyou-card">
-        <div class="thankyou-icon"><i class="fa-solid fa-circle-check"></i></div>
-        <h2>ধন্যবাদ!</h2>
-        <p>আপনার অর্ডারটি সফলভাবে জমা হয়ে গেছে।<br>আপনার সাথে যত দ্রুত সম্ভব যোগাযোগ করা হবে।</p>
-        <button onclick="closeThankYouModal()" class="thankyou-btn">ঠিক আছে</button>
+<!-- USER ORDERS LIST MODAL (CUSTOMER ORDERS & CANCEL OPTION) -->
+<div id="ordersModal" class="thankyou-overlay">
+    <div class="thankyou-card" style="text-align:left;">
+        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">আপনার অর্ডারসমূহ</h2>
+        <div id="userOrdersList"></div>
+        <button onclick="closeOrdersModal()" class="thankyou-btn" style="margin-top:15px;">বন্ধ করুন</button>
     </div>
 </div>
 
-<!-- ADD SUCCESS MODAL -->
-<div id="addSuccessModal" class="thankyou-overlay">
-    <div class="thankyou-card">
-        <div class="thankyou-icon"><i class="fa-solid fa-circle-check"></i></div>
-        <h2>সফল!</h2>
-        <p>পণ্যটি আপলোড হয়ে গেছে</p>
-        <button onclick="closeAddSuccessModal()" class="thankyou-btn">ঠিক আছে</button>
-    </div>
-</div>
+<!-- PRINTABLE VOUCHER MODAL -->
+<div id="voucherModal" class="voucher-modal">
+    <div class="voucher-box" id="printableVoucherBox">
+        <div class="voucher-header">
+            <img src="https://i.postimg.cc/TyKwf7KS/20261008-191945.png" alt="Logo" class="voucher-logo">
+            <div class="voucher-title">ADORE'S PET</div>
+            <div class="voucher-subtitle">Official Order Voucher & Cash Memo</div>
+        </div>
+        
+        <div class="voucher-info-grid" id="voucherCustomerInfo"></div>
 
-<!-- EDIT SUCCESS MODAL -->
-<div id="editSuccessModal" class="thankyou-overlay">
-    <div class="thankyou-card">
-        <div class="thankyou-icon"><i class="fa-solid fa-circle-check"></i></div>
-        <h2>সফল!</h2>
-        <p>পণ্যটি সংশোধন করা হয়েছে</p>
-        <button onclick="closeEditSuccessModal()" class="thankyou-btn">ঠিক আছে</button>
-    </div>
-</div>
+        <table class="voucher-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="voucherTableBody"></tbody>
+        </table>
 
-<!-- DELETE CONFIRMATION MODAL -->
-<div id="deleteConfirmModal" class="thankyou-overlay">
-    <div class="thankyou-card">
-        <div class="thankyou-icon" style="background:#fee2e2; color:#ef4444;"><i class="fa-solid fa-triangle-exclamation"></i></div>
-        <h2>নিশ্চিত করুন</h2>
-        <p>আপনি কি এই পণ্যটি মুছে ফেলতে চান?</p>
-        <div style="display:flex; gap:10px; margin-top:20px;">
-            <button onclick="confirmDeleteProduct()" class="thankyou-btn" style="background:#ef4444;">হ্যাঁ, ডিলিট</button>
-            <button onclick="closeDeleteConfirmModal()" class="thankyou-btn" style="background:#64748b;">বাতিল</button>
+        <div class="voucher-totals" id="voucherTotalsBox"></div>
+
+        <div class="voucher-actions no-print">
+            <button onclick="window.print()" class="thankyou-btn" style="margin:0; background:var(--teal);"><i class="fa-solid fa-print"></i> প্রিন্ট করুন</button>
+            <button onclick="closeVoucherModal()" class="thankyou-btn" style="margin:0; background:#64748b;">বন্ধ করুন</button>
         </div>
     </div>
 </div>
 
+<!-- SUCCESS POPUP MODAL -->
+<div id="thankyouModal" class="thankyou-overlay">
+    <div class="thankyou-card">
+        <div class="thankyou-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h2>ধন্যবাদ!</h2>
+        <p id="successPopupText">আপনার অর্ডারটি সফলভাবে জমা হয়ে গেছে।<br>আপনার সাথে যত দ্রুত সম্ভব যোগাযোগ করা হবে।</p>
+        <button onclick="closeThankYouModal()" class="thankyou-btn">ঠিক আছে</button>
+    </div>
+</div>
+
 <!-- CUSTOM ALERT MODAL -->
-<div id="customAlertModal">
+<div id="customAlertModal" class="thankyou-overlay">
     <div class="thankyou-card">
         <div class="thankyou-icon" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <h2>সতর্কতা</h2>
@@ -1221,138 +1098,151 @@ footer{
     </div>
 </div>
 
+<!-- EDIT PRODUCT MODAL -->
+<div id="editModal" class="thankyou-overlay">
+    <div class="thankyou-card" style="text-align:left;">
+        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">Edit Product</h2>
+        <input type="hidden" id="editProductId">
+        
+        <label style="font-size:12px; font-weight:700;">Product Name</label>
+        <input id="editProductName" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+        
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700;">Price (৳)</label>
+                <input id="editProductPrice" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+            </div>
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700;">Stock</label>
+                <input id="editProductStock" type="number" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+            </div>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700;">Color (Optional)</label>
+                <input id="editProductColor" placeholder="e.g. White & Brown" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+            </div>
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700;">Rating (e.g. 4.9)</label>
+                <input id="editProductRating" type="text" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;" placeholder="4.8">
+            </div>
+        </div>
+
+        <label style="font-size:12px; font-weight:700;">Category</label>
+        <select id="editProductCategory" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px;">
+            <option>Rabbit</option>
+            <option>Hamster</option>
+            <option>Pet Food</option>
+            <option>Accessories</option>
+        </select>
+
+        <label style="font-size:12px; font-weight:700;">Short Description / Details</label>
+        <textarea id="editProductDesc" placeholder="Product details..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px; margin-top:4px; margin-bottom:10px; height:60px; outline:none;"></textarea>
+
+        <label style="font-size:12px; font-weight:700;">Change Image (Optional)</label>
+        <input type="file" id="editProductImageFile" accept="image/*" onchange="previewUploadImage(this, 'editPreview')" style="width:100%; margin-top:4px; margin-bottom:10px;">
+        <img id="editPreview" style="max-height:70px; border-radius:6px; margin-bottom:10px; display:none;" alt="Preview">
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save</button>
+            <button onclick="closeEditModal()" class="thankyou-btn" style="margin:0; flex:1; background:#64748b;">Cancel</button>
+        </div>
+    </div>
+</div>
+
 <!-- ADMIN SECTION -->
 <section id="adminSection">
 <div id="adminLogin" class="admin-login">
-    <div class="admin-header">
-        <h2><i class="fa-solid fa-shield-halved" style="color:var(--coral);"></i> Admin Login</h2>
-        <button onclick="hideAdmin()" class="logout-btn" style="background:#64748b;">Close</button>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <h2>Admin Login</h2>
+        <button onclick="hideAdmin()" style="background:#64748b; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Close</button>
     </div>
     <input id="adminPassword" type="password" placeholder="Enter Admin Password">
-    <button onclick="adminLogin()" class="admin-submit-btn" style="margin-top:20px;">Login</button>
+    <button onclick="adminLogin()" class="admin-submit-btn">Login</button>
 </div>
 
-<div id="adminPanel" class="admin-panel" style="display:none; max-width:1000px; margin:auto;">
-    <div class="admin-card">
-        <div class="admin-header">
-            <h2><i class="fa-solid fa-plus-circle" style="color:var(--coral);"></i> Add New Product</h2>
-            <button onclick="logoutAdmin()" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-        </div>
-        
-        <div class="admin-form-group">
-            <label>Product Name</label>
-            <input id="productName" placeholder="e.g. Rabbit Feed 1kg">
-        </div>
-
-        <div style="display:flex; gap:10px;">
-            <div class="admin-form-group" style="flex:1;">
-                <label>Price (৳)</label>
-                <input id="productPrice" type="number" placeholder="40">
-            </div>
-            <div class="admin-form-group" style="flex:1;">
-                <label>Stock Quantity</label>
-                <input id="productStock" type="number" placeholder="10">
-            </div>
-        </div>
-
-        <div class="admin-form-group">
-            <label>Category</label>
-            <select id="productCategory">
-                <option>Rabbit</option>
-                <option>Hamster</option>
-                <option>Pet Food</option>
-                <option>Accessories</option>
-            </select>
-        </div>
-
-        <div class="admin-form-group">
-            <label>Product Image</label>
-            <div class="file-input-wrapper">
-                <i class="fa-solid fa-cloud-arrow-up file-input-icon"></i>
-                <div style="font-size:14px; font-weight:700;">Click to Upload Image</div>
-                <div style="font-size:12px; color:#94a3b8;">PNG, JPG or WEBP</div>
-                <input type="file" id="productImageFile" accept="image/*" onchange="previewUploadImage(this, 'addPreview')">
-            </div>
-            <img id="addPreview" class="preview-img" alt="Preview">
-        </div>
-
-        <button onclick="addProduct()" class="admin-submit-btn">Add Product</button>
+<div id="adminPanel" style="display:none;" class="admin-card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <h2>Admin Panel</h2>
+        <button onclick="logoutAdmin()" style="background:#ef4444; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer;">Logout</button>
     </div>
 
-    <div class="admin-card">
-        <h2><i class="fa-solid fa-boxes-stacked" style="color:var(--coral);"></i> Manage Products</h2>
-        <div id="adminProducts"></div>
+    <!-- ADMIN NOTIFICATION ORDER BOX -->
+    <div class="admin-notif-box">
+        <div class="admin-notif-header" onclick="toggleAdminOrderList()">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <i class="fa-solid fa-bell" style="color:var(--teal); font-size:18px;"></i>
+                <span style="font-weight:800; font-size:15px; color:var(--text-dark);">নতুন অর্ডার নোটিফিকেশন</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span class="notif-badge-pill" id="pendingNotifBadge">0 নতুন অর্ডার</span>
+                <i class="fa-solid fa-chevron-down" id="notifArrow" style="color:var(--text-muted); transition:transform 0.3s;"></i>
+            </div>
+        </div>
+
+        <!-- Collapsible Order Management Panel -->
+        <div id="collapsibleOrderPanel" style="display:none; margin-top:15px; border-top:1px dashed #cbd5e1; padding-top:12px;">
+            <!-- Order Tabs -->
+            <div class="admin-order-tabs">
+                <button class="order-tab-btn active" id="tabPending" onclick="switchOrderTab('pending')">পেন্ডিং (<span id="countPending">0</span>)</button>
+                <button class="order-tab-btn" id="tabCompleted" onclick="switchOrderTab('completed')">কমপ্লিট (<span id="countCompleted">0</span>)</button>
+                <button class="order-tab-btn" id="tabCancelled" onclick="switchOrderTab('cancelled')">বাতিল (<span id="countCancelled">0</span>)</button>
+            </div>
+
+            <div id="adminOrdersListContainer" style="max-height:350px; overflow-y:auto;">
+                <!-- Dynamic Admin Orders List -->
+            </div>
+        </div>
     </div>
+    
+    <h2 style="margin-top:20px; margin-bottom:15px; font-size:18px;">Add New Product</h2>
+    <label style="font-size:13px; font-weight:700;">Product Name</label>
+    <input id="productName" placeholder="e.g. Dwarf Rabbit">
+
+    <div style="display:flex; gap:10px;">
+        <div style="flex:1;">
+            <label style="font-size:13px; font-weight:700;">Price (৳)</label>
+            <input id="productPrice" type="number" placeholder="850">
+        </div>
+        <div style="flex:1;">
+            <label style="font-size:13px; font-weight:700;">Stock Quantity</label>
+            <input id="productStock" type="number" placeholder="10">
+        </div>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+        <div style="flex:1;">
+            <label style="font-size:13px; font-weight:700;">Color (Option)</label>
+            <input id="productColor" placeholder="e.g. White / Golden">
+        </div>
+        <div style="flex:1;">
+            <label style="font-size:13px; font-weight:700;">Rating (e.g. 4.9)</label>
+            <input id="productRating" type="text" placeholder="4.8">
+        </div>
+    </div>
+
+    <label style="font-size:13px; font-weight:700;">Category</label>
+    <select id="productCategory">
+        <option>Rabbit</option>
+        <option>Hamster</option>
+        <option>Pet Food</option>
+        <option>Accessories</option>
+    </select>
+
+    <label style="font-size:13px; font-weight:700;">Product Details / Short Description</label>
+    <textarea id="productDesc" placeholder="e.g. High quality breed, healthy and active." style="height:70px;"></textarea>
+
+    <label style="font-size:13px; font-weight:700;">Product Image</label>
+    <input type="file" id="productImageFile" accept="image/*" onchange="previewUploadImage(this, 'addPreview')">
+    <img id="addPreview" style="max-height:80px; border-radius:8px; margin-bottom:10px; display:none;" alt="Preview">
+
+    <button onclick="addProduct()" class="admin-submit-btn">Add Product</button>
+
+    <h2 style="margin-top:25px; margin-bottom:15px; font-size:18px;">Manage Products</h2>
+    <div id="adminProducts"></div>
 </div>
 </section>
-
-<!-- EDIT PRODUCT MODAL -->
-<div id="editModal" class="modal-overlay">
-    <div class="modal-box admin-panel">
-        <h2 style="font-size:20px; font-weight:800; margin-bottom:15px; color:#0f172a;">Edit Product</h2>
-        <input type="hidden" id="editProductId">
-        
-        <div class="admin-form-group">
-            <label>Product Name</label>
-            <input id="editProductName">
-        </div>
-        
-        <div style="display:flex; gap:10px;">
-            <div class="admin-form-group" style="flex:1;">
-                <label>Price (৳)</label>
-                <input id="editProductPrice" type="number">
-            </div>
-            <div class="admin-form-group" style="flex:1;">
-                <label>Stock Quantity</label>
-                <input id="editProductStock" type="number">
-            </div>
-        </div>
-
-        <div class="admin-form-group">
-            <label>Category</label>
-            <select id="editProductCategory">
-                <option>Rabbit</option>
-                <option>Hamster</option>
-                <option>Pet Food</option>
-                <option>Accessories</option>
-            </select>
-        </div>
-
-        <div class="admin-form-group">
-            <label>Change Image (Optional)</label>
-            <div class="file-input-wrapper" style="padding:12px;">
-                <div style="font-size:13px; font-weight:700;">Upload New Image</div>
-                <input type="file" id="editProductImageFile" accept="image/*" onchange="previewUploadImage(this, 'editPreview')">
-            </div>
-            <img id="editPreview" class="preview-img" alt="Preview">
-        </div>
-
-        <div style="display:flex; gap:10px; margin-top:15px;">
-            <button onclick="saveEditProduct()" class="admin-submit-btn" style="flex:1;">Save Changes</button>
-            <button onclick="closeEditModal()" class="admin-submit-btn" style="flex:1; background:#64748b; box-shadow:none;">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-<div class="footer-inner">
-    <h2>ADORE'S PET</h2>
-    <p>Quality Pets, Food & Accessories</p>
-    <div class="socials">
-        <a href="https://www.facebook.com/share/1GyJFG3Psu/" target="_blank" class="fb">
-            <i class="fa-brands fa-facebook-f"></i> Facebook
-        </a>
-        <a href="https://youtube.com/@adorespet?si=zAsLtAT9ohffXY8J" target="_blank" class="yt">
-            <i class="fa-brands fa-youtube"></i> YouTube
-        </a>
-        <a href="https://wa.me/message/NTZHEUXXC6DTN1" target="_blank" class="wa">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-    </div>
-    <p class="copyright-text" onclick="handleSecretClick()">© 2026 ADORE'S PET. All Rights Reserved.</p>
-</div>
-</footer>
 
 <script>
 /* EMAILJS INIT */
@@ -1368,24 +1258,31 @@ const defaultProducts = [
     price: 40,
     stock: 10,
     category: "Accessories",
+    color: "Silver/Red",
+    desc: "Stainless steel automatic nipple feeder for pets.",
+    rating: "4.8",
     image: "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"
 },
 {
     id: 2,
-    name: "Water Bottle",
-    price: 60,
+    name: "Dwarf Rabbit Pair",
+    price: 2500,
     stock: 10,
-    category: "Accessories",
+    category: "Rabbit",
+    color: "Mixed Color",
+    desc: "Healthy & active pair of Netherland Dwarf Rabbits.",
+    rating: "4.8",
     image: "https://i.postimg.cc/hGyVG8y6/file-000000006f14720b98a7a5a54d184cb0.png"
 }
 ];
 
 let products = JSON.parse(localStorage.getItem("adoresProducts")) || defaultProducts;
 let cart = JSON.parse(localStorage.getItem("adoresCart")) || [];
+let myOrders = JSON.parse(localStorage.getItem("adoresMyOrders")) || [];
 let currentCategory = "";
 let uploadedBase64Image = "";
 let editUploadedBase64Image = "";
-let productIdToDelete = null;
+let currentAdminTab = "pending";
 
 function saveProducts(){
     localStorage.setItem("adoresProducts", JSON.stringify(products));
@@ -1395,7 +1292,10 @@ function saveCart(){
     localStorage.setItem("adoresCart", JSON.stringify(cart));
 }
 
-/* CUSTOM ALERT FUNCTION */
+function saveMyOrders(){
+    localStorage.setItem("adoresMyOrders", JSON.stringify(myOrders));
+}
+
 function showCustomAlert(message){
     document.getElementById("customAlertMessage").innerText = message;
     document.getElementById("customAlertModal").classList.add("show");
@@ -1405,7 +1305,15 @@ function closeCustomAlert(){
     document.getElementById("customAlertModal").classList.remove("show");
 }
 
-/* IMAGE PREVIEW AND BASE64 CONVERSION */
+function showSuccessPopup(msg){
+    document.getElementById("successPopupText").innerHTML = msg;
+    document.getElementById("thankyouModal").classList.add("show");
+}
+
+function closeThankYouModal(){
+    document.getElementById("thankyouModal").classList.remove("show");
+}
+
 function previewUploadImage(input, previewId) {
     const file = input.files[0];
     if (file) {
@@ -1414,7 +1322,7 @@ function previewUploadImage(input, previewId) {
             const preview = document.getElementById(previewId);
             preview.src = e.target.result;
             preview.style.display = "block";
-            if(previewId === 'addPreview') {
+            if(previewId === 'addPreview'){
                 uploadedBase64Image = e.target.result;
             } else {
                 editUploadedBase64Image = e.target.result;
@@ -1424,76 +1332,60 @@ function previewUploadImage(input, previewId) {
     }
 }
 
-/* HOME FUNCTION */
 function goHome(){
     currentCategory = "";
     document.getElementById("searchInput").value = "";
-    document.getElementById("productsSection").classList.remove("show");
-    document.getElementById("productsGrid").innerHTML = "";
-    document.getElementById("productsTitle").innerText = "";
-    document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.querySelectorAll(".chip-btn").forEach(btn => btn.classList.remove("active"));
+    renderProducts();
 }
 
-/* SELECT CATEGORY */
 function selectCategory(category, button){
     currentCategory = category;
-    document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".chip-btn").forEach(btn => btn.classList.remove("active"));
     if(button) button.classList.add("active");
-    
     document.getElementById("searchInput").value = "";
     renderProducts();
-
-    setTimeout(() => {
-        document.getElementById("productsSection").scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
 }
 
-/* RENDER PRODUCTS */
 function renderProducts(){
-    const section = document.getElementById("productsSection");
     const grid = document.getElementById("productsGrid");
     const title = document.getElementById("productsTitle");
     const search = document.getElementById("searchInput").value.trim().toLowerCase();
 
-    if(!currentCategory && !search){
-        section.classList.remove("show");
-        grid.innerHTML = "";
-        title.innerText = "";
-        return;
-    }
-
-    section.classList.add("show");
-
     let filtered = products;
 
     if(currentCategory){
-        title.innerText = currentCategory + " Products";
-        filtered = filtered.filter(product => product.category === currentCategory);
+        title.innerText = currentCategory + " Supplies";
+        filtered = filtered.filter(p => p.category.toLowerCase() === currentCategory.toLowerCase());
+    } else if(search){
+        title.innerText = 'Search Results';
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(search));
     } else {
-        title.innerText = 'Search Results for "' + search + '"';
-    }
-
-    if(search){
-        filtered = filtered.filter(product => product.name.toLowerCase().includes(search));
+        title.innerText = "Popular Pet Supplies";
     }
 
     if(filtered.length === 0){
-        grid.innerHTML = `<div class="empty-products">No products found.</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#64748b;">কোনো পণ্য পাওয়া যায়নি।</div>`;
         return;
     }
 
     grid.innerHTML = filtered.map(product => `
         <div class="product-card">
-            <img src="${product.image}" alt="${escapeHTML(product.name)}" onerror="this.src='https://via.placeholder.com/500x400?text=No+Image'">
+            <div class="product-img-wrap">
+                <img src="${product.image}" alt="${escapeHTML(product.name)}" onerror="this.src='https://via.placeholder.com/400x300?text=Pet'">
+                <div class="rating-badge">
+                    <i class="fa-solid fa-star"></i> ${product.rating || '4.8'}
+                </div>
+                ${product.color ? `<div class="color-badge">${escapeHTML(product.color)}</div>` : ''}
+            </div>
             <div class="product-info">
                 <div class="product-name">${escapeHTML(product.name)}</div>
-                <div class="product-category">${escapeHTML(product.category)}</div>
-                <div class="product-price">৳${product.price}</div>
-                <div class="stock">📦 Stock: ${product.stock}</div>
-                <div class="product-actions">
+                ${product.desc ? `<div class="product-desc">${escapeHTML(product.desc)}</div>` : ''}
+                <div style="font-size:11px; color:#10b981; font-weight:700; margin-bottom:6px;">Stock: ${product.stock}</div>
+                <div class="product-footer-row">
+                    <div class="product-price">৳${product.price}</div>
                     <button class="add-btn" onclick="addToCart(${product.id})" ${product.stock <= 0 ? "disabled" : ""}>
-                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -1501,28 +1393,20 @@ function renderProducts(){
     `).join("");
 }
 
-/* SEARCH PRODUCTS */
 function searchProducts(){
-    const search = document.getElementById("searchInput").value.trim();
-    if(search !== ""){
-        document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
-        currentCategory = "";
-    }
+    currentCategory = "";
+    document.querySelectorAll(".chip-btn").forEach(btn => btn.classList.remove("active"));
     renderProducts();
 }
 
-/* ADD TO CART */
 function addToCart(id){
     const product = products.find(p => p.id === id);
     if(!product) return;
-
     if(product.stock <= 0){
-        showCustomAlert("এই পণ্যটি বর্তমানে স্টকে নেই।");
+        showCustomAlert("এই পণ্যটি স্টকে নেই।");
         return;
     }
-
     const existing = cart.find(item => item.id === id);
-
     if(existing){
         if(existing.qty >= product.stock){
             showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
@@ -1532,38 +1416,41 @@ function addToCart(id){
     } else {
         cart.push({ id: id, qty: 1 });
     }
-
     saveCart();
-    updateCart();
+    updateCartBadge();
 }
 
-/* UPDATE CART */
+function updateCartBadge(){
+    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const badge = document.getElementById("cartCount");
+    badge.innerText = totalCount;
+    if(totalCount > 0){
+        badge.style.display = "flex";
+    } else {
+        badge.style.display = "none";
+    }
+}
+
 function updateCart(){
     const container = document.getElementById("cartItems");
     let subtotal = 0;
 
     if(cart.length === 0){
-        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">Your cart is empty.</p>`;
+        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">আপনার কার্ট খালি রয়েছে।</p>`;
     } else {
         container.innerHTML = cart.map(item => {
             const product = products.find(p => p.id === item.id);
             if(!product) return "";
             subtotal += product.price * item.qty;
-
             return `
                 <div class="cart-item">
                     <img src="${product.image}" alt="">
-                    <div class="cart-item-info">
-                        <div class="cart-item-name">${escapeHTML(product.name)}</div>
-                        <div style="font-weight:700; color:var(--coral); font-size:15px;">৳${product.price}</div>
-                        <div class="qty-title">আপনি কত পিস নিতে চান?</div>
-                        <div class="qty-controls">
-                            <button class="btn-qty" onclick="changeQty(${product.id}, -1)">−</button>
-                            <span class="qty-number">${item.qty}</span>
-                            <button class="btn-qty" onclick="changeQty(${product.id}, 1)">+</button>
-                            <button class="btn-remove" onclick="removeFromCart(${product.id})">Remove</button>
-                        </div>
+                    <div style="flex:1;">
+                        <div style="font-weight:700; font-size:14px;">${escapeHTML(product.name)}</div>
+                        ${product.color ? `<div style="font-size:11px; color:#64748b;">Color: ${escapeHTML(product.color)}</div>` : ''}
+                        <div style="color:var(--teal); font-weight:800; font-size:14px;">৳${product.price} × ${item.qty}</div>
                     </div>
+                    <button onclick="removeFromCart(${product.id})" style="background:#fee2e2; color:#ef4444; border:none; padding:6px 10px; border-radius:8px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `;
         }).join("");
@@ -1571,93 +1458,15 @@ function updateCart(){
 
     document.getElementById("subtotal").innerText = subtotal;
     updateDelivery();
-    document.getElementById("cartCount").innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+    updateCartBadge();
 }
 
-/* CHANGE QTY */
-function changeQty(id, change){
-    const item = cart.find(i => i.id === id);
-    const product = products.find(p => p.id === id);
-    if(!item || !product) return;
-
-    const newQty = item.qty + change;
-
-    if(newQty <= 0){
-        removeFromCart(id);
-        return;
-    }
-
-    if(newQty > product.stock){
-        showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক: " + product.stock);
-        return;
-    }
-
-    item.qty = newQty;
-    saveCart();
-    updateCart();
-}
-
-/* REMOVE FROM CART */
 function removeFromCart(id){
-    cart = cart.filter(item => item.id !== id);
+    cart = cart.filter(i => i.id !== id);
     saveCart();
     updateCart();
 }
 
-/* UPDATE DELIVERY */
-function updateDelivery(){
-    const district = document.getElementById("customerDistrict").value;
-    let delivery = 0;
-
-    if(district && cart.length > 0){
-        let hasRabbit = false;
-        let hasHamster = false;
-
-        cart.forEach(item => {
-            const product = products.find(p => p.id === item.id);
-            if(product){
-                if(product.category === "Rabbit") hasRabbit = true;
-                if(product.category === "Hamster") hasHamster = true;
-            }
-        });
-
-        if(district === "Dhaka"){
-            if(hasRabbit){
-                delivery = 400;
-            } else if(hasHamster){
-                delivery = 300;
-            } else {
-                delivery = 80;
-            }
-        } else if(district === "Gazipur"){
-            if(hasRabbit){
-                delivery = 500;
-            } else if(hasHamster){
-                delivery = 450;
-            } else {
-                delivery = 100;
-            }
-        } else {
-            if(hasRabbit){
-                delivery = 500;
-            } else if(hasHamster){
-                delivery = 450;
-            } else {
-                delivery = 150;
-            }
-        }
-    }
-
-    const subtotal = cart.reduce((sum, item) => {
-        const product = products.find(p => p.id === item.id);
-        return sum + (product ? product.price * item.qty : 0);
-    }, 0);
-
-    document.getElementById("deliveryCharge").innerText = delivery;
-    document.getElementById("grandTotal").innerText = subtotal + delivery;
-}
-
-/* CART CONTROLS */
 function openCart(){
     document.getElementById("cartOverlay").classList.add("show");
     updateCart();
@@ -1667,136 +1476,243 @@ function closeCart(){
     document.getElementById("cartOverlay").classList.remove("show");
 }
 
-/* MODAL CONTROLS */
-function showThankYouModal(){
-    document.getElementById("thankyouModal").classList.add("show");
-}
+/* DYNAMIC DELIVERY CHARGE CALCULATION LOGIC */
+function updateDelivery(){
+    const district = document.getElementById("customerDistrict").value;
+    let delivery = 0;
 
-function closeThankYouModal(){
-    document.getElementById("thankyouModal").classList.remove("show");
-}
+    if (cart.length > 0 && district !== "") {
+        let hasRabbit = false;
+        let hasHamster = false;
 
-function showAddSuccessModal(){
-    document.getElementById("addSuccessModal").classList.add("show");
-}
+        cart.forEach(item => {
+            const product = products.find(p => p.id === item.id);
+            if(product){
+                const cat = product.category.toLowerCase();
+                if(cat === "rabbit") hasRabbit = true;
+                if(cat === "hamster") hasHamster = true;
+            }
+        });
 
-function closeAddSuccessModal(){
-    document.getElementById("addSuccessModal").classList.remove("show");
-}
+        const isDhaka = (district === "Dhaka");
+        const isGazipur = (district === "Gazipur");
 
-function showEditSuccessModal(){
-    document.getElementById("editSuccessModal").classList.add("show");
-}
-
-function closeEditSuccessModal(){
-    document.getElementById("editSuccessModal").classList.remove("show");
-}
-
-function showDeleteConfirmModal(id){
-    productIdToDelete = id;
-    document.getElementById("deleteConfirmModal").classList.add("show");
-}
-
-function closeDeleteConfirmModal(){
-    productIdToDelete = null;
-    document.getElementById("deleteConfirmModal").classList.remove("show");
-}
-
-function confirmDeleteProduct(){
-    if(productIdToDelete === null) return;
-
-    products = products.filter(p => p.id !== productIdToDelete);
-    cart = cart.filter(item => item.id !== productIdToDelete);
-
-    saveProducts();
-    saveCart();
-    updateCart();
-    renderAdminProducts();
-
-    if(currentCategory || document.getElementById("searchInput").value){
-        renderProducts();
+        if (hasRabbit) {
+            delivery = isDhaka ? 400 : 500;
+        } else if (hasHamster) {
+            delivery = isDhaka ? 300 : 450;
+        } else {
+            if (isDhaka) delivery = 80;
+            else if (isGazipur) delivery = 100;
+            else delivery = 150;
+        }
     }
 
-    closeDeleteConfirmModal();
+    const subtotal = Number(document.getElementById("subtotal").innerText);
+    document.getElementById("deliveryCharge").innerText = delivery;
+    document.getElementById("grandTotal").innerText = subtotal + delivery;
 }
 
-/* PLACE ORDER */
 function placeOrder(){
     if(cart.length === 0){
-        showCustomAlert("Your cart is empty.");
+        showCustomAlert("আপনার কার্ট খালি!");
         return;
     }
-
     const name = document.getElementById("customerName").value.trim();
     const phone = document.getElementById("customerPhone").value.trim();
     const district = document.getElementById("customerDistrict").value;
     const address = document.getElementById("customerAddress").value.trim();
 
     if(!name || !phone || !district || !address){
-        showCustomAlert("Please fill all order information.");
+        showCustomAlert("দয়া করে সব তথ্য পূরণ করুন।");
         return;
     }
 
     let subtotal = 0;
-    let orderItems = "";
+    let orderItemsHtml = "";
+    let orderItemsText = "";
+    let voucherItemsTableHtml = "";
+    let whatsappProductsText = "";
 
     cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
         if(!product) return;
         subtotal += product.price * item.qty;
-        orderItems += `• ${product.name} (পরিমাণ: ${item.qty} পিস) = ৳${product.price * item.qty}<br>`;
+        const colorText = product.color ? ` (${product.color})` : '';
+        
+        orderItemsHtml += `• ${product.name}${colorText} (${item.qty}টি) - ৳${product.price * item.qty}<br>`;
+        orderItemsText += `• ${product.name}${colorText} (${item.qty}টি) - ৳${product.price * item.qty}\n`;
+        whatsappProductsText += `- ${product.name}${colorText} x ${item.qty} = ৳${product.price * item.qty}\n`;
+        
+        voucherItemsTableHtml += `
+            <tr>
+                <td>${escapeHTML(product.name)}${colorText}</td>
+                <td>${item.qty}</td>
+                <td>৳${product.price * item.qty}</td>
+            </tr>
+        `;
+
+        product.stock -= item.qty;
+        if(product.stock < 0) product.stock = 0;
     });
 
+    saveProducts();
     const delivery = Number(document.getElementById("deliveryCharge").innerText);
     const total = subtotal + delivery;
+    const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
 
+    const newOrderObj = {
+        id: orderId,
+        date: new Date().toLocaleDateString('bn-BD'),
+        name: name,
+        phone: phone,
+        district: district,
+        address: address,
+        itemsText: orderItemsText,
+        tableHtml: voucherItemsTableHtml,
+        subtotal: subtotal,
+        delivery: delivery,
+        total: total,
+        status: 'pending' // pending, completed, cancelled
+    };
+
+    myOrders.unshift(newOrderObj);
+    saveMyOrders();
+
+    // EmailJS backup
     const templateParams = {
         customer_name: name,
         customer_phone: phone,
         district: district,
         address: address,
         customer_address: address,
-        order_items: orderItems,
-        products: orderItems,
+        order_items: orderItemsHtml,
+        products: orderItemsHtml,
         subtotal: subtotal,
         delivery_charge: delivery,
         total: total
     };
+    emailjs.send("service_5am5end", "template_45wz8f9", templateParams).catch(err => console.log(err));
 
-    emailjs.send("service_5am5end", "template_45wz8f9", templateParams)
-    .then(() => {
-        cart.forEach(item => {
-            const product = products.find(p => p.id === item.id);
-            if(product){
-                product.stock -= item.qty;
-                if(product.stock < 0) product.stock = 0;
-            }
-        });
+    // WhatsApp Direct Integration
+    const whatsappMessage = `🛒 *New Order From ADORE'S PET*\n\n` +
+        `🆔 Order ID: ${orderId}\n` +
+        `👤 Name: ${name}\n` +
+        `📞 Phone: ${phone}\n` +
+        `📍 District: ${district}\n` +
+        `🏠 Address: ${address}\n\n` +
+        `📦 *Products:*\n${whatsappProductsText}\n` +
+        `🚚 Delivery Charge: ৳${delivery}\n` +
+        `💰 *Total: ৳${total}*`;
 
-        saveProducts();
-        cart = [];
-        saveCart();
-        updateCart();
+    const ownerWhatsappNumber = "8801681578599";
+    const whatsappUrl = `https://wa.me/${ownerWhatsappNumber}?text=` + encodeURIComponent(whatsappMessage);
 
-        document.getElementById("customerName").value = "";
-        document.getElementById("customerPhone").value = "";
-        document.getElementById("customerDistrict").value = "";
-        document.getElementById("customerAddress").value = "";
+    cart = [];
+    saveCart();
+    updateCartBadge();
+    renderProducts();
+    
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerPhone").value = "";
+    document.getElementById("customerDistrict").value = "";
+    document.getElementById("customerAddress").value = "";
+    
+    closeCart();
+    showSuccessPopup("আপনার অর্ডারটি সফলভাবে জমা হয়ে গেছে!<br>WhatsApp-এ অর্ডার কনফার্ম করতে একটু পর চ্যাট ওপেন হবে।");
 
-        closeCart();
-        showThankYouModal();
-
-        if(currentCategory || document.getElementById("searchInput").value){
-            renderProducts();
-        }
-    })
-    .catch(error => {
-        console.error(error);
-        showCustomAlert("Order failed. Please try again.");
-    });
+    setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+    }, 1500);
 }
 
-/* SECRET TRIPLE CLICK TO SHOW ADMIN */
+/* CUSTOMER ORDERS MODAL & CANCELLATION */
+function openOrdersModal(){
+    const container = document.getElementById("userOrdersList");
+    if(myOrders.length === 0){
+        container.innerHTML = `<p style="padding:20px; text-align:center; color:#64748b; font-size:14px;">আপনার কোনো পূর্ববর্তী অর্ডার পাওয়া যায়নি।</p>`;
+    } else {
+        container.innerHTML = myOrders.map((order, index) => {
+            const status = order.status || 'pending';
+            const statusText = status === 'completed' ? 'সম্পন্ন' : (status === 'cancelled' ? 'বাতিল' : 'পেন্ডিং (চলমান)');
+            const statusColor = status === 'completed' ? '#10b981' : (status === 'cancelled' ? '#ef4444' : '#f59e0b');
+            
+            return `
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <span>${order.id}</span>
+                        <span>${order.date}</span>
+                    </div>
+                    <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:4px;">গ্রাহক: ${escapeHTML(order.name)} (${order.phone})</div>
+                    <div class="order-items-list">${order.itemsText.replace(/\n/g, '<br>')}</div>
+                    <div style="font-size:11px; font-weight:700; margin-bottom:6px;">
+                        স্ট্যাটাস: <span style="color:${statusColor}">${statusText}</span>
+                    </div>
+                    <div class="order-card-footer" style="margin-bottom:8px;">
+                        <span>মোট টাকা:</span>
+                        <span style="color:var(--teal);">৳${order.total}</span>
+                    </div>
+                    
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button onclick="openVoucher(${index})" style="flex:1; min-width:90px; background:var(--teal); color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-file-invoice"></i> ভাউচার</button>
+                        
+                        ${status === 'pending' ? `
+                            <button onclick="cancelMyOrder(${index})" style="flex:1; min-width:90px; background:#ef4444; color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-ban"></i> অর্ডার বাতিল (Cancel)</button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+    document.getElementById("ordersModal").classList.add("show");
+}
+
+function closeOrdersModal(){
+    document.getElementById("ordersModal").classList.remove("show");
+}
+
+function cancelMyOrder(index){
+    if(myOrders[index] && (myOrders[index].status === 'pending' || !myOrders[index].status)){
+        if(confirm("আপনি কি নিশ্চিতভাবে এই অর্ডারটি বাতিল করতে চান?")){
+            myOrders[index].status = 'cancelled';
+            saveMyOrders();
+            openOrdersModal();
+            showSuccessPopup("আপনার অর্ডারটি সফলভাবে বাতিল করা হয়েছে।");
+        }
+    } else {
+        showCustomAlert("এই অর্ডারটি এখন বাতিল করা সম্ভব নয়।");
+    }
+}
+
+function openVoucher(index){
+    const order = myOrders[index];
+    if(!order) return;
+
+    document.getElementById("voucherCustomerInfo").innerHTML = `
+        <strong>Order ID:</strong> ${order.id}<br>
+        <strong>Date:</strong> ${order.date}<br>
+        <strong>Name:</strong> ${escapeHTML(order.name)}<br>
+        <strong>Phone:</strong> ${escapeHTML(order.phone)}<br>
+        <strong>District:</strong> ${escapeHTML(order.district)}<br>
+        <strong>Address:</strong> ${escapeHTML(order.address)}
+    `;
+
+    document.getElementById("voucherTableBody").innerHTML = order.tableHtml;
+
+    document.getElementById("voucherTotalsBox").innerHTML = `
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Subtotal:</span> <strong>৳${order.subtotal}</strong></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Delivery Charge:</span> <strong>৳${order.delivery}</strong></div>
+        <div style="display:flex; justify-content:space-between; font-size:15px; font-weight:900; color:var(--teal); border-top:1px dashed #cbd5e1; padding-top:6px;"><span>Total:</span> <strong>৳${order.total}</strong></div>
+    `;
+
+    document.getElementById("voucherModal").classList.add("show");
+}
+
+function closeVoucherModal(){
+    document.getElementById("voucherModal").classList.remove("show");
+}
+
+/* SECRET TRIPLE CLICK FOR ADMIN ON LIVE BADGE */
 let secretClickCount = 0;
 let secretClickTimer = null;
 
@@ -1814,33 +1730,118 @@ function handleSecretClick() {
     }
 }
 
-/* ADMIN PANEL CONTROLS */
 function showAdmin(){
-    const section = document.getElementById("adminSection");
-    section.style.display = "block";
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("adminSection").style.display = "block";
+    document.getElementById("adminSection").scrollIntoView({ behavior: "smooth" });
 }
 
 function hideAdmin(){
     document.getElementById("adminSection").style.display = "none";
-    document.getElementById("adminPassword").value = "";
+}
+
+function adminLogin(){
+    const pass = document.getElementById("adminPassword").value;
+    if(pass === "DJ778899"){
+        document.getElementById("adminLogin").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        renderAdminProducts();
+        renderAdminOrders();
+    } else {
+        showCustomAlert("ভুল পাসওয়ার্ড!");
+    }
 }
 
 function logoutAdmin(){
     document.getElementById("adminPanel").style.display = "none";
     document.getElementById("adminLogin").style.display = "block";
-    document.getElementById("adminPassword").value = "";
     hideAdmin();
 }
 
-function adminLogin(){
-    const password = document.getElementById("adminPassword").value;
-    if(password === "DJ778899"){
-        document.getElementById("adminLogin").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        renderAdminProducts();
+/* TOGGLE ADMIN ORDER COLLAPSIBLE NOTIFICATION BOX */
+function toggleAdminOrderList(){
+    const panel = document.getElementById("collapsibleOrderPanel");
+    const arrow = document.getElementById("notifArrow");
+    if(panel.style.display === "none"){
+        panel.style.display = "block";
+        arrow.style.transform = "rotate(180deg)";
     } else {
-        showCustomAlert("Wrong password.");
+        panel.style.display = "none";
+        arrow.style.transform = "rotate(0deg)";
+    }
+}
+
+/* ADMIN ORDER MANAGEMENT WITH TABS & STATUS */
+function switchOrderTab(tab){
+    currentAdminTab = tab;
+    document.querySelectorAll(".order-tab-btn").forEach(btn => btn.classList.remove("active"));
+    if(tab === 'pending') document.getElementById("tabPending").classList.add("active");
+    if(tab === 'completed') document.getElementById("tabCompleted").classList.add("active");
+    if(tab === 'cancelled') document.getElementById("tabCancelled").classList.add("active");
+    renderAdminOrders();
+}
+
+function renderAdminOrders(){
+    const container = document.getElementById("adminOrdersListContainer");
+    
+    const pendingCount = myOrders.filter(o => !o.status || o.status === 'pending').length;
+    const completedCount = myOrders.filter(o => o.status === 'completed').length;
+    const cancelledCount = myOrders.filter(o => o.status === 'cancelled').length;
+
+    document.getElementById("countPending").innerText = pendingCount;
+    document.getElementById("countCompleted").innerText = completedCount;
+    document.getElementById("countCancelled").innerText = cancelledCount;
+
+    document.getElementById("pendingNotifBadge").innerText = pendingCount + " নতুন অর্ডার";
+
+    const filteredOrders = myOrders.filter(o => {
+        const status = o.status || 'pending';
+        if(currentAdminTab === 'pending') return status === 'pending';
+        if(currentAdminTab === 'completed') return status === 'completed';
+        if(currentAdminTab === 'cancelled') return status === 'cancelled';
+        return true;
+    });
+
+    if(filteredOrders.length === 0){
+        container.innerHTML = `<p style="text-align:center; color:#64748b; font-size:13px; padding:15px;">এই ক্যাটাগরিতে কোনো অর্ডার নেই।</p>`;
+        return;
+    }
+
+    container.innerHTML = filteredOrders.map((order) => {
+        const originalIndex = myOrders.indexOf(order);
+        const status = order.status || 'pending';
+        return `
+            <div style="background:white; border:1px solid #cbd5e1; border-radius:10px; padding:10px; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; color:var(--teal); margin-bottom:4px;">
+                    <span>${order.id} (${order.date})</span>
+                    <span>৳${order.total}</span>
+                </div>
+                <div style="font-size:12px; color:var(--text-dark); margin-bottom:4px;">
+                    <strong>${escapeHTML(order.name)}</strong> - ${order.phone} (${order.district})<br>
+                    <span style="color:#64748b;">${escapeHTML(order.address)}</span>
+                </div>
+                <div style="font-size:12px; background:#f1f5f9; padding:6px; border-radius:6px; margin-bottom:8px;">
+                    ${order.itemsText.replace(/\n/g, '<br>')}
+                </div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <button onclick="openVoucher(${originalIndex})" style="flex:1; min-width:80px; background:var(--teal); color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-print"></i> ভাউচার</button>
+                    ${status === 'pending' ? `
+                        <button onclick="updateOrderStatus(${originalIndex}, 'completed')" style="flex:1; min-width:80px; background:#10b981; color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-check"></i> কমপ্লিট</button>
+                        <button onclick="updateOrderStatus(${originalIndex}, 'cancelled')" style="flex:1; min-width:80px; background:#ef4444; color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-ban"></i> বাতিল</button>
+                    ` : `
+                        <button onclick="updateOrderStatus(${originalIndex}, 'pending')" style="flex:1; min-width:100px; background:#64748b; color:white; border:none; padding:6px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;"><i class="fa-solid fa-rotate-left"></i> পেন্ডিং করুন</button>
+                    `}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function updateOrderStatus(index, newStatus){
+    if(myOrders[index]){
+        myOrders[index].status = newStatus;
+        saveMyOrders();
+        renderAdminOrders();
+        showSuccessPopup(newStatus === 'completed' ? "অর্ডারটি কমপ্লিট হিসেবে চিহ্নিত করা হয়েছে!" : (newStatus === 'cancelled' ? "অর্ডারটি বাতিল করা হয়েছে!" : "অর্ডারটি পেন্ডিং লিস্টে নেওয়া হয়েছে!"));
     }
 }
 
@@ -1848,131 +1849,136 @@ function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
     const stock = Number(document.getElementById("productStock").value);
+    const color = document.getElementById("productColor").value.trim();
+    const rating = document.getElementById("productRating").value.trim() || "4.8";
     const category = document.getElementById("productCategory").value;
-    
-    let finalImage = uploadedBase64Image;
-    if(!finalImage) {
-        finalImage = "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png";
-    }
+    const desc = document.getElementById("productDesc").value.trim();
+    const image = uploadedBase64Image || "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png";
 
     if(!name || price <= 0 || stock < 0){
-        showCustomAlert("দয়া করে নাম, সঠিক দাম এবং স্টক সঠিকভাবে পূরণ করুন!");
+        showCustomAlert("সঠিক নাম, দাম ও স্টক দিন।");
         return;
     }
 
-    products.push({
+    products.unshift({
         id: Date.now(),
-        name: name,
-        price: price,
-        stock: stock,
-        category: category,
-        image: finalImage
+        name,
+        price,
+        stock,
+        color,
+        category,
+        desc,
+        rating,
+        image
     });
 
     saveProducts();
     renderAdminProducts();
+    renderProducts();
 
     document.getElementById("productName").value = "";
     document.getElementById("productPrice").value = "";
     document.getElementById("productStock").value = "";
+    document.getElementById("productColor").value = "";
+    document.getElementById("productRating").value = "";
+    document.getElementById("productDesc").value = "";
     document.getElementById("productImageFile").value = "";
     document.getElementById("addPreview").style.display = "none";
-    document.getElementById("addPreview").src = "";
     uploadedBase64Image = "";
 
-    if(currentCategory || document.getElementById("searchInput").value){
-        renderProducts();
-    }
-
-    showAddSuccessModal();
+    showSuccessPopup("পণ্যটি সফলভাবে আপলোড হয়ে গেছে!");
 }
 
 function renderAdminProducts(){
     const container = document.getElementById("adminProducts");
     if(products.length === 0){
-        container.innerHTML = "<p style='color:#64748b;'>No products available.</p>";
+        container.innerHTML = "<p style='color:#64748b;'>কোনো পণ্য নেই।</p>";
         return;
     }
-
-    container.innerHTML = products.map(product => `
+    container.innerHTML = products.map(p => `
         <div class="admin-product-card">
             <div class="admin-product-info">
-                <img src="${product.image}" alt="">
+                <img src="${p.image}" alt="">
                 <div>
-                    <div style="font-weight:800; font-size:16px;">${escapeHTML(product.name)}</div>
-                    <div style="font-size:13px; color:#64748b;">৳${product.price} | Stock: <strong style="color:var(--green);">${product.stock}</strong> | ${product.category}</div>
+                    <div style="font-weight:700; font-size:13px;">${escapeHTML(p.name)} ${p.color ? `(${escapeHTML(p.color)})` : ''}</div>
+                    <div style="font-size:12px; color:#64748b;">৳${p.price} | Stock: ${p.stock} | Rating: ${p.rating || '4.8'}</div>
                 </div>
             </div>
-            <div class="admin-actions">
-                <button onclick="openEditModal(${product.id})" style="background:#2563eb;"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                <button onclick="showDeleteConfirmModal(${product.id})" style="background:#ef4444;"><i class="fa-solid fa-trash"></i> Delete</button>
+            <div style="display:flex; gap:6px;">
+                <button onclick="openEditModal(${p.id})" style="background:#2563eb; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
+                <button onclick="deleteProduct(${p.id})" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
             </div>
         </div>
     `).join("");
 }
 
-/* EDIT MODAL FUNCTIONS */
 function openEditModal(id){
-    const product = products.find(p => p.id === id);
-    if(!product) return;
-
-    document.getElementById("editProductId").value = product.id;
-    document.getElementById("editProductName").value = product.name;
-    document.getElementById("editProductPrice").value = product.price;
-    document.getElementById("editProductStock").value = product.stock;
-    document.getElementById("editProductCategory").value = product.category;
+    const p = products.find(prod => prod.id === id);
+    if(!p) return;
+    document.getElementById("editProductId").value = p.id;
+    document.getElementById("editProductName").value = p.name;
+    document.getElementById("editProductPrice").value = p.price;
+    document.getElementById("editProductStock").value = p.stock;
+    document.getElementById("editProductColor").value = p.color || "";
+    document.getElementById("editProductRating").value = p.rating || "4.8";
+    document.getElementById("editProductCategory").value = p.category;
+    document.getElementById("editProductDesc").value = p.desc || "";
     
     const preview = document.getElementById("editPreview");
-    preview.src = product.image;
+    preview.src = p.image;
     preview.style.display = "block";
-    editUploadedBase64Image = ""; 
+    editUploadedBase64Image = "";
 
     document.getElementById("editModal").classList.add("show");
 }
 
 function closeEditModal(){
     document.getElementById("editModal").classList.remove("show");
-    document.getElementById("editProductImageFile").value = "";
-    editUploadedBase64Image = "";
 }
 
 function saveEditProduct(){
     const id = Number(document.getElementById("editProductId").value);
-    const product = products.find(p => p.id === id);
-    if(!product) return;
+    const p = products.find(prod => prod.id === id);
+    if(!p) return;
 
     const name = document.getElementById("editProductName").value.trim();
     const price = Number(document.getElementById("editProductPrice").value);
     const stock = Number(document.getElementById("editProductStock").value);
+    const color = document.getElementById("editProductColor").value.trim();
+    const rating = document.getElementById("editProductRating").value.trim() || "4.8";
     const category = document.getElementById("editProductCategory").value;
-    const editPreviewSrc = document.getElementById("editPreview").src;
+    const desc = document.getElementById("editProductDesc").value.trim();
 
-    if(!editUploadedBase64Image && editPreviewSrc && editPreviewSrc.startsWith("data:")) {
-        editUploadedBase64Image = editPreviewSrc;
-    }
-
-    if(!name || price <= 0 || stock < 0){
-        showCustomAlert("দয়া করে সঠিক তথ্য দিন।");
+    if(!name || price <= 0){
+        showCustomAlert("সঠিক তথ্য দিন।");
         return;
     }
 
-    product.name = name;
-    product.price = price;
-    product.stock = stock;
-    product.category = category;
+    p.name = name;
+    p.price = price;
+    p.stock = stock;
+    p.color = color;
+    p.rating = rating;
+    p.category = category;
+    p.desc = desc;
+
     if(editUploadedBase64Image){
-        product.image = editUploadedBase64Image;
+        p.image = editUploadedBase64Image;
     }
 
     saveProducts();
     renderAdminProducts();
+    renderProducts();
     closeEditModal();
+    showSuccessPopup("পণ্যটি সফলভাবে সংশোধন করা হয়েছে!");
+}
 
-    if(currentCategory || document.getElementById("searchInput").value){
-        renderProducts();
-    }
-
-    showEditSuccessModal();
+function deleteProduct(id){
+    products = products.filter(p => p.id !== id);
+    saveProducts();
+    renderAdminProducts();
+    renderProducts();
+    showSuccessPopup("পণ্যটি মুছে ফেলা হয়েছে!");
 }
 
 function escapeHTML(value){
@@ -1985,8 +1991,8 @@ function escapeHTML(value){
 }
 
 /* INITIALIZE */
-updateCart();
-goHome();
+updateCartBadge();
+renderProducts();
 </script>
 
 </body>
