@@ -494,6 +494,7 @@ body{
     overflow-y:auto;
 }
 
+/* CART HEADER WITH CENTERED TITLE */
 .cart-header{
     background: var(--teal);
     padding: 16px 20px;
@@ -501,11 +502,15 @@ body{
     justify-content: space-between;
     align-items: center;
     color: white;
+    position: relative;
 }
 
 .cart-header h2{
     font-size: 18px;
     font-weight: 900;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .close-btn{
@@ -516,6 +521,8 @@ body{
     height: 32px;
     border-radius: 50%;
     cursor: pointer;
+    margin-left: auto;
+    z-index: 2;
 }
 
 .cart-body-content{
@@ -531,8 +538,8 @@ body{
 }
 
 .cart-item img{
-    width:60px;
-    height:60px;
+    width:65px;
+    height:65px;
     object-fit:cover;
     border-radius:10px;
 }
@@ -981,11 +988,11 @@ body{
             <i class="fa-solid fa-cart-shopping"></i>
             <span class="nav-cart-badge" id="cartCount">0</span>
         </div>
-        <span>Cart</span>
+        <span>My Cart</span>
     </button>
     <button class="nav-item" onclick="openOrdersModal()">
         <i class="fa-solid fa-receipt"></i>
-        <span>Orders</span>
+        <span>My Orders</span>
     </button>
     <a href="https://wa.me/message/NTZHEUXXC6DTN1" target="_blank" class="nav-item">
         <i class="fa-brands fa-whatsapp" style="font-size:20px; color:#25d366;"></i>
@@ -997,7 +1004,7 @@ body{
 <div id="cartOverlay" class="cart-overlay">
 <div class="cart-box">
     <div class="cart-header">
-        <h2>YOUR CART</h2>
+        <h2>MY CART</h2>
         <button class="close-btn" onclick="closeCart()">✕</button>
     </div>
 
@@ -1038,10 +1045,10 @@ body{
 </div>
 </div>
 
-<!-- USER ORDERS LIST MODAL (CUSTOMER ORDERS & CANCEL OPTION) -->
+<!-- USER ORDERS LIST MODAL (MY ORDERS & CANCELLATION) -->
 <div id="ordersModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
-        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">আপনার অর্ডারসমূহ</h2>
+        <h2 style="font-size:18px; margin-bottom:15px; color:var(--teal); text-align:center;">My Orders (আমার অর্ডারসমূহ)</h2>
         <div id="userOrdersList"></div>
         <button onclick="closeOrdersModal()" class="thankyou-btn" style="margin-top:15px;">বন্ধ করুন</button>
     </div>
@@ -1446,11 +1453,20 @@ function updateCart(){
                 <div class="cart-item">
                     <img src="${product.image}" alt="">
                     <div style="flex:1;">
-                        <div style="font-weight:700; font-size:14px;">${escapeHTML(product.name)}</div>
-                        ${product.color ? `<div style="font-size:11px; color:#64748b;">Color: ${escapeHTML(product.color)}</div>` : ''}
-                        <div style="color:var(--teal); font-weight:800; font-size:14px;">৳${product.price} × ${item.qty}</div>
+                        <div style="font-weight:700; font-size:14px; margin-bottom:2px;">${escapeHTML(product.name)}</div>
+                        ${product.color ? `<div style="font-size:11px; color:#64748b; margin-bottom:4px;">Color: ${escapeHTML(product.color)}</div>` : ''}
+                        <div style="color:var(--teal); font-weight:800; font-size:14px; margin-bottom:8px;">৳${product.price * item.qty}</div>
+                        
+                        <!-- Larger & Fixed Quantity Control Box (- / +) -->
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="display:flex; align-items:center; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc;">
+                                <button type="button" onclick="changeCartQty(${product.id}, -1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:#64748b;">-</button>
+                                <span style="padding:0 12px; font-size:15px; font-weight:800; min-width:30px; text-align:center;">${item.qty}</span>
+                                <button type="button" onclick="changeCartQty(${product.id}, 1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:var(--teal);">+</button>
+                            </div>
+                            <button type="button" onclick="removeFromCart(${product.id})" style="background:#fee2e2; color:#ef4444; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px;"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </div>
-                    <button onclick="removeFromCart(${product.id})" style="background:#fee2e2; color:#ef4444; border:none; padding:6px 10px; border-radius:8px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `;
         }).join("");
@@ -1459,6 +1475,22 @@ function updateCart(){
     document.getElementById("subtotal").innerText = subtotal;
     updateDelivery();
     updateCartBadge();
+}
+
+function changeCartQty(id, change){
+    const item = cart.find(i => i.id === id);
+    const product = products.find(p => p.id === id);
+    if(!item || !product) return;
+
+    item.qty += change;
+    if(item.qty <= 0){
+        cart = cart.filter(i => i.id !== id);
+    } else if(item.qty > product.stock){
+        showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
+        item.qty = product.stock;
+    }
+    saveCart();
+    updateCart();
 }
 
 function removeFromCart(id){
