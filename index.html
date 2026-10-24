@@ -2501,7 +2501,6 @@ function openEditModal(id){
     const p = products.find(prod => Number(prod.id) === Number(id));
     if(!p) return;
     
-    // Set current product image preview
     const previewImg = document.getElementById("editModalCurrentImg");
     const currentImgSrc = (p.images && p.images[0]) ? p.images[0] : (p.image || 'https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png');
     if(previewImg) previewImg.src = currentImgSrc;
@@ -2509,13 +2508,17 @@ function openEditModal(id){
     document.getElementById("editProductId").value = p.id;
     document.getElementById("editProductName").value = p.name;
     document.getElementById("editProductPrice").value = p.price;
-    document.getElementById("editProductDiscountPrice").value = p.discountPrice || "";
+    document.getElementById("editProductDiscountPrice").value = (p.discountPrice !== null && p.discountPrice !== undefined) ? p.discountPrice : "";
     document.getElementById("editProductStock").value = p.stock;
     document.getElementById("editProductColor").value = p.color || "";
     document.getElementById("editProductCategory").value = p.category;
     document.getElementById("editProductDesc").value = p.desc || "";
     
-    editImagesBase64 = p.images ? [...p.images] : [p.image || ""];
+    editImagesBase64 = [
+        p.images && p.images[0] ? p.images[0] : "",
+        p.images && p.images[1] ? p.images[1] : "",
+        p.images && p.images[2] ? p.images[2] : ""
+    ];
     editVideoBase64 = p.video || "";
 
     document.getElementById("editModal").classList.add("show");
@@ -2536,12 +2539,11 @@ function saveEditProduct(){
     const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("editProductStock").value);
     const color = document.getElementById("editProductColor").value.trim();
-    const rating = p.rating || "4.8";
     const category = document.getElementById("editProductCategory").value;
     const desc = document.getElementById("editProductDesc").value.trim();
 
     if(!name || price <= 0){
-        showCustomAlert("সঠিক তথ্য দিন।");
+        showCustomAlert("সঠিক নাম ও দাম দিন।");
         return;
     }
 
@@ -2550,15 +2552,15 @@ function saveEditProduct(){
     p.discountPrice = discountPrice;
     p.stock = stock;
     p.color = color;
-    p.rating = rating;
     p.category = category;
     p.desc = desc;
 
-    let validEditImgs = editImagesBase64.filter(img => img);
+    let validEditImgs = editImagesBase64.filter(img => img && img.trim() !== "");
     if(validEditImgs.length > 0){
         p.images = validEditImgs;
     }
-    if(editVideoBase64 !== undefined){
+    
+    if(editVideoBase64 !== null && editVideoBase64 !== undefined){
         p.video = editVideoBase64;
     }
 
