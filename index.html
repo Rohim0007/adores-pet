@@ -1337,13 +1337,21 @@ body{
             </div>
         </div>
 
-        <label style="font-size:12px; font-weight:700; color:#475569;">Category</label>
-        <select id="editProductCategory" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none; background:#fff;">
-            <option>Rabbit</option>
-            <option>Hamster</option>
-            <option>Pet Food</option>
-            <option>Accessories</option>
-        </select>
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700; color:#475569;">Category</label>
+                <select id="editProductCategory" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none; background:#fff;">
+                    <option>Rabbit</option>
+                    <option>Hamster</option>
+                    <option>Pet Food</option>
+                    <option>Accessories</option>
+                </select>
+            </div>
+            <div style="flex:1;">
+                <label style="font-size:12px; font-weight:700; color:#475569;">Rating (e.g. 4.8)</label>
+                <input id="editProductRating" type="text" placeholder="4.8" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:12px; outline:none;">
+            </div>
+        </div>
 
         <label style="font-size:12px; font-weight:700; color:#475569;">Full Description / Details</label>
         <textarea id="editProductDesc" placeholder="Detailed product info..." style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; margin-top:4px; margin-bottom:14px; height:80px; outline:none;"></textarea>
@@ -1480,37 +1488,6 @@ body{
                 </div>
             </div>
 
-            <label style="font-size:13px; font-weight:700; color:#475569;">Category</label>
-            <select id="productCategory">
-                <option>Rabbit</option>
-                <option>Hamster</option>
-                <option>Pet Food</option>
-                <option>Accessories</option>
-            </select>
-
-            <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
-            <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
-
-            <div class="admin-file-box">
-                <label>ছবি ১ (প্রধান ছবি - আবশ্যিক)</label>
-                <input type="file" id="imgFile1" accept="image/*" onchange="previewNewImage(this, 0)">
-            </div>
-
-            <div class="admin-file-box">
-                <label>ছবি ২ (ঐচ্ছিক)</label>
-                <input type="file" id="imgFile2" accept="image/*" onchange="previewNewImage(this, 1)">
-            </div>
-
-            <div class="admin-file-box">
-                <label>ছবি ৩ (ঐচ্ছিক)</label>
-                <input type="file" id="imgFile3" accept="image/*" onchange="previewNewImage(this, 2)">
-            </div>
-
-            <div class="admin-file-box" style="border-color:#fca5a5; background:#fff5f5;">
-                <label style="color:#ef4444;">ছোট ভিডিও ক্লিপ (৫-১০ সেকেন্ড - ঐচ্ছিক)</label>
-                <input type="file" id="videoFile" accept="video/*" onchange="previewNewVideo(this)">
-            </div>
-
             <button onclick="addProduct()" class="admin-submit-btn" style="margin-top:10px;">Add Product</button>
         </div>
 
@@ -1597,6 +1574,7 @@ products = products.map(p => {
     if(!p.images) p.images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
     if(!p.video) p.video = "";
     if(p.discountPrice === undefined) p.discountPrice = null;
+    if(!p.rating) p.rating = "4.8";
     return p;
 });
 
@@ -1826,7 +1804,7 @@ function renderProducts(){
 
 /* PRODUCT DETAILS MODAL */
 function openProductModal(id){
-    const product = products.find(p => Number(p.id) === Number(id));
+    const product = products.find(p => String(p.id) === String(id));
     if(!product) return;
     activeSelectedProductId = product.id;
 
@@ -1935,13 +1913,13 @@ function addToCart(id){
         showCustomAlert("বর্তমানে আমাদের শপ সাময়িক বিরতিতে রয়েছে।");
         return;
     }
-    const product = products.find(p => Number(p.id) === Number(id));
+    const product = products.find(p => String(p.id) === String(id));
     if(!product) return;
     if(product.stock <= 0){
         showCustomAlert("এই পণ্যটি স্টকে নেই।");
         return;
     }
-    const existing = cart.find(item => Number(item.id) === Number(id));
+    const existing = cart.find(item => String(item.id) === String(id));
     if(existing){
         if(existing.qty >= product.stock){
             showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
@@ -1975,7 +1953,7 @@ function updateCart(){
         container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">আপনার কার্ট খালি রয়েছে।</p>`;
     } else {
         container.innerHTML = cart.map(item => {
-            const product = products.find(p => Number(p.id) === Number(item.id));
+            const product = products.find(p => String(p.id) === String(item.id));
             if(!product) return "";
             
             const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
@@ -1992,11 +1970,11 @@ function updateCart(){
                         
                         <div style="display:flex; align-items:center; gap:10px;">
                             <div style="display:flex; align-items:center; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; background:#f8fafc;">
-                                <button type="button" onclick="changeCartQty(${product.id}, -1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:#64748b;">-</button>
+                                <button type="button" onclick="changeCartQty('${product.id}', -1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:#64748b;">-</button>
                                 <span style="padding:0 12px; font-size:15px; font-weight:800; min-width:30px; text-align:center;">${item.qty}</span>
-                                <button type="button" onclick="changeCartQty(${product.id}, 1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:var(--teal);">+</button>
+                                <button type="button" onclick="changeCartQty('${product.id}', 1)" style="background:none; border:none; padding:8px 14px; cursor:pointer; font-weight:900; font-size:16px; color:var(--teal);">+</button>
                             </div>
-                            <button type="button" onclick="removeFromCart(${product.id})" style="background:#fee2e2; color:#ef4444; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px;"><i class="fa-solid fa-trash"></i></button>
+                            <button type="button" onclick="removeFromCart('${product.id}')" style="background:#fee2e2; color:#ef4444; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px;"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -2010,13 +1988,13 @@ function updateCart(){
 }
 
 function changeCartQty(id, change){
-    const item = cart.find(i => Number(i.id) === Number(id));
-    const product = products.find(p => Number(p.id) === Number(id));
+    const item = cart.find(i => String(i.id) === String(id));
+    const product = products.find(p => String(p.id) === String(id));
     if(!item || !product) return;
 
     item.qty += change;
     if(item.qty <= 0){
-        cart = cart.filter(i => Number(i.id) !== Number(id));
+        cart = cart.filter(i => String(i.id) !== String(id));
     } else if(item.qty > product.stock){
         showCustomAlert("সর্বোচ্চ উপলব্ধ স্টক সীমায় পৌঁছে গেছে।");
         item.qty = product.stock;
@@ -2026,7 +2004,7 @@ function changeCartQty(id, change){
 }
 
 function removeFromCart(id){
-    cart = cart.filter(i => Number(i.id) !== Number(id));
+    cart = cart.filter(i => String(i.id) !== String(id));
     saveCart();
     updateCart();
 }
@@ -2049,7 +2027,7 @@ function updateDelivery(){
         let hasHamster = false;
 
         cart.forEach(item => {
-            const product = products.find(p => Number(p.id) === Number(item.id));
+            const product = products.find(p => String(p.id) === String(item.id));
             if(product){
                 const cat = product.category.toLowerCase();
                 if(cat === "rabbit") hasRabbit = true;
@@ -2102,7 +2080,7 @@ function placeOrder(){
     let whatsappProductsText = "";
 
     cart.forEach(item => {
-        const product = products.find(p => Number(p.id) === Number(item.id));
+        const product = products.find(p => String(p.id) === String(item.id));
         if(!product) return;
 
         const effectivePrice = (product.discountPrice && product.discountPrice > 0 && product.discountPrice < product.price) ? product.discountPrice : product.price;
@@ -2418,33 +2396,25 @@ function addProduct(){
     const discountPrice = discountPriceInput ? Number(discountPriceInput) : null;
     const stock = Number(document.getElementById("productStock").value);
     const color = document.getElementById("productColor").value.trim();
-    const rating = "4.8";
-    const category = document.getElementById("productCategory").value;
-    const desc = document.getElementById("productDesc").value.trim();
     
-    let images = newImagesBase64.filter(img => img);
-    if(images.length === 0){
-        images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
-    }
-    const video = newVideoBase64 || "";
-
     if(!name || price <= 0 || stock < 0){
         showCustomAlert("সঠিক নাম, দাম ও স্টক দিন।");
         return;
     }
 
+    // Direct Quick Add defaults for seamless experience
     products.unshift({
         id: Date.now(),
         name,
         price,
         discountPrice,
         stock,
-        color,
-        category,
-        desc,
-        rating,
-        images,
-        video
+        color: color || "Standard",
+        category: "Accessories",
+        desc: "High quality pet product.",
+        rating: "4.8",
+        images: ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"],
+        video: ""
     });
 
     saveProducts();
@@ -2456,16 +2426,8 @@ function addProduct(){
     document.getElementById("productDiscountPrice").value = "";
     document.getElementById("productStock").value = "";
     document.getElementById("productColor").value = "";
-    document.getElementById("productDesc").value = "";
-    document.getElementById("imgFile1").value = "";
-    document.getElementById("imgFile2").value = "";
-    document.getElementById("imgFile3").value = "";
-    document.getElementById("videoFile").value = "";
-    
-    newImagesBase64 = ["", "", ""];
-    newVideoBase64 = "";
 
-    showSuccessPopup("পণ্যটি সফলভাবে আপলোড হয়ে গেছে!");
+    showSuccessPopup("পণ্যটি সফলভাবে যোগ করা হয়েছে!");
 }
 
 function renderAdminProducts(){
@@ -2489,8 +2451,8 @@ function renderAdminProducts(){
                     </div>
                 </div>
                 <div style="display:flex; gap:6px;">
-                    <button onclick="openEditModal(${p.id})" style="background:#2563eb; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
-                    <button onclick="deleteProduct(${p.id})" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+                    <button onclick="openEditModal('${p.id}')" style="background:#2563eb; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteProduct('${p.id}')" style="background:#ef4444; color:white; border:none; padding:6px 10px; border-radius:6px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>
         `;
@@ -2498,7 +2460,7 @@ function renderAdminProducts(){
 }
 
 function openEditModal(id){
-    const p = products.find(prod => Number(prod.id) === Number(id));
+    const p = products.find(prod => String(prod.id) === String(id));
     if(!p) return;
     
     const previewImg = document.getElementById("editModalCurrentImg");
@@ -2511,7 +2473,8 @@ function openEditModal(id){
     document.getElementById("editProductDiscountPrice").value = (p.discountPrice !== null && p.discountPrice !== undefined) ? p.discountPrice : "";
     document.getElementById("editProductStock").value = p.stock;
     document.getElementById("editProductColor").value = p.color || "";
-    document.getElementById("editProductCategory").value = p.category;
+    document.getElementById("editProductCategory").value = p.category || "Accessories";
+    document.getElementById("editProductRating").value = p.rating || "4.8";
     document.getElementById("editProductDesc").value = p.desc || "";
     
     editImagesBase64 = [
@@ -2529,8 +2492,8 @@ function closeEditModal(){
 }
 
 function saveEditProduct(){
-    const id = Number(document.getElementById("editProductId").value);
-    const p = products.find(prod => Number(prod.id) === Number(id));
+    const id = document.getElementById("editProductId").value;
+    const p = products.find(prod => String(prod.id) === String(id));
     if(!p) return;
 
     const name = document.getElementById("editProductName").value.trim();
@@ -2540,6 +2503,7 @@ function saveEditProduct(){
     const stock = Number(document.getElementById("editProductStock").value);
     const color = document.getElementById("editProductColor").value.trim();
     const category = document.getElementById("editProductCategory").value;
+    const rating = document.getElementById("editProductRating").value.trim() || "4.8";
     const desc = document.getElementById("editProductDesc").value.trim();
 
     if(!name || price <= 0){
@@ -2553,6 +2517,7 @@ function saveEditProduct(){
     p.stock = stock;
     p.color = color;
     p.category = category;
+    p.rating = rating;
     p.desc = desc;
 
     let validEditImgs = editImagesBase64.filter(img => img && img.trim() !== "");
@@ -2572,7 +2537,7 @@ function saveEditProduct(){
 }
 
 function deleteProduct(id){
-    products = products.filter(p => Number(p.id) !== Number(id));
+    products = products.filter(p => String(p.id) !== String(id));
     saveProducts();
     renderAdminProducts();
     renderProducts();
