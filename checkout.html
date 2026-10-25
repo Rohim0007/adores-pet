@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - ADORE'S PET</title>
+<link rel="stylesheet" href="shop.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background:#f8fafc; padding:20px 16px;" onload="initCheckout()">
+
+<div style="max-width:500px; margin:0 auto;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; background:#fff; padding:12px 16px; border-radius:14px; border:1px solid #e2e8f0;">
+        <a href="index.html" style="color:#00897b; font-size:16px; text-decoration:none;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2 style="font-size:17px; color:#00897b; font-weight:900; margin:0;">Checkout (অর্ডার কনফার্ম করুন)</h2>
+    </div>
+
+    <!-- বিকাশ/নগদ পার্সোনাল নম্বর বক্স (ফর্মের বাইরে উপরে) -->
+    <div id="advancePaymentBox" style="display:none; background:#e0f2f1; border:1.5px dashed #00897b; padding:12px 16px; border-radius:14px; margin-bottom:15px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+        <div style="font-weight:900; font-size:13px; color:#00695c;"><i class="fa-solid fa-wallet"></i> bKash / Nagad Personal Number:</div>
+        <div style="font-size:19px; font-weight:900; color:#00897b; margin:4px 0;">01681578599</div>
+        <div style="font-size:11.5px; color:#b45309; font-weight:800;">(খরগোশ/হ্যামস্টারের ক্ষেত্রে ৫০% অ্যাডভান্স ৳<span id="advanceAmountText">0</span> সেন্ড মানি করুন)</div>
+    </div>
+
+    <div style="background:#fff; border-radius:16px; padding:20px; border:1px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+        <form onsubmit="submitOrderForm(event)">
+            <label style="font-size:12.5px; font-weight:700; color:#475569;">আপনার নাম (Full Name) *</label>
+            <input type="text" id="customerName" placeholder="যেমন: মো: রাশেদ" required style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:8px; margin-bottom:10px; font-size:12.5px; box-sizing:border-box;">
+
+            <label style="font-size:12.5px; font-weight:700; color:#475569;">মোবাইল নম্বর (Phone Number) *</label>
+            <input type="tel" id="customerPhone" placeholder="যেমন: 017xxxxxxxx" required style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:8px; margin-bottom:10px; font-size:12.5px; box-sizing:border-box;">
+
+            <label style="font-size:12.5px; font-weight:700; color:#475569;">সম্পূর্ণ ঠিকানা (রোড, বাসা নং) *</label>
+            <textarea id="customerAddress" placeholder="বাসা নম্বর ও রোড নম্বর লিখুন..." style="width:100%; height:50px; padding:9px; border:1px solid #cbd5e1; border-radius:8px; margin-bottom:10px; font-size:12.5px; box-sizing:border-box;" required></textarea>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+                <div>
+                    <label style="font-size:12.5px; font-weight:700; color:#475569;">জেলা নির্বাচন করুন *</label>
+                    <select id="deliveryDistrict" onchange="updateCheckoutTotal()" required style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12.5px; box-sizing:border-box;">
+                        <option value="">-- জেলা বেছে নিন --</option>
+                        <option value="Dhaka">ঢাকা</option>
+                        <option value="Gazipur">গাজীপুর</option>
+                        <option value="Narayanganj">নারায়ণগঞ্জ</option>
+                        <option value="Chattogram">চট্টগ্রাম</option>
+                        <option value="Sylhet">সিলেট</option>
+                        <option value="Rajshahi">রাজশাহী</option>
+                        <option value="Khulna">খুলনা</option>
+                        <option value="Barishal">বরিশাল</option>
+                        <option value="Rangpur">রংপুর</option>
+                        <option value="Mymensingh">ময়মনসিংহ</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:12.5px; font-weight:700; color:#475569;">এলাকা / থানা *</label>
+                    <input type="text" id="deliveryArea" placeholder="যেমন: মিরপুর, উত্তরা" required style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12.5px; box-sizing:border-box;">
+                </div>
+            </div>
+
+            <label style="font-size:12.5px; font-weight:700; color:#475569;">বিকাশ/নগদ ট্রানজেকশন আইডি (TrxID)</label>
+            <input type="text" id="trxIdInput" placeholder="যেমন: 9J87H6G5F4" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:8px; margin-bottom:15px; font-size:12.5px; box-sizing:border-box;">
+
+            <div style="background:#f1f5f9; padding:12px; border-radius:10px; margin-bottom:15px; font-size:13px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>পণ্যের মূল্য:</span><span><b>৳<span id="checkoutSubtotalText">0</span></b></span></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>ডেলিভারি চার্জ:</span><span><b>৳<span id="checkoutDeliveryText">80</span></b></span></div>
+                <div style="display:flex; justify-content:space-between; border-top:1px dashed #cbd5e1; padding-top:6px; font-weight:900; color:#00897b; font-size:14.5px;"><span>সর্বমোট প্রদেয়:</span><span>৳<span id="checkoutTotalText">0</span></span></div>
+            </div>
+
+            <button type="submit" style="width:100%; background:#00897b; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:900; font-size:15px; cursor:pointer;">✅ অর্ডার কনফার্ম করুন</button>
+        </form>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+function initCheckout() { updateCheckoutTotal(); }
+function updateCheckoutTotal(){
+    let subtotal = 0;
+    let hasRabbit = false, hasHamster = false, hasLivePet = false;
+
+    if(typeof cart !== 'undefined' && cart.length > 0){
+        cart.forEach(item => {
+            const p = products.find(x => String(x.id) === String(item.id));
+            if(p){
+                const price = (p.discountPrice && p.discountPrice > 0 && p.discountPrice < p.price) ? p.discountPrice : p.price;
+                subtotal += price * item.qty;
+                const cat = (p.category || '').toLowerCase(), name = (p.name || '').toLowerCase();
+                if(cat.includes('rabbit') || name.includes('rabbit') || name.includes('খরগোশ')) { hasRabbit = true; hasLivePet = true; }
+                if(cat.includes('hamster') || name.includes('hamster') || name.includes('হ্যামস্টার')) { hasHamster = true; hasLivePet = true; }
+            }
+        });
+    }
+    
+    const district = document.getElementById("deliveryDistrict").value;
+    const isDhaka = (district === "Dhaka");
+    let delivery = 80;
+
+    if(hasRabbit) { delivery = isDhaka ? 400 : 500; }
+    else if(hasHamster) { delivery = isDhaka ? 350 : 450; }
+    else {
+        if(district === "Gazipur" || district === "Narayanganj") delivery = 120;
+        else if(district !== "Dhaka" && district !== "") delivery = 150;
+    }
+    
+    const total = subtotal + delivery;
+    document.getElementById("checkoutSubtotalText").innerText = subtotal;
+    document.getElementById("checkoutDeliveryText").innerText = delivery;
+    document.getElementById("checkoutTotalText").innerText = total;
+
+    const advBox = document.getElementById("advancePaymentBox");
+    if(hasLivePet){
+        document.getElementById("advanceAmountText").innerText = Math.round(total * 0.5);
+        advBox.style.display = "block";
+    } else { advBox.style.display = "none"; }
+}
+
+function submitOrderForm(e){
+    e.preventDefault();
+    const name = document.getElementById("customerName").value;
+    const phone = document.getElementById("customerPhone").value;
+    const address = document.getElementById("customerAddress").value;
+    const district = document.getElementById("deliveryDistrict").value;
+    const area = document.getElementById("deliveryArea").value;
+    const trxId = document.getElementById("trxIdInput").value;
+
+    let hasLivePet = cart.some(item => {
+        const p = products.find(x => String(x.id) === String(item.id));
+        return p && ((p.category||'').toLowerCase().includes('rabbit') || (p.category||'').toLowerCase().includes('hamster') || (p.name||'').toLowerCase().includes('খরগোশ') || (p.name||'').toLowerCase().includes('হ্যামস্টার'));
+    });
+
+    if(hasLivePet && !trxId.trim()){ alert("⚠️ লাইভ এনিমেলের জন্য ৫০% অ্যাডভান্স পেমেন্টের TrxID আবশ্যক!"); return; }
+
+    let subtotal = 0;
+    cart.forEach(item => {
+        const p = products.find(x => String(x.id) === String(item.id));
+        if(p) subtotal += ((p.discountPrice && p.discountPrice > 0 && p.discountPrice < p.price) ? p.discountPrice : p.price) * item.qty;
+    });
+
+    const delivery = Number(document.getElementById("checkoutDeliveryText").innerText);
+    const total = subtotal + delivery;
+
+    const newOrder = {
+        orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+        date: new Date().toLocaleDateString('bn-BD'),
+        customerName: name, customerPhone: phone,
+        address: `${address}, থানা/এলাকা: ${area}, জেলা: ${district}`,
+        items: cart, subtotal, delivery, total,
+        advancePaid: hasLivePet ? Math.round(total * 0.5) : 0,
+        trxId: trxId || 'N/A', status: 'Pending'
+    };
+
+    let orders = JSON.parse(localStorage.getItem("adore_orders") || "[]");
+    orders.unshift(newOrder);
+    localStorage.setItem("adore_orders", JSON.stringify(orders));
+
+    cart = [];
+    localStorage.setItem("adore_cart", JSON.stringify(cart));
+    alert("🎉 আপনার অর্ডার সফলভাবে কনফার্ম হয়েছে!");
+    window.location.href = "index.html";
+}
+</script>
+</body>
+</html>
