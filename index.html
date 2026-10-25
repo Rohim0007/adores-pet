@@ -1128,7 +1128,6 @@ body{
 
         <div style="width:100%; aspect-ratio:1 / 1; background:#ffffff; border-radius:16px; overflow:hidden; margin-bottom:12px; display:flex; align-items:center; justify-content:center; border:1px solid #e2e8f0; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.03);">
             <img id="modalMainImg" src="" style="width:100%; height:100%; object-fit:contain;" alt="">
-            <video id="modalMainVideo" src="" style="width:100%; height:100%; object-fit:contain; display:none;" controls autoplay loop muted></video>
         </div>
 
         <div id="modalThumbnails" style="display:none; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px;"></div>
@@ -1141,7 +1140,14 @@ body{
             </div>
         </div>
 
-        <button id="modalAddCartBtn" onclick="addModalProductToCart()" class="thankyou-btn" style="margin-bottom:16px; font-size:16px; box-shadow:0 4px 12px rgba(0,137,123,0.3);"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
+        <button id="modalAddCartBtn" onclick="addModalProductToCart()" class="thankyou-btn" style="margin-bottom:12px; font-size:16px; box-shadow:0 4px 12px rgba(0,137,123,0.3);"><i class="fa-solid fa-cart-plus"></i> কার্টে যোগ করুন</button>
+
+        <!-- VIDEO LINK BUTTON (BETWEEN CART BTN & DETAILS) -->
+        <div id="modalVideoLinkContainer" style="display:none; margin-bottom:14px;">
+            <a id="modalVideoAnchor" href="" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#fee2e2; color:#dc2626; border:1.5px dashed #f87171; padding:11px; border-radius:12px; font-weight:800; font-size:14px; text-decoration:none; box-shadow:0 3px 10px rgba(220,38,38,0.1); transition:background 0.2s;">
+                <i class="fa-solid fa-circle-play" style="font-size:18px;"></i> পণ্যটির ভিডিও দেখুন
+            </a>
+        </div>
 
         <div style="border-top:1px dashed #cbd5e1; padding-top:12px;">
             <div style="font-size:13px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
@@ -1280,7 +1286,7 @@ body{
     </div>
 </div>
 
-<!-- EDIT PRODUCT MODAL -->
+<!-- EDIT PRODUCT MODAL (WITH VIDEO URL) -->
 <div id="editModal" class="thankyou-overlay">
     <div class="thankyou-card" style="text-align:left;">
         <h2 style="font-size:18px; margin-bottom:10px; color:var(--teal); text-align:center;"><i class="fa-solid fa-pen-to-square"></i> Edit Product</h2>
@@ -1319,8 +1325,11 @@ body{
         <label style="font-size:12px; font-weight:700; color:#475569;">Color (Optional)</label>
         <input id="editProductColor" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:10px; outline:none;">
 
-        <label style="font-size:12px; font-weight:700; color:var(--teal);">নতুন ছবি ১ লিংক (Image URL)</label>
-        <input id="editProductImgUrl" placeholder="https://..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:12px; outline:none;">
+        <label style="font-size:12px; font-weight:700; color:var(--teal);">ছবির লিংক (Image URL)</label>
+        <input id="editProductImgUrl" placeholder="https://..." style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:10px; outline:none;">
+
+        <label style="font-size:12px; font-weight:700; color:#dc2626;">🎥 ভিডিওর লিংক (YouTube / Facebook Video URL - ঐচ্ছিক)</label>
+        <input id="editProductVideoUrl" placeholder="https://youtube.com/... বা ফেসবুক ভিডিও লিংক" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:10px; margin-top:4px; margin-bottom:12px; outline:none;">
 
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button onclick="saveEditProduct()" class="thankyou-btn" style="margin:0; flex:1;">Save Changes</button>
@@ -1456,13 +1465,16 @@ body{
             <label style="font-size:13px; font-weight:700; color:#475569;">Full Product Details / Description</label>
             <textarea id="productDesc" placeholder="e.g. High quality breed, healthy, active..." style="height:80px; width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:12px; outline:none; margin-bottom:14px;"></textarea>
 
-            <!-- IMAGE URL / LINK INPUT BOXES -->
+            <!-- IMAGE & VIDEO URL INPUT BOXES -->
             <div style="background:#e0f2f1; padding:12px; border-radius:12px; border:1px solid var(--teal); margin-bottom:14px;">
                 <label style="font-size:13px; font-weight:800; color:var(--teal);">🔗 ছবির লিংক দিন (Image URL)</label>
-                <p style="font-size:11px; color:#475569; margin-bottom:8px;">Postimages থেকে পাওয়া ছবির Direct URL লিংকটি পেস্ট করুন:</p>
                 <input id="imageUrl1" placeholder="Image 1 Link (https://...)" style="margin-bottom:6px;">
                 <input id="imageUrl2" placeholder="Image 2 Link (Optional)" style="margin-bottom:6px;">
-                <input id="imageUrl3" placeholder="Image 3 Link (Optional)" style="margin-bottom:0;">
+                <input id="imageUrl3" placeholder="Image 3 Link (Optional)" style="margin-bottom:10px;">
+
+                <label style="font-size:13px; font-weight:800; color:#dc2626;">🎥 ভিডিওর লিংক দিন (YouTube / FB Video URL - ঐচ্ছিক)</label>
+                <p style="font-size:11px; color:#64748b; margin-bottom:6px;">ইউটিউব বা ফেসবুক ভিডিওর লিংক এখানে দিন:</p>
+                <input id="productVideoUrlInput" placeholder="https://youtube.com/... বা ফেসবুক লিংক" style="margin-bottom:0;">
             </div>
 
             <button onclick="addProduct()" class="admin-submit-btn" style="margin-top:10px;">Add Product</button>
@@ -1526,7 +1538,7 @@ const defaultProducts = [
     images: [
         "https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"
     ],
-    video: ""
+    videoUrl: ""
 },
 {
     id: "2",
@@ -1542,7 +1554,7 @@ const defaultProducts = [
     images: [
         "https://i.postimg.cc/hGyVG8y6/file-000000006f14720b98a7a5a54d184cb0.png"
     ],
-    video: ""
+    videoUrl: ""
 }
 ];
 
@@ -1551,7 +1563,7 @@ let products = JSON.parse(localStorage.getItem("adoresProducts")) || defaultProd
 products = products.map(p => {
     if(!p.images && p.image) p.images = [p.image];
     if(!p.images) p.images = ["https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png"];
-    if(!p.video) p.video = "";
+    if(!p.videoUrl) p.videoUrl = p.video || "";
     if(p.discountPrice === undefined) p.discountPrice = null;
     if(!p.rating) p.rating = "4.8";
     if(!p.age) p.age = "";
@@ -1780,15 +1792,24 @@ function openProductModal(id){
         ageBadge.style.display = "none";
     }
 
+    /* VIDEO LINK BUTTON DISPLAY LOGIC */
+    const videoContainer = document.getElementById("modalVideoLinkContainer");
+    const videoAnchor = document.getElementById("modalVideoAnchor");
+    if(product.videoUrl && product.videoUrl.trim() !== ""){
+        videoAnchor.href = product.videoUrl.trim();
+        videoContainer.style.display = "block";
+    } else {
+        videoContainer.style.display = "none";
+    }
+
     const mainImg = document.getElementById("modalMainImg");
-    const mainVideo = document.getElementById("modalMainVideo");
     const thumbContainer = document.getElementById("modalThumbnails");
 
     thumbContainer.innerHTML = "";
     
     let validImages = product.images && product.images.length > 0 ? product.images.filter(img => img) : ['https://i.postimg.cc/CdyZqRY5/file-000000006ecc71f899e85a5cc31b0405.png'];
     
-    if(validImages.length <= 1 && !product.video){
+    if(validImages.length <= 1){
         thumbContainer.style.display = "none";
     } else {
         thumbContainer.style.display = "flex";
@@ -1796,8 +1817,6 @@ function openProductModal(id){
 
     mainImg.src = validImages[0];
     mainImg.style.display = "block";
-    mainVideo.style.display = "none";
-    mainVideo.pause();
 
     validImages.forEach((imgSrc, idx) => {
         const thumb = document.createElement("img");
@@ -1805,9 +1824,6 @@ function openProductModal(id){
         thumb.style.cssText = "width:50px; height:50px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid " + (idx === 0 ? "var(--teal)" : "#cbd5e1");
         thumb.onclick = () => {
             mainImg.src = imgSrc;
-            mainImg.style.display = "block";
-            mainVideo.style.display = "none";
-            mainVideo.pause();
             Array.from(thumbContainer.children).forEach(el => el.style.borderColor = "#cbd5e1");
             thumb.style.borderColor = "var(--teal)";
         };
@@ -1818,8 +1834,6 @@ function openProductModal(id){
 }
 
 function closeProductModal(){
-    const mainVideo = document.getElementById("modalMainVideo");
-    mainVideo.pause();
     document.getElementById("productDetailModal").classList.remove("show");
 }
 
@@ -2322,7 +2336,7 @@ function updateOrderStatus(index, newStatus){
     }
 }
 
-/* ADD PRODUCT VIA IMAGE LINK ONLY */
+/* ADD PRODUCT WITH VIDEO URL */
 function addProduct(){
     const name = document.getElementById("productName").value.trim();
     const price = Number(document.getElementById("productPrice").value);
@@ -2335,10 +2349,10 @@ function addProduct(){
     const rating = document.getElementById("productRating").value.trim() || "4.8";
     const desc = document.getElementById("productDesc").value.trim();
     
-    // Collect URL Inputs
     const url1 = document.getElementById("imageUrl1").value.trim();
     const url2 = document.getElementById("imageUrl2").value.trim();
     const url3 = document.getElementById("imageUrl3").value.trim();
+    const videoUrl = document.getElementById("productVideoUrlInput").value.trim();
 
     let images = [];
     if(url1) images.push(url1);
@@ -2366,7 +2380,7 @@ function addProduct(){
         rating,
         desc: desc || "High quality product.",
         images,
-        video: ""
+        videoUrl: videoUrl || ""
     });
 
     saveProducts();
@@ -2385,6 +2399,7 @@ function addProduct(){
     document.getElementById("imageUrl1").value = "";
     document.getElementById("imageUrl2").value = "";
     document.getElementById("imageUrl3").value = "";
+    document.getElementById("productVideoUrlInput").value = "";
 
     showSuccessPopup("পণ্যটি সফলভাবে যোগ করা হয়েছে!");
 }
@@ -2434,6 +2449,7 @@ function openEditModal(id){
     document.getElementById("editProductAge").value = p.age || "";
     document.getElementById("editProductColor").value = p.color || "";
     document.getElementById("editProductImgUrl").value = p.images && p.images[0] ? p.images[0] : "";
+    document.getElementById("editProductVideoUrl").value = p.videoUrl || "";
 
     document.getElementById("editModal").classList.add("show");
 }
@@ -2455,6 +2471,7 @@ function saveEditProduct(){
     const age = document.getElementById("editProductAge").value.trim();
     const color = document.getElementById("editProductColor").value.trim();
     const imgUrl = document.getElementById("editProductImgUrl").value.trim();
+    const videoUrl = document.getElementById("editProductVideoUrl").value.trim();
 
     if(!name || price <= 0){
         showCustomAlert("সঠিক নাম ও দাম দিন।");
@@ -2468,6 +2485,7 @@ function saveEditProduct(){
     p.age = age;
     p.color = color;
     if(imgUrl) p.images = [imgUrl];
+    p.videoUrl = videoUrl;
 
     saveProducts();
     renderAdminProducts();
