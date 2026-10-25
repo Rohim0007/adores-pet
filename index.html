@@ -3,61 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADORE'S PET</title>
+    <title>ADORE'S PET - Online Pet Store</title>
     <link rel="stylesheet" href="shop.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body style="background:#f8fafc; margin:0; padding-bottom:70px;">
+<body style="background:#f8fafc; margin:0; padding-bottom:70px; font-family: 'Segoe UI', Tahoma, sans-serif;">
 
-    <!-- TOP BRAND HEADER (এখানে ৫ বার ক্লিক করলে অ্যাডমিন প্যানেল খুলবে) -->
+    <!-- TOP BRAND HEADER (৫ বার ক্লিক করলে অ্যাডমিন প্যানেল খুলবে) -->
     <div class="brand-box" style="background:#00897b; padding:15px; color:#fff; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
         <div style="display:flex; align-items:center; gap:10px;">
-            <img src="https://via.placeholder.com/40" style="border-radius:50%; border:2px solid #fff;" alt="Logo">
+            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=100" style="width:42px; height:42px; border-radius:50%; object-fit:cover; border:2px solid #fff;" alt="Logo">
             <div>
-                <h2 style="font-size:16px; margin:0; font-weight:900;">ADORE'S PET</h2>
+                <h2 style="font-size:16px; margin:0; font-weight:900; letter-spacing:0.5px;">ADORE'S PET</h2>
                 <span style="font-size:11px; opacity:0.9;">Loved by pets, trusted by owners</span>
             </div>
         </div>
-        <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700;">Live Site</span>
+        <span style="background:rgba(255,255,255,0.25); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700;">Live Site</span>
     </div>
 
     <!-- SEARCH BAR -->
     <div style="padding:12px 16px; background:#00897b;">
-        <div style="background:#fff; border-radius:20px; padding:8px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 2px 6px rgba(0,0,0,0.05);">
-            <i class="fa-solid fa-search" style="color:#64748b;"></i>
-            <input type="text" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." oninput="searchProducts(this)" style="border:none; outline:none; width:100%; font-size:13px;">
+        <div style="background:#fff; border-radius:22px; padding:10px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+            <i class="fa-solid fa-search" style="color:#64748b; font-size:14px;"></i>
+            <input type="text" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." oninput="searchProducts(this)" style="border:none; outline:none; width:100%; font-size:13px; color:#1e293b;">
         </div>
     </div>
 
-    <!-- PROMO HERO BANNER (স্ক্রিনশটের মতো মূল ব্যানার) -->
-    <div style="padding:16px 16px 0 16px;">
-        <div style="width:100%; border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
-            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=800" style="width:100%; height:160px; object-fit:cover;" alt="Promo Banner">
+    <!-- HERO BANNER -->
+    <div style="padding:14px 16px 0 16px;">
+        <div style="width:100%; border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
+            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=800" style="width:100%; height:160px; object-fit:cover;" alt="Hero Banner">
         </div>
     </div>
 
-    <!-- CATEGORIES (স্ক্রিনশটের মতো সাধারণ টেক্সট স্টাইল বাটন) -->
+    <!-- CATEGORIES -->
     <div style="padding:16px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h3 style="font-size:15px; font-weight:800; color:#1e293b; margin:0;">ক্যাটাগরি সমূহ</h3>
+            <h3 style="font-size:15px; font-weight:900; color:#1e293b; margin:0;">ক্যাটাগরি সমূহ</h3>
             <span onclick="filterCategory('All')" style="font-size:12px; color:#00897b; font-weight:800; cursor:pointer;">সব দেখুন</span>
         </div>
         <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:5px; scrollbar-width:none;">
-            <button onclick="filterCategory('Rabbit')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 20px; border-radius:20px; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 4px rgba(0,0,0,0.02);">Rabbit</button>
-            <button onclick="filterCategory('Hamster')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 20px; border-radius:20px; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 4px rgba(0,0,0,0.02);">Hamster</button>
-            <button onclick="filterCategory('Pet Food')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 20px; border-radius:20px; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 4px rgba(0,0,0,0.02);">Pet Food</button>
-            <button onclick="filterCategory('Accessories')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 20px; border-radius:20px; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 4px rgba(0,0,0,0.02);">Accessories</button>
+            <button onclick="filterCategory('Rabbit')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-paw" style="color:#00897b;"></i> Rabbit</button>
+            <button onclick="filterCategory('Hamster')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-shield-cat" style="color:#00897b;"></i> Hamster</button>
+            <button onclick="filterCategory('Pet Food')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-bone" style="color:#00897b;"></i> Pet Food</button>
+            <button onclick="filterCategory('Accessories')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-gem" style="color:#00897b;"></i> Accessories</button>
         </div>
     </div>
 
     <!-- PRODUCTS CONTAINER -->
     <div style="padding:0 16px;">
-        <h3 style="font-size:15px; font-weight:800; color:#1e293b; margin-bottom:12px;">জনপ্রিয় প্রোডাক্ট সমূহ</h3>
+        <h3 style="font-size:15px; font-weight:900; color:#1e293b; margin-bottom:12px;">জনপ্রিয় প্রোডাক্ট সমূহ</h3>
         <div id="shopProductsContainer" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;"></div>
     </div>
 
     <!-- BOTTOM NAVIGATION BAR -->
-    <div style="position:fixed; bottom:0; left:0; width:100%; background:#fff; border-top:1px solid #e2e8f0; display:flex; justify-content:space-around; padding:10px 0; z-index:999; box-shadow:0 -2px 10px rgba(0,0,0,0.03);">
+    <div style="position:fixed; bottom:0; left:0; width:100%; background:#fff; border-top:1px solid #e2e8f0; display:flex; justify-content:space-around; padding:10px 0; z-index:999; box-shadow:0 -2px 10px rgba(0,0,0,0.04);">
         <a href="index.html" style="text-align:center; color:#00897b; text-decoration:none; font-size:11px; font-weight:800;">
             <i class="fa-solid fa-shop" style="font-size:18px; display:block; margin-bottom:2px;"></i> Shop
         </a>
@@ -73,7 +73,7 @@
         </a>
     </div>
 
-    <!-- MODALS (Cart, Admin, Orders, Voucher) -->
+    <!-- MODALS -->
     <div id="cartModal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:flex-end;">
         <div style="background:#fff; width:100%; max-height:80vh; border-radius:20px 20px 0 0; padding:20px; overflow-y:auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
