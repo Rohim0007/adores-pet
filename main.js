@@ -31,20 +31,72 @@ let adminSettings = JSON.parse(localStorage.getItem('adore_admin_settings')) || 
 let liveClickCount = 0;
 let currentOrderTab = 'Pending';
 
-// ================= DOM LOAD INITIALIZER =================
-document.addEventListener("DOMContentLoaded", () => {
-    updateCartUI();
-    if(document.getElementById('productGrid')) {
-        displayProducts(products);
-        checkHomeSettings();
-    }
-    if(document.getElementById('adminManageProductList')) {
-        loadAdminData();
-    }
-    if(document.getElementById('checkoutCartItems')) {
-        loadCheckoutPage();
-    }
-});
+// ================= CUSTOM MODAL SYSTEM (REPLACING NATIVE ALERTS) =================
+function showCustomAlert(title, message, callback) {
+    let oldOverlay = document.getElementById('customModalOverlay');
+    if(oldOverlay) oldOverlay.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'customModalOverlay';
+    overlay.className = 'custom-modal-overlay';
+    overlay.innerHTML = `
+        <div class="custom-modal-box">
+            <h3>${title}</h3>
+            <p>${message}</p>
+            <div class="custom-modal-buttons">
+                <button class="custom-modal-btn primary" id="customAlertOkBtn">ঠিক আছে</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    document.getElementById('customAlertOkBtn').onclick = () => {
+        overlay.remove();
+        if(callback) callback();
+    };
+}
+
+function showCustomPasswordPrompt(callback) {
+    let oldOverlay = document.getElementById('customModalOverlay');
+    if(oldOverlay) oldOverlay.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'customModalOverlay';
+    overlay.className = 'custom-modal-overlay';
+    overlay.innerHTML = `
+        <div class="custom-modal-box">
+            <h3>অ্যাডমিন লগইন</h3>
+            <p>অ্যাডমিন পাসওয়ার্ড দিন (ডিফল্ট: 1234):</p>
+            <input type="password" id="customPassInput" placeholder="পাসওয়ার্ড লিখুন" autofocus>
+            <div class="custom-modal-buttons">
+                <button class="custom-modal-btn secondary" id="customPromptCancel">বাতিল</button>
+                <button class="custom-modal-btn primary" id="customPromptOk">প্রবেশ করুন</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const input = document.getElementById('customPassInput');
+    input.focus();
+
+    document.getElementById('customPromptOk').onclick = () => {
+        const val = input.value;
+        overlay.remove();
+        callback(val);
+    };
+
+    document.getElementById('customPromptCancel').onclick = () => {
+        overlay.remove();
+    };
+
+    input.onkeydown = (e) => {
+        if(e.key === 'Enter') {
+            const val = input.value;
+            overlay.remove();
+            callback(val);
+        }
+    };
+}
 
 // Success Toast Notification
 function showSuccessToast(message) {
@@ -63,17 +115,33 @@ function showSuccessToast(message) {
     }, 3000);
 }
 
+// ================= DOM LOAD INITIALIZER =================
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartUI();
+    if(document.getElementById('productGrid')) {
+        displayProducts(products);
+        checkHomeSettings();
+    }
+    if(document.getElementById('adminManageProductList')) {
+        loadAdminData();
+    }
+    if(document.getElementById('checkoutCartItems')) {
+        loadCheckoutPage();
+    }
+});
+
 // Live Site 3-Click Admin Access
 function handleLiveSiteClick() {
     liveClickCount++;
     if(liveClickCount >= 3) {
         liveClickCount = 0;
-        const pass = prompt('অ্যাডমিন পাসওয়ার্ড দিন (ডিফল্ট: 1234):');
-        if(pass === adminSettings.adminPass) {
-            window.location.href = 'admin.html';
-        } else {
-            alert('ভুল পাসওয়ার্ড!');
-        }
+        showCustomPasswordPrompt((pass) => {
+            if(pass === adminSettings.adminPass) {
+                window.location.href = 'admin.html';
+            } else {
+                showCustomAlert('ভুল পাসওয়ার্ড', 'সঠিক পাসওয়ার্ড দিয়ে পুনরায় চেষ্টা করুন।');
+            }
+        });
     } else {
         setTimeout(() => { liveClickCount = 0; }, 1500);
     }
@@ -96,18 +164,19 @@ function displayProducts(list) {
     }
 
     list.forEach(p => {
+        let productImg = p.img1 || p.image || 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=500&q=80';
         grid.innerHTML += `
             <div class="product-card">
                 <span class="badge-offer">OFFER</span>
                 <span class="badge-rating"><i class="fa-solid fa-star"></i> ${p.rating || '4.8'}</span>
                 <div class="product-img-wrapper">
-                    <img src="${p.img1}" class="product-img" alt="${p.name}">
+                    <img src="${productImg}" class="product-img" alt="${p.name}">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">${p.name}</h3>
                     <div style="font-size:11px; color:#777; margin-bottom:4px;">Stock: ${p.stock || '10'} | Age: ${p.ageVal||'1'} ${p.ageUnit||'Year'}</div>
                     <div class="product-price">
-                        ৳ ${p.discountPrice} 
+                        ৳ ${p.discountPrice || p.price} 
                         ${p.regularPrice ? `<span style="font-size:12px; color:#aaa; text-decoration:line-through; margin-left:5px;">৳ ${p.regularPrice}</span>` : ''}
                     </div>
                     <div class="card-action-row">
@@ -169,13 +238,14 @@ function openProductModal(id) {
     const p = products.find(item => item.id == id);
     if(!p) return;
 
+    let productImg = p.img1 || p.image || 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=500&q=80';
     const modalBody = document.getElementById('modalBodyContent');
     modalBody.innerHTML = `
         <h3 style="color:var(--primary); font-size:18px; text-transform:uppercase; margin-bottom:10px;">${p.name}</h3>
-        <img src="${p.img1}" class="modal-product-img" alt="${p.name}">
+        <img src="${productImg}" class="modal-product-img" alt="${p.name}">
         <div class="modal-price-box">
             ${p.regularPrice ? `<span class="modal-old-price">৳ ${p.regularPrice}</span>` : ''}
-            <span class="modal-current-price">৳ ${p.discountPrice}</span>
+            <span class="modal-current-price">৳ ${p.discountPrice || p.price}</span>
         </div>
         <div class="modal-badges">
             <span class="badge-stock">Stock: ${p.stock || 10} Pcs</span>
@@ -213,14 +283,17 @@ function toggleCart() {
 
 function addToCart(id) {
     if(adminSettings.vacationMode) {
-        alert('শপ বর্তমানে ভ্যাকেশন মোডে থাকায় অর্ডার নেয়া বন্ধ আছে!');
+        showCustomAlert('অবগত করুন', 'শপ বর্তমানে ভ্যাকেশন মোডে থাকায় অর্ডার নেয়া বন্ধ আছে!');
         return;
     }
     const p = products.find(item => item.id == id);
     const existing = cart.find(c => c.id == id);
 
+    let productImg = p.img1 || p.image || '';
+    let itemPrice = p.discountPrice || p.price || 0;
+
     if(existing) existing.qty += 1;
-    else cart.push({ ...p, qty: 1 });
+    else cart.push({ ...p, img1: productImg, discountPrice: itemPrice, qty: 1 });
 
     localStorage.setItem('adore_cart', JSON.stringify(cart));
     updateCartUI();
@@ -263,13 +336,15 @@ function updateCartUI() {
     let total = 0;
 
     cart.forEach(item => {
-        total += item.discountPrice * item.qty;
+        let pImg = item.img1 || item.image || '';
+        let pPrice = item.discountPrice || item.price || 0;
+        total += pPrice * item.qty;
         container.innerHTML += `
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <img src="${item.img1}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" alt="${item.name}">
+                <img src="${pImg}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" alt="${item.name}">
                 <div style="flex: 1;">
                     <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 3px;">${item.name}</h4>
-                    <p style="font-size: 12px; color: #d32f2f; font-weight: 700;">৳ ${item.discountPrice * item.qty}</p>
+                    <p style="font-size: 12px; color: #d32f2f; font-weight: 700;">৳ ${pPrice * item.qty}</p>
                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 5px;">
                         <button onclick="changeQty('${item.id}', -1)" style="background: #eee; border: none; width: 22px; height: 22px; border-radius: 4px; cursor: pointer; font-weight: 700;">-</button>
                         <span style="font-size: 13px; font-weight: 600;">${item.qty}</span>
@@ -288,7 +363,7 @@ function updateCartUI() {
 
 function goToCheckout() {
     if(cart.length === 0) {
-        alert('আপনার কার্ট খালি!');
+        showCustomAlert('কার্ট খালি', 'আপনার কার্টে কোনো প্রোডাক্ট নেই!');
         return;
     }
     window.location.href = 'checkout.html';
@@ -309,12 +384,13 @@ function loadCheckoutPage() {
     if(container) container.innerHTML = '';
     let subtotal = 0;
     cart.forEach(item => {
-        subtotal += item.discountPrice * item.qty;
+        let pPrice = item.discountPrice || item.price || 0;
+        subtotal += pPrice * item.qty;
         if(container) {
             container.innerHTML += `
                 <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;">
                     <span>${item.name} (x${item.qty})</span>
-                    <span>৳ ${item.discountPrice * item.qty}</span>
+                    <span>৳ ${pPrice * item.qty}</span>
                 </div>
             `;
         }
@@ -326,7 +402,7 @@ function loadCheckoutPage() {
 function submitOrder(e) {
     e.preventDefault();
     if(cart.length === 0) {
-        alert('কার্ট খালি!');
+        showCustomAlert('কার্ট খালি', 'কার্ট খালি আছে!');
         return;
     }
 
@@ -335,7 +411,7 @@ function submitOrder(e) {
     const address = document.getElementById('custAddress').value;
     const trxId = document.getElementById('custTrxId') ? document.getElementById('custTrxId').value || 'প্রযোজ্য নয়' : 'প্রযোজ্য নয়';
 
-    let subtotal = cart.reduce((sum, i) => sum + (i.discountPrice * i.qty), 0);
+    let subtotal = cart.reduce((sum, i) => sum + ((i.discountPrice || i.price) * i.qty), 0);
     let grandTotal = subtotal + 80;
 
     const newOrder = {
@@ -357,12 +433,13 @@ function submitOrder(e) {
     localStorage.setItem('adore_cart', JSON.stringify(cart));
 
     let msg = `🛒 *Adore's Pet - নতুন অর্ডার*%0A👤 নাম: ${name}%0A📞 ফোন: ${phone}%0A📍 ঠিকানা: ${address}%0A%0A`;
-    newOrder.items.forEach(i => { msg += `- ${i.name} (${i.qty} pcs) = ৳ ${i.discountPrice * i.qty}%0A`; });
+    newOrder.items.forEach(i => { msg += `- ${i.name} (${i.qty} pcs) = ৳ ${(i.discountPrice || i.price) * i.qty}%0A`; });
     msg += `%0A💰 মোট: ৳ ${grandTotal} (ডেলিভারি চার্জ ৮০ সহ)%0A💳 TrxID: ${trxId}`;
 
     window.open(`https://wa.me/8801681578599?text=${msg}`, '_blank');
-    alert('অর্ডার সফলভাবে প্লেস হয়েছে!');
-    window.location.href = 'index.html';
+    showCustomAlert('অর্ডার সফল', 'আপনার অর্ডারটি সফলভাবে প্লেস হয়েছে!', () => {
+        window.location.href = 'index.html';
+    });
 }
 
 
@@ -379,19 +456,29 @@ function loadAdminData() {
     const manageList = document.getElementById('adminManageProductList');
     if(!manageList) return;
     manageList.innerHTML = '';
+
+    if(products.length === 0) {
+        manageList.innerHTML = '<p style="text-align:center; color:var(--gray); padding:15px;">কোনো প্রোডাক্ট নেই।</p>';
+        return;
+    }
+
     products.forEach(p => {
+        let productImg = p.img1 || p.image || 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=100&q=80';
+        let prodPrice = p.discountPrice || p.price || 0;
+
         manageList.innerHTML += `
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding:10px 0;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <img src="${p.img1}" style="width:45px; height:45px; object-fit:cover; border-radius:6px;" alt="${p.name}">
-                    <div>
-                        <strong style="font-size:13px;">${p.name}</strong><br>
-                        <span style="font-size:12px; color:#d32f2f;">৳ ${p.discountPrice}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#fafafa; border:1px solid var(--border); padding:12px; border-radius:12px; margin-bottom:10px; gap:10px;">
+                <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+                    <img src="${productImg}" style="width:55px; height:55px; object-fit:cover; border-radius:8px; flex-shrink:0; border:1px solid #ddd;" alt="${p.name}">
+                    <div style="flex:1; min-width:0;">
+                        <h4 style="font-size:13px; font-weight:700; color:var(--dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:2px;">${p.name}</h4>
+                        <span style="font-size:12px; color:#d32f2f; font-weight:700;">৳ ${prodPrice}</span>
+                        <div style="font-size:11px; color:var(--gray);">স্টক: ${p.stock || '10'} pcs</div>
                     </div>
                 </div>
-                <div style="display:flex; gap:6px;">
-                    <button onclick="openEditProductModal('${p.id}')" style="background:var(--primary); color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Edit</button>
-                    <button onclick="deleteProduct('${p.id}')" style="background:#e53935; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Delete</button>
+                <div style="display:flex; gap:6px; flex-shrink:0;">
+                    <button onclick="openEditProductModal('${p.id}')" style="background:var(--primary); color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600;">Edit</button>
+                    <button onclick="deleteProduct('${p.id}')" style="background:#e53935; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600;">Delete</button>
                 </div>
             </div>
         `;
@@ -426,7 +513,7 @@ function changeAdminPassword() {
         localStorage.setItem('adore_admin_settings', JSON.stringify(adminSettings));
         showSuccessToast('অ্যাডমিন পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
     } else {
-        alert('পাসওয়ার্ড মেলেনি!');
+        showCustomAlert('ত্রুটি', 'পাসওয়ার্ড মেলেনি!');
     }
 }
 
@@ -492,17 +579,19 @@ function openEditProductModal(id) {
     const p = products.find(item => item.id == id);
     if(!p) return;
 
+    let pImg = p.img1 || p.image || '';
+
     document.getElementById('editId').value = p.id;
     document.getElementById('editDisplayId').value = p.id;
     document.getElementById('editName').value = p.name;
     document.getElementById('editRegularPrice').value = p.regularPrice || '';
-    document.getElementById('editDiscountPrice').value = p.discountPrice;
+    document.getElementById('editDiscountPrice').value = p.discountPrice || p.price;
     document.getElementById('editStock').value = p.stock || 10;
     document.getElementById('editAgeVal').value = p.ageVal || '1';
     document.getElementById('editAgeUnit').value = p.ageUnit || 'Year';
-    document.getElementById('editImg1').value = p.img1;
+    document.getElementById('editImg1').value = pImg;
     document.getElementById('editVideoUrl').value = p.videoUrl || '';
-    document.getElementById('editPreviewImg').src = p.img1;
+    document.getElementById('editPreviewImg').src = pImg;
 
     document.getElementById('editProductModal').classList.add('open');
     document.getElementById('editProductModalOverlay').style.display = 'block';
@@ -526,6 +615,7 @@ function handleSaveEditProduct(e) {
         p.ageVal = document.getElementById('editAgeVal').value;
         p.ageUnit = document.getElementById('editAgeUnit').value;
         p.img1 = document.getElementById('editImg1').value;
+        p.image = document.getElementById('editImg1').value;
         p.videoUrl = document.getElementById('editVideoUrl').value;
 
         localStorage.setItem('adore_products', JSON.stringify(products));
@@ -551,7 +641,7 @@ function openAdminOrderModal(orderId) {
     const modalContent = document.getElementById('adminOrderModalContent');
     let itemsHtml = '';
     order.items.forEach(item => {
-        itemsHtml += `<li>${item.name} - ${item.qty} pcs (৳ ${item.discountPrice * item.qty})</li>`;
+        itemsHtml += `<li>${item.name} - ${item.qty} pcs (৳ ${(item.discountPrice || item.price) * item.qty})</li>`;
     });
 
     modalContent.innerHTML = `
