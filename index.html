@@ -3,43 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adore's Pet | Home</title>
+    <title>ADORE'S PET | Premium Pet Shop</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Top Header -->
     <header>
         <div class="nav-container">
-            <a href="index.html" class="brand-info">
+            <div class="brand-info">
                 <div class="brand-logo"><i class="fa-solid fa-paw"></i></div>
                 <div>
                     <h2>ADORE'S PET</h2>
-                    <p>Rabbit & Hamster Specialist</p>
+                    <p>Loved by pets, trusted by owners</p>
                 </div>
-            </a>
-            <div class="nav-links-top">
-                <a href="admin.html"><i class="fa-solid fa-lock"></i> Admin</a>
             </div>
+            <button class="live-badge">Live Site</button>
         </div>
         <div class="search-box-container">
             <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="খাবার বা খেলনা খুঁজুন..." onkeyup="filterProducts()">
+                <input type="text" id="searchInput" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." onkeyup="filterProducts()">
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <h2 style="font-size: 18px; margin-bottom: 15px;">জনপ্রিয় প্রোডাক্ট সমূহ</h2>
+    <!-- Banner Section -->
+    <section class="hero-banner">
+        <div class="banner-card">
+            <div class="banner-title">ADORE'S PET</div>
+            <div class="banner-subtitle">❤️ আপনার প্রিয় পোষা প্রাণীর বিশ্বস্ত ঠিকানা ❤️</div>
+            <div class="banner-tags">
+                <span>🐰 Rabbit</span>
+                <span>🐹 Hamster</span>
+                <span>🌿 Pet Food</span>
+                <span>🧸 Accessories</span>
+            </div>
+            <a href="#shop" class="shop-now-btn"><i class="fa-solid fa-cart-shopping"></i> Shop Now &gt;</a>
+            <div class="banner-features">
+                <span><i class="fa-solid fa-shield-cat"></i> স্বাস্থ্যকর ও মানসম্মত পেট</span>
+                <span><i class="fa-solid fa-truck-fast"></i> সারা বাংলাদেশে ডেলিভারি</span>
+                <span><i class="fa-solid fa-seedling"></i> নিরাপদ ও প্রাকৃতিক খাবার</span>
+                <span><i class="fa-solid fa-headset"></i> বিশেষজ্ঞ কাস্টমার সাপোর্ট</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Container -->
+    <div class="container" id="shop">
+        <div class="section-header">
+            <h3 class="section-title">ক্যাটাগরি সমূহ</h3>
+            <span class="see-all" onclick="filterCategory('all')">সব দেখুন</span>
+        </div>
+
+        <!-- Categories -->
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCategory('all')">All</button>
+            <button class="cat-btn" onclick="filterCategory('rabbit')">Rabbit</button>
+            <button class="cat-btn" onclick="filterCategory('hamster')">Hamster</button>
+            <button class="cat-btn" onclick="filterCategory('pet-food')">Pet Food</button>
+            <button class="cat-btn" onclick="filterCategory('accessories')">Accessories</button>
+        </div>
+
+        <div class="section-header" style="margin-top: 25px;">
+            <h3 class="section-title">জনপ্রিয় প্রোডাক্ট সমূহ</h3>
+        </div>
+
+        <!-- Product Grid -->
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Adore's Pet Shop. All Rights Reserved.</p>
-    </footer>
+    <!-- Product Details Modal Popup -->
+    <div class="modal-overlay" id="productModalOverlay" onclick="closeProductModal()"></div>
+    <div class="product-modal" id="productModal">
+        <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div id="modalBodyContent"></div>
+    </div>
 
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-store"></i>
@@ -50,10 +93,10 @@
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="badge" id="bottomCartCount">0</span>
             </div>
-            <span>Cart</span>
+            <span>My Cart</span>
         </a>
         <a href="admin.html" class="nav-item">
-            <i class="fa-solid fa-user-gear"></i>
+            <i class="fa-solid fa-receipt"></i>
             <span>Admin</span>
         </a>
         <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
