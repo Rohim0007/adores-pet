@@ -3,75 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | Adore's Pet</title>
+    <title>Admin Dashboard | Adore's Pet</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background: #f4f7f6;">
 
-    <header>
+    <!-- Admin Dashboard Header -->
+    <header style="background: #00875a; padding: 15px;">
         <div class="nav-container">
-            <a href="index.html" class="brand-info">
-                <div class="brand-logo"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="brand-info">
                 <div>
-                    <h2>Admin Dashboard</h2>
-                    <p>Manage Products</p>
+                    <h2 style="font-size: 20px; color: #fff;">Admin Dashboard</h2>
+                    <p style="font-size: 11px; color: #e0e0e0;">ADORE'S PET Control Panel</p>
                 </div>
-            </a>
-            <div class="nav-links-top">
-                <a href="index.html">Home</a>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <a href="index.html" class="live-badge" style="background: #e53935; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 700;">
+                    <i class="fa-solid fa-store"></i> শপে যান
+                </a>
+                <button onclick="adminLogout()" class="live-badge" style="background: #333; color: #fff; border:none; border-radius: 8px; cursor:pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i> লগআউট
+                </button>
             </div>
         </div>
     </header>
 
-    <div class="container" style="max-width: 700px;">
-        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 20px;">
-            <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">নতুন প্রোডাক্ট যোগ করুন</h3>
-            <form onsubmit="addNewProduct(event)">
+    <div class="container" style="max-width: 800px; margin-top: 20px;">
+
+        <!-- 1. Welcome Popup Banner (Daraz Style) -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-regular fa-image"></i> Welcome Popup Banner (Daraz Style)
+            </h3>
+            <div class="form-group">
+                <label>পপআপ ছবির লিংক (Image URL)</label>
+                <input type="text" id="popupImgUrl" placeholder="https://...">
+            </div>
+            <div class="form-group">
+                <label>পপআপে ক্লিক করলে কোথায় যাবে (Link URL - অপশনাল)</label>
+                <input type="text" id="popupTargetUrl" placeholder="https://...">
+            </div>
+            <button onclick="savePopupBanner()" class="btn-primary-custom" style="background: var(--primary);">পপআপ ব্যানার সেভ করুন</button>
+        </div>
+
+        <!-- 2. Announcement & YouTube Notice -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-solid fa-bullhorn"></i> Announcement & YouTube Notice
+            </h3>
+            <div class="form-group">
+                <label style="color: var(--dark);">১. সাধারণ নোটিশ / টেক্সট (ঐচ্ছিক)</label>
+                <textarea id="noticeText" rows="2" placeholder="যেমন: আজ সকল পণ্যে ১০% ডিসকাউন্ট চলছে!"></textarea>
+            </div>
+            <div class="form-group">
+                <label style="color: #d32f2f;">২. ইউটিউব ভিডিওর লিংক (ঐচ্ছিক)</label>
+                <input type="text" id="noticeYtUrl" placeholder="https://youtu.be/...">
+            </div>
+            <button onclick="saveAnnouncementNotice()" class="btn-primary-custom" style="background: var(--primary);">নোটিশ ও ভিডিও আপডেট করুন</button>
+        </div>
+
+        <!-- 3. Shop Mode / Vacation Setting -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                Shop Mode / Vacation Setting
+            </h3>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 14px; color: var(--dark);">সাময়িক বিরতি / ভ্যাকেশন মোড</strong>
+                    <p style="font-size: 12px; color: var(--gray);">চালু করলে হোমপেজে অর্ডারের বদলে বিরতির নোটিশ দেখাবে।</p>
+                </div>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; color: var(--primary);">
+                    <input type="checkbox" id="vacationModeToggle" onchange="toggleVacationMode()" style="width: 20px; height: 20px;"> অন / অফ
+                </label>
+            </div>
+        </div>
+
+        <!-- 4. Change Admin Password -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-solid fa-key"></i> Change Admin Password
+            </h3>
+            <div class="form-row">
                 <div class="form-group">
-                    <label>প্রোডাক্টের নাম</label>
-                    <input type="text" id="newTitle" placeholder="যেমন: Flemish Giant Rabbit" required>
+                    <label>নতুন পাসওয়ার্ড</label>
+                    <input type="password" id="newPass" placeholder="নতুন পাসওয়ার্ড দিন">
                 </div>
                 <div class="form-group">
-                    <label>মূল্য (টাকা)</label>
-                    <input type="number" id="newPrice" placeholder="যেমন: 3500" required>
+                    <label>কনফার্ম পাসওয়ার্ড</label>
+                    <input type="password" id="confirmPass" placeholder="পাসওয়ার্ডটি আবার দিন">
+                </div>
+            </div>
+            <button onclick="changeAdminPassword()" class="btn-primary-custom" style="background: #333;">পাসওয়ার্ড পরিবর্তন করুন</button>
+        </div>
+
+        <!-- 5. Order Management Section -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-solid fa-receipt"></i> অর্ডার ম্যানেজমেন্ট
+            </h3>
+            <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                <button onclick="filterOrderTab('Pending')" class="cat-btn active" id="tabPending">⏳ পেন্ডিং</button>
+                <button onclick="filterOrderTab('Completed')" class="cat-btn" id="tabCompleted">✅ কমপ্লিট</button>
+                <button onclick="filterOrderTab('Canceled')" class="cat-btn" id="tabCanceled">❌ ক্যানসেল</button>
+            </div>
+            <div id="adminOrdersList"></div>
+        </div>
+
+        <!-- 6. Add New Product Section -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; color: var(--primary); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-solid fa-circle-plus"></i> Add New Product
+            </h3>
+            <form onsubmit="handleAddNewProduct(event)">
+                <div class="form-group">
+                    <label>Product Name *</label>
+                    <input type="text" id="pName" placeholder="e.g. Dwarf Rabbit" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Regular Price (৳)</label>
+                        <input type="number" id="pRegularPrice" placeholder="1000">
+                    </div>
+                    <div class="form-group">
+                        <label style="color: #d32f2f;">Discount Price (৳) *</label>
+                        <input type="number" id="pDiscountPrice" placeholder="850" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Stock Quantity</label>
+                        <input type="number" id="pStock" placeholder="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Age / বয়স</label>
+                        <div style="display: flex; gap: 5px;">
+                            <input type="text" id="pAgeVal" placeholder="যেমন: 2">
+                            <select id="pAgeUnit" style="width: 100px;">
+                                <option value="Month">Month</option>
+                                <option value="Year">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input type="text" id="pColor" placeholder="e.g. White">
+                    </div>
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select id="pCategory" required>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Hamster">Hamster</option>
+                            <option value="Pet Food">Pet Food</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>ছবির লিংক (Image URL)</label>
-                    <input type="text" id="newImage" placeholder="https://..." required>
+                    <label>Rating</label>
+                    <input type="text" id="pRating" value="4.8">
                 </div>
-                <button type="submit" class="btn-primary-custom">প্রোডাক্ট লিস্টে যোগ করুন</button>
+                <div class="form-group">
+                    <label>Full Product Details</label>
+                    <textarea id="pDetails" rows="3" placeholder="Description..."></textarea>
+                </div>
+
+                <div style="border: 1px solid #b2dfdb; background: #e0f2f1; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                    <label style="color: var(--primary); font-weight: 700; margin-bottom: 8px; display: block;">
+                        🔗 ছবির লিংক দিন (Image URL)
+                    </label>
+                    <input type="text" id="pImg1" placeholder="Image 1 Link (https://...)" required style="margin-bottom: 8px;">
+                    <input type="text" id="pImg2" placeholder="Image 2 Link (Optional)" style="margin-bottom: 8px;">
+                    <input type="text" id="pImg3" placeholder="Image 3 Link (Optional)" style="margin-bottom: 8px;">
+                    
+                    <label style="color: #d32f2f; font-weight: 700; margin-top: 5px; margin-bottom: 5px; display: block;">
+                        🎥 ভিডিওর লিংক দিন (YouTube / FB Video URL)
+                    </label>
+                    <input type="text" id="pVideoUrl" placeholder="https://youtube.com/...">
+                </div>
+
+                <button type="submit" class="btn-primary-custom" style="background: var(--primary);">Add Product</button>
             </form>
         </div>
 
-        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
-            <h3 style="font-size: 16px; margin-bottom: 12px;">বর্তমান প্রোডাক্টসমূহ</h3>
-            <div id="adminProductList"></div>
+        <!-- 7. Manage Products -->
+        <div style="background: #fff; padding: 20px; border-radius: 16px; box-shadow: var(--shadow);">
+            <h3 style="font-size: 16px; color: var(--dark); margin-bottom: 15px; font-weight: 700;">
+                <i class="fa-solid fa-boxes-stacked"></i> Manage Products
+            </h3>
+            <div id="adminManageProductList"></div>
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fa-solid fa-store"></i>
-            <span>Shop</span>
-        </a>
-        <a href="checkout.html" class="nav-item">
-            <div class="cart-icon-wrapper">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="badge" id="bottomCartCount">0</span>
+    <!-- Edit Product Modal (স্ক্রিনশটের মতো হুবহু পপআপ) -->
+    <div class="modal-overlay" id="editProductModalOverlay" onclick="closeEditProductModal()"></div>
+    <div class="product-modal" id="editProductModal" style="max-width: 500px; margin: 0 auto; border-radius: 20px;">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h3 style="color: var(--primary); font-size: 18px;"><i class="fa-regular fa-pen-to-square"></i> Edit Product</h3>
+            <img id="editPreviewImg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px; margin-top: 8px;">
+        </div>
+        <form onsubmit="handleSaveEditProduct(event)">
+            <input type="hidden" id="editId">
+            <div class="form-group">
+                <label>Product ID (কপি করুন):</label>
+                <input type="text" id="editDisplayId" readonly style="background: #eee;">
             </div>
-            <span>Cart</span>
-        </a>
-        <a href="admin.html" class="nav-item active">
-            <i class="fa-solid fa-user-gear"></i>
-            <span>Admin</span>
-        </a>
-        <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
-            <i class="fa-solid fa-headset"></i>
-            <span>Support</span>
-        </a>
-    </nav>
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="editName" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Price (৳)</label>
+                    <input type="number" id="editRegularPrice">
+                </div>
+                <div class="form-group">
+                    <label style="color: #d32f2f;">Discount (৳)</label>
+                    <input type="number" id="editDiscountPrice" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" id="editStock">
+                </div>
+                <div class="form-group">
+                    <label>Age (সংখ্যা ও ইউনিট)</label>
+                    <div style="display: flex; gap: 5px;">
+                        <input type="text" id="editAgeVal">
+                        <select id="editAgeUnit">
+                            <option value="Month">Month</option>
+                            <option value="Year">Year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="text" id="editImg1" required>
+            </div>
+            <div class="form-group">
+                <label style="color: #d32f2f;">Video URL</label>
+                <input type="text" id="editVideoUrl">
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button type="submit" class="btn-primary-custom" style="background: var(--primary); flex: 1;">Save Changes</button>
+                <button type="button" onclick="closeEditProductModal()" class="modal-close-action" style="flex: 1;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal-overlay" id="adminOrderModalOverlay" onclick="closeAdminOrderModal()"></div>
+    <div class="product-modal" id="adminOrderModal">
+        <button class="modal-close-btn" onclick="closeAdminOrderModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div id="adminOrderModalContent" style="padding: 10px;"></div>
+    </div>
 
     <script src="main.js"></script>
 </body>
