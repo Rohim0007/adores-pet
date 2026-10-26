@@ -1,4 +1,4 @@
-// Database State
+// ================= GLOBAL STATE & LOCALSTORAGE =================
 let products = JSON.parse(localStorage.getItem('adore_products')) || [
     {
         id: "PET-101",
@@ -11,7 +11,7 @@ let products = JSON.parse(localStorage.getItem('adore_products')) || [
         color: "White",
         category: "Rabbit",
         rating: "4.8",
-        details: "High quality pure breed rabbit.",
+        details: "High quality pure breed rabbit with active health and friendly nature.",
         img1: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=500&q=80",
         videoUrl: "https://youtu.be/f0Xmh4MH15o"
     }
@@ -31,6 +31,7 @@ let adminSettings = JSON.parse(localStorage.getItem('adore_admin_settings')) || 
 let liveClickCount = 0;
 let currentOrderTab = 'Pending';
 
+// ================= DOM LOAD INITIALIZER =================
 document.addEventListener("DOMContentLoaded", () => {
     updateCartUI();
     if(document.getElementById('productGrid')) {
@@ -40,14 +41,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if(document.getElementById('adminManageProductList')) {
         loadAdminData();
     }
+    if(document.getElementById('checkoutCartItems')) {
+        loadCheckoutPage();
+    }
 });
+
+// Success Toast Notification
+function showSuccessToast(message) {
+    let toast = document.getElementById('successToastBox');
+    if(!toast) {
+        toast = document.createElement('div');
+        toast.id = 'successToastBox';
+        toast.className = 'success-toast';
+        document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<i class="fa-solid fa-circle-check" style="font-size: 18px;"></i> ${message}`;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
 
 // Live Site 3-Click Admin Access
 function handleLiveSiteClick() {
     liveClickCount++;
     if(liveClickCount >= 3) {
         liveClickCount = 0;
-        const pass = prompt('অ্যাডমিন পাসওয়ার্ড দিন:');
+        const pass = prompt('অ্যাডমিন পাসওয়ার্ড দিন (ডিফল্ট: 1234):');
         if(pass === adminSettings.adminPass) {
             window.location.href = 'admin.html';
         } else {
@@ -59,15 +80,20 @@ function handleLiveSiteClick() {
 }
 
 function adminLogout() {
-    alert('লগআউট সফল হয়েছে!');
-    window.location.href = 'index.html';
+    showSuccessToast('লগআউট সফল হয়েছে!');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
 }
 
-// Display Products on Home
+// ================= SHOP & HOME PAGE FUNCTIONS =================
 function displayProducts(list) {
     const grid = document.getElementById('productGrid');
     if(!grid) return;
     grid.innerHTML = '';
+
+    if(list.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">কোনো প্রোডাক্ট পাওয়া যায়নি!</p>';
+        return;
+    }
 
     list.forEach(p => {
         grid.innerHTML += `
@@ -75,7 +101,7 @@ function displayProducts(list) {
                 <span class="badge-offer">OFFER</span>
                 <span class="badge-rating"><i class="fa-solid fa-star"></i> ${p.rating || '4.8'}</span>
                 <div class="product-img-wrapper">
-                    <img src="${p.img1}" class="product-img">
+                    <img src="${p.img1}" class="product-img" alt="${p.name}">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">${p.name}</h3>
@@ -95,12 +121,10 @@ function displayProducts(list) {
 }
 
 function checkHomeSettings() {
-    // Check Vacation Mode
     if(adminSettings.vacationMode) {
         const vBar = document.getElementById('vacationNoticeBar');
         if(vBar) vBar.style.display = 'block';
     }
-    // Check Announcement Text
     if(adminSettings.noticeText) {
         const nBar = document.getElementById('announcementNoticeBar');
         if(nBar) {
@@ -108,18 +132,23 @@ function checkHomeSettings() {
             nBar.style.display = 'block';
         }
     }
-    // Welcome Popup
     if(adminSettings.popupImg) {
-        document.getElementById('welcomePopupImg').src = adminSettings.popupImg;
-        document.getElementById('welcomePopupLink').href = adminSettings.popupLink || '#';
-        document.getElementById('welcomePopupModal').classList.add('open');
-        document.getElementById('welcomePopupOverlay').style.display = 'block';
+        const popImg = document.getElementById('welcomePopupImg');
+        const popLink = document.getElementById('welcomePopupLink');
+        const popModal = document.getElementById('welcomePopupModal');
+        const popOverlay = document.getElementById('welcomePopupOverlay');
+        if(popImg) popImg.src = adminSettings.popupImg;
+        if(popLink) popLink.href = adminSettings.popupLink || '#';
+        if(popModal) popModal.classList.add('open');
+        if(popOverlay) popOverlay.style.display = 'block';
     }
 }
 
 function closeWelcomePopup() {
-    document.getElementById('welcomePopupModal').classList.remove('open');
-    document.getElementById('welcomePopupOverlay').style.display = 'none';
+    const popModal = document.getElementById('welcomePopupModal');
+    const popOverlay = document.getElementById('welcomePopupOverlay');
+    if(popModal) popModal.classList.remove('open');
+    if(popOverlay) popOverlay.style.display = 'none';
 }
 
 function filterCategory(cat) {
@@ -143,7 +172,7 @@ function openProductModal(id) {
     const modalBody = document.getElementById('modalBodyContent');
     modalBody.innerHTML = `
         <h3 style="color:var(--primary); font-size:18px; text-transform:uppercase; margin-bottom:10px;">${p.name}</h3>
-        <img src="${p.img1}" class="modal-product-img">
+        <img src="${p.img1}" class="modal-product-img" alt="${p.name}">
         <div class="modal-price-box">
             ${p.regularPrice ? `<span class="modal-old-price">৳ ${p.regularPrice}</span>` : ''}
             <span class="modal-current-price">৳ ${p.discountPrice}</span>
@@ -152,7 +181,7 @@ function openProductModal(id) {
             <span class="badge-stock">Stock: ${p.stock || 10} Pcs</span>
             <span class="badge-age">Age: ${p.ageVal || 1} ${p.ageUnit || 'Year'}</span>
         </div>
-        <p class="modal-desc">${p.details || 'High quality product.'}</p>
+        <p class="modal-desc">${p.details || 'High quality pet product.'}</p>
         ${p.videoUrl ? `
             <a href="${p.videoUrl}" target="_blank" class="youtube-btn">
                 <i class="fa-brands fa-youtube"></i> Watch Product Video on YouTube
@@ -173,7 +202,7 @@ function closeProductModal() {
     document.getElementById('productModalOverlay').style.display = 'none';
 }
 
-// Cart Drawer Functions
+// ================= CART & CHECKOUT FUNCTIONS =================
 function toggleCart() {
     const drawer = document.getElementById('cartDrawer');
     const overlay = document.getElementById('cartOverlay');
@@ -237,7 +266,7 @@ function updateCartUI() {
         total += item.discountPrice * item.qty;
         container.innerHTML += `
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <img src="${item.img1}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                <img src="${item.img1}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;" alt="${item.name}">
                 <div style="flex: 1;">
                     <h4 style="font-size: 13px; font-weight: 600; margin-bottom: 3px;">${item.name}</h4>
                     <p style="font-size: 12px; color: #d32f2f; font-weight: 700;">৳ ${item.discountPrice * item.qty}</p>
@@ -265,35 +294,104 @@ function goToCheckout() {
     window.location.href = 'checkout.html';
 }
 
-// ================= ADMIN FUNCTIONS =================
+function loadCheckoutPage() {
+    const container = document.getElementById('checkoutCartItems');
+    const subtotalEl = document.getElementById('checkoutSubtotal');
+    const totalEl = document.getElementById('checkoutTotal');
 
+    if(cart.length === 0) {
+        if(container) container.innerHTML = '<p style="color:var(--gray); text-align:center;">আপনার কার্ট খালি!</p>';
+        if(subtotalEl) subtotalEl.innerText = '৳ ০';
+        if(totalEl) totalEl.innerText = '৳ ৮০';
+        return;
+    }
+
+    if(container) container.innerHTML = '';
+    let subtotal = 0;
+    cart.forEach(item => {
+        subtotal += item.discountPrice * item.qty;
+        if(container) {
+            container.innerHTML += `
+                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;">
+                    <span>${item.name} (x${item.qty})</span>
+                    <span>৳ ${item.discountPrice * item.qty}</span>
+                </div>
+            `;
+        }
+    });
+    if(subtotalEl) subtotalEl.innerText = `৳ ${subtotal}`;
+    if(totalEl) totalEl.innerText = `৳ ${subtotal + 80}`;
+}
+
+function submitOrder(e) {
+    e.preventDefault();
+    if(cart.length === 0) {
+        alert('কার্ট খালি!');
+        return;
+    }
+
+    const name = document.getElementById('custName').value;
+    const phone = document.getElementById('custPhone').value;
+    const address = document.getElementById('custAddress').value;
+    const trxId = document.getElementById('custTrxId') ? document.getElementById('custTrxId').value || 'প্রযোজ্য নয়' : 'প্রযোজ্য নয়';
+
+    let subtotal = cart.reduce((sum, i) => sum + (i.discountPrice * i.qty), 0);
+    let grandTotal = subtotal + 80;
+
+    const newOrder = {
+        id: Date.now(),
+        name,
+        phone,
+        address,
+        trxId,
+        items: [...cart],
+        total: grandTotal,
+        status: 'Pending',
+        date: new Date().toLocaleString()
+    };
+
+    orders.unshift(newOrder);
+    localStorage.setItem('adore_orders', JSON.stringify(orders));
+
+    cart = [];
+    localStorage.setItem('adore_cart', JSON.stringify(cart));
+
+    let msg = `🛒 *Adore's Pet - নতুন অর্ডার*%0A👤 নাম: ${name}%0A📞 ফোন: ${phone}%0A📍 ঠিকানা: ${address}%0A%0A`;
+    newOrder.items.forEach(i => { msg += `- ${i.name} (${i.qty} pcs) = ৳ ${i.discountPrice * i.qty}%0A`; });
+    msg += `%0A💰 মোট: ৳ ${grandTotal} (ডেলিভারি চার্জ ৮০ সহ)%0A💳 TrxID: ${trxId}`;
+
+    window.open(`https://wa.me/8801681578599?text=${msg}`, '_blank');
+    alert('অর্ডার সফলভাবে প্লেস হয়েছে!');
+    window.location.href = 'index.html';
+}
+
+
+// ================= ADMIN PANEL FUNCTIONS =================
 function loadAdminData() {
-    // Fill Settings
     document.getElementById('popupImgUrl').value = adminSettings.popupImg || '';
     document.getElementById('popupTargetUrl').value = adminSettings.popupLink || '';
     document.getElementById('noticeText').value = adminSettings.noticeText || '';
     document.getElementById('noticeYtUrl').value = adminSettings.noticeYt || '';
     document.getElementById('vacationModeToggle').checked = adminSettings.vacationMode || false;
 
-    // Load Orders Tab
     filterOrderTab(currentOrderTab);
 
-    // Load Manage Products
     const manageList = document.getElementById('adminManageProductList');
+    if(!manageList) return;
     manageList.innerHTML = '';
     products.forEach(p => {
         manageList.innerHTML += `
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding:10px 0;">
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <img src="${p.img1}" style="width:45px; height:45px; object-fit:cover; border-radius:6px;">
+                    <img src="${p.img1}" style="width:45px; height:45px; object-fit:cover; border-radius:6px;" alt="${p.name}">
                     <div>
                         <strong style="font-size:13px;">${p.name}</strong><br>
                         <span style="font-size:12px; color:#d32f2f;">৳ ${p.discountPrice}</span>
                     </div>
                 </div>
                 <div style="display:flex; gap:6px;">
-                    <button onclick="openEditProductModal('${p.id}')" style="background:var(--primary); color:#fff; border:none; padding:5px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Edit</button>
-                    <button onclick="deleteProduct('${p.id}')" style="background:#e53935; color:#fff; border:none; padding:5px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Delete</button>
+                    <button onclick="openEditProductModal('${p.id}')" style="background:var(--primary); color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Edit</button>
+                    <button onclick="deleteProduct('${p.id}')" style="background:#e53935; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:600;">Delete</button>
                 </div>
             </div>
         `;
@@ -304,20 +402,20 @@ function savePopupBanner() {
     adminSettings.popupImg = document.getElementById('popupImgUrl').value;
     adminSettings.popupLink = document.getElementById('popupTargetUrl').value;
     localStorage.setItem('adore_admin_settings', JSON.stringify(adminSettings));
-    alert('পপআপ ব্যানার সেভ করা হয়েছে!');
+    showSuccessToast('পপআপ ব্যানার সফলভাবে সেভ করা হয়েছে!');
 }
 
 function saveAnnouncementNotice() {
     adminSettings.noticeText = document.getElementById('noticeText').value;
     adminSettings.noticeYt = document.getElementById('noticeYtUrl').value;
     localStorage.setItem('adore_admin_settings', JSON.stringify(adminSettings));
-    alert('নোটিশ আপডেট করা হয়েছে!');
+    showSuccessToast('নোটিশ ও ভিডিও সফলভাবে আপডেট করা হয়েছে!');
 }
 
 function toggleVacationMode() {
     adminSettings.vacationMode = document.getElementById('vacationModeToggle').checked;
     localStorage.setItem('adore_admin_settings', JSON.stringify(adminSettings));
-    alert(`ভ্যাকেশন মোড ${adminSettings.vacationMode ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
+    showSuccessToast(`ভ্যাকেশন মোড ${adminSettings.vacationMode ? 'চালু' : 'বন্ধ'} করা হয়েছে!`);
 }
 
 function changeAdminPassword() {
@@ -326,7 +424,7 @@ function changeAdminPassword() {
     if(np && np === cp) {
         adminSettings.adminPass = np;
         localStorage.setItem('adore_admin_settings', JSON.stringify(adminSettings));
-        alert('অ্যাডমিন পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+        showSuccessToast('অ্যাডমিন পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
     } else {
         alert('পাসওয়ার্ড মেলেনি!');
     }
@@ -334,12 +432,16 @@ function changeAdminPassword() {
 
 function filterOrderTab(tab) {
     currentOrderTab = tab;
-    document.getElementById('tabPending').classList.remove('active');
-    document.getElementById('tabCompleted').classList.remove('active');
-    document.getElementById('tabCanceled').classList.remove('active');
-    document.getElementById(`tab${tab}`).classList.add('active');
+    ['Pending', 'Completed', 'Canceled'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if(btn) {
+            if(t === tab) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+    });
 
     const list = document.getElementById('adminOrdersList');
+    if(!list) return;
     const filtered = orders.filter(o => o.status === tab);
     list.innerHTML = '';
 
@@ -361,7 +463,6 @@ function filterOrderTab(tab) {
     });
 }
 
-// Add New Product Handler
 function handleAddNewProduct(e) {
     e.preventDefault();
     const newP = {
@@ -382,12 +483,11 @@ function handleAddNewProduct(e) {
 
     products.push(newP);
     localStorage.setItem('adore_products', JSON.stringify(products));
-    alert('প্রোডাক্ট সফলভাবে যুক্ত করা হয়েছে!');
+    showSuccessToast('নতুন প্রোডাক্ট সফলভাবে যোগ করা হয়েছে!');
     e.target.reset();
     loadAdminData();
 }
 
-// Open & Save Edit Modal
 function openEditProductModal(id) {
     const p = products.find(item => item.id == id);
     if(!p) return;
@@ -429,8 +529,8 @@ function handleSaveEditProduct(e) {
         p.videoUrl = document.getElementById('editVideoUrl').value;
 
         localStorage.setItem('adore_products', JSON.stringify(products));
-        alert('প্রোডাক্ট আপডেট সফল হয়েছে!');
         closeEditProductModal();
+        showSuccessToast('প্রোডাক্ট সফলভাবে এডিট হয়েছে!');
         loadAdminData();
     }
 }
@@ -439,6 +539,54 @@ function deleteProduct(id) {
     if(confirm('আপনি কি এই প্রোডাক্টটি মুছে ফেলতে চান?')) {
         products = products.filter(p => p.id != id);
         localStorage.setItem('adore_products', JSON.stringify(products));
+        showSuccessToast('প্রোডাক্ট ডিলিট করা হয়েছে!');
+        loadAdminData();
+    }
+}
+
+function openAdminOrderModal(orderId) {
+    const order = orders.find(o => o.id == orderId);
+    if(!order) return;
+
+    const modalContent = document.getElementById('adminOrderModalContent');
+    let itemsHtml = '';
+    order.items.forEach(item => {
+        itemsHtml += `<li>${item.name} - ${item.qty} pcs (৳ ${item.discountPrice * item.qty})</li>`;
+    });
+
+    modalContent.innerHTML = `
+        <h3 style="margin-bottom: 10px; font-size: 18px; color: var(--primary);">অর্ডার ডিটেইলস</h3>
+        <p><strong>নাম:</strong> ${order.name}</p>
+        <p><strong>ফোন:</strong> ${order.phone}</p>
+        <p><strong>ঠিকানা:</strong> ${order.address}</p>
+        <p><strong>TrxID:</strong> ${order.trxId}</p>
+        <p><strong>তারিখ:</strong> ${order.date}</p>
+        <p style="margin-top: 10px;"><strong>প্রোডাক্টসমূহ:</strong></p>
+        <ul style="padding-left: 20px; font-size: 13px; margin-bottom: 15px;">${itemsHtml}</ul>
+        <p style="font-weight: 700; margin-bottom: 15px;">সর্বমোট: ৳ ${order.total}</p>
+        
+        <div style="display: flex; gap: 10px;">
+            <button onclick="updateOrderStatus(${order.id}, 'Completed')" style="flex:1; background:#4caf50; color:#fff; border:none; padding:10px; border-radius:6px; font-weight:700; cursor:pointer;">কমপ্লিট করুন</button>
+            <button onclick="updateOrderStatus(${order.id}, 'Canceled')" style="flex:1; background:#e53935; color:#fff; border:none; padding:10px; border-radius:6px; font-weight:700; cursor:pointer;">ক্যানসেল করুন</button>
+        </div>
+    `;
+
+    document.getElementById('adminOrderModal').classList.add('open');
+    document.getElementById('adminOrderModalOverlay').style.display = 'block';
+}
+
+function closeAdminOrderModal() {
+    document.getElementById('adminOrderModal').classList.remove('open');
+    document.getElementById('adminOrderModalOverlay').style.display = 'none';
+}
+
+function updateOrderStatus(orderId, newStatus) {
+    const order = orders.find(o => o.id == orderId);
+    if(order) {
+        order.status = newStatus;
+        localStorage.setItem('adore_orders', JSON.stringify(orders));
+        showSuccessToast(`অর্ডার স্ট্যাটাস '${newStatus}' করা হয়েছে!`);
+        closeAdminOrderModal();
         loadAdminData();
     }
 }
