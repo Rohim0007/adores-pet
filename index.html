@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- Top Header -->
+    <!-- Header -->
     <header>
         <div class="nav-container">
             <div class="brand-info">
@@ -20,7 +20,7 @@
                     <p>Loved by pets, trusted by owners</p>
                 </div>
             </div>
-            <a href="admin.html" class="live-badge"><i class="fa-solid fa-lock"></i> Admin</a>
+            <button class="live-badge" onclick="handleLiveSiteClick()">Live Site</button>
         </div>
         <div class="search-box-container">
             <div class="search-bar">
@@ -30,16 +30,16 @@
         </div>
     </header>
 
+    <!-- Announcement Text Bar (যদি এডমিন থেকে দেওয়া হয়) -->
+    <div id="announcementNoticeBar" style="display:none; background: #fff3cd; color: #856404; text-align: center; padding: 8px 15px; font-size: 13px; font-weight: 600; border-bottom: 1px solid #ffeeba;"></div>
+
     <!-- Banner Section -->
     <section class="hero-banner">
         <div class="banner-card">
             <div class="banner-title">ADORE'S PET</div>
             <div class="banner-subtitle">❤️ আপনার প্রিয় পোষা প্রাণীর বিশ্বস্ত ঠিকানা ❤️</div>
             <div class="banner-tags">
-                <span>🐰 Rabbit</span>
-                <span>🐹 Hamster</span>
-                <span>🌿 Pet Food</span>
-                <span>🧸 Accessories</span>
+                <span>🐰 Rabbit</span> <span>🐹 Hamster</span> <span>🌿 Pet Food</span> <span>🧸 Accessories</span>
             </div>
             <a href="#shop" class="shop-now-btn"><i class="fa-solid fa-cart-shopping"></i> Shop Now &gt;</a>
             <div class="banner-features">
@@ -51,6 +51,11 @@
         </div>
     </section>
 
+    <!-- Vacation Mode Warning Bar (যদি চালু থাকে) -->
+    <div id="vacationNoticeBar" style="display:none; max-width:1200px; margin:10px auto; padding:15px; background:#fff3e0; border-left:5px solid #ff9800; border-radius:8px; color:#e65100; font-weight:600; text-align:center;">
+        ⚠️ শপ বর্তমানে সাময়িক বিরতি / ভ্যাকেশন মোডে আছে। নতুন অর্ডার গ্রহণ সাময়িকভাবে বন্ধ আছে!
+    </div>
+
     <!-- Main Container -->
     <div class="container" id="shop">
         <div class="section-header">
@@ -60,10 +65,10 @@
 
         <div class="categories">
             <button class="cat-btn active" onclick="filterCategory('all')">All</button>
-            <button class="cat-btn" onclick="filterCategory('rabbit')">Rabbit</button>
-            <button class="cat-btn" onclick="filterCategory('hamster')">Hamster</button>
-            <button class="cat-btn" onclick="filterCategory('pet-food')">Pet Food</button>
-            <button class="cat-btn" onclick="filterCategory('accessories')">Accessories</button>
+            <button class="cat-btn" onclick="filterCategory('Rabbit')">Rabbit</button>
+            <button class="cat-btn" onclick="filterCategory('Hamster')">Hamster</button>
+            <button class="cat-btn" onclick="filterCategory('Pet Food')">Pet Food</button>
+            <button class="cat-btn" onclick="filterCategory('Accessories')">Accessories</button>
         </div>
 
         <div class="section-header" style="margin-top: 25px;">
@@ -73,65 +78,59 @@
         <div class="product-grid" id="productGrid"></div>
     </div>
 
-    <!-- Product Details Modal -->
+    <!-- Daraz Style Welcome Popup Modal -->
+    <div class="modal-overlay" id="welcomePopupOverlay" onclick="closeWelcomePopup()"></div>
+    <div class="product-modal" id="welcomePopupModal" style="max-width: 400px; margin: 0 auto; text-align: center; border-radius: 20px;">
+        <button class="modal-close-btn" onclick="closeWelcomePopup()"><i class="fa-solid fa-xmark"></i></button>
+        <a id="welcomePopupLink" href="#" target="_blank">
+            <img id="welcomePopupImg" style="width: 100%; border-radius: 12px; margin-top: 10px;">
+        </a>
+    </div>
+
+    <!-- Product Details Modal Popup -->
     <div class="modal-overlay" id="productModalOverlay" onclick="closeProductModal()"></div>
     <div class="product-modal" id="productModal">
         <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
         <div id="modalBodyContent"></div>
     </div>
 
-    <!-- Support Modal (সাপোর্ট পপআপ - ফোন নাম্বার ও ফেসবুক আইডি সহ) -->
-    <div class="modal-overlay" id="supportModalOverlay" onclick="closeSupportModal()"></div>
-    <div class="product-modal" id="supportModal">
-        <button class="modal-close-btn" onclick="closeSupportModal()"><i class="fa-solid fa-xmark"></i></button>
-        <div style="text-align: center; padding: 10px;">
-            <div style="background: var(--primary); color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 24px;">
-                <i class="fa-solid fa-headset"></i>
+    <!-- Cart Drawer Popup -->
+    <div class="overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-cart-shopping"></i> My Cart</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <div class="total-amount">
+                <span>মোট পণ্যের দাম:</span>
+                <span id="cartTotalPrice">৳ ০</span>
             </div>
-            <h3 style="margin-bottom: 10px; font-size: 20px;">Customer Support</h3>
-            <p style="color: var(--gray); font-size: 13px; margin-bottom: 20px;">যেকোনো প্রয়োজনে সরাসরি যোগাযোগ করুন:</p>
-            
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border); text-align: left;">
-                <p style="font-size: 13px; margin-bottom: 8px;"><i class="fa-solid fa-phone" style="color: var(--primary); width: 20px;"></i> <strong>সরাসরি কল করুন:</strong> <a href="tel:01681578599" style="color: #d32f2f; font-weight: 700; text-decoration: none;">01681578599</a></p>
-                <p style="font-size: 13px; margin-bottom: 8px;"><i class="fa-brands fa-whatsapp" style="color: #25d366; width: 20px;"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/8801681578599" target="_blank" style="color: #25d366; font-weight: 700; text-decoration: none;">01681578599</a></p>
-                <p style="font-size: 13px;"><i class="fa-brands fa-facebook" style="color: #1877f2; width: 20px;"></i> <strong>Facebook ID / Page:</strong> <a href="https://facebook.com" target="_blank" style="color: #1877f2; font-weight: 700; text-decoration: none;">Adore's Pet BD</a></p>
-            </div>
-
-            <button onclick="closeSupportModal()" class="modal-close-action" style="width: 100%;">বন্ধ করুন</button>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                <i class="fa-solid fa-arrow-right"></i> Checkout (ডেলিভারি তথ্য দিন)
+            </button>
         </div>
     </div>
 
-    <!-- My Orders Modal -->
-    <div class="modal-overlay" id="ordersModalOverlay" onclick="closeOrdersModal()"></div>
-    <div class="product-modal" id="ordersModal">
-        <button class="modal-close-btn" onclick="closeOrdersModal()"><i class="fa-solid fa-xmark"></i></button>
-        <div style="padding: 10px;">
-            <h3 style="margin-bottom: 15px; font-size: 18px;"><i class="fa-solid fa-receipt"></i> আমার অর্ডারসমূহ</h3>
-            <div id="ordersModalContent">
-                <p style="text-align: center; color: var(--gray); padding: 20px;">আপনার কোনো চলমান অর্ডার নেই!</p>
-            </div>
-            <button onclick="closeOrdersModal()" class="modal-close-action" style="width: 100%; margin-top: 15px;">বন্ধ করুন</button>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar (Exact Match with User Request) -->
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-store"></i>
             <span>Shop</span>
         </a>
-        <a href="checkout.html" class="nav-item">
+        <a href="javascript:void(0)" class="nav-item" onclick="toggleCart()">
             <div class="cart-icon-wrapper">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="badge" id="bottomCartCount">0</span>
             </div>
             <span>My Cart</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="openOrdersModal()">
+        <a href="javascript:void(0)" class="nav-item" onclick="alert('আপনার কোনো সক্রিয় অর্ডার নেই!')">
             <i class="fa-solid fa-receipt"></i>
             <span>My Orders</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="openSupportModal()">
+        <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
             <i class="fa-solid fa-headset"></i>
             <span>Support</span>
         </a>
