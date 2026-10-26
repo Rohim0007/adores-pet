@@ -3,155 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADORE'S PET - Online Pet Store</title>
-    <link rel="stylesheet" href="shop.css">
+    <title>Adore's Pet | Premium Pet Shop for Rabbits & Hamsters</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body style="background:#f8fafc; margin:0; padding-bottom:70px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+<body>
 
-    <!-- TOP BRAND HEADER (৫ বার ক্লিক করলে অ্যাডমিন প্যানেল খুলবে) -->
-    <div class="brand-box" style="background:#00897b; padding:15px; color:#fff; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
-        <div style="display:flex; align-items:center; gap:10px;">
-            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=100" style="width:42px; height:42px; border-radius:50%; object-fit:cover; border:2px solid #fff;" alt="Logo">
-            <div>
-                <h2 style="font-size:16px; margin:0; font-weight:900; letter-spacing:0.5px;">ADORE'S PET</h2>
-                <span style="font-size:11px; opacity:0.9;">Loved by pets, trusted by owners</span>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span>🐰 বিশেষ অফার:</span> খরগোশ ও হ্যামস্টারের প্রিমিয়াম খাবারে ফ্রি হোম ডেলিভারি শর্ত সাপেক্ষে!
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-paw"></i> Adore's Pet
+            </a>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="খাবার, খেলনা বা অ্যাক্সেসরিজ খুঁজুন..." onkeyup="filterProducts()">
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fa-solid fa-cart-shopping"></i> কার্ট (<span id="cartCount">0</span>)
+                </button>
             </div>
         </div>
-        <span style="background:rgba(255,255,255,0.25); padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700;">Live Site</span>
-    </div>
+    </header>
 
-    <!-- SEARCH BAR -->
-    <div style="padding:12px 16px; background:#00897b;">
-        <div style="background:#fff; border-radius:22px; padding:10px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
-            <i class="fa-solid fa-search" style="color:#64748b; font-size:14px;"></i>
-            <input type="text" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." oninput="searchProducts(this)" style="border:none; outline:none; width:100%; font-size:13px; color:#1e293b;">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>আপনার আদরের পোষা প্রাণীর পারফেক্ট শপ</h1>
+        <p>খরগোশ, হ্যামস্টার ও গিনিপিগের স্বাস্থ্যকর খাবার, প্রিমিয়াম খেলনা এবং প্রয়োজনীয় সব অ্যাক্সেসরিজ এখন এক ঠিকানায়।</p>
+        <a href="#shop" class="hero-btn">কেনাকাটা শুরু করুন</a>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container" id="shop">
+        <h2 class="section-title">আমাদের জনপ্রিয় প্রোডাক্টসমূহ</h2>
+
+        <!-- Category Filters -->
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCategory('all')">সব প্রোডাক্ট</button>
+            <button class="cat-btn" onclick="filterCategory('rabbit-food')">খরগোশের খাবার</button>
+            <button class="cat-btn" onclick="filterCategory('hamster-food')">হ্যামস্টারের খাবার</button>
+            <button class="cat-btn" onclick="filterCategory('toys')">খেলনা ও চিবানোর কাঠ</button>
+            <button class="cat-btn" onclick="filterCategory('accessories')">অন্যান্য অ্যাক্সেসরিজ</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <!-- Dynamic Products will load here via JS -->
         </div>
     </div>
 
-    <!-- HERO BANNER -->
-    <div style="padding:14px 16px 0 16px;">
-        <div style="width:100%; border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
-            <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=800" style="width:100%; height:160px; object-fit:cover;" alt="Hero Banner">
+    <!-- Cart Drawer -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>আপনার শপিং কার্ট</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-    </div>
-
-    <!-- CATEGORIES -->
-    <div style="padding:16px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h3 style="font-size:15px; font-weight:900; color:#1e293b; margin:0;">ক্যাটাগরি সমূহ</h3>
-            <span onclick="filterCategory('All')" style="font-size:12px; color:#00897b; font-weight:800; cursor:pointer;">সব দেখুন</span>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; color: var(--gray); margin-top: 40px;">আপনার কার্ট খালি আছে!</p>
         </div>
-        <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:5px; scrollbar-width:none;">
-            <button onclick="filterCategory('Rabbit')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-paw" style="color:#00897b;"></i> Rabbit</button>
-            <button onclick="filterCategory('Hamster')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-shield-cat" style="color:#00897b;"></i> Hamster</button>
-            <button onclick="filterCategory('Pet Food')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-bone" style="color:#00897b;"></i> Pet Food</button>
-            <button onclick="filterCategory('Accessories')" style="background:#fff; color:#475569; border:1px solid #e2e8f0; padding:8px 18px; border-radius:24px; font-size:12.5px; font-weight:800; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; box-shadow:0 2px 4px rgba(0,0,0,0.03);"><i class="fa-solid fa-gem" style="color:#00897b;"></i> Accessories</button>
-        </div>
-    </div>
-
-    <!-- PRODUCTS CONTAINER -->
-    <div style="padding:0 16px;">
-        <h3 style="font-size:15px; font-weight:900; color:#1e293b; margin-bottom:12px;">জনপ্রিয় প্রোডাক্ট সমূহ</h3>
-        <div id="shopProductsContainer" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;"></div>
-    </div>
-
-    <!-- BOTTOM NAVIGATION BAR -->
-    <div style="position:fixed; bottom:0; left:0; width:100%; background:#fff; border-top:1px solid #e2e8f0; display:flex; justify-content:space-around; padding:10px 0; z-index:999; box-shadow:0 -2px 10px rgba(0,0,0,0.04);">
-        <a href="index.html" style="text-align:center; color:#00897b; text-decoration:none; font-size:11px; font-weight:800;">
-            <i class="fa-solid fa-shop" style="font-size:18px; display:block; margin-bottom:2px;"></i> Shop
-        </a>
-        <a href="#" onclick="openCartModal(); return false;" style="text-align:center; color:#64748b; text-decoration:none; font-size:11px; font-weight:700; position:relative;">
-            <i class="fa-solid fa-cart-shopping" style="font-size:18px; display:block; margin-bottom:2px;"></i> My Cart
-            <span id="cartCountBadge" style="position:absolute; top:-5px; right:5px; background:#ef4444; color:#fff; font-size:9px; padding:1px 5px; border-radius:10px; display:none;">0</span>
-        </a>
-        <a href="#" onclick="openOrdersModal(); return false;" style="text-align:center; color:#64748b; text-decoration:none; font-size:11px; font-weight:700;">
-            <i class="fa-solid fa-receipt" style="font-size:18px; display:block; margin-bottom:2px;"></i> My Orders
-        </a>
-        <a href="#" style="text-align:center; color:#64748b; text-decoration:none; font-size:11px; font-weight:700;">
-            <i class="fa-solid fa-headset" style="font-size:18px; display:block; margin-bottom:2px;"></i> Support
-        </a>
-    </div>
-
-    <!-- MODALS -->
-    <div id="cartModal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:flex-end;">
-        <div style="background:#fff; width:100%; max-height:80vh; border-radius:20px 20px 0 0; padding:20px; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h3 style="font-size:16px; font-weight:900; color:#00897b; margin:0;">আপনার কার্ট</h3>
-                <button onclick="closeCartModal()" style="background:none; border:none; font-size:18px; cursor:pointer; color:#64748b;"><i class="fa-solid fa-xmark"></i></button>
+        <div class="cart-footer">
+            <div class="total-amount">
+                <span>মোট দাম:</span>
+                <span id="cartTotal">৳ ০</span>
             </div>
-            <div id="cartItemsList"></div>
-            <div style="border-top:1px solid #e2e8f0; margin-top:15px; padding-top:10px; display:flex; justify-content:space-between; font-weight:900; font-size:15px;">
-                <span>সাবটোটাল:</span><span>৳<span id="cartSubtotalText">0</span></span>
-            </div>
-            <button onclick="proceedToCheckout()" style="width:100%; background:#00897b; color:#fff; border:none; padding:12px; border-radius:10px; font-weight:800; margin-top:15px; cursor:pointer;">চেকআউট করুন</button>
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> অর্ডার কনফার্ম করুন (WhatsApp)
+            </button>
         </div>
     </div>
 
-    <div id="adminModal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center; padding:15px;">
-        <div style="background:#fff; width:100%; max-width:450px; max-height:90vh; border-radius:16px; padding:20px; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h3 style="font-size:16px; font-weight:900; color:#00897b; margin:0;">অ্যাডমিন প্যানেল</h3>
-                <button onclick="closeAdminModal()" style="background:none; border:none; font-size:18px; cursor:pointer; color:#64748b;"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <form id="adminProductForm" onsubmit="saveAdminProduct(event)" style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">
-                <input type="hidden" id="editProductId">
-                <input type="text" id="editProductName" placeholder="প্রোডাক্টের নাম" required style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px;">
-                <div style="display:flex; gap:8px;">
-                    <input type="number" id="editProductPrice" placeholder="মূল্য" required style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px; width:50%;">
-                    <input type="number" id="editProductDiscount" placeholder="ছাড় মূল্য" style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px; width:50%;">
-                </div>
-                <div style="display:flex; gap:8px;">
-                    <input type="number" id="editProductStock" placeholder="স্টক" required style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px; width:50%;">
-                    <select id="editProductCategory" style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px; width:50%;">
-                        <option value="Rabbit">Rabbit</option><option value="Hamster">Hamster</option><option value="Pet Food">Pet Food</option><option value="Accessories">Accessories</option>
-                    </select>
-                </div>
-                <input type="text" id="editProductImage" placeholder="ছবির লিংক (Image URL)" style="padding:9px; border:1px solid #cbd5e1; border-radius:8px; font-size:12px;">
-                <button type="submit" style="background:#00897b; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:800; cursor:pointer; font-size:12px;">প্রোডাক্ট সেভ করুন</button>
-            </form>
-            <h4 style="font-size:13px; font-weight:800; color:#1e293b; margin-bottom:8px;">প্রোডাক্ট তালিকা</h4>
-            <div id="adminProductsList" style="margin-bottom:20px; max-height:150px; overflow-y:auto;"></div>
-            <h4 style="font-size:13px; font-weight:800; color:#1e293b; margin-bottom:8px;">অর্ডারসমূহ</h4>
-            <div id="adminOrdersList" style="max-height:180px; overflow-y:auto;"></div>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Adore's Pet Shop. All Rights Reserved. Designed for Rabbit & Hamster Lovers.</p>
+    </footer>
 
-    <div id="ordersModal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1500; align-items:flex-end;">
-        <div style="background:#fff; width:100%; max-height:80vh; border-radius:20px 20px 0 0; padding:20px; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                <h3 style="font-size:16px; font-weight:900; color:#00897b; margin:0;">আমার অর্ডারসমূহ</h3>
-                <button onclick="closeOrdersModal()" style="background:none; border:none; font-size:18px; cursor:pointer; color:#64748b;"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="userOrdersList"></div>
-        </div>
-    </div>
-
-    <div id="voucherModal" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2500; align-items:center; justify-content:center; padding:15px;">
-        <div style="background:#fff; width:100%; max-width:400px; border-radius:16px; padding:20px; max-height:90vh; overflow-y:auto;">
-            <div style="text-align:center; margin-bottom:10px;">
-                <h3 style="font-size:16px; font-weight:900; color:#00897b; margin:0;">ADORE'S PET</h3>
-                <span style="font-size:11px; color:#64748b;">Official Order Voucher & Cash Memo</span>
-            </div>
-            <div id="voucherCustomerInfo" style="font-size:12px; color:#475569; background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:10px; line-height:1.6;"></div>
-            <table style="width:100%; border-collapse:collapse; margin-bottom:10px;">
-                <thead><tr style="background:#f1f5f9; font-size:12px;"><th style="padding:6px; text-align:left;">Product Name</th><th style="padding:6px; text-align:center;">Qty</th><th style="padding:6px; text-align:right;">Price</th></tr></thead>
-                <tbody id="voucherTableBody"></tbody>
-            </table>
-            <div id="voucherTotalsBox" style="font-size:12px; background:#f8fafc; padding:10px; border-radius:8px; margin-bottom:15px;"></div>
-            <div style="display:flex; gap:10px;">
-                <button onclick="window.print()" style="flex:1; background:#00897b; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:800; cursor:pointer; font-size:12px;"><i class="fa-solid fa-print"></i> প্রিন্ট করুন</button>
-                <button onclick="closeVoucherModal()" style="flex:1; background:#64748b; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:800; cursor:pointer; font-size:12px;">বন্ধ করুন</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="data.js"></script>
-    <script src="app.js"></script>
-    <script>
-        const style = document.createElement('style'); 
-        style.innerHTML = `.modal.show { display: flex !important; }`; 
-        document.head.appendChild(style);
-    </script>
+    <!-- External JavaScript -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
