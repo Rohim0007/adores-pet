@@ -3,191 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adore's Pet | Premium Pet Shop</title>
-    <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Adore's Pet | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- External CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header Component -->
     <header>
         <div class="nav-container">
-            <div class="brand-info">
+            <a href="index.html" class="brand-info">
                 <div class="brand-logo"><i class="fa-solid fa-paw"></i></div>
                 <div>
                     <h2>ADORE'S PET</h2>
-                    <p>Loved by pets, trusted by owners</p>
+                    <p>Rabbit & Hamster Specialist</p>
                 </div>
+            </a>
+            <div class="nav-links-top">
+                <a href="admin.html"><i class="fa-solid fa-lock"></i> Admin</a>
             </div>
-            <button class="live-badge">Live Site</button>
         </div>
-        <!-- Search Bar -->
         <div class="search-box-container">
             <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." onkeyup="filterProducts()">
+                <input type="text" id="searchInput" placeholder="খাবার বা খেলনা খুঁজুন..." onkeyup="filterProducts()">
             </div>
         </div>
     </header>
 
-    <!-- Hero Banner -->
-    <section class="hero">
-        <div class="hero-banner-content">
-            <div class="banner-text">
-                <h3>ADORE'S PET</h3>
-                <p>❤️ আপনার প্রিয় পোষা প্রাণীর বিশ্বস্ত ঠিকানা ❤️</p>
-                <div class="banner-tags">
-                    <span>🐰 Rabbit</span> <span>🐹 Hamster</span> <span>🌿 Pet Food</span> <span>🧸 Accessories</span>
-                </div>
-                <a href="#shop" class="hero-btn"><i class="fa-solid fa-cart-shopping"></i> Shop Now</a>
-            </div>
-            <div class="banner-features">
-                <span><i class="fa-solid fa-shield-cat"></i> স্বাস্থ্যকর ও মানসম্মত পেট</span>
-                <span><i class="fa-solid fa-truck-fast"></i> সারা বাংলাদেশে ডেলিভারি সুবিধা</span>
-                <span><i class="fa-solid fa-seedling"></i> নিরাপদ ও প্রাকৃতিক খাবার</span>
-                <span><i class="fa-solid fa-headset"></i> বিশেষজ্ঞ কাস্টমার সাপোর্ট</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Container -->
-    <div class="container" id="shop">
-        <div class="section-header-flex">
-            <h2 class="section-title">ক্যাটাগরি সমূহ</h2>
-            <span class="see-all" onclick="filterCategory('all')">সব দেখুন</span>
-        </div>
-
-        <!-- Category Filters -->
-        <div class="categories">
-            <button class="cat-btn active" onclick="filterCategory('all')">All</button>
-            <button class="cat-btn" onclick="filterCategory('rabbit')">Rabbit</button>
-            <button class="cat-btn" onclick="filterCategory('hamster')">Hamster</button>
-            <button class="cat-btn" onclick="filterCategory('pet-food')">Pet Food</button>
-            <button class="cat-btn" onclick="filterCategory('accessories')">Accessories</button>
-        </div>
-
-        <h2 class="section-title" style="margin-top: 25px;">জনপ্রিয় প্রোডাক্ট সমূহ</h2>
-
-        <!-- Product Grid -->
+    <!-- Main Container & Cards -->
+    <div class="container">
+        <h2 style="font-size: 18px; margin-bottom: 15px;">জনপ্রিয় প্রোডাক্ট সমূহ</h2>
         <div class="product-grid" id="productGrid">
-            <!-- Dynamic Products will load here via JS -->
+            <!-- Dynamic Cards will load here -->
         </div>
     </div>
 
-    <!-- Product Detail Modal -->
-    <div class="modal-overlay" id="productModalOverlay" onclick="closeProductModal()"></div>
-    <div class="product-modal" id="productModal">
-        <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
-        <div id="modalBodyContent">
-            <!-- Dynamic content loaded via JS -->
-        </div>
-    </div>
+    <!-- Footer Component -->
+    <footer>
+        <p>&copy; 2026 Adore's Pet Shop. All Rights Reserved.</p>
+    </footer>
 
-    <!-- Cart Drawer -->
-    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3><i class="fa-solid fa-cart-shopping"></i> My Cart</h3>
-            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <p style="text-align: center; color: var(--gray); margin-top: 40px;">আপনার কার্ট খালি আছে!</p>
-        </div>
-        <div class="cart-footer">
-            <div class="total-amount">
-                <span>মোট পণ্যের দাম:</span>
-                <span id="cartTotal">৳ ০</span>
-            </div>
-            <button class="checkout-btn" onclick="openCheckoutModal()">
-                <i class="fa-solid fa-arrow-right"></i> Checkout (ডেলিভারি তথ্য দিন)
-            </button>
-        </div>
-    </div>
-
-    <!-- Checkout Modal / Page -->
-    <div class="checkout-modal-overlay" id="checkoutOverlay" onclick="closeCheckoutModal()"></div>
-    <div class="checkout-drawer" id="checkoutDrawer">
-        <div class="checkout-header">
-            <h3><i class="fa-solid fa-file-invoice"></i> Checkout (অর্ডার কনফার্ম করুন)</h3>
-            <button class="close-cart" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="checkout-body">
-            <form id="orderForm" onsubmit="submitOrder(event)">
-                <div class="form-group">
-                    <label>আপনার নাম (Full Name) *</label>
-                    <input type="text" id="custName" placeholder="যেমন: মো: রাশেদ" required>
-                </div>
-                <div class="form-group">
-                    <label>মোবাইল নম্বর (Phone Number) *</label>
-                    <input type="tel" id="custPhone" placeholder="যেমন: 017xxxxxxxx" required>
-                </div>
-                <div class="form-group">
-                    <label>সম্পূর্ণ ঠিকানা (রোড, বাসা নং) *</label>
-                    <textarea id="custAddress" rows="2" placeholder="বাসা নম্বর ও রোড নম্বর লিখুন..." required></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>জেলা নির্বাচন করুন *</label>
-                        <select id="custDistrict" required>
-                            <option value="">-- জেলা বেছে নিন --</option>
-                            <option value="Dhaka">ঢাকা (Dhaka)</option>
-                            <option value="Gazipur">গাজীপুর (Gazipur)</option>
-                            <option value="Tongi">টঙ্গী (Tongi)</option>
-                            <option value="Chittagong">চট্টগ্রাম (Chittagong)</option>
-                            <option value="Sylhet">সিলেট (Sylhet)</option>
-                            <option value="Other">অন্যান্য জেলা</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>এলাকা / থানা *</label>
-                        <input type="text" id="custArea" placeholder="যেমন: মিরের বাজার" required>
-                    </div>
-                </div>
-
-                <!-- Bkash / Nagad Box -->
-                <div class="bkash-box">
-                    <p><i class="fa-solid fa-wallet"></i> <strong>bKash / Nagad Personal Number:</strong></p>
-                    <h4 style="color: var(--primary); font-size: 18px; margin: 5px 0;">01681578599</h4>
-                    <p class="bkash-note">(খরগোশ/হ্যামস্টারের ক্ষেত্রে ৫০% অ্যাডভান্স সেন্ড মানি করুন)</p>
-                </div>
-
-                <div class="form-group">
-                    <label>বিকাশ/নগদ ট্রানজেকশন আইডি (TrxID)</label>
-                    <input type="text" id="custTrxId" placeholder="যেমন: 9J87H6G5F4">
-                </div>
-
-                <div class="order-summary-box">
-                    <div class="summary-row"><span>পণ্যের মূল্য:</span> <span id="summarySubtotal">৳ ০</span></div>
-                    <div class="summary-row"><span>ডেলিভারি চার্জ:</span> <span>৳ ৮০</span></div>
-                    <div class="summary-row total"><span>সর্বমোট প্রদেয়:</span> <span id="summaryTotal">৳ ৮০</span></div>
-                </div>
-
-                <button type="submit" class="confirm-order-btn">
-                    <i class="fa-solid fa-check"></i> অর্ডার কনফার্ম করুন
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar (Mobile App Style) -->
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item active">
             <i class="fa-solid fa-store"></i>
             <span>Shop</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="toggleCart()">
+        <a href="checkout.html" class="nav-item">
             <div class="cart-icon-wrapper">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="badge" id="bottomCartCount">0</span>
             </div>
-            <span>My Cart</span>
+            <span>Cart</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item" onclick="alert('আপনার কোনো চলমান অর্ডার নেই!')">
-            <i class="fa-solid fa-receipt"></i>
-            <span>My Orders</span>
+        <a href="admin.html" class="nav-item">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Admin</span>
         </a>
         <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
             <i class="fa-solid fa-headset"></i>
@@ -195,7 +68,6 @@
         </a>
     </nav>
 
-    <!-- External JavaScript -->
     <script src="assets/js/main.js"></script>
 </body>
 </html>
