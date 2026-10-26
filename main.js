@@ -14,6 +14,21 @@ let products = JSON.parse(localStorage.getItem('adore_products')) || [
         details: "High quality pure breed rabbit with active health and friendly nature.",
         img1: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=500&q=80",
         videoUrl: "https://youtu.be/f0Xmh4MH15o"
+    },
+    {
+        id: "PET-102",
+        name: "Nipple Feeder 1 pcs (খরগোশের ড্রিংকার)",
+        regularPrice: 300,
+        discountPrice: 220,
+        stock: 400,
+        ageVal: "New",
+        ageUnit: "",
+        color: "Silver",
+        category: "Accessories",
+        rating: "4.8",
+        details: "Stainless steel durable water nipple feeder for rabbits.",
+        img1: "https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?auto=format&fit=crop&w=500&q=80",
+        videoUrl: ""
     }
 ];
 
@@ -31,7 +46,7 @@ let adminSettings = JSON.parse(localStorage.getItem('adore_admin_settings')) || 
 let liveClickCount = 0;
 let currentOrderTab = 'Pending';
 
-// ================= CUSTOM MODAL SYSTEM (REPLACING ALL BROWSER ALERTS & CONFIRMS) =================
+// ================= CUSTOM MODAL SYSTEM (REPLACING NATIVE ALERTS) =================
 function showCustomAlert(title, message, callback) {
     let oldOverlay = document.getElementById('customModalOverlay');
     if(oldOverlay) oldOverlay.remove();
@@ -109,7 +124,7 @@ function showCustomPasswordPrompt(callback) {
     document.body.appendChild(overlay);
 
     const input = document.getElementById('customPassInput');
-    input.focus();
+    if(input) input.focus();
 
     document.getElementById('customPromptOk').onclick = () => {
         const val = input.value;
@@ -121,13 +136,15 @@ function showCustomPasswordPrompt(callback) {
         overlay.remove();
     };
 
-    input.onkeydown = (e) => {
-        if(e.key === 'Enter') {
-            const val = input.value;
-            overlay.remove();
-            callback(val);
-        }
-    };
+    if(input) {
+        input.onkeydown = (e) => {
+            if(e.key === 'Enter') {
+                const val = input.value;
+                overlay.remove();
+                callback(val);
+            }
+        };
+    }
 }
 
 // Success Toast Notification
@@ -162,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Live Site 3-Click Admin Access
+// Live Site 3-Click Secret Access
 function handleLiveSiteClick() {
     liveClickCount++;
     if(liveClickCount >= 3) {
@@ -175,7 +192,7 @@ function handleLiveSiteClick() {
             }
         });
     } else {
-        setTimeout(() => { liveClickCount = 0; }, 1500);
+        setTimeout(() => { liveClickCount = 0; }, 2000);
     }
 }
 
@@ -190,7 +207,7 @@ function displayProducts(list) {
     if(!grid) return;
     grid.innerHTML = '';
 
-    if(list.length === 0) {
+    if(!list || list.length === 0) {
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray); padding: 20px;">কোনো প্রোডাক্ট পাওয়া যায়নি!</p>';
         return;
     }
@@ -257,7 +274,7 @@ function filterCategory(cat) {
     if(event && event.target) event.target.classList.add('active');
 
     if(cat === 'all') displayProducts(products);
-    else displayProducts(products.filter(p => p.category.toLowerCase() === cat.toLowerCase()));
+    else displayProducts(products.filter(p => p.category && p.category.toLowerCase() === cat.toLowerCase()));
 }
 
 function filterProducts() {
@@ -265,7 +282,7 @@ function filterProducts() {
     displayProducts(products.filter(p => p.name.toLowerCase().includes(q)));
 }
 
-// Product Modal Popup
+// Product Details Modal
 function openProductModal(id) {
     const p = products.find(item => item.id == id);
     if(!p) return;
@@ -309,7 +326,7 @@ function toggleCart() {
     const drawer = document.getElementById('cartDrawer');
     const overlay = document.getElementById('cartOverlay');
     if(drawer) drawer.classList.toggle('open');
-    if(overlay) overlay.classList.toggle('active');
+    if(overlay) overlay.style.display = drawer.classList.contains('open') ? 'block' : 'none';
     updateCartUI();
 }
 
@@ -319,8 +336,9 @@ function addToCart(id) {
         return;
     }
     const p = products.find(item => item.id == id);
-    const existing = cart.find(c => c.id == id);
+    if(!p) return;
 
+    const existing = cart.find(c => c.id == id);
     let productImg = p.img1 || p.image || '';
     let itemPrice = p.discountPrice || p.price || 0;
 
@@ -476,11 +494,11 @@ function submitOrder(e) {
 
 // ================= ADMIN PANEL FUNCTIONS =================
 function loadAdminData() {
-    document.getElementById('popupImgUrl').value = adminSettings.popupImg || '';
-    document.getElementById('popupTargetUrl').value = adminSettings.popupLink || '';
-    document.getElementById('noticeText').value = adminSettings.noticeText || '';
-    document.getElementById('noticeYtUrl').value = adminSettings.noticeYt || '';
-    document.getElementById('vacationModeToggle').checked = adminSettings.vacationMode || false;
+    if(document.getElementById('popupImgUrl')) document.getElementById('popupImgUrl').value = adminSettings.popupImg || '';
+    if(document.getElementById('popupTargetUrl')) document.getElementById('popupTargetUrl').value = adminSettings.popupLink || '';
+    if(document.getElementById('noticeText')) document.getElementById('noticeText').value = adminSettings.noticeText || '';
+    if(document.getElementById('noticeYtUrl')) document.getElementById('noticeYtUrl').value = adminSettings.noticeYt || '';
+    if(document.getElementById('vacationModeToggle')) document.getElementById('vacationModeToggle').checked = adminSettings.vacationMode || false;
 
     filterOrderTab(currentOrderTab);
 
@@ -488,7 +506,7 @@ function loadAdminData() {
     if(!manageList) return;
     manageList.innerHTML = '';
 
-    if(products.length === 0) {
+    if(!products || products.length === 0) {
         manageList.innerHTML = '<p style="text-align:center; color:var(--gray); padding:15px;">কোনো প্রোডাক্ট নেই।</p>';
         return;
     }
@@ -656,7 +674,6 @@ function handleSaveEditProduct(e) {
     }
 }
 
-// Custom Delete Confirm Call
 function deleteProduct(id) {
     showCustomConfirm(
         'প্রোডাক্ট ডিলিট',
