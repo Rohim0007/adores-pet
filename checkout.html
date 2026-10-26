@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Adore's Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Component -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-info">
+                <div class="brand-logo"><i class="fa-solid fa-arrow-left"></i></div>
+                <div>
+                    <h2>Checkout (অর্ডার কনফার্ম)</h2>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 600px;">
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+            <h3 style="font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">আপনার কার্ট আইটেম</h3>
+            <div id="checkoutCartItems" style="margin-bottom: 15px;">
+                <!-- Cart summary items -->
+            </div>
+
+            <form onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>আপনার নাম *</label>
+                    <input type="text" id="custName" placeholder="পূর্ণ নাম লিখুন" required>
+                </div>
+                <div class="form-group">
+                    <label>মোবাইল নম্বর *</label>
+                    <input type="tel" id="custPhone" placeholder="017xxxxxxxx" required>
+                </div>
+                <div class="form-group">
+                    <label>সম্পূর্ণ ঠিকানা *</label>
+                    <textarea id="custAddress" rows="2" placeholder="বাসা ও রোড নম্বর" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>বিকাশ/নগদ TrxID (যদি অ্যাডভান্স করে থাকেন)</label>
+                    <input type="text" id="custTrxId" placeholder="যেমন: 9J87H6G5F4">
+                </div>
+
+                <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px;">
+                        <span>সর্বমোট প্রদেয়:</span>
+                        <span id="checkoutTotal">৳ ০</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary-custom">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp এ অর্ডার কনফার্ম করুন
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="checkout.html" class="nav-item active">
+            <div class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge" id="bottomCartCount">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+        <a href="admin.html" class="nav-item">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Admin</span>
+        </a>
+        <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
+            <i class="fa-solid fa-headset"></i>
+            <span>Support</span>
+        </a>
+    </nav>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
