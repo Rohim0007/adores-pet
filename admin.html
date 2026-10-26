@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Adore's Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header Component -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-info">
+                <div class="brand-logo"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p>Manage Products</p>
+                </div>
+            </a>
+            <div class="nav-links-top">
+                <a href="index.html">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 700px;">
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 20px;">
+            <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">নতুন প্রোডাক্ট যোগ করুন</h3>
+            <form onsubmit="addNewProduct(event)">
+                <div class="form-group">
+                    <label>প্রোডাক্টের নাম</label>
+                    <input type="text" id="newTitle" placeholder="যেমন: Flemish Giant Rabbit" required>
+                </div>
+                <div class="form-group">
+                    <label>মূল্য (টাকা)</label>
+                    <input type="number" id="newPrice" placeholder="যেমন: 3500" required>
+                </div>
+                <div class="form-group">
+                    <label>ছবির লিংক (Image URL)</label>
+                    <input type="text" id="newImage" placeholder="https://..." required>
+                </div>
+                <button type="submit" class="btn-primary-custom">প্রোডাক্ট লিস্টে যোগ করুন</button>
+            </form>
+        </div>
+
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: var(--shadow);">
+            <h3 style="font-size: 16px; margin-bottom: 12px;">বর্তমান প্রোডাক্টসমূহ</h3>
+            <div id="adminProductList">
+                <!-- Admin items loaded via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="checkout.html" class="nav-item">
+            <div class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge" id="bottomCartCount">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+        <a href="admin.html" class="nav-item active">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Admin</span>
+        </a>
+        <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
+            <i class="fa-solid fa-headset"></i>
+            <span>Support</span>
+        </a>
+    </nav>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
