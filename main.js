@@ -1,4 +1,3 @@
-// Sample products database with images and ratings
 const products = [
     {
         id: 1,
@@ -54,7 +53,7 @@ let cart = JSON.parse(localStorage.getItem('adore_cart')) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
-    displayProducts(products);
+    if(document.getElementById('productGrid')) displayProducts(products);
 });
 
 function displayProducts(productsToDisplay) {
@@ -134,6 +133,28 @@ function openProductModal(productId) {
 function closeProductModal() {
     document.getElementById('productModal').classList.remove('open');
     document.getElementById('productModalOverlay').style.display = 'none';
+}
+
+// Support Modal Functions
+function openSupportModal() {
+    document.getElementById('supportModal').classList.add('open');
+    document.getElementById('supportModalOverlay').style.display = 'block';
+}
+
+function closeSupportModal() {
+    document.getElementById('supportModal').classList.remove('open');
+    document.getElementById('supportModalOverlay').style.display = 'none';
+}
+
+// Orders Modal Functions
+function openOrdersModal() {
+    document.getElementById('ordersModal').classList.add('open');
+    document.getElementById('ordersModalOverlay').style.display = 'block';
+}
+
+function closeOrdersModal() {
+    document.getElementById('ordersModal').classList.remove('open');
+    document.getElementById('ordersModalOverlay').style.display = 'none';
 }
 
 function addToCart(productId) {
