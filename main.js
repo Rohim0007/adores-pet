@@ -31,7 +31,7 @@ let adminSettings = JSON.parse(localStorage.getItem('adore_admin_settings')) || 
 let liveClickCount = 0;
 let currentOrderTab = 'Pending';
 
-// ================= CUSTOM MODAL SYSTEM (REPLACING NATIVE ALERTS) =================
+// ================= CUSTOM MODAL SYSTEM (REPLACING ALL BROWSER ALERTS & CONFIRMS) =================
 function showCustomAlert(title, message, callback) {
     let oldOverlay = document.getElementById('customModalOverlay');
     if(oldOverlay) oldOverlay.remove();
@@ -41,6 +41,7 @@ function showCustomAlert(title, message, callback) {
     overlay.className = 'custom-modal-overlay';
     overlay.innerHTML = `
         <div class="custom-modal-box">
+            <div class="icon-wrap info"><i class="fa-solid fa-circle-info"></i></div>
             <h3>${title}</h3>
             <p>${message}</p>
             <div class="custom-modal-buttons">
@@ -56,6 +57,36 @@ function showCustomAlert(title, message, callback) {
     };
 }
 
+function showCustomConfirm(title, message, onConfirm) {
+    let oldOverlay = document.getElementById('customModalOverlay');
+    if(oldOverlay) oldOverlay.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'customModalOverlay';
+    overlay.className = 'custom-modal-overlay';
+    overlay.innerHTML = `
+        <div class="custom-modal-box">
+            <div class="icon-wrap danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>${title}</h3>
+            <p>${message}</p>
+            <div class="custom-modal-buttons">
+                <button class="custom-modal-btn secondary" id="customConfirmCancel">না</button>
+                <button class="custom-modal-btn danger-btn" id="customConfirmOk">হ্যাঁ, ডিলিট করুন</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    document.getElementById('customConfirmOk').onclick = () => {
+        overlay.remove();
+        if(onConfirm) onConfirm();
+    };
+
+    document.getElementById('customConfirmCancel').onclick = () => {
+        overlay.remove();
+    };
+}
+
 function showCustomPasswordPrompt(callback) {
     let oldOverlay = document.getElementById('customModalOverlay');
     if(oldOverlay) oldOverlay.remove();
@@ -65,6 +96,7 @@ function showCustomPasswordPrompt(callback) {
     overlay.className = 'custom-modal-overlay';
     overlay.innerHTML = `
         <div class="custom-modal-box">
+            <div class="icon-wrap info"><i class="fa-solid fa-lock"></i></div>
             <h3>অ্যাডমিন লগইন</h3>
             <p>অ্যাডমিন পাসওয়ার্ড দিন (ডিফল্ট: 1234):</p>
             <input type="password" id="customPassInput" placeholder="পাসওয়ার্ড লিখুন" autofocus>
@@ -442,7 +474,6 @@ function submitOrder(e) {
     });
 }
 
-
 // ================= ADMIN PANEL FUNCTIONS =================
 function loadAdminData() {
     document.getElementById('popupImgUrl').value = adminSettings.popupImg || '';
@@ -539,7 +570,7 @@ function filterOrderTab(tab) {
 
     filtered.forEach(o => {
         list.innerHTML += `
-            <div onclick="openAdminOrderModal(${o.id})" style="background:#f9f9f9; padding:12px; border-radius:8px; margin-bottom:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border);">
+            <div onclick="openAdminOrderModal(${o.id})" style="background:#fafafa; padding:12px; border-radius:10px; margin-bottom:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; border:1px solid var(--border);">
                 <div>
                     <strong>${o.name}</strong> (${o.phone})<br>
                     <span style="font-size:12px; color:var(--gray);">তারিখ: ${o.date}</span>
@@ -625,13 +656,18 @@ function handleSaveEditProduct(e) {
     }
 }
 
+// Custom Delete Confirm Call
 function deleteProduct(id) {
-    if(confirm('আপনি কি এই প্রোডাক্টটি মুছে ফেলতে চান?')) {
-        products = products.filter(p => p.id != id);
-        localStorage.setItem('adore_products', JSON.stringify(products));
-        showSuccessToast('প্রোডাক্ট ডিলিট করা হয়েছে!');
-        loadAdminData();
-    }
+    showCustomConfirm(
+        'প্রোডাক্ট ডিলিট',
+        'আপনি কি নিশ্চিত যে এই প্রোডাক্টটি চিরতরে মুছে ফেলতে চান?',
+        () => {
+            products = products.filter(p => p.id != id);
+            localStorage.setItem('adore_products', JSON.stringify(products));
+            showSuccessToast('প্রোডাক্ট ডিলিট করা হয়েছে!');
+            loadAdminData();
+        }
+    );
 }
 
 function openAdminOrderModal(orderId) {
@@ -656,8 +692,8 @@ function openAdminOrderModal(orderId) {
         <p style="font-weight: 700; margin-bottom: 15px;">সর্বমোট: ৳ ${order.total}</p>
         
         <div style="display: flex; gap: 10px;">
-            <button onclick="updateOrderStatus(${order.id}, 'Completed')" style="flex:1; background:#4caf50; color:#fff; border:none; padding:10px; border-radius:6px; font-weight:700; cursor:pointer;">কমপ্লিট করুন</button>
-            <button onclick="updateOrderStatus(${order.id}, 'Canceled')" style="flex:1; background:#e53935; color:#fff; border:none; padding:10px; border-radius:6px; font-weight:700; cursor:pointer;">ক্যানসেল করুন</button>
+            <button onclick="updateOrderStatus(${order.id}, 'Completed')" style="flex:1; background:#16a34a; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:700; cursor:pointer;">কমপ্লিট করুন</button>
+            <button onclick="updateOrderStatus(${order.id}, 'Canceled')" style="flex:1; background:#dc2626; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:700; cursor:pointer;">ক্যানসেল করুন</button>
         </div>
     `;
 
