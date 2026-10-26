@@ -3,262 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Adore's Pet</title>
+    <title>ADORE'S PET | Premium Pet Shop</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Admin Header Bar -->
+    <!-- Header -->
     <header>
         <div class="nav-container">
             <div class="brand-info">
-                <div class="brand-logo"><i class="fa-solid fa-user-shield"></i></div>
+                <div class="brand-logo"><i class="fa-solid fa-paw"></i></div>
                 <div>
-                    <h2>Admin Dashboard</h2>
-                    <p>ADORE'S PET Control Panel</p>
+                    <h2>ADORE'S PET</h2>
+                    <p>Loved by pets, trusted by owners</p>
                 </div>
             </div>
-            <div class="admin-header-actions">
-                <a href="index.html" class="btn-header-action btn-header-shop">
-                    <i class="fa-solid fa-store"></i> শপে যান
-                </a>
-                <button onclick="adminLogout()" class="btn-header-action btn-header-logout">
-                    <i class="fa-solid fa-right-from-bracket"></i> লগআউট
-                </button>
+            <!-- Live Site বাটন (৩ বার ক্লিকে অ্যাডমিন পাসওয়ার্ড পপআপ আসবে) -->
+            <button class="live-badge" onclick="handleLiveSiteClick()">Live Site</button>
+        </div>
+        <div class="search-box-container">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="খাবারের নাম, খেলনা বা প্রোডাক্ট খুঁজুন..." onkeyup="filterProducts()">
             </div>
         </div>
     </header>
 
-    <div class="container" style="max-width: 800px; margin-top: 20px;">
+    <!-- Announcement Text Bar -->
+    <div id="announcementNoticeBar" style="display:none; background: #fef3c7; color: #92400e; text-align: center; padding: 10px 15px; font-size: 13px; font-weight: 600; border-bottom: 1px solid #fde68a;"></div>
 
-        <!-- 1. Welcome Popup Banner (Daraz Style) -->
-        <div class="admin-card">
-            <h3><i class="fa-regular fa-image"></i> Welcome Popup Banner (Daraz Style)</h3>
-            <div class="form-group">
-                <label>পপআপ ছবির লিংক (Image URL)</label>
-                <input type="text" id="popupImgUrl" placeholder="https://...">
+    <!-- Banner Section -->
+    <section class="hero-banner">
+        <div class="banner-card">
+            <div class="banner-title">ADORE'S PET</div>
+            <div class="banner-subtitle">❤️ আপনার প্রিয় পোষা প্রাণীর বিশ্বস্ত ঠিকানা ❤️</div>
+            <div class="banner-tags">
+                <span>🐰 Rabbit</span>
+                <span>🐹 Hamster</span>
+                <span>🌿 Pet Food</span>
+                <span>🧸 Accessories</span>
             </div>
-            <div class="form-group">
-                <label>পপআপে ক্লিক করলে কোথায় যাবে (Link URL - অপশনাল)</label>
-                <input type="text" id="popupTargetUrl" placeholder="https://...">
-            </div>
-            <button onclick="savePopupBanner()" class="btn-primary-custom">পপআপ ব্যানার সেভ করুন</button>
-        </div>
-
-        <!-- 2. Announcement & YouTube Notice -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-bullhorn"></i> Announcement & YouTube Notice</h3>
-            <div class="form-group">
-                <label>১. সাধারণ নোটিশ / টেক্সট (ঐচ্ছিক)</label>
-                <textarea id="noticeText" rows="2" placeholder="যেমন: আজ সকল পণ্যে ১০% ডিসকাউন্ট চলছে!"></textarea>
-            </div>
-            <div class="form-group">
-                <label style="color: #dc2626;">২. ইউটিউব ভিডিওর লিংক (ঐচ্ছিক)</label>
-                <input type="text" id="noticeYtUrl" placeholder="https://youtu.be/...">
-            </div>
-            <button onclick="saveAnnouncementNotice()" class="btn-primary-custom">নোটিশ ও ভিডিও আপডেট করুন</button>
-        </div>
-
-        <!-- 3. Shop Mode / Vacation Setting -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-plane-arrival"></i> Shop Mode / Vacation Setting</h3>
-            <div style="background: #f8fafc; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border);">
-                <div>
-                    <strong style="font-size: 14px; color: var(--dark);">সাময়িক বিরতি / ভ্যাকেশন মোড</strong>
-                    <p style="font-size: 12px; color: var(--gray);">চালু করলে হোমপেজে অর্ডারের বদলে বিরতির নোটিশ দেখাবে।</p>
-                </div>
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; color: var(--primary);">
-                    <input type="checkbox" id="vacationModeToggle" onchange="toggleVacationMode()" style="width: 20px; height: 20px;"> অন / অফ
-                </label>
+            <a href="#shop" class="shop-now-btn"><i class="fa-solid fa-cart-shopping"></i> Shop Now &gt;</a>
+            <div class="banner-features">
+                <span><i class="fa-solid fa-shield-cat"></i> স্বাস্থ্যকর ও মানসম্মত পেট</span>
+                <span><i class="fa-solid fa-truck-fast"></i> সারা বাংলাদেশে ডেলিভারি</span>
+                <span><i class="fa-solid fa-seedling"></i> নিরাপদ ও প্রাকৃতিক খাবার</span>
+                <span><i class="fa-solid fa-headset"></i> বিশেষজ্ঞ কাস্টমার সাপোর্ট</span>
             </div>
         </div>
+    </section>
 
-        <!-- 4. Change Admin Password -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-key"></i> Change Admin Password</h3>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>নতুন পাসওয়ার্ড</label>
-                    <input type="password" id="newPass" placeholder="নতুন পাসওয়ার্ড দিন">
-                </div>
-                <div class="form-group">
-                    <label>কনফার্ম পাসওয়ার্ড</label>
-                    <input type="password" id="confirmPass" placeholder="পাসওয়ার্ডটি আবার দিন">
-                </div>
+    <!-- Vacation Mode Notice Bar -->
+    <div id="vacationNoticeBar" style="display:none; max-width:1200px; margin:10px auto; padding:15px; background:#fff3e0; border-left:5px solid #ff9800; border-radius:8px; color:#e65100; font-weight:600; text-align:center;">
+        ⚠️ শপ বর্তমানে সাময়িক বিরতি / ভ্যাকেশন মোডে আছে। নতুন অর্ডার গ্রহণ সাময়িকভাবে বন্ধ আছে!
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="shop">
+        <div class="section-header">
+            <h3 class="section-title">ক্যাটাগরি সমূহ</h3>
+            <span class="see-all" onclick="filterCategory('all')">সব দেখুন</span>
+        </div>
+
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCategory('all')">All</button>
+            <button class="cat-btn" onclick="filterCategory('Rabbit')">Rabbit</button>
+            <button class="cat-btn" onclick="filterCategory('Hamster')">Hamster</button>
+            <button class="cat-btn" onclick="filterCategory('Pet Food')">Pet Food</button>
+            <button class="cat-btn" onclick="filterCategory('Accessories')">Accessories</button>
+        </div>
+
+        <div class="section-header" style="margin-top: 25px;">
+            <h3 class="section-title">জনপ্রিয় প্রোডাক্ট সমূহ</h3>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <!-- Welcome Popup Modal -->
+    <div class="modal-overlay" id="welcomePopupOverlay" onclick="closeWelcomePopup()"></div>
+    <div class="product-modal" id="welcomePopupModal" style="max-width: 400px; margin: 0 auto; text-align: center; border-radius: 20px;">
+        <button class="modal-close-btn" onclick="closeWelcomePopup()"><i class="fa-solid fa-xmark"></i></button>
+        <a id="welcomePopupLink" href="#" target="_blank">
+            <img id="welcomePopupImg" style="width: 100%; border-radius: 12px; margin-top: 10px;">
+        </a>
+    </div>
+
+    <!-- Product Details Modal Popup -->
+    <div class="modal-overlay" id="productModalOverlay" onclick="closeProductModal()"></div>
+    <div class="product-modal" id="productModal">
+        <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div id="modalBodyContent"></div>
+    </div>
+
+    <!-- Cart Drawer Popup -->
+    <div class="modal-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="product-modal" id="cartDrawer" style="max-width: 500px; margin: 0 auto; border-top-left-radius: 24px; border-top-right-radius: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 15px;">
+            <h3 style="font-size: 18px; color: var(--primary);"><i class="fa-solid fa-cart-shopping"></i> My Cart</h3>
+            <button class="modal-close-btn" onclick="toggleCart()" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cartItemsContainer" style="max-height: 50vh; overflow-y: auto;"></div>
+        <div style="border-top: 1px solid var(--border); padding-top: 15px; margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; margin-bottom: 15px;">
+                <span>মোট পণ্যের দাম:</span>
+                <span id="cartTotalPrice">৳ ০</span>
             </div>
-            <button onclick="changeAdminPassword()" class="btn-primary-custom" style="background: #334155;">পাসওয়ার্ড পরিবর্তন করুন</button>
-        </div>
-
-        <!-- 5. Order Management Section -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-receipt"></i> অর্ডার ম্যানেজমেন্ট</h3>
-            <div class="order-tabs-grid">
-                <button onclick="filterOrderTab('Pending')" class="order-tab-btn pending-tab active" id="tabPending">
-                    <i class="fa-solid fa-hourglass-half"></i>
-                    <span>পেন্ডিং</span>
-                </button>
-                <button onclick="filterOrderTab('Completed')" class="order-tab-btn completed-tab" id="tabCompleted">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>কমপ্লিট</span>
-                </button>
-                <button onclick="filterOrderTab('Canceled')" class="order-tab-btn canceled-tab" id="tabCanceled">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <span>ক্যানসেল</span>
-                </button>
-            </div>
-            <div id="adminOrdersList"></div>
-        </div>
-
-        <!-- 6. Add New Product Section -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-circle-plus"></i> Add New Product</h3>
-            <form onsubmit="handleAddNewProduct(event)">
-                <div class="form-group">
-                    <label>Product Name *</label>
-                    <input type="text" id="pName" placeholder="e.g. Dwarf Rabbit" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Regular Price (৳)</label>
-                        <input type="number" id="pRegularPrice" placeholder="1000">
-                    </div>
-                    <div class="form-group">
-                        <label style="color: #dc2626;">Discount Price (৳) *</label>
-                        <input type="number" id="pDiscountPrice" placeholder="850" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Stock Quantity</label>
-                        <input type="number" id="pStock" placeholder="10">
-                    </div>
-                    <div class="form-group">
-                        <label>Age / বয়স</label>
-                        <div style="display: flex; gap: 5px;">
-                            <input type="text" id="pAgeVal" placeholder="যেমন: 2">
-                            <select id="pAgeUnit" style="width: 100px;">
-                                <option value="Month">Month</option>
-                                <option value="Year">Year</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Color</label>
-                        <input type="text" id="pColor" placeholder="e.g. White">
-                    </div>
-                    <div class="form-group">
-                        <label>Category *</label>
-                        <select id="pCategory" required>
-                            <option value="Rabbit">Rabbit</option>
-                            <option value="Hamster">Hamster</option>
-                            <option value="Pet Food">Pet Food</option>
-                            <option value="Accessories">Accessories</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Rating</label>
-                    <input type="text" id="pRating" value="4.8">
-                </div>
-                <div class="form-group">
-                    <label>Full Product Details</label>
-                    <textarea id="pDetails" rows="3" placeholder="Description..."></textarea>
-                </div>
-
-                <div style="border: 1px dashed var(--primary); background: #f0fdf4; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-                    <label style="color: var(--primary); font-weight: 700; margin-bottom: 8px; display: block;">
-                        🔗 ছবির লিংক দিন (Image URL)
-                    </label>
-                    <input type="text" id="pImg1" placeholder="Image 1 Link (https://...)" required style="margin-bottom: 8px;">
-                    <input type="text" id="pImg2" placeholder="Image 2 Link (Optional)" style="margin-bottom: 8px;">
-                    <input type="text" id="pImg3" placeholder="Image 3 Link (Optional)" style="margin-bottom: 8px;">
-                    
-                    <label style="color: #dc2626; font-weight: 700; margin-top: 8px; margin-bottom: 5px; display: block;">
-                        🎥 ভিডিওর লিংক দিন (YouTube / FB Video URL)
-                    </label>
-                    <input type="text" id="pVideoUrl" placeholder="https://youtube.com/...">
-                </div>
-
-                <button type="submit" class="btn-primary-custom">Add Product</button>
-            </form>
-        </div>
-
-        <!-- 7. Manage Products List -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-boxes-stacked"></i> Manage Products</h3>
-            <div id="adminManageProductList"></div>
+            <button class="btn-primary-custom" onclick="goToCheckout()">
+                <i class="fa-solid fa-arrow-right"></i> Checkout (ডেলিভারি তথ্য দিন)
+            </button>
         </div>
     </div>
 
-    <!-- Edit Product Modal Popup -->
-    <div class="modal-overlay" id="editProductModalOverlay" onclick="closeEditProductModal()"></div>
-    <div class="product-modal" id="editProductModal" style="max-width: 500px; margin: 0 auto; border-radius: 20px;">
-        <div style="text-align: center; margin-bottom: 15px;">
-            <h3 style="color: var(--primary); font-size: 18px;"><i class="fa-regular fa-pen-to-square"></i> Edit Product</h3>
-            <img id="editPreviewImg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px; margin-top: 8px; border: 1px solid var(--border);">
-        </div>
-        <form onsubmit="handleSaveEditProduct(event)">
-            <input type="hidden" id="editId">
-            <div class="form-group">
-                <label>Product ID (কপি করুন):</label>
-                <input type="text" id="editDisplayId" readonly style="background: #e2e8f0;">
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="toggleCart()">
+            <div class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="badge" id="bottomCartCount">0</span>
             </div>
-            <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" id="editName" required>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Price (৳)</label>
-                    <input type="number" id="editRegularPrice">
-                </div>
-                <div class="form-group">
-                    <label style="color: #dc2626;">Discount (৳)</label>
-                    <input type="number" id="editDiscountPrice" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Stock</label>
-                    <input type="number" id="editStock">
-                </div>
-                <div class="form-group">
-                    <label>Age (সংখ্যা ও ইউনিট)</label>
-                    <div style="display: flex; gap: 5px;">
-                        <input type="text" id="editAgeVal">
-                        <select id="editAgeUnit">
-                            <option value="Month">Month</option>
-                            <option value="Year">Year</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Image URL</label>
-                <input type="text" id="editImg1" required>
-            </div>
-            <div class="form-group">
-                <label style="color: #dc2626;">Video URL</label>
-                <input type="text" id="editVideoUrl">
-            </div>
-
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <button type="submit" class="btn-primary-custom" style="flex: 1;">Save Changes</button>
-                <button type="button" onclick="closeEditProductModal()" class="custom-modal-btn secondary" style="flex: 1;">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Order Details Modal -->
-    <div class="modal-overlay" id="adminOrderModalOverlay" onclick="closeAdminOrderModal()"></div>
-    <div class="product-modal" id="adminOrderModal">
-        <button class="modal-close-btn" onclick="closeAdminOrderModal()"><i class="fa-solid fa-xmark"></i></button>
-        <div id="adminOrderModalContent" style="padding: 10px;"></div>
-    </div>
+            <span>My Cart</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" onclick="showCustomAlert('মাই অর্ডার', 'আপনার কোনো সক্রিয় অর্ডার নেই!')">
+            <i class="fa-solid fa-receipt"></i>
+            <span>My Orders</span>
+        </a>
+        <a href="https://wa.me/8801681578599" target="_blank" class="nav-item">
+            <i class="fa-solid fa-headset"></i>
+            <span>Support</span>
+        </a>
+    </nav>
 
     <script src="main.js"></script>
 </body>
